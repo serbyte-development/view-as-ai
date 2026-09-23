@@ -1,0 +1,11 @@
+version: 1
+repository: Serbyte-Development/view-as-ai
+branch: main
+targets:
+  - github
+  - pypi
+github:
+  tagPrefix: v
+  assets: []
+pypi:
+  packageDir: .

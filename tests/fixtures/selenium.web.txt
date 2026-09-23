@@ -1,0 +1,17 @@
+# Web form
+
+Text input [Input] Password [Input] Textarea Disabled input [Input: Disabled input] Readonly input [Input]
+
+【0†Return to index】
+
+Dropdown (select) [Select] Dropdown (datalist) [Input: Type to search...] File input [Input]
+
+[Input] Checked checkbox [Input] Default checkbox
+
+[Input] Checked radio
+
+[Input] Default radio
+
+[Button: Submit]
+
+Color picker [Input] Date picker [Input] Example range [Input] [Input]

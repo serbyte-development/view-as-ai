@@ -1,0 +1,76 @@
+[project]
+name = "view-as-ai"
+version = "1.0.0"
+description = "Preview website content as AI web browsers and LLM agents see it, calibrated against ChatGPT web browsing"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Serbyte Development" }]
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+keywords = [
+  "ai-web-browser",
+  "chatgpt",
+  "html-to-markdown",
+  "llm",
+  "llm-ready",
+  "web-scraping",
+  "website-to-markdown",
+  "website-to-text",
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+  "html2text==2025.4.15",
+  "lxml>=5.3,<7",
+  "httpx>=0.28,<1",
+]
+
+[project.urls]
+Homepage = "https://github.com/Serbyte-Development/view-as-ai"
+Repository = "https://github.com/Serbyte-Development/view-as-ai"
+Issues = "https://github.com/Serbyte-Development/view-as-ai/issues"
+
+[project.scripts]
+view-as-ai = "view_as_ai.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "ruff>=0.12"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/view_as_ai"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"THIRD_PARTY_NOTICES.md" = "view_as_ai/THIRD_PARTY_NOTICES.md"
+"licenses" = "view_as_ai/licenses"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/.github",
+  "/.gitignore",
+  "/AGENTS.md",
+  "/MEMORY.md",
+  "/wiki",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

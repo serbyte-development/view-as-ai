@@ -1,0 +1,42 @@
+【0†Open new window】
+
+【1†Create a new anonymous window】
+
+【1†Open page with iframes in same window】
+
+【2†Open a window with a close button】
+
+# XHTML Might Be The Future
+
+If you'd like to go elsewhere then 【0†click me】 .
+
+Alternatively, 【0†this goes to the same place】 .
+
+[Input]
+
+This link has the same text as another link: 【0†click me】 .
+
+Another div starts here.
+## An H2 title
+
+Some more text
+
+【3†Foo】
+
+I have width
+
+【4†Link=equalssign】
+
+Spaced out
+
+first_div
+
+second_div
+
+first_span second_span
+
+I'm a parent
+
+I'm a child
+
+Woo woo

@@ -1,0 +1,11 @@
+<!-- Reduced source excerpts: OpenAI bots page search overlay and native select.
+     Classes, SVG paths, data attributes, and intervening navigation are omitted.
+     ARIA attributes and the separate visual control preserve the relevant DOM. -->
+<div id="header-search-overlay" role="dialog" aria-modal="true" aria-labelledby="header-search-title" aria-hidden="true">
+  <h2 id="header-search-title" class="sr-only"> Search the API docs </h2>
+  <div><label class="sr-only" for="header-site-search-input">Search docs</label><input id="header-site-search-input" type="text" placeholder="Start searching" value=""></div>
+  <section><h3>Suggested</h3><div><button type="button" data-search-query="responses create">responses create</button><button type="button" data-search-query="reasoning_effort">reasoning_effort</button><button type="button" data-search-query="realtime">realtime</button><button type="button" data-search-query="prompt caching">prompt caching</button></div></section>
+</div>
+<div hidden>
+  <select aria-label="Docs"><option selected>Overview</option><option>Models</option><option>Agents</option><option>Tools</option></select><span role="button" tabindex="-1" aria-hidden="true" aria-labelledby="docs-label docs-value"><span><span id="docs-label" class="sr-only">Docs</span><span id="docs-value">Overview</span></span></span>
+</div>

@@ -1,0 +1,8 @@
+## Search the API docs
+
+Search docs[Input: Start searching]
+### Suggested
+
+[Button: responses create][Button: reasoning_effort][Button: realtime][Button: prompt caching]
+
+[Select]Docs Overview
