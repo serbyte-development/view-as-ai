@@ -25,6 +25,15 @@ Final native recheck confirmed the first three snapshots unchanged:
 `turn520001view0`, `turn520001view1`, `turn520001view2`. Fresh HTML fetched by the
 installed CLI produced an empty `diff` against each of those saved expectations.
 
+On 2026-09-23, the exact-capture workflow was repeated against current `web.run`.
+Example.com and the httpbin form still matched byte-for-byte after removing tool
+line prefixes/citation wrappers. A current Python `html.parser` page check exposed
+one downstream annotation that is not present in the origin HTML:
+`Keyword-only parameters separator (PEP 3102)` attached to the `*` parameter.
+Because View as AI intentionally operates on direct origin HTML and does not
+reproduce downstream accessibility/semantic enrichment, that difference is a
+documented boundary rather than a parser regression.
+
 The much larger native-open calibration corpora used during reverse engineering
 were archived after the 1.0 stabilization pass. The active suite intentionally
 keeps only these small golden fixtures plus synthetic parser/pruner regressions.
