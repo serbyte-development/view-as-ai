@@ -288,11 +288,11 @@ Route pattern: `/experiments/boilerplate/<test-id>/`
 
 Coverage: `BOIL-001..BOIL-030`
 
-- [ ] Build one isolated route for each `BOIL-001` through `BOIL-030`.
-- [ ] Keep the treatment block unique to that page during this phase.
-- [ ] Use neutral surrounding content so local class/role semantics are the variable.
-- [ ] Preserve inside-main versus outside-main distinctions.
-- [ ] Do not share boilerplate components across these routes yet.
+- [x] Build one isolated route for each `BOIL-001` through `BOIL-030`.
+- [x] Keep the treatment block unique to that page during this phase.
+- [x] Use neutral surrounding content so local class/role semantics are the variable.
+- [x] Preserve inside-main versus outside-main distinctions.
+- [x] Do not share boilerplate components across these routes yet.
 
 ## Embedded-resource follow-ups
 
@@ -300,9 +300,9 @@ Route pattern: `/experiments/frame/<test-id>/`
 
 Coverage: `FRAME-006..FRAME-008`
 
-- [ ] Build FRAME-006 parent plus same-origin iframe child with child-only sentinel.
-- [ ] Build FRAME-007 object/fallback page.
-- [ ] Build FRAME-008 embed page.
+- [x] Build FRAME-006 parent plus same-origin iframe child with child-only sentinel.
+- [x] Build FRAME-007 object/fallback page.
+- [x] Build FRAME-008 embed page.
 
 ---
 
