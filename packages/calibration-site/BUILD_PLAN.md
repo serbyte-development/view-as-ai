@@ -105,27 +105,28 @@ Deployment and native capture are separate steps. A built test stays `planned` i
 
 Route: `/`
 
-- [ ] Keep the existing human-readable calibration-site homepage.
-- [ ] Link to `/baseline/` and `/kitchen-sink/` only after those routes exist.
-- [ ] Do not reuse homepage chrome/components on experimental routes.
-- [ ] Keep the homepage out of calibration result IDs.
+- [x] Keep the existing human-readable calibration-site homepage.
+- [x] Link to `/baseline/` and `/kitchen-sink/` only after those routes exist.
+- [x] Do not reuse homepage chrome/components on experimental routes.
+- [x] Keep the homepage out of calibration result IDs.
 
 ## Baseline
 
 Route: `/baseline/`
 
-- [ ] Build a very small static page containing one heading.
-- [ ] Add one ordinary paragraph sentinel.
-- [ ] Add one same-origin text link.
-- [ ] Add one external text link.
-- [ ] Add one image with alt text.
-- [ ] Add one text input with placeholder.
-- [ ] Add one text-only button.
-- [ ] Add one small table.
-- [ ] Add no JavaScript.
-- [ ] Add no hiding/layout CSS.
-- [ ] Add no nav/footer/sidebar landmarks.
-- [ ] Use this route to validate the capture/finalize/recompare pipeline before broad fixtures.
+- [x] Build a very small static page containing one heading.
+- [x] Add one ordinary paragraph sentinel.
+- [x] Add one same-origin text link.
+- [x] Add one external text link.
+- [x] Add one image with alt text.
+- [x] Add one text input with placeholder.
+- [x] Add one text-only button.
+- [x] Add one small table.
+- [x] Add no JavaScript.
+- [x] Add no hiding/layout CSS.
+- [x] Add no nav/footer/sidebar landmarks.
+- [x] Designate this route as the capture/finalize/recompare sanity target before broad native
+  captures.
 
 ---
 

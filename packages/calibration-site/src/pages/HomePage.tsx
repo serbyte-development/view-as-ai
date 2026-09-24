@@ -16,7 +16,9 @@ export function HomePage() {
             This site hosts controlled public fixtures used to compare View as AI with AI web
             browsing systems.
           </p>
-          <p>The detailed calibration cases will be added after the site scaffold is deployed.</p>
+          <p>
+            <a href="/baseline/">Baseline fixture</a>
+          </p>
         </main>
       </body>
     </html>
