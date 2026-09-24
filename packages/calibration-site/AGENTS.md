@@ -6,8 +6,10 @@ This package is a controlled public test site for native AI web browsing behavio
 pages static and avoid introducing client runtime or framework behavior unless a fixture is
 specifically designed to test it.
 
-For byte-for-byte native ChatGPT captures, follow `capture/code-mode-prompt.md`. Do not manually
-transcribe `web.run` output into fixtures.
+For text-faithful native ChatGPT captures, follow `capture/code-mode-prompt.md`. Preserve the
+actual model-facing text, characters, Unicode, punctuation, and ordering. Do not manually
+transcribe or paraphrase `web.run` output into fixtures. Incidental file-transport differences
+such as a terminal newline or CRLF/LF normalization are acceptable.
 
 For the complete operational sequence and capture artifact layout, follow `capture/README.md`.
 

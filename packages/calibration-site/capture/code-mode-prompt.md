@@ -17,11 +17,16 @@ Use the exact deployed fixture URL requested by the capture task.
 ## Capture contract
 
 The authoritative source is the live native OpenAI web-browsing result for the public fixture URL.
-The goal is to preserve the returned model-facing page text byte-for-byte.
+The goal is to preserve the returned model-facing page text faithfully.
 
-Do not manually retype, reconstruct, normalize, reformat, paraphrase, or copy the page body through
-the model. Do not rebuild the expected output from the local HTML or from View as AI. The native
-capture is the oracle.
+Do not manually retype, reconstruct, paraphrase, summarize, omit, reorder, or otherwise alter the
+page body through the model. Do not rebuild the expected output from the local HTML or from View as
+AI. The native capture is the oracle.
+
+The important fidelity requirement is the actual returned text: characters, punctuation, Unicode,
+content, and ordering. Incidental file-transport formatting is not part of the oracle. A terminal
+newline added by a patch/write tool, CRLF/LF normalization, or an equivalent text-file terminator
+does not invalidate a capture.
 
 The data path must remain programmatic:
 
@@ -45,9 +50,9 @@ The model should never be the transport layer for the captured page body.
    `https://view-as-ai.vercel.app/` and that the web result is for that exact URL before writing
    any evidence.
 4. Invoke the web/open callable from Code Mode. Keep the returned result in JavaScript.
-5. Inspect the returned value programmatically and select the exact model-facing page text. Preserve
-   the text exactly as returned. Do not strip or add whitespace unless the capture task explicitly
-   defines a separate derived/normalized artifact.
+5. Inspect the returned value programmatically and select the model-facing page text. Preserve its
+   characters, punctuation, Unicode, content, and ordering. Do not paraphrase or reconstruct it.
+   Incidental line-ending normalization or a terminal file newline is acceptable.
 6. Build the repository patch entirely in the same Code Mode execution from that captured string.
    A typical write path is:
 
@@ -75,8 +80,8 @@ The model should never be the transport layer for the captured page body.
    })
    ```
 
-   If the target file does not already exist, omit the delete section. If the capture result carries
-   a final newline, preserve it deliberately when constructing the patch.
+   If the target file does not already exist, omit the delete section. Do not spend effort correcting
+   a harmless terminal newline added or removed by the patch/write mechanism.
 7. Keep the entire capture, extraction, and patch construction in that Code Mode execution path.
    Do not print the raw capture into chat and then copy it into a later tool call.
 8. After the raw capture is persisted, use `@[...] Macbook` to fetch/save the corresponding origin
@@ -91,9 +96,10 @@ fetches the paired origin HTML and generates the current View as AI output and d
 
 - Capture the exact public fixture URL that was requested. Do not substitute localhost, a preview
   deployment, cached HTML, or another route.
-- Preserve the native page text exactly as returned by the live OpenAI web-browsing tool.
-- Preserve whitespace, blank lines, punctuation, Unicode, citation/reference notation, and line
-  breaks unless a separate normalized artifact explicitly says otherwise.
+- Preserve the native page text faithfully: no altered characters, punctuation, Unicode,
+  citation/reference notation, omitted text, inserted text, or reordered content.
+- Preserve meaningful internal whitespace and line structure when practical, but do not treat a
+  terminal newline or CRLF/LF line-ending normalization as a capture failure.
 - Do not derive native output from View as AI. View as AI is what the capture is validating.
 - Do not use the local origin HTML as the expected result.
 - Do not use a stale conversation's earlier web result after the deployed fixture changes. Capture
@@ -107,5 +113,5 @@ fetches the paired origin HTML and generates the current View as AI output and d
 
 Local fixtures can validate View as AI's parser, but only a publicly reachable page can establish
 what native ChatGPT web browsing actually exposes to the model. Keeping the native result on a
-programmatic path from the OpenAI tool response to disk avoids transcription and formatting changes
+programmatic path from the OpenAI tool response to disk avoids substantive transcription changes
 introduced by the assistant itself.

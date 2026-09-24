@@ -27,14 +27,17 @@ Example:
 
 ## 2. Capture native web.run
 
-Follow `code-mode-prompt.md`. The native model-facing page text must move programmatically from the
-live OpenAI web tool result to:
+Follow `code-mode-prompt.md`. The native model-facing page text should move programmatically from
+the live OpenAI web tool result to:
 
 ```text
 captures/<capture-id>/native.web.txt
 ```
 
-Do not manually transcribe or normalize it.
+Do not manually transcribe, paraphrase, omit, reorder, or alter the returned text. Preserve the
+actual characters, punctuation, Unicode, and content ordering. Incidental storage differences such
+as one terminal newline or CRLF/LF line-ending normalization are acceptable and do not invalidate
+the capture.
 
 ## 3. Finalize the evidence bundle
 
@@ -71,8 +74,9 @@ captures/<capture-id>/
 diff are derived artifacts and may be regenerated after parser changes.
 
 The comparison treats one final LF used as a normal text-file terminator as transport rather than
-page content. No other whitespace is removed for the exact-match result. The raw
-`native.web.txt` bytes and SHA remain untouched.
+page content. The stored `native.web.txt` remains authoritative evidence and should not be edited
+after capture. Its SHA identifies the stored artifact; the research contract is text fidelity, not
+byte identity with the in-memory tool value.
 
 ## 4. Recompare after parser changes
 

@@ -179,8 +179,9 @@ This makes a failed capture distinguishable from a real extraction result.
 
 ### Preserve raw native evidence
 
-Use `capture/code-mode-prompt.md` for byte-for-byte native captures. The raw native result is the
-oracle and must never be manually transcribed.
+Use `capture/code-mode-prompt.md` for text-faithful native captures. The native result is the
+oracle and must never be manually transcribed, paraphrased, omitted, or reordered. Incidental
+text-file differences such as a terminal newline or CRLF/LF normalization are acceptable.
 
 For every capture, record at least:
 
@@ -789,8 +790,8 @@ without being literal rendered text.
   document.
 - **JSONLD-046:** body contains a unique fact that is absent from JSON-LD.
 
-Do not infer precedence from a conversational answer alone. The byte-for-byte native page capture
-must show whether the conflicting structured value entered the model-facing page representation.
+Do not infer precedence from a conversational answer alone. The native page capture must faithfully
+show whether the conflicting structured value entered the model-facing page representation.
 
 ### JSONLD-URL — URLs and entity references
 

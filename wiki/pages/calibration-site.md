@@ -51,10 +51,11 @@ Future fixtures may therefore include both:
 When a native behavior is established from this public site, preserve the smallest useful evidence
 in the active regression suite and summarize durable findings in the wiki.
 
-For byte-for-byte native ChatGPT captures, follow
+For text-faithful native ChatGPT captures, follow
 `packages/calibration-site/capture/code-mode-prompt.md`. That procedure keeps the live OpenAI-side
 result on a programmatic path from the web tool response to the repository instead of manually
-transcribing it through the model.
+transcribing or paraphrasing it through the model. A terminal newline or line-ending normalization
+is acceptable; substantive text changes are not.
 
 The end-to-end agent workflow is
 `packages/calibration-site/capture/README.md`: capture native output, finalize the evidence bundle,

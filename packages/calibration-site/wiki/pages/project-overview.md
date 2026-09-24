@@ -34,8 +34,9 @@ the production build does not depend on a platform-specific esbuild binary.
 - Native-browser conclusions require testing the deployed public URL, not only localhost output.
 - Individual fixture cases should eventually use stable IDs and unique sentinel text so native
   output can be checked mechanically.
-- Byte-for-byte native ChatGPT captures must follow `capture/code-mode-prompt.md` so the live
-  OpenAI-side result is written to disk programmatically rather than transcribed by the model.
+- Text-faithful native ChatGPT captures must follow `capture/code-mode-prompt.md` so the live
+  OpenAI-side result is written to disk programmatically rather than transcribed or paraphrased by
+  the model. Incidental terminal-newline or line-ending differences are acceptable.
 - `capture/README.md` is the concise operational runbook: native capture, paired origin fetch,
   parser comparison, evidence bundle, then results-ledger update.
 - `CALIBRATION_PLAN.md` is the canonical experimental plan. New fixture routes should map to a
