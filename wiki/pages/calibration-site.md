@@ -55,3 +55,15 @@ For byte-for-byte native ChatGPT captures, follow
 `packages/calibration-site/capture/code-mode-prompt.md`. That procedure keeps the live OpenAI-side
 result on a programmatic path from the web tool response to the repository instead of manually
 transcribing it through the model.
+
+The end-to-end agent workflow is
+`packages/calibration-site/capture/README.md`: capture native output, finalize the evidence bundle,
+compare the saved origin with the current parser, then record the finding in the results ledger.
+
+The complete test inventory and experiment design live in
+`packages/calibration-site/CALIBRATION_PLAN.md`. In particular, site-wide recurrence must be tested
+with controlled multi-page and sequential-deployment experiments rather than inferred from one
+kitchen-sink page.
+
+Execution status and findings live in `packages/calibration-site/CALIBRATION_RESULTS.md`. The
+package check verifies that every planned test ID has exactly one results row.

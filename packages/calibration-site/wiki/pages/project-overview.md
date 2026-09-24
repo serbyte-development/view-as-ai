@@ -31,3 +31,9 @@ as static files. Normal fixture pages should not hydrate or ship client JavaScri
   output can be checked mechanically.
 - Byte-for-byte native ChatGPT captures must follow `capture/code-mode-prompt.md` so the live
   OpenAI-side result is written to disk programmatically rather than transcribed by the model.
+- `capture/README.md` is the concise operational runbook: native capture, paired origin fetch,
+  parser comparison, evidence bundle, then results-ledger update.
+- `CALIBRATION_PLAN.md` is the canonical experimental plan. New fixture routes should map to a
+  documented test family and use the controls/sentinel conventions defined there.
+- `CALIBRATION_RESULTS.md` is the authoritative execution ledger. It tracks every plan ID from
+  planned through verified/mismatch and links to the corresponding raw evidence.

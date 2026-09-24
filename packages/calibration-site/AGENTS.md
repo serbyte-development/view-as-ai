@@ -8,3 +8,11 @@ specifically designed to test it.
 
 For byte-for-byte native ChatGPT captures, follow `capture/code-mode-prompt.md`. Do not manually
 transcribe `web.run` output into fixtures.
+
+For the complete operational sequence and capture artifact layout, follow `capture/README.md`.
+
+Before adding or changing calibration fixtures, read `CALIBRATION_PLAN.md`. It is the canonical
+inventory of known behavior, open questions, experimental controls, and planned test families.
+
+Record execution state and findings in `CALIBRATION_RESULTS.md`. Every plan test ID must have
+exactly one ledger row; `npm run check:results` enforces coverage.

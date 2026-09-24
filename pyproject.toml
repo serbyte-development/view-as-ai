@@ -71,6 +71,9 @@ exclude = [
   "/.gitignore",
   "/AGENTS.md",
   "/MEMORY.md",
+  "/package-lock.json",
+  "/package.json",
+  "/packages",
   "/wiki",
 ]
 

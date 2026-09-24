@@ -30,7 +30,7 @@ live native web/open result
   -> JavaScript string in Code Mode
   -> programmatically constructed patch text
   -> @[...] Macbook apply_patch
-  -> repository capture file
+  -> captures/<capture-id>/native.web.txt
 ```
 
 The model should never be the transport layer for the captured page body.
@@ -53,7 +53,7 @@ The model should never be the transport layer for the captured page body.
 
    ```js
    const repoDir = "/Users/austinserb/Desktop/agent-workspace/projects/modelview"
-   const fixture = "packages/calibration-site/captures/<fixture-name>.web.txt"
+   const fixture = "packages/calibration-site/captures/<capture-id>/native.web.txt"
 
    // `capturedText` must come directly from the live web/open tool result.
    const patch = [
@@ -83,6 +83,9 @@ The model should never be the transport layer for the captured page body.
    HTML independently when the task requires a paired comparison.
 9. Run the repository checks or comparison scripts requested by the task only after the raw native
    capture is safely persisted.
+
+After the raw native file exists, return to `capture/README.md` and run the finalize step. That
+fetches the paired origin HTML and generates the current View as AI output and diff.
 
 ## Fidelity rules
 
