@@ -4,8 +4,21 @@ branch: main
 targets:
   - github
   - pypi
+artifacts:
+  workflow: release-artifacts.yml
+  event: workflow_dispatch
+  names:
+    - view-as-ai-darwin-arm64
+    - view-as-ai-darwin-x64
+    - view-as-ai-linux-arm64
+    - view-as-ai-linux-x64
+    - view-as-ai-windows-arm64.exe
+    - view-as-ai-windows-x64.exe
+    - checksums
 github:
   tagPrefix: v
-  assets: []
+  artifactPatterns:
+    - view-as-ai-*
+    - checksums.txt
 pypi:
   packageDir: .

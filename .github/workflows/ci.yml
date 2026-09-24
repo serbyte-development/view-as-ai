@@ -36,6 +36,6 @@ jobs:
           cache-dependency-glob: uv.lock
       - run: uv python install 3.13
       - run: uv sync --locked --group dev --python 3.13
-      - run: uv run ruff check src tests
-      - run: uv run ruff format --check src tests
+      - run: uv run ruff check src tests scripts
+      - run: uv run ruff format --check src tests scripts
       - run: uv build

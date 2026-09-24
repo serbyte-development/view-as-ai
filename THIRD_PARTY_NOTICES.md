@@ -20,6 +20,13 @@ formatter functions it uses, with its own small CLI and regression tests.
 `httpx` uses BSD-3-Clause. Dependency licenses remain part of their respective
 distributions. Review combined distribution licensing before publishing a release.
 
+## Standalone executable build
+
+GitHub Release executables are frozen with PyInstaller. PyInstaller is a build-time
+dependency and its bootloader is distributed under GPLv2 with a special exception
+permitting it to be combined with and distributed as part of applications built
+with PyInstaller. See https://pyinstaller.org/en/stable/license.html.
+
 View as AI is an independent best-effort approximation. OpenAI's public browser
 example provides source ancestry; production equivalence is evaluated through
 recorded native ChatGPT `web.run` observations.
