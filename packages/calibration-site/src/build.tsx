@@ -1,10 +1,10 @@
 import { copyFile, mkdir, rm, writeFile } from "node:fs/promises";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
-import { renderToStaticMarkup } from "react-dom/server";
 
 import type { FixtureManifest, FixtureManifestEntry, FixtureRoute } from "./fixture-types";
 import { assets, calibrationScenario, routes } from "./registry";
+import { renderFixtureRoute } from "./render";
 
 const packageRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 const outputRoot = join(packageRoot, "dist");
@@ -29,15 +29,6 @@ function assetOutputPath(path: string): string {
   const normalized = normalizePublicPath(path);
   if (normalized.endsWith("/")) throw new Error(`asset path must name a file: ${normalized}`);
   return join(outputRoot, normalized.slice(1));
-}
-
-function renderRoute(route: FixtureRoute): string {
-  if (route.kind === "raw") return route.render();
-  const rendered = renderToStaticMarkup(route.render());
-  // React 19 injects image preload hints during server rendering. Calibration
-  // origin HTML must contain only resource hints we author deliberately.
-  const controlled = rendered.replace(/<link rel="preload" as="image"[^>]*\/>/g, "");
-  return `<!doctype html>${controlled}\n`;
 }
 
 function validateRouteRegistry(): void {
@@ -84,7 +75,7 @@ function validateRouteRegistry(): void {
 }
 
 async function buildRoute(route: FixtureRoute): Promise<FixtureManifestEntry> {
-  const html = renderRoute(route);
+  const html = renderFixtureRoute(route);
   const target = routeOutputPath(route.path);
   await mkdir(dirname(target), { recursive: true });
   await writeFile(target, html, "utf8");

@@ -475,119 +475,121 @@ These are sequential deployment scenarios. Do **not** deploy all variants simult
 
 ## Scenario build mode
 
-- [ ] Add `CALIBRATION_SITE_SCENARIO` (or equivalent) as a build-time selector.
-- [ ] Default normal deployment excludes site-context sibling corpora unless actively testing them.
-- [ ] Write the active scenario into the private build manifest.
-- [ ] Keep the target page source and emitted bytes stable across scenarios that require an unchanged
+- [x] Add `CALIBRATION_SITE_SCENARIO` (or equivalent) as a build-time selector.
+- [x] Default normal deployment excludes site-context sibling corpora unless actively testing them.
+- [x] Write the active scenario into the private build manifest.
+- [x] Keep the target page source and emitted bytes stable across scenarios that require an unchanged
   target.
-- [ ] Add a local command that prints/hashes the site-context target HTML before deployment.
+- [x] Add a local command that prints/hashes the site-context target HTML before deployment.
 
 ## Page-local baseline
 
 Coverage: `SITE-BASE`
 
-- [ ] Build target page with unique header/nav/main/sidebar/footer blocks.
-- [ ] Build no sibling containing those blocks in the SITE-BASE scenario.
+- [x] Build target page with unique header/nav/main/sidebar/footer blocks.
+- [x] Build no sibling containing those blocks in the SITE-BASE scenario.
 
 ## Repetition-count scenarios
 
 Coverage: `SITE-COUNT`
 
-- [ ] Build target-only scenario.
-- [ ] Build target + 1 sibling scenario.
-- [ ] Build target + 2 siblings scenario.
-- [ ] Build target + 4 siblings scenario.
-- [ ] Build target + 9 siblings scenario.
-- [ ] Keep target bytes identical across all five scenarios.
+- [x] Build target-only scenario.
+- [x] Build target + 1 sibling scenario.
+- [x] Build target + 2 siblings scenario.
+- [x] Build target + 4 siblings scenario.
+- [x] Build target + 9 siblings scenario.
+- [x] Keep target bytes identical across all five scenarios.
 
 ## Text versus structural repetition
 
 Coverage: `SITE-TEXT`
 
-- [ ] Build same markup + same text scenario.
-- [ ] Build same markup + different text scenario.
-- [ ] Build different markup + same text scenario.
-- [ ] Build same link destinations + different labels scenario.
-- [ ] Build same labels + different link destinations scenario.
+- [x] Build same markup + same text scenario.
+- [x] Build same markup + different text scenario.
+- [x] Build different markup + same text scenario.
+- [x] Build same link destinations + different labels scenario.
+- [x] Build same labels + different link destinations scenario.
 
 ## Region/landmark recurrence
 
 Coverage: `SITE-REGION`
 
-- [ ] Build repeated header variant.
-- [ ] Build repeated nav variant.
-- [ ] Build repeated neutral div before main.
-- [ ] Build repeated aside variant.
-- [ ] Build repeated neutral div after main.
-- [ ] Build repeated footer variant.
-- [ ] Build repeated block inside main.
-- [ ] Build role-navigation variant.
-- [ ] Build role-complementary variant.
-- [ ] Build role-contentinfo variant.
+- [x] Build repeated header variant.
+- [x] Build repeated nav variant.
+- [x] Build repeated neutral div before main.
+- [x] Build repeated aside variant.
+- [x] Build repeated neutral div after main.
+- [x] Build repeated footer variant.
+- [x] Build repeated block inside main.
+- [x] Build role-navigation variant.
+- [x] Build role-complementary variant.
+- [x] Build role-contentinfo variant.
 
 ## Unique child inside repeated wrapper
 
 Coverage: `SITE-UNIQUE-CHILD`
 
-- [ ] Build repeated wrapper + unique plain text child.
-- [ ] Build repeated wrapper + unique link child.
-- [ ] Build repeated wrapper + unique heading child.
-- [ ] Build repeated wrapper + unique alert/status child.
+- [x] Build repeated wrapper + unique plain text child.
+- [x] Build repeated wrapper + unique link child.
+- [x] Build repeated wrapper + unique heading child.
+- [x] Build repeated wrapper + unique alert/status child.
 
 ## Discoverability/linkage
 
 Coverage: `SITE-NAV-LINKAGE`
 
-- [ ] Build sibling linked from target nav.
-- [ ] Build sibling linked only from another sibling.
-- [ ] Build sitemap-only sibling.
-- [ ] Build completely unlinked sibling.
-- [ ] Build noindex sibling.
-- [ ] Build robots-excluded sibling scenario where direct capture remains testable.
+- [x] Build sibling linked from target nav.
+- [x] Build sibling linked only from another sibling.
+- [x] Build sitemap-only sibling.
+- [x] Build completely unlinked sibling.
+- [x] Build noindex sibling.
+- [x] Build robots-excluded sibling scenario for later direct-open verification.
 
 ## Template sanity check
 
 Coverage: `SITE-TEMPLATE`
 
-- [ ] Build one shared-component page set.
-- [ ] Build one independently authored page set that emits byte-identical HTML.
-- [ ] Add an assertion proving the compared origin bytes are identical.
+- [x] Build one shared-component page set.
+- [x] Build one independently authored page set that emits byte-identical HTML.
+- [x] Add an assertion proving the compared origin bytes are identical.
 
 ## Class-signal versus recurrence
 
 Coverage: `SITE-CLASS`
 
-- [ ] Build neutral-class unique and repeated variants.
-- [ ] Build navbar unique and repeated variants.
-- [ ] Build breadcrumb unique and repeated variants.
-- [ ] Build utility-nav unique and repeated variants.
-- [ ] Build related-navigation unique and repeated variants.
-- [ ] Build contextual-sidebar unique and repeated variants.
-- [ ] Build banner unique and repeated variants.
+- [x] Build neutral-class unique and repeated variants.
+- [x] Build navbar unique and repeated variants.
+- [x] Build breadcrumb unique and repeated variants.
+- [x] Build utility-nav unique and repeated variants.
+- [x] Build related-navigation unique and repeated variants.
+- [x] Build contextual-sidebar unique and repeated variants.
+- [x] Build banner unique and repeated variants.
 
 ## Before/after unchanged-target experiment
 
 Coverage: `SITE-CHANGE`
 
-- [ ] Build scenario A: target block unique.
-- [ ] Build scenario B: sibling pages repeat exact target block.
-- [ ] Add build-time assertion that target HTML hash is identical between A and B.
-- [ ] Make sibling sentinel family unique to this experiment.
+- [x] Build scenario A: target block unique.
+- [x] Build scenario B: sibling pages repeat exact target block.
+- [x] Add build-time assertion that target HTML hash is identical between A and B.
+- [x] Make sibling sentinel family unique to this experiment.
 
 ## Conversation/session-context corpus
 
 Coverage: `SITE-CONVERSATION`
 
-- [ ] Build stable target and sibling pages that can be opened in different conversation orders.
-- [ ] Do not require deployment mutation between conversation-order captures.
+- [x] Build stable target and sibling pages that can be opened in different conversation orders.
+- [x] Do not require deployment mutation between conversation-order captures.
 
 ## Host/subdomain scope
 
 Coverage: `SITE-SUBDOMAIN`
 
-- [ ] Build the same repeatable block corpus for the Vercel hostname.
-- [ ] Prepare a sibling-subdomain deployment target when this phase is reached.
-- [ ] Prepare a different-host control only if the same-host/sibling-subdomain results justify it.
+- [x] Build the same repeatable block corpus for the Vercel hostname.
+- [x] Prepare a host-agnostic sibling-subdomain scenario that can be deployed unchanged to a second
+  hostname.
+- [x] Keep the different-host control conditional on same-host/sibling-subdomain evidence rather
+  than publishing it prematurely.
 
 ---
 

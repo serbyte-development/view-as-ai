@@ -10,10 +10,13 @@ import { jsonLdRoutes } from "./fixtures/jsonld";
 import { kitchenSinkAssets, kitchenSinkRoutes } from "./fixtures/kitchen-sink";
 import { malformedRoutes } from "./fixtures/malformed";
 import { orderRoutes } from "./fixtures/order";
+import { siteContextAssetsFor, siteContextRoutesFor } from "./fixtures/site-context";
 import { sizeRoutes } from "./fixtures/size";
 import { isolatedVisibilityAssets, isolatedVisibilityRoutes } from "./fixtures/visibility-isolated";
 
 export const calibrationScenario = process.env.CALIBRATION_SITE_SCENARIO ?? "default";
+const siteContextRoutes = siteContextRoutesFor(calibrationScenario);
+const siteContextAssets = siteContextAssetsFor(calibrationScenario);
 
 export const requireFullCalibrationCoverage = false;
 
@@ -31,6 +34,7 @@ export const routes: FixtureRoute[] = [
   ...duplicateRoutes,
   ...malformedRoutes,
   ...sizeRoutes,
+  ...siteContextRoutes,
 ];
 
 export const assets: StaticAsset[] = [
@@ -38,6 +42,7 @@ export const assets: StaticAsset[] = [
   ...kitchenSinkAssets,
   ...isolatedVisibilityAssets,
   ...activeAssets,
+  ...siteContextAssets,
   {
     path: "/styles.css",
     source: "src/styles.css",
