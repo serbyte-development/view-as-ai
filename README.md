@@ -1,4 +1,6 @@
-# View as AI
+# View as AI - see how AI views your website
+
+[Try it](#try-it-in-one-command) • [CLI](#cli) • [Python API](#python-api) • [How it works](#how-it-works) • [Calibration](#calibration-and-limitations)
 
 [![CI](https://github.com/Serbyte-Development/view-as-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Serbyte-Development/view-as-ai/actions/workflows/ci.yml)
 [![License: GPL-3.0-or-later](https://img.shields.io/badge/License-GPL--3.0--or--later-blue.svg)](LICENSE)
@@ -19,27 +21,31 @@ The implementation started from OpenAI's public `gpt-oss` browser formatter and 
 
 ## What you see vs. what the model sees
 
+<table>
+<tr>
+<td align="center" width="50%">
+
 **What you think AI sees**
 
-![Example SaaS website as a browser user sees it, with navigation, a hero section, calls to action, and a dashboard preview](https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main/images/what-ai-sees-hero.webp)
+</td>
+<td align="center" width="50%">
 
-**What the model-facing representation looks more like**
+**What the model sees**
 
-```text
-# Understand your data faster
+</td>
+</tr>
+<tr>
+<td colspan="2">
 
-Ship dashboards without fighting your stack.
+<img src="./images/what-ai-sees-hero.webp" alt="Side-by-side comparison of a SaaS homepage. Left: the visual page a browser user sees, with navigation, a hero, calls to action, and a dashboard preview. Right: the compact Markdown-like representation an AI browsing model receives, with a heading, prose, a button, and a citation link." width="100%">
 
-[Button: Start free]
-
-【0†Read the docs】
-```
+</td>
+</tr>
+</table>
 
 The exact output varies by page and by the browsing system. View as AI targets **information presence, omission, ordering, links, images, controls, and tables**. Exact Markdown shape, whitespace, reference numbering, and line layout are secondary.
 
-For the observed pipeline, calibration evidence, known element behavior, and the parts of OpenAI's browsing stack we still cannot see, read **[How ChatGPT web browsing represents a webpage](https://github.com/Serbyte-Development/view-as-ai/blob/main/docs/how-chatgpt-sees-web-pages.md)**.
-
-[Try it](#try-it-in-one-command) • [CLI](#cli) • [Python API](#python-api) • [How it works](#how-it-works) • [Calibration](#calibration-and-limitations)
+For the observed pipeline, calibration evidence, known element behavior, and the parts of OpenAI's browsing stack we still cannot see, read **[How ChatGPT web browsing represents a webpage](./docs/how-chatgpt-sees-web-pages.md)**.
 
 ## Try it in one command
 

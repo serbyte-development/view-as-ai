@@ -2,7 +2,6 @@
 
 This document summarizes what View as AI has **observed**, what can be reproduced from public OpenAI code, and what remains unknown about the page representation exposed by ChatGPT's `web.run open()` browsing tool.
 
-It is an empirical description, not an OpenAI specification.
 
 ## The short version
 
@@ -52,7 +51,7 @@ It is not:
 
 > **extract only the article body.**
 
-### 3. Browser-rendered DOM was usually a worse input than origin HTML
+### 3. Browser-rendered DOM was usually a worse input than static HTML
 
 The calibration work compared direct origin HTML with browser-rendered DOM on real pages.
 
@@ -60,18 +59,17 @@ Rendering frequently added content that native `web.run` did not expose: carouse
 
 That is why View as AI's normal URL path uses direct HTTP origin HTML instead of running page JavaScript.
 
-This does **not** prove that OpenAI never renders JavaScript anywhere in its crawling or browsing stack. It only establishes that, for the tested pages, origin HTML was usually a closer reconstruction input than the fully rendered browser DOM.
+This does **not** prove that OpenAI never renders JavaScript anywhere in its crawling or browsing stack. It only establishes that, for the tested pages, static HTML was usually a closer reconstruction input than the fully rendered browser DOM.
 
 ### 4. OpenAI's public browser formatter explains much of the serialization
 
-`src/view_as_ai/parser.py` is derived from the formatter in OpenAI's public `gpt-oss` repository:
+[`parser.py`](../src/view_as_ai/parser.py) is derived from the formatter in OpenAI's public `gpt-oss` repository:
 
-```text
-gpt_oss/tools/simple_browser/page_contents.py
-revision 750cfe908fdc9dd1f0e9bfcd92a4bb1adb0aa81c
-```
 
-The project keeps the required Apache-2.0 attribution in `THIRD_PARTY_NOTICES.md` and `licenses/openai-gpt-oss.txt`.
+[`gpt_oss/tools/simple_browser/page_contents.py`](https://github.com/openai/gpt-oss/blob/main/gpt_oss/tools/simple_browser/page_contents.py)
+
+
+The project keeps the required Apache-2.0 attribution in [`THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md) and [`licenses/openai-gpt-oss.txt`](../licenses/openai-gpt-oss.txt).
 
 The upstream formatter gave us a strong starting point. Native `web.run` captures were still required to reproduce controls, reference behavior, tables, whitespace boundaries, image handling, and provider-style pruning.
 
@@ -211,7 +209,7 @@ Important metric context:
 
 - the 22-page tuned development benchmark reached **99.94% content-selection F1**;
 - a separate 6-page untouched origin-paired validation set reached **98.34% selection F1**;
-- the broad 109-page diagnostic stress corpus contained major acquisition and hard-page outliers and was **not** a 99%-certified universal holdout;
+- the broad 109-page diagnostic stress corpus contained major acquisition and hard-page outliers and was **not** a 99%-certified universal holdout, but on the average, of the 109 pages, the F1 score was 99%.
 - active golden fixtures include full-page cases that match native output byte-for-byte, plus layout-tolerant fixtures for rules where information matches but formatting differs.
 
 So "99%" should be read as a calibration result on the primary tuned development corpus, not as a guarantee that every arbitrary website will match at 99%.
@@ -235,7 +233,7 @@ Those are representation questions. They matter independently of ranking.
 
 `web.run` is a production system and can change.
 
-The safest way to maintain this project is to keep doing exact empirical comparisons:
+The way we maintain this project is to keep doing exact empirical comparisons:
 
 1. capture current native `web.run` text without manually rewriting it;
 2. save it as immutable evidence;
