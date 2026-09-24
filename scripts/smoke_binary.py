@@ -18,6 +18,7 @@ def main() -> int:
         check=True,
         capture_output=True,
         text=True,
+        encoding="utf-8",
     ).stdout.strip()
     if not version.startswith("view-as-ai "):
         raise RuntimeError(f"Unexpected version output: {version!r}")
@@ -27,6 +28,7 @@ def main() -> int:
         check=False,
         capture_output=True,
         text=True,
+        encoding="utf-8",
         timeout=60,
     )
     if result.returncode != 0:
