@@ -1,6 +1,6 @@
 # View as AI - see how AI views your website
 
-[Try it](#try-it-in-one-command) • [CLI](#cli) • [Python API](#python-api) • [How it works](#how-it-works) • [Calibration](#calibration-and-limitations)
+[Try it](#try-it) • [CLI](#cli) • [Python API](#python-api) • [How it works](#how-it-works) • [Calibration](#calibration-and-limitations)
 
 [![CI](https://github.com/Serbyte-Development/view-as-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Serbyte-Development/view-as-ai/actions/workflows/ci.yml)
 [![License: GPL-3.0-or-later](https://img.shields.io/badge/License-GPL--3.0--or--later-blue.svg)](LICENSE)
@@ -47,7 +47,7 @@ The exact output varies by page and by the browsing system. View as AI targets *
 
 For the observed pipeline, calibration evidence, known element behavior, and the parts of OpenAI's browsing stack we still cannot see, read **[How ChatGPT web browsing represents a webpage](./docs/how-chatgpt-sees-web-pages.md)**.
 
-## Try it in one command without installing anything
+## Try it
 
 **macOS / Linux**
 
@@ -63,89 +63,13 @@ curl -fsSL https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main
 
 The launcher detects your operating system and CPU architecture, downloads the matching standalone executable from the latest GitHub Release, verifies its SHA-256 checksum, runs it, and removes the temporary copy.
 
-If you already have [uv](https://docs.astral.sh/uv/), the PyPI package is also a one-command run:
-
-```sh
-uvx view-as-ai https://example.com
-```
-
-If you use pipx:
-
-```sh
-pipx run view-as-ai https://example.com
-```
-
-## Install
-
-### Standalone executable
-
-Install the latest verified binary to your user account.
-
-**macOS / Linux**
-
-```sh
-curl -fsSL https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main/install.sh | sh
-view-as-ai https://example.com
-```
-
-The default install location is `~/.local/bin`. Set `VIEW_AS_AI_INSTALL_DIR` to override it.
-
-**Windows PowerShell**
-
-```powershell
-irm 'https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main/install.ps1' | iex
-view-as-ai https://example.com
-```
-
-The Windows installer adds its user-level install directory to `PATH` when needed.
-
-Standalone binaries are built and smoke-tested natively for macOS ARM64/x64, Linux ARM64/x64, and Windows ARM64/x64. Every release includes `checksums.txt` for SHA-256 verification.
-
-### Python package
-
-Requires Python 3.11+.
-
-Install the CLI from PyPI:
-
-```sh
-uv tool install view-as-ai
-view-as-ai https://example.com
-```
-
-For library use:
-
-```sh
-uv add view-as-ai
-```
-
-For development:
-
-```sh
-uv sync --group dev --group binary
-uv run view-as-ai https://example.com
-```
-
 ## CLI
 
 ```sh
-# Public webpage
 view-as-ai https://example.com
-
-# Plain model-readable text
-view-as-ai https://example.com --format text
-
-# Structured output with reference URLs
-view-as-ai https://example.com --format json
-
-# Local or built HTML
-view-as-ai ./dist/index.html --base-url https://example.com/
-
-# HTML from stdin
-curl -fsSL https://example.com | view-as-ai - --base-url https://example.com/
-
-# Save output
-view-as-ai https://example.com -o preview.txt
 ```
+
+Common options: `--format text`, `--format json`, `-o preview.txt`, or pass a local HTML file with `--base-url`. Run `view-as-ai --help` for the complete interface.
 
 The default `view` format adds line numbers for inspection:
 
@@ -172,7 +96,42 @@ L4: 【0†Learn more†iana.org】
 }
 ```
 
-The CLI follows HTTP redirects, accepts HTML/XHTML responses, and uses a 30-second default timeout. Run `view-as-ai --help` for the complete option list. `python -m view_as_ai` exposes the same CLI.
+The CLI follows HTTP redirects, accepts HTML/XHTML responses, and uses a 30-second default timeout.
+
+<details>
+<summary><strong>Install permanently or use the Python package</strong></summary>
+
+Install the standalone executable:
+
+```sh
+# macOS / Linux
+curl -fsSL https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main/install.sh | sh
+```
+
+```powershell
+# Windows PowerShell
+irm 'https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main/install.ps1' | iex
+```
+
+The installer downloads the verified binary for your platform. No Python runtime is required. Releases include SHA-256 checksums and binaries for macOS ARM64/x64, Linux ARM64/x64, and Windows ARM64/x64.
+
+Run directly from PyPI with uv or pipx:
+
+```sh
+uvx view-as-ai https://example.com
+pipx run view-as-ai https://example.com
+```
+
+Install the Python CLI or library:
+
+```sh
+uv tool install view-as-ai
+uv add view-as-ai
+```
+
+Requires Python 3.11+. `python -m view_as_ai` exposes the same CLI.
+
+</details>
 
 ## Python API
 
