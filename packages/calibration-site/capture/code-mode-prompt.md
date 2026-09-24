@@ -58,9 +58,16 @@ The model should never be the transport layer for the captured page body.
    metadata, and choose an unused capture directory. Check that `native.web.txt` does not already
    exist before writing; preserve existing evidence and use a new capture ID for another run.
 4. Invoke the native `open` callable from Code Mode and keep its returned value in JavaScript.
-   After the call, check for tool errors and verify the result's reported source/resolved URL
-   against the requested URL. Inspect the returned source metadata or header; a matching URL in
-   an ordinary body link is insufficient. Stop on an error or a different source URL.
+   After the call, check both the tool error flag and the returned text. Native access failures can
+   appear as `Internal Error` / `URL ... is not accessible via this tool.` even when `isError` is
+   false. Preserve those responses as diagnostic evidence and record the access failure.
+   An unexpected baseline access failure blocks pipeline validation. An HTTP error deliberately
+   tested by an experiment remains an experiment outcome to interpret.
+
+   Verify the result's reported source/resolved URL against the requested URL and the experiment's
+   documented redirect behavior. Inspect source metadata or the returned header; a matching URL in
+   an ordinary body link is insufficient. Preserve both requested and resolved URLs for intended
+   redirects. Stop on an unexplained different source URL.
 5. Inspect the result structure programmatically and select the complete model-facing text directly
    from it. An MCP response uses a `content` array; when its sole block has type `text`, the string
    is `result.content[0].text`. Check the structure before using that path. For a different

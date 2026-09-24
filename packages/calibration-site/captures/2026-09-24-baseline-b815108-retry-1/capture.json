@@ -1,0 +1,47 @@
+{
+  "capture_id": "2026-09-24-baseline-b815108-retry-1",
+  "native_capture_status": "access-error",
+  "result_status": "blocked",
+  "diagnostic_only": true,
+  "finding": "Native open could not access the public baseline. The saved diff is diagnostic and establishes no parser extraction or parity result.",
+  "native_request_artifact": "native.request.json",
+  "native_response_artifact": "native.response.json",
+  "requested_url": "https://view-as-ai.vercel.app/baseline/",
+  "final_url": "https://view-as-ai.vercel.app/baseline/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": null,
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "546d8dfcb2b06f029758832e8cbc7100e039a15b930a11de052e9358823264e4",
+  "native_sha256": "cd4279830f9826be1d00f83801ff4e52e4f793ea771d739a0f37caabcb59bb9f",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "a9818f7a81c25dc056dbab96a25c6a198703c27a",
+  "test_ids": [],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "b9eb7e311ebcdea018894ef756cb804f18794e78589a9f80196211483e0426a1",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "tsx",
+      "notes": "Capture-pipeline sanity page; not a calibration result ID.",
+      "path": "/baseline/",
+      "phase": 1,
+      "source": "src/fixtures/baseline.tsx",
+      "testIds": [],
+      "sentinels": {},
+      "sentinelGroups": {}
+    }
+  ],
+  "finalized_at": "2026-09-24T22:34:58.622426+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-24T22:34:58.625056+00:00",
+    "native_sha256": "cd4279830f9826be1d00f83801ff4e52e4f793ea771d739a0f37caabcb59bb9f",
+    "view_as_ai_sha256": "fa910a8124e226a0998ff2517d58590bbef29d9af80722bf32318bdb52b36558"
+  }
+}

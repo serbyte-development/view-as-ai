@@ -1,0 +1,35 @@
+{
+  "purpose": "Retry failed native baseline open once to check a transient tool failure.",
+  "tool": "mcp__codex_apps__search_service_web_run",
+  "request": {
+    "open": [
+      {
+        "ref_id": "https://view-as-ai.vercel.app/baseline/"
+      }
+    ],
+    "response_length": "long"
+  },
+  "started_at": "2026-09-24T22:34:05.991Z",
+  "received_at": "2026-09-24T22:34:06.757Z",
+  "reported_urls": [
+    "https://view-as-ai.vercel.app/baseline/"
+  ],
+  "native_access_errors": [
+    "URL https://view-as-ai.vercel.app/baseline/ is not accessible via this tool."
+  ],
+  "tool_is_error": false,
+  "deployment_verification": {
+    "verifiedAt": "2026-09-24T22:31:34.544Z",
+    "deploymentId": "dpl_6WFSw2kxGbndjYUp1Gna6h4E3Gsu",
+    "commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+    "scenario": "default",
+    "baselineUrl": "https://view-as-ai.vercel.app/baseline/",
+    "httpStatus": 200,
+    "bytes": 829,
+    "originSha256": "546d8dfcb2b06f029758832e8cbc7100e039a15b930a11de052e9358823264e4",
+    "matchesLocalBuild": true,
+    "sentinelPresent": true,
+    "captureId": "2026-09-24-baseline-b815108",
+    "captureExists": false
+  }
+}

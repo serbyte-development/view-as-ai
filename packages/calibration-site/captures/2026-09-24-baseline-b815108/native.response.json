@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Internal Error ()\n【turn0view0】 [wordlim: 200] Source: open({\"ref_id\":\"https://view-as-ai.vercel.app/baseline/\",\"lineno\":null}); Total lines: 1\nL0: URL https://view-as-ai.vercel.app/baseline/ is not accessible via this tool.\n"
+    }
+  ],
+  "isError": false
+}

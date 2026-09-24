@@ -159,15 +159,29 @@ def render_comparison(directory: Path, metadata: dict[str, object]) -> dict[str,
     return comparison
 
 
-def finalize(capture_id: str, url: str, test_ids: list[str]) -> None:
+def finalize(
+    capture_id: str,
+    url: str,
+    test_ids: list[str],
+    *,
+    deployment_commit: str,
+    fixture_scenario: str | None = None,
+) -> None:
     parsed = urlsplit(url)
     if parsed.scheme not in {"http", "https"} or not parsed.hostname:
         raise SystemExit("public URL must be an absolute HTTP(S) URL")
     unknown_test_ids = sorted(set(test_ids) - valid_test_ids())
     if unknown_test_ids:
         raise SystemExit(f"unknown calibration test IDs: {', '.join(unknown_test_ids)}")
+    if not re.fullmatch(r"[0-9a-fA-F]{7,40}", deployment_commit):
+        raise SystemExit(
+            "deployment commit must be the verified deployed Git SHA (7–40 hex digits)"
+        )
     manifest = fixture_manifest()
+    fixtures: list[dict[str, object]] = []
     if manifest is not None:
+        if fixture_scenario is not None and fixture_scenario != manifest.get("scenario"):
+            raise SystemExit("fixture scenario differs from the current built fixture manifest")
         fixtures = [*manifest.get("routes", []), *manifest.get("endpoints", [])]
         manifest_ids = {test_id for fixture in fixtures for test_id in fixture.get("testIds", [])}
         unbuilt_test_ids = sorted(set(test_ids) - manifest_ids)
@@ -183,6 +197,8 @@ def finalize(capture_id: str, url: str, test_ids: list[str]) -> None:
         raise SystemExit(
             f"capture native web.run first; expected {native_path.relative_to(REPO_ROOT)}"
         )
+    if (directory / "origin.html").exists() or (directory / "capture.json").exists():
+        raise SystemExit("saved origin/metadata already exists; use compare or a new capture ID")
 
     headers = {
         "User-Agent": USER_AGENT,
@@ -194,10 +210,8 @@ def finalize(capture_id: str, url: str, test_ids: list[str]) -> None:
 
     content_type = response.headers.get("content-type", "")
     media_type = content_type.split(";", 1)[0].strip().lower()
-    fetch_compatible = (
-        response.is_success
-        and bool(response.content)
-        and (not media_type or media_type in {"text/html", "application/xhtml+xml"})
+    fetch_compatible = response.is_success and (
+        not media_type or media_type in {"text/html", "application/xhtml+xml"}
     )
 
     origin_path = directory / "origin.html"
@@ -221,14 +235,32 @@ def finalize(capture_id: str, url: str, test_ids: list[str]) -> None:
         "view_as_ai_url_fetch_compatible": fetch_compatible,
         "origin_encoding": encoding,
         "origin_sha256": sha256(response.content),
-        "deployment_commit": git_commit(),
+        "native_sha256": sha256(native_path.read_bytes()),
+        "deployment_commit": deployment_commit,
+        "local_commit": git_commit(),
         "test_ids": test_ids,
-        "fixture_scenario": manifest.get("scenario") if manifest else None,
+        "fixture_scenario": (
+            fixture_scenario
+            if fixture_scenario is not None
+            else manifest.get("scenario")
+            if manifest
+            else None
+        ),
         "fixture_manifest_sha256": (
             sha256(FIXTURE_MANIFEST.read_bytes()) if manifest is not None else None
         ),
+        "fixture_definitions": [
+            fixture
+            for fixture in fixtures
+            if set(test_ids).intersection(fixture.get("testIds", []))
+            or (not test_ids and fixture.get("path") == parsed.path)
+        ],
         "finalized_at": datetime.now(UTC).isoformat(),
     }
+    # Save the origin's identity before rendering so compare can recover a parser failure.
+    (directory / "capture.json").write_text(
+        json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     comparison = render_comparison(directory, metadata)
     print(
         f"{capture_id}: exact_match={comparison['exact_match']} "
@@ -244,6 +276,14 @@ def compare(capture_id: str) -> None:
     if not metadata_path.exists():
         raise SystemExit(f"missing capture metadata: {metadata_path}")
     metadata = json.loads(metadata_path.read_text("utf-8"))
+    origin_path = directory / "origin.html"
+    if not origin_path.exists() or sha256(origin_path.read_bytes()) != metadata["origin_sha256"]:
+        raise SystemExit("saved origin does not match its capture hash")
+    native_hash = metadata.get("native_sha256") or metadata.get("comparison", {}).get(
+        "native_sha256"
+    )
+    if native_hash and sha256((directory / "native.web.txt").read_bytes()) != native_hash:
+        raise SystemExit("saved native capture does not match its capture hash")
     comparison = render_comparison(directory, metadata)
     print(
         f"{capture_id}: exact_match={comparison['exact_match']} "
@@ -260,14 +300,28 @@ def main() -> None:
     finalize_parser = subparsers.add_parser("finalize")
     finalize_parser.add_argument("capture_id")
     finalize_parser.add_argument("url")
-    finalize_parser.add_argument("test_ids", nargs="+")
+    finalize_parser.add_argument(
+        "test_ids", nargs="*", help="omit for baseline pipeline validation"
+    )
+    finalize_parser.add_argument(
+        "--deployment-commit", required=True, help="verified public deployment Git SHA"
+    )
+    finalize_parser.add_argument(
+        "--fixture-scenario", help="verified deployed scenario; defaults to the built manifest"
+    )
 
     compare_parser = subparsers.add_parser("compare")
     compare_parser.add_argument("capture_id")
 
     args = parser.parse_args()
     if args.command == "finalize":
-        finalize(args.capture_id, args.url, args.test_ids)
+        finalize(
+            args.capture_id,
+            args.url,
+            args.test_ids,
+            deployment_commit=args.deployment_commit,
+            fixture_scenario=args.fixture_scenario,
+        )
     else:
         compare(args.capture_id)
 

@@ -1,0 +1,15 @@
+# Baseline Fixture
+
+VAI_BASELINE_PARAGRAPH_2E7C9A Ordinary readable baseline content.
+
+【0†Same-origin baseline link】
+
+【1†External baseline link†example.com】
+
+【2†Image: Baseline geometric fixture】
+
+Baseline name[Input: Baseline placeholder][Button: Baseline button]
+
+Baseline column | Baseline value
+--- | ---
+Alpha | One

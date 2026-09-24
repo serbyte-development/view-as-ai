@@ -51,6 +51,26 @@ npm run check:results --workspace @serbyte/view-as-ai-calibration-site
 The check fails when a test ID exists in `CALIBRATION_PLAN.md` but not here, when this ledger has an
 unknown/duplicate ID, or when a row uses an unsupported status.
 
+## Campaign checkpoint: 2026-09-24
+
+Campaign status: `blocked` at baseline pipeline validation. Production was verified at
+`b8151082d794b71bc4b1a54f6b1eb6195ee86a36`, scenario `default`.
+
+Native `open` returned `URL https://view-as-ai.vercel.app/baseline/ is not accessible via this tool.`
+on the initial attempt and one retry. The calibration homepage returned the same access failure;
+a native `https://example.com/` control succeeded. Independent public-origin requests returned
+HTTP 200 and baseline HTML matched the built fixture. The native failure is preserved as
+diagnostic evidence and establishes no parser extraction/parity result.
+
+- Baseline attempt: `captures/2026-09-24-baseline-b815108/`.
+- Baseline retry: `captures/2026-09-24-baseline-b815108-retry-1/`.
+- Access controls and finding: `captures/2026-09-24-native-access-diagnostics-b815108/finding.md`.
+- Completed calibration IDs: 0 of 531. All 520 default cases and 11 SITE cases remain unexecuted;
+  their existing `deployed` and `planned` states below remain accurate.
+
+Resume with a new baseline capture ID after native access to the exact public baseline URL works.
+Baseline pipeline validation and all subsequent default/SITE captures remain unfinished.
+
 ## TEXT
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |

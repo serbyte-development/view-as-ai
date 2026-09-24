@@ -47,7 +47,9 @@ From the repository root:
 npm run capture:finalize --workspace @serbyte/view-as-ai-calibration-site -- \
   <capture-id> \
   <public-url> \
-  <TEST-ID> [TEST-ID...]
+  [TEST-ID...] \
+  --deployment-commit <verified-deployed-sha> \
+  --fixture-scenario <verified-scenario>
 ```
 
 Example:
@@ -56,22 +58,33 @@ Example:
 npm run capture:finalize --workspace @serbyte/view-as-ai-calibration-site -- \
   2026-09-24-kitchen-sink-a1b2c3d \
   https://view-as-ai.vercel.app/kitchen-sink/ \
-  TEXT-001 VIS-001 SEM-003
+  TEXT-001 VIS-001 SEM-003 \
+  --deployment-commit a1b2c3d \
+  --fixture-scenario default
 ```
 
-This creates/updates:
+Omit test IDs for `/baseline/`; its metadata records `test_ids: []`. Always pass the independently
+verified deployed commit. `local_commit` records the working repository HEAD separately. The
+scenario defaults to the private built manifest; an explicit scenario must agree with that manifest.
+Build the matching scenario before finalizing its captures.
+
+This creates:
 
 ```text
 captures/<capture-id>/
 ├── native.web.txt   # authoritative native capture; never generated locally
 ├── origin.html      # public origin response used for the parser comparison
-├── capture.json     # URL, commit, hashes, test IDs, comparison summary
+├── capture.json     # URL, commits, scenario, hashes, fixture/sentinel definitions, comparison
 ├── view-as-ai.txt   # generated from origin.html by the current parser
 └── diff.txt         # generated native-vs-parser unified diff
 ```
 
 `native.web.txt` is the oracle. `origin.html` is the paired public input. The parser output and
 diff are derived artifacts and may be regenerated after parser changes.
+
+Finalization refuses to overwrite an existing origin or capture metadata. Use `capture:compare`
+for saved evidence and a new capture ID for another native run. Relevant fixture definitions,
+including JSON-LD-only and visible sentinel groups, are preserved in `capture.json`.
 
 The comparison treats one final LF used as a normal text-file terminator as transport rather than
 page content. The stored `native.web.txt` remains authoritative evidence and should not be edited
@@ -87,7 +100,9 @@ npm run capture:compare --workspace @serbyte/view-as-ai-calibration-site -- <cap
 ```
 
 This reruns the current parser against the saved `origin.html` and refreshes
-`view-as-ai.txt`, `diff.txt`, and the comparison fields in `capture.json`.
+`view-as-ai.txt`, `diff.txt`, and the comparison fields in `capture.json`. It checks saved evidence
+hashes before comparison. A failed initial parser render can be retried using the origin and
+metadata already saved by finalization.
 
 ## 5. Record the finding
 

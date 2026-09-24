@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Internal Error ()\n【turn1view0】 [wordlim: 200] Source: open({\"ref_id\":\"https://view-as-ai.vercel.app/\",\"lineno\":null}); Total lines: 1\nL0: URL https://view-as-ai.vercel.app/ is not accessible via this tool.\n\n--------------------------------------------------------------------------------\nExample Domain (https://example.com/)\n【turn1view1】 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({\"ref_id\":\"https://example.com/\",\"lineno\":null}); Total lines: 5\nL0: # Example Domain\nL1: \nL2: This domain is for use in documentation examples without needing permission. Avoid use in operations.\nL3: \nL4: 【0†Learn more†iana.org】\n"
+    }
+  ],
+  "isError": false
+}
