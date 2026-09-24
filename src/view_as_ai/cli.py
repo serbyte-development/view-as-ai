@@ -23,6 +23,14 @@ DEFAULT_USER_AGENT = (
 )
 
 
+def _configure_stdio() -> None:
+    """Keep model-reference Unicode printable on Windows consoles and pipes."""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None:
+            reconfigure(encoding="utf-8")
+
+
 def _validate_http_url(value: str) -> None:
     try:
         parsed = urlsplit(value)
@@ -50,6 +58,7 @@ def _fetch_url(url: str, timeout: float) -> tuple[str, str]:
 
 
 def main(argv: list[str] | None = None) -> int:
+    _configure_stdio()
     parser = argparse.ArgumentParser(
         description="Preview the information a browsing model is likely to receive from HTML."
     )
