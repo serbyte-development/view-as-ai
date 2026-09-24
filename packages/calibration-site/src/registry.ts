@@ -8,7 +8,9 @@ import { headMetadataRoutes } from "./fixtures/head-metadata";
 import { homeRoutes } from "./fixtures/home";
 import { jsonLdRoutes } from "./fixtures/jsonld";
 import { kitchenSinkAssets, kitchenSinkRoutes } from "./fixtures/kitchen-sink";
+import { malformedRoutes } from "./fixtures/malformed";
 import { orderRoutes } from "./fixtures/order";
+import { sizeRoutes } from "./fixtures/size";
 import { isolatedVisibilityAssets, isolatedVisibilityRoutes } from "./fixtures/visibility-isolated";
 
 export const calibrationScenario = process.env.CALIBRATION_SITE_SCENARIO ?? "default";
@@ -27,6 +29,8 @@ export const routes: FixtureRoute[] = [
   ...activeRoutes,
   ...orderRoutes,
   ...duplicateRoutes,
+  ...malformedRoutes,
+  ...sizeRoutes,
 ];
 
 export const assets: StaticAsset[] = [

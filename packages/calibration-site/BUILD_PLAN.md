@@ -443,12 +443,13 @@ Route pattern: `/experiments/malformed/<test-id>/`
 
 Coverage: `MAL-001..MAL-012`
 
-- [ ] Emit MAL-001 through MAL-012 from raw HTML strings instead of React when React would repair the
+- [x] Emit MAL-001 through MAL-012 from raw HTML strings instead of React when React would repair the
   markup.
-- [ ] Verify emitted bytes before deployment.
-- [ ] Preserve duplicate attributes, multiple body/title tags, XML declarations, and invalid nesting
+- [x] Verify emitted bytes before deployment.
+- [x] Preserve duplicate attributes, multiple body/title tags, XML declarations, and invalid nesting
   exactly where the platform permits.
-- [ ] Mark a case `blocked` later if Vercel/CDN normalization makes the intended origin impossible.
+- [x] Preserve the results-ledger `blocked` path for any later case where Vercel/CDN normalization
+  makes the intended origin impossible.
 
 ## Large-page/truncation
 
@@ -456,15 +457,15 @@ Route pattern: `/experiments/size/<test-id>/`
 
 Coverage: `SIZE-001..SIZE-011`
 
-- [ ] Generate deterministic moderate, 25 KB, 100 KB, and 500 KB text fixtures.
-- [ ] Put beginning/middle/end sentinels at deterministic byte/content positions.
-- [ ] Generate large-nav/small-main and small-nav/large-main paired cases.
-- [ ] Generate large code block.
-- [ ] Generate large table.
-- [ ] Generate hundreds-of-links case.
-- [ ] Generate hundreds-of-images case with stable same-origin assets.
-- [ ] Generate repeated-boilerplate plus small-unique-article case.
-- [ ] Keep large fixture generation deterministic across rebuilds.
+- [x] Generate deterministic moderate, 25 KB, 100 KB, and 500 KB text fixtures.
+- [x] Put beginning/middle/end sentinels at deterministic byte/content positions.
+- [x] Generate large-nav/small-main and small-nav/large-main paired cases.
+- [x] Generate large code block.
+- [x] Generate large table.
+- [x] Generate hundreds-of-links case.
+- [x] Generate hundreds-of-images case with stable same-origin assets.
+- [x] Generate repeated-boilerplate plus small-unique-article case.
+- [x] Keep large fixture generation deterministic across rebuilds.
 
 ---
 
