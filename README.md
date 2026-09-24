@@ -71,7 +71,7 @@ view-as-ai https://example.com
 
 Common options: `--format text`, `--format json`, `-o preview.txt`, or pass a local HTML file with `--base-url`. Run `view-as-ai --help` for the complete interface.
 
-The default `view` format adds line numbers for inspection:
+Native `web.run open()` returns line-numbered output, so `view` mirrors it with `L<n>:` prefixes:
 
 ```text
 Example Domain (https://example.com/)
@@ -82,6 +82,8 @@ L2: This domain is for use in documentation examples without needing permission.
 L3:
 L4: 【0†Learn more†iana.org】
 ```
+
+Use `--format text` when you want only the parsed page body without the tool-style line-number wrapper.
 
 `--format json` returns the page URL, model-readable text, title, and the reference URL map:
 
