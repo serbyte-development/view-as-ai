@@ -314,13 +314,13 @@ Route pattern: `/experiments/head/<test-id>/`
 
 Coverage: `HEAD-001..HEAD-017`
 
-- [ ] Build one document per HEAD test so metadata fields cannot contaminate one another.
-- [ ] Implement title absent/present variants with custom document heads.
-- [ ] Add canonical and alternate-language targets.
-- [ ] Add robots/noindex/nofollow variants.
-- [ ] Add Open Graph and Twitter card metadata.
-- [ ] Add microdata and RDFa body fixtures.
-- [ ] Isolate meta-refresh because it can change fetch behavior.
+- [x] Build one document per HEAD test so metadata fields cannot contaminate one another.
+- [x] Implement title absent/present variants with custom document heads.
+- [x] Add canonical and alternate-language targets.
+- [x] Add robots/noindex/nofollow variants.
+- [x] Add Open Graph and Twitter card metadata.
+- [x] Add microdata and RDFa body fixtures.
+- [x] Isolate meta-refresh because it can change fetch behavior.
 
 ## JSON-LD basic/syntax
 
@@ -328,67 +328,67 @@ Route pattern: `/experiments/jsonld/<test-id>/`
 
 Coverage: `JSONLD-001..JSONLD-015`
 
-- [ ] Build one isolated route per JSONLD-001 through JSONLD-015.
-- [ ] Keep JSON-LD-only sentinels absent from visible DOM.
-- [ ] Build head/body, valid/invalid, graph/nested, minified/pretty, Unicode, and large-string
+- [x] Build one isolated route per JSONLD-001 through JSONLD-015.
+- [x] Keep JSON-LD-only sentinels absent from visible DOM.
+- [x] Build head/body, valid/invalid, graph/nested, minified/pretty, Unicode, and large-string
   variants.
-- [ ] Include ordinary `application/json` and executable-script controls.
+- [x] Include ordinary `application/json` and executable-script controls.
 
 ## JSON-LD schema types
 
 Coverage: `JSONLD-016..JSONLD-036`
 
-- [ ] Build one route per listed schema.org type.
-- [ ] Include one fact repeated visibly and one fact available only in JSON-LD.
-- [ ] Keep schema values unique per route.
+- [x] Build one route per listed schema.org type.
+- [x] Include one fact repeated visibly and one fact available only in JSON-LD.
+- [x] Keep schema values unique per route.
 
 ## JSON-LD conflicts
 
 Coverage: `JSONLD-037..JSONLD-046`
 
-- [ ] Build isolated visible-vs-JSON-LD conflict routes.
-- [ ] Use deliberately unmistakable conflicting values for title, price, address, phone, rating,
+- [x] Build isolated visible-vs-JSON-LD conflict routes.
+- [x] Use deliberately unmistakable conflicting values for title, price, address, phone, rating,
   and FAQ.
-- [ ] Include JSON-LD-only and body-only fact controls.
+- [x] Include JSON-LD-only and body-only fact controls.
 
 ## JSON-LD URLs
 
 Coverage: `JSONLD-047..JSONLD-054`
 
-- [ ] Build URL/sameAs/image/logo/mainEntity/offers URL cases.
-- [ ] Ensure JSON-LD-only URLs do not appear in normal DOM anchors.
+- [x] Build URL/sameAs/image/logo/mainEntity/offers URL cases.
+- [x] Ensure JSON-LD-only URLs do not appear in normal DOM anchors.
 
 ## JSON-LD visibility and JavaScript mutation
 
 Coverage: `JSONLD-055..JSONLD-060`
 
-- [ ] Build hidden/aria-hidden JSON-LD source cases.
-- [ ] Build JS-inserted, JS-modified, and JS-removed JSON-LD routes with route-local scripts.
-- [ ] Preserve original source JSON separately in fixture source for review.
+- [x] Build hidden/aria-hidden JSON-LD source cases.
+- [x] Build JS-inserted, JS-modified, and JS-removed JSON-LD routes with route-local scripts.
+- [x] Preserve original source JSON separately in fixture source for review.
 
 ## JSON-LD multi-entity/deduplication
 
 Coverage: `JSONLD-061..JSONLD-068`
 
-- [ ] Build multiple-script, graph, duplicate, conflicting, and `@id` relationship cases.
+- [x] Build multiple-script, graph, duplicate, conflicting, and `@id` relationship cases.
 
 ## JSON-LD size
 
 Coverage: `JSONLD-069..JSONLD-075`
 
-- [ ] Generate deterministic <1 KB, ~10 KB, and ~100 KB structured-data payloads.
-- [ ] Generate large ItemList and graph variants.
-- [ ] Place unique beginning/end sentinels exactly as specified.
+- [x] Generate deterministic <1 KB, ~10 KB, and ~100 KB structured-data payloads.
+- [x] Generate large ItemList and graph variants.
+- [x] Place unique beginning/end sentinels exactly as specified.
 
 ## JSON-LD vs microdata vs RDFa
 
 Coverage: `JSONLD-076..JSONLD-079`
 
-- [ ] Build paired Organization encodings.
-- [ ] Build paired Product/Offer encodings.
-- [ ] Build paired breadcrumb encodings.
-- [ ] Build paired FAQ encodings.
-- [ ] Add private manifest metadata distinguishing JSON-LD-only and visible sentinel sets.
+- [x] Build paired Organization encodings.
+- [x] Build paired Product/Offer encodings.
+- [x] Build paired breadcrumb encodings.
+- [x] Build paired FAQ encodings.
+- [x] Add private manifest metadata distinguishing JSON-LD-only and visible sentinel sets.
 
 ---
 

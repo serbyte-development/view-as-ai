@@ -108,6 +108,7 @@ async function buildRoute(route: FixtureRoute): Promise<FixtureManifestEntry> {
     source: route.metadata.source,
     testIds: route.metadata.testIds,
     sentinels: route.metadata.sentinels ?? {},
+    sentinelGroups: route.metadata.sentinelGroups ?? {},
   };
 }
 

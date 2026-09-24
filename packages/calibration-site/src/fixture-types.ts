@@ -7,6 +7,7 @@ export interface FixtureMetadata {
   source: string;
   testIds: string[];
   sentinels?: Record<string, string>;
+  sentinelGroups?: Record<string, string[]>;
   notes?: string;
   allowDuplicateTestIds?: boolean;
   allowRepeatedSentinels?: boolean;
@@ -44,6 +45,7 @@ export interface FixtureManifestEntry {
   source: string;
   testIds: string[];
   sentinels: Record<string, string>;
+  sentinelGroups: Record<string, string[]>;
 }
 
 export interface FixtureManifest {
