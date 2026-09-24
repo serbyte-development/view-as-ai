@@ -47,17 +47,61 @@ The exact output varies by page and by the browsing system. View as AI targets *
 
 For the observed pipeline, calibration evidence, known element behavior, and the parts of OpenAI's browsing stack we still cannot see, read **[How ChatGPT web browsing represents a webpage](./docs/how-chatgpt-sees-web-pages.md)**.
 
-## Try it in one command
+## Try it in one command without installing anything
 
-If you have [uv](https://docs.astral.sh/uv/) installed, you can run View as AI directly from PyPI without installing it first:
+**macOS / Linux**
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main/run.sh | sh -s -- https://example.com
+```
+
+**Windows PowerShell**
+
+```powershell
+& ([scriptblock]::Create((irm 'https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main/run.ps1'))) 'https://example.com'
+```
+
+The launcher detects your operating system and CPU architecture, downloads the matching standalone executable from the latest GitHub Release, verifies its SHA-256 checksum, runs it, and removes the temporary copy.
+
+If you already have [uv](https://docs.astral.sh/uv/), the PyPI package is also a one-command run:
 
 ```sh
 uvx view-as-ai https://example.com
 ```
 
-That command creates an isolated environment, runs the latest published `view-as-ai`, prints the model-readable representation, and exits.
+If you use pipx:
+
+```sh
+pipx run view-as-ai https://example.com
+```
 
 ## Install
+
+### Standalone executable
+
+Install the latest verified binary to your user account.
+
+**macOS / Linux**
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main/install.sh | sh
+view-as-ai https://example.com
+```
+
+The default install location is `~/.local/bin`. Set `VIEW_AS_AI_INSTALL_DIR` to override it.
+
+**Windows PowerShell**
+
+```powershell
+irm 'https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main/install.ps1' | iex
+view-as-ai https://example.com
+```
+
+The Windows installer adds its user-level install directory to `PATH` when needed.
+
+Standalone binaries are built and smoke-tested natively for macOS ARM64/x64, Linux ARM64/x64, and Windows ARM64/x64. Every release includes `checksums.txt` for SHA-256 verification.
+
+### Python package
 
 Requires Python 3.11+.
 
@@ -77,7 +121,7 @@ uv add view-as-ai
 For development:
 
 ```sh
-uv sync --group dev
+uv sync --group dev --group binary
 uv run view-as-ai https://example.com
 ```
 
