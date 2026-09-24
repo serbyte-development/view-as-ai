@@ -1,22 +1,139 @@
 import { copyFile, mkdir, rm, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { HomePage } from "./pages/HomePage";
+import type { FixtureManifest, FixtureManifestEntry, FixtureRoute } from "./fixture-types";
+import { assets, calibrationScenario, routes } from "./registry";
 
 const packageRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
-const sourceRoot = join(packageRoot, "src");
 const outputRoot = join(packageRoot, "dist");
+const privateRoot = join(packageRoot, ".calibration");
+const manifestPath = join(privateRoot, "manifest.json");
 
+function normalizePublicPath(path: string): string {
+  if (!path.startsWith("/")) throw new Error(`public path must start with /: ${path}`);
+  return path.replace(/\/+/g, "/");
+}
+
+function routeOutputPath(path: string): string {
+  const normalized = normalizePublicPath(path);
+  if (normalized === "/") return join(outputRoot, "index.html");
+  if (!normalized.endsWith("/")) {
+    throw new Error(`fixture route must use a trailing slash: ${normalized}`);
+  }
+  return join(outputRoot, normalized.slice(1), "index.html");
+}
+
+function assetOutputPath(path: string): string {
+  const normalized = normalizePublicPath(path);
+  if (normalized.endsWith("/")) throw new Error(`asset path must name a file: ${normalized}`);
+  return join(outputRoot, normalized.slice(1));
+}
+
+function renderRoute(route: FixtureRoute): string {
+  if (route.kind === "raw") return route.render();
+  return `<!doctype html>${renderToStaticMarkup(route.render())}\n`;
+}
+
+function validateRouteRegistry(): void {
+  const seenPaths = new Set<string>();
+  const seenPrimaryIds = new Map<string, FixtureRoute>();
+  const seenSentinels = new Map<string, FixtureRoute>();
+
+  for (const route of routes) {
+    const path = normalizePublicPath(route.path);
+    if (seenPaths.has(path)) throw new Error(`duplicate fixture route: ${path}`);
+    seenPaths.add(path);
+
+    for (const testId of route.metadata.testIds) {
+      const first = seenPrimaryIds.get(testId);
+      if (
+        first &&
+        !(first.metadata.allowDuplicateTestIds && route.metadata.allowDuplicateTestIds)
+      ) {
+        throw new Error(`duplicate primary test ID ${testId}: ${first.path}, ${route.path}`);
+      }
+      if (!first) seenPrimaryIds.set(testId, route);
+    }
+
+    for (const value of Object.values(route.metadata.sentinels ?? {})) {
+      const first = seenSentinels.get(value);
+      if (
+        first &&
+        !(first.metadata.allowRepeatedSentinels && route.metadata.allowRepeatedSentinels)
+      ) {
+        throw new Error(`sentinel reused across routes: ${value}`);
+      }
+      if (!first) seenSentinels.set(value, route);
+    }
+  }
+
+  const assetPaths = new Set<string>();
+  for (const asset of assets) {
+    const path = normalizePublicPath(asset.path);
+    if (assetPaths.has(path) || seenPaths.has(path)) {
+      throw new Error(`duplicate public asset/route path: ${path}`);
+    }
+    assetPaths.add(path);
+  }
+}
+
+async function buildRoute(route: FixtureRoute): Promise<FixtureManifestEntry> {
+  const html = renderRoute(route);
+  const target = routeOutputPath(route.path);
+  await mkdir(dirname(target), { recursive: true });
+  await writeFile(target, html, "utf8");
+
+  for (const [testId, expectedSentinel] of Object.entries(route.metadata.sentinels ?? {})) {
+    if (!route.metadata.testIds.includes(testId)) {
+      throw new Error(`sentinel metadata references unassigned ID ${testId} on ${route.path}`);
+    }
+    if (!html.includes(expectedSentinel)) {
+      throw new Error(`expected sentinel ${expectedSentinel} missing from ${route.path}`);
+    }
+  }
+
+  return {
+    allowDuplicateTestIds: route.metadata.allowDuplicateTestIds ?? false,
+    allowRepeatedSentinels: route.metadata.allowRepeatedSentinels ?? false,
+    kind: route.kind,
+    notes: route.metadata.notes,
+    path: route.path,
+    phase: route.metadata.phase,
+    source: route.metadata.source,
+    testIds: route.metadata.testIds,
+    sentinels: route.metadata.sentinels ?? {},
+  };
+}
+
+async function buildAsset(path: string, source: string): Promise<void> {
+  const target = assetOutputPath(path);
+  const sourcePath = join(packageRoot, source);
+  await mkdir(dirname(target), { recursive: true });
+  await copyFile(sourcePath, target);
+}
+
+validateRouteRegistry();
 await rm(outputRoot, { recursive: true, force: true });
-await mkdir(outputRoot, { recursive: true });
-
-const html = `<!doctype html>${renderToStaticMarkup(<HomePage />)}\n`;
-
+await rm(privateRoot, { recursive: true, force: true });
 await Promise.all([
-  writeFile(join(outputRoot, "index.html"), html, "utf8"),
-  copyFile(join(sourceRoot, "styles.css"), join(outputRoot, "styles.css")),
+  mkdir(outputRoot, { recursive: true }),
+  mkdir(privateRoot, { recursive: true }),
 ]);
 
-console.log(`Built calibration site at ${outputRoot}`);
+const manifestEntries: FixtureManifestEntry[] = [];
+for (const route of routes) manifestEntries.push(await buildRoute(route));
+for (const asset of assets) await buildAsset(asset.path, asset.source);
+
+const manifest: FixtureManifest = {
+  generatedAt: new Date().toISOString(),
+  scenario: calibrationScenario,
+  routes: manifestEntries,
+};
+await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+
+console.log(
+  `Built ${routes.length} routes and ${assets.length} assets at ${relative(process.cwd(), outputRoot)}`,
+);
+console.log(`Private fixture manifest: ${relative(process.cwd(), manifestPath)}`);

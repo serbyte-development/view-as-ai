@@ -17,6 +17,7 @@ from view_as_ai import __version__, process_html, prune_html
 PACKAGE_ROOT = Path(__file__).resolve().parents[1]
 REPO_ROOT = PACKAGE_ROOT.parents[1]
 CAPTURES_ROOT = PACKAGE_ROOT / "captures"
+FIXTURE_MANIFEST = PACKAGE_ROOT / ".calibration" / "manifest.json"
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
@@ -59,6 +60,12 @@ def valid_test_ids() -> set[str]:
     numbered = re.findall(r"\*\*([A-Z][A-Z0-9-]*-\d{3}):\*\*", plan)
     site = re.findall(r"^## (SITE-[A-Z-]+) —", plan, flags=re.MULTILINE)
     return set(numbered + site)
+
+
+def fixture_manifest() -> dict[str, object] | None:
+    if not FIXTURE_MANIFEST.exists():
+        return None
+    return json.loads(FIXTURE_MANIFEST.read_text("utf-8"))
 
 
 def render_comparison(directory: Path, metadata: dict[str, object]) -> dict[str, object]:
@@ -118,6 +125,17 @@ def finalize(capture_id: str, url: str, test_ids: list[str]) -> None:
     unknown_test_ids = sorted(set(test_ids) - valid_test_ids())
     if unknown_test_ids:
         raise SystemExit(f"unknown calibration test IDs: {', '.join(unknown_test_ids)}")
+    manifest = fixture_manifest()
+    if manifest is not None:
+        manifest_ids = {
+            test_id for route in manifest.get("routes", []) for test_id in route.get("testIds", [])
+        }
+        unbuilt_test_ids = sorted(set(test_ids) - manifest_ids)
+        if unbuilt_test_ids:
+            raise SystemExit(
+                "test IDs are not present in the current built fixture manifest: "
+                + ", ".join(unbuilt_test_ids)
+            )
 
     directory = capture_dir(capture_id)
     native_path = directory / "native.web.txt"
@@ -153,6 +171,10 @@ def finalize(capture_id: str, url: str, test_ids: list[str]) -> None:
         "origin_sha256": sha256(response.content),
         "deployment_commit": git_commit(),
         "test_ids": test_ids,
+        "fixture_scenario": manifest.get("scenario") if manifest else None,
+        "fixture_manifest_sha256": (
+            sha256(FIXTURE_MANIFEST.read_bytes()) if manifest is not None else None
+        ),
         "finalized_at": datetime.now(UTC).isoformat(),
     }
     comparison = render_comparison(directory, metadata)

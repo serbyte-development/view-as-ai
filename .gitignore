@@ -1,5 +1,6 @@
 .venv/
 node_modules/
+packages/calibration-site/.calibration/
 __pycache__/
 .pytest_cache/
 .ruff_cache/
@@ -11,3 +12,5 @@ release/
 .vercel/
 .coverage
 MEMORY.md
+.vercel
+.env*

@@ -52,50 +52,50 @@ Deployment and native capture are separate steps. A built test stays `planned` i
 
 ## Static route builder
 
-- [ ] Refactor `src/build.tsx` into a route registry that can emit many static routes.
-- [ ] Support normal TSX routes rendered with `renderToStaticMarkup()`.
-- [ ] Support raw HTML routes for malformed/parser tests.
-- [ ] Support copying static CSS, JS, image, media, JSON, robots, and sitemap assets.
-- [ ] Support route-local assets without content hashes or bundler-generated markup.
-- [ ] Preserve trailing-slash routes as `dist/<route>/index.html`.
-- [ ] Keep `dist/` as the only Vercel public output directory.
-- [ ] Fail the build on duplicate route paths.
+- [x] Refactor `src/build.tsx` into a route registry that can emit many static routes.
+- [x] Support normal TSX routes rendered with `renderToStaticMarkup()`.
+- [x] Support raw HTML routes for malformed/parser tests.
+- [x] Support copying static CSS, JS, image, media, JSON, robots, and sitemap assets.
+- [x] Support route-local assets without content hashes or bundler-generated markup.
+- [x] Preserve trailing-slash routes as `dist/<route>/index.html`.
+- [x] Keep `dist/` as the only Vercel public output directory.
+- [x] Fail the build on duplicate route paths.
 
 ## Minimal document primitives
 
-- [ ] Add a minimal document component that emits only doctype/html/head/body essentials.
-- [ ] Allow each route to fully override `<head>` for `HEAD-*` and metadata tests.
-- [ ] Allow body children to render directly without an automatic `main`, header, or footer.
-- [ ] Add a source-only fixture metadata type: test IDs, route, sentinels, phase, and notes.
-- [ ] Add a fragment-only test helper or equivalent authoring primitive that adds zero rendered DOM.
+- [x] Add a minimal document component that emits only doctype/html/head/body essentials.
+- [x] Allow each route to fully override `<head>` for `HEAD-*` and metadata tests.
+- [x] Allow body children to render directly without an automatic `main`, header, or footer.
+- [x] Add a source-only fixture metadata type: test IDs, route, sentinels, phase, and notes.
+- [x] Add a fragment-only test helper or equivalent authoring primitive that adds zero rendered DOM.
 
 ## Sentinel system
 
-- [ ] Define deterministic sentinel naming, e.g. `VAI_SENTINEL_VIS_008_OPACITY_ZERO_...`.
-- [ ] Give every content-presence test a unique sentinel.
-- [ ] Ensure sentinels never repeat across test IDs.
-- [ ] Keep sentinels stable after first public capture.
-- [ ] Add a build validation that fails if a sentinel appears in more than one generated route unless
+- [x] Define deterministic sentinel naming, e.g. `VAI_SENTINEL_VIS_008_OPACITY_ZERO_...`.
+- [x] Give every content-presence test a unique sentinel.
+- [x] Ensure sentinels never repeat across test IDs.
+- [x] Keep sentinels stable after first public capture.
+- [x] Add a build validation that fails if a sentinel appears in more than one generated route unless
   the calibration plan explicitly requires repetition.
-- [ ] Add a build validation that confirms each expected sentinel exists in its emitted origin.
+- [x] Add a build validation that confirms each expected sentinel exists in its emitted origin.
 
 ## Private build manifest
 
-- [ ] Generate a local manifest outside `dist/`.
-- [ ] Record test ID → route → sentinel → fixture kind → source module.
-- [ ] Record the active site-context scenario.
-- [ ] Ensure the private manifest is ignored from deployment output.
-- [ ] Make capture/verification tooling able to read the private manifest later without scraping the
+- [x] Generate a local manifest outside `dist/`.
+- [x] Record test ID → route → sentinel → fixture kind → source module.
+- [x] Record the active site-context scenario.
+- [x] Ensure the private manifest is ignored from deployment output.
+- [x] Make capture/verification tooling able to read the private manifest later without scraping the
   HTML.
 
 ## Local verification
 
-- [ ] Add a fixture coverage check that compares built test IDs with `CALIBRATION_PLAN.md`.
-- [ ] Add a check that no unknown test ID is emitted.
-- [ ] Add a check that no test ID has two primary routes unless explicitly marked as a paired case.
-- [ ] Add a check for duplicate sentinels.
-- [ ] Add `check:build-plan` so this document must cover every calibration-plan ID.
-- [ ] Include fixture/build validation in `npm run check`.
+- [x] Add a fixture coverage check that compares built test IDs with `CALIBRATION_PLAN.md`.
+- [x] Add a check that no unknown test ID is emitted.
+- [x] Add a check that no test ID has two primary routes unless explicitly marked as a paired case.
+- [x] Add a check for duplicate sentinels.
+- [x] Add `check:build-plan` so this document must cover every calibration-plan ID.
+- [x] Include fixture/build validation in `npm run check`.
 
 ---
 
