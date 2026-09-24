@@ -1,0 +1,32 @@
+--- native web.run
++++ view-as-ai
+@@ -1,14 +1,15 @@
+-View as AI Baseline Fixture (https://view-as-ai.vercel.app/baseline/)
+- [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://view-as-ai.vercel.app/baseline/","lineno":null}); Total lines: 15
+-L0: # Baseline Fixture
+-L1: 
+-L2: VAI_BASELINE_PARAGRAPH_2E7C9A Ordinary readable baseline content.
+-L3: 
+-L4:  L5: 
+-L6:  L7: 
+-L8:  L9: 
+-L10: Baseline name[Input: Baseline placeholder][Button: Baseline button]
+-L11: 
+-L12: Baseline column  | Baseline value
+-L13: --- | ---
+-L14: Alpha  | One
++# Baseline Fixture
++
++VAI_BASELINE_PARAGRAPH_2E7C9A Ordinary readable baseline content.
++
++【0†Same-origin baseline link】
++
++【1†External baseline link†example.com】
++
++【2†Image: Baseline geometric fixture】
++
++Baseline name[Input: Baseline placeholder][Button: Baseline button]
++
++Baseline column | Baseline value
++--- | ---
++Alpha | One

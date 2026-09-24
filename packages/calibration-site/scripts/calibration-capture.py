@@ -8,7 +8,7 @@ import re
 import subprocess
 from datetime import UTC, datetime
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import parse_qsl, urlsplit
 
 import httpx
 
@@ -23,6 +23,11 @@ USER_AGENT = (
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
 )
 CAPTURE_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
+BATCH_CAPTURE_RE = re.compile(
+    r"^URL: (?P<url>https://view-as-ai\.vercel\.app/[^\n]*)\n\n"
+    r"```\n(?P<text>[\s\S]*?)\n```(?=\nURL: |\n?\Z)",
+    flags=re.MULTILINE,
+)
 
 
 def sha256(data: bytes) -> str:
@@ -44,6 +49,77 @@ def capture_dir(capture_id: str) -> Path:
     if not CAPTURE_ID_RE.fullmatch(capture_id):
         raise SystemExit("capture ID must use only letters, numbers, dot, underscore, and hyphen")
     return CAPTURES_ROOT / capture_id
+
+
+def capture_slug(url: str) -> str:
+    parsed = urlsplit(url)
+    parts = [part.lower() for part in parsed.path.strip("/").split("/") if part]
+    if parts[:2] == ["experiments", "visibility"] and len(parts) == 3:
+        slug = f"visibility-{parts[2]}"
+    elif parts:
+        slug = "-".join(parts)
+    else:
+        slug = "root"
+
+    query_parts = [
+        f"{key.lower()}-{value.lower()}"
+        for key, value in parse_qsl(parsed.query, keep_blank_values=True)
+    ]
+    if query_parts:
+        slug = "-".join([slug, *query_parts])
+    if parsed.fragment:
+        slug = f"{slug}-{parsed.fragment.lower()}"
+    return re.sub(r"[^a-z0-9._-]+", "-", slug).strip("-")
+
+
+def import_batch(
+    batch_file: Path,
+    *,
+    capture_date: str,
+    deployment_commit: str,
+    batch_label: str | None = None,
+) -> None:
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", capture_date):
+        raise SystemExit("capture date must use YYYY-MM-DD")
+    if not re.fullmatch(r"[0-9a-fA-F]{7,40}", deployment_commit):
+        raise SystemExit("deployment commit must be a 7–40 character Git SHA")
+    if batch_label and not CAPTURE_ID_RE.fullmatch(batch_label):
+        raise SystemExit("batch label must use capture-ID-safe characters")
+
+    source = batch_file.read_text("utf-8")
+    matches = list(BATCH_CAPTURE_RE.finditer(source))
+    if not matches:
+        raise SystemExit(f"no native URL capture blocks found in {batch_file}")
+
+    consumed = BATCH_CAPTURE_RE.sub("", source).strip()
+    if consumed:
+        raise SystemExit(
+            "batch file contains text outside recognized URL/fenced capture blocks; "
+            "refusing a partial import"
+        )
+
+    seen_urls: set[str] = set()
+    short_commit = deployment_commit[:7].lower()
+    imported: list[tuple[str, str]] = []
+    for match in matches:
+        url = match.group("url")
+        if url in seen_urls:
+            raise SystemExit(f"duplicate URL in batch: {url}")
+        seen_urls.add(url)
+
+        suffix = f"-{batch_label}" if batch_label else ""
+        capture_id = f"{capture_date}-{capture_slug(url)}-{short_commit}{suffix}"
+        directory = capture_dir(capture_id)
+        native_path = directory / "native.web.txt"
+        if directory.exists():
+            raise SystemExit(f"capture directory already exists: {directory}")
+
+        directory.mkdir(parents=True)
+        native_path.write_text(match.group("text") + "\n", encoding="utf-8")
+        imported.append((capture_id, url))
+
+    for capture_id, url in imported:
+        print(f"{capture_id}\t{url}")
 
 
 def normalize_for_layout_comparison(text: str) -> str:
@@ -294,8 +370,16 @@ def compare(capture_id: str) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Finalize or recompare a calibration capture.")
+    parser = argparse.ArgumentParser(
+        description="Import, finalize, or recompare a calibration capture."
+    )
     subparsers = parser.add_subparsers(dest="command", required=True)
+
+    import_parser = subparsers.add_parser("import-batch")
+    import_parser.add_argument("batch_file", type=Path)
+    import_parser.add_argument("--capture-date", required=True)
+    import_parser.add_argument("--deployment-commit", required=True)
+    import_parser.add_argument("--batch-label")
 
     finalize_parser = subparsers.add_parser("finalize")
     finalize_parser.add_argument("capture_id")
@@ -314,7 +398,14 @@ def main() -> None:
     compare_parser.add_argument("capture_id")
 
     args = parser.parse_args()
-    if args.command == "finalize":
+    if args.command == "import-batch":
+        import_batch(
+            args.batch_file,
+            capture_date=args.capture_date,
+            deployment_commit=args.deployment_commit,
+            batch_label=args.batch_label,
+        )
+    elif args.command == "finalize":
         finalize(
             args.capture_id,
             args.url,

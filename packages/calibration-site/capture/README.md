@@ -39,6 +39,21 @@ actual characters, punctuation, Unicode, and content ordering. Incidental storag
 as one terminal newline or CRLF/LF line-ending normalization are acceptable and do not invalidate
 the capture.
 
+If a Work Mode capture batch was returned through chat and saved as a markdown file containing
+`URL: ...` followed by fenced native results, import it mechanically with
+`calibration-capture.py import-batch` before finalization. The importer creates one immutable
+`native.web.txt` per URL and refuses partial parses, duplicate URLs, and existing destinations.
+
+From the repository root:
+
+```bash
+npm run capture:import-batch --workspace @serbyte/view-as-ai-calibration-site -- \
+  packages/calibration-site/capture/turn-2.md \
+  --capture-date 2026-09-24 \
+  --deployment-commit <verified-deployed-sha> \
+  --batch-label turn-2
+```
+
 ## 3. Finalize the evidence bundle
 
 From the repository root:

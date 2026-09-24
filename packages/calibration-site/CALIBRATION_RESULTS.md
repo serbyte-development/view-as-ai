@@ -53,104 +53,108 @@ unknown/duplicate ID, or when a row uses an unsupported status.
 
 ## Campaign checkpoint: 2026-09-24
 
-Campaign status: `blocked` at baseline pipeline validation. Production was verified at
+Campaign status: `active`. Production is verified at
 `b8151082d794b71bc4b1a54f6b1eb6195ee86a36`, scenario `default`.
 
-Native `open` returned `URL https://view-as-ai.vercel.app/baseline/ is not accessible via this tool.`
-on the initial attempt and one retry. The calibration homepage returned the same access failure;
-a native `https://example.com/` control succeeded. Independent public-origin requests returned
-HTTP 200 and baseline HTML matched the built fixture. The native failure is preserved as
-diagnostic evidence and establishes no parser extraction/parity result.
+The initial native-access attempts were blocked, but a later Work Mode capture successfully opened
+the exact public baseline and calibration routes. Baseline pipeline validation is therefore
+unblocked: native output, paired public origin, View as AI output, diff, and capture metadata were
+all persisted successfully.
 
 - Baseline attempt: `captures/2026-09-24-baseline-b815108/`.
 - Baseline retry: `captures/2026-09-24-baseline-b815108-retry-1/`.
 - Access controls and finding: `captures/2026-09-24-native-access-diagnostics-b815108/finding.md`.
-- Completed calibration IDs: 0 of 531. All 520 default cases and 11 SITE cases remain unexecuted;
-  their existing `deployed` and `planned` states below remain accurate.
+- Successful baseline: `captures/2026-09-24-baseline-b815108-turn-1/`.
+- Kitchen sink: `captures/2026-09-24-kitchen-sink-b815108-turn-1/`.
+- Isolated visibility: `VIS-031..VIS-038` under matching
+  `captures/2026-09-24-visibility-*-b815108-turn-1/` directories.
+- Original returned batch source: `capture/turn-1.md`.
+- Native evidence now exists for 224 of 531 calibration IDs: 8 `verified`, 44 clear `mismatch`,
+  and 172 `captured` pending case-specific interpretation. 296 default-deployment IDs remain
+  `deployed` without native evidence, and the 11 `SITE-*` IDs remain `planned`.
 
-Resume with a new baseline capture ID after native access to the exact public baseline URL works.
-Baseline pipeline validation and all subsequent default/SITE captures remain unfinished.
+Continue with the remaining default-deployment capture units, beginning at `VIS-039`.
 
 ## TEXT
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TEXT-001 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-002 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-003 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-004 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-005 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-006 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-007 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-008 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-009 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-010 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-011 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-012 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-013 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-014 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-015 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-016 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-017 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-018 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-019 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-020 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-021 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-022 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-023 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-024 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-025 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-026 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-027 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-028 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-029 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-030 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-031 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-032 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TEXT-033 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
+| TEXT-001 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-002 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-003 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-004 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-005 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Native and parser outputs captured; case-specific interpretation pending. |
+| TEXT-006 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-007 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-008 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-009 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-010 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-011 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-012 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-013 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-014 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-015 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-016 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-017 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-018 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-019 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-020 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-021 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-022 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-023 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-024 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| TEXT-025 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-026 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-027 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-028 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-029 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-030 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TEXT-031 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Native and parser outputs captured; case-specific interpretation pending. |
+| TEXT-032 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Native and parser outputs captured; case-specific interpretation pending. |
+| TEXT-033 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
 
 ## VIS
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| VIS-001 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-002 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-003 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-004 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-005 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-006 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-007 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-008 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-009 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-010 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-011 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-012 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-013 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-014 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-015 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-016 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-017 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-018 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-019 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-020 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-021 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-022 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-023 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-024 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-025 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-026 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-027 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-028 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| VIS-029 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
+| VIS-001 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-002 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-003 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-004 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-005 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-006 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-007 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-008 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-009 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-010 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-011 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-012 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-013 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-014 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-015 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-016 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-017 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-018 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-019 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-020 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| VIS-021 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-022 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-023 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-024 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-025 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-026 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-027 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-028 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| VIS-029 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
 | VIS-030 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-030/ | — | — | — | — | — | — |
-| VIS-031 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-031/ | — | — | — | — | — | — |
-| VIS-032 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-032/ | — | — | — | — | — | — |
-| VIS-033 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-033/ | — | — | — | — | — | — |
-| VIS-034 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-034/ | — | — | — | — | — | — |
-| VIS-035 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-035/ | — | — | — | — | — | — |
-| VIS-036 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-036/ | — | — | — | — | — | — |
-| VIS-037 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-037/ | — | — | — | — | — | — |
-| VIS-038 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-038/ | — | — | — | — | — | — |
+| VIS-031 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-031/ | present | present | yes | captures/2026-09-24-visibility-vis-031-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-032 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-032/ | present | present | yes | captures/2026-09-24-visibility-vis-032-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-033 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-033/ | present | present | yes | captures/2026-09-24-visibility-vis-033-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-034 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-034/ | present | present | yes | captures/2026-09-24-visibility-vis-034-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-035 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-035/ | present | present | yes | captures/2026-09-24-visibility-vis-035-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-036 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-036/ | present | present | yes | captures/2026-09-24-visibility-vis-036-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-037 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-037/ | present | present | yes | captures/2026-09-24-visibility-vis-037-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-038 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-038/ | present | present | yes | captures/2026-09-24-visibility-vis-038-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
 | VIS-039 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-039/ | — | — | — | — | — | — |
 | VIS-040 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-040/ | — | — | — | — | — | — |
 | VIS-041 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-041/ | — | — | — | — | — | — |
@@ -228,42 +232,42 @@ Baseline pipeline validation and all subsequent default/SITE captures remain unf
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| SEM-001 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-002 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-003 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-004 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-005 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-006 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-007 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-008 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-009 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-010 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-011 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-012 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-013 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-014 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-015 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-016 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-017 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-018 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-019 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-020 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-021 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-022 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-023 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-024 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-025 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-026 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-027 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-028 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-029 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-030 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-031 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-032 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-033 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-034 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-035 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| SEM-036 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
+| SEM-001 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-002 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-003 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-004 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-005 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-006 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-007 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-008 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-009 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-010 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-011 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-012 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-013 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-014 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-015 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-016 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| SEM-017 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-018 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-019 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-020 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-021 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-022 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-023 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-024 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-025 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-026 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-027 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-028 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-029 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-030 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| SEM-031 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-032 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-033 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-034 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-035 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| SEM-036 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
 
 ## BOIL
 
@@ -304,76 +308,76 @@ Baseline pipeline validation and all subsequent default/SITE captures remain unf
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| CTRL-001 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-002 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-003 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-004 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-005 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-006 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-007 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-008 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-009 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-010 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-011 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-012 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-013 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-014 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-015 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-016 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-017 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-018 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-019 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-020 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-021 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-022 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-023 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-024 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-025 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-026 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-027 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-028 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-029 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-030 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-031 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-032 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-033 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-034 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| CTRL-035 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
+| CTRL-001 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-002 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-003 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-004 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-005 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-006 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-007 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-008 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-009 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-010 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-011 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-012 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-013 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-014 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-015 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-016 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-017 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-018 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-019 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-020 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-021 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-022 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-023 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| CTRL-024 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-025 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-026 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-027 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-028 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-029 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-030 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-031 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-032 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-033 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-034 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| CTRL-035 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
 
 ## LINK
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| LINK-001 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-002 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-003 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-004 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-005 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-006 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-007 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-008 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-009 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-010 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-011 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-012 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-013 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-014 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-015 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-016 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-017 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-018 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-019 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-020 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-021 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-022 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-023 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-024 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-025 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-026 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-027 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-028 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-029 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| LINK-030 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
+| LINK-001 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-002 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-003 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-004 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-005 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-006 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-007 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| LINK-008 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| LINK-009 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-010 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-011 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-012 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-013 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-014 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-015 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Native and parser outputs captured; case-specific interpretation pending. |
+| LINK-016 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| LINK-017 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| LINK-018 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-019 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| LINK-020 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| LINK-021 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| LINK-022 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-023 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| LINK-024 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| LINK-025 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| LINK-026 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-027 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-028 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-029 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| LINK-030 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
 | LINK-031 | deployed | https://view-as-ai.vercel.app/experiments/link/LINK-031/ | — | — | — | — | — | — |
 | LINK-032 | deployed | https://view-as-ai.vercel.app/experiments/link/LINK-032/ | — | — | — | — | — | — |
 | LINK-033 | deployed | https://view-as-ai.vercel.app/experiments/link/LINK-033/ | — | — | — | — | — | — |
@@ -382,37 +386,37 @@ Baseline pipeline validation and all subsequent default/SITE captures remain unf
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| IMG-001 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-002 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-003 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-004 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-005 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-006 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-007 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-008 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-009 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-010 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-011 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-012 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-013 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-014 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-015 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-016 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-017 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-018 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-019 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-020 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| IMG-021 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
+| IMG-001 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| IMG-002 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| IMG-003 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| IMG-004 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Native and parser outputs captured; case-specific interpretation pending. |
+| IMG-005 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Native and parser outputs captured; case-specific interpretation pending. |
+| IMG-006 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| IMG-007 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| IMG-008 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| IMG-009 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| IMG-010 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| IMG-011 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| IMG-012 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Native and parser outputs captured; case-specific interpretation pending. |
+| IMG-013 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| IMG-014 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| IMG-015 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| IMG-016 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| IMG-017 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| IMG-018 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| IMG-019 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| IMG-020 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| IMG-021 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
 
 ## FRAME
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| FRAME-001 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| FRAME-002 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| FRAME-003 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| FRAME-004 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| FRAME-005 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
+| FRAME-001 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| FRAME-002 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Native and parser outputs captured; case-specific interpretation pending. |
+| FRAME-003 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| FRAME-004 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| FRAME-005 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
 | FRAME-006 | deployed | https://view-as-ai.vercel.app/experiments/frame/FRAME-006/ | — | — | — | — | — | — |
 | FRAME-007 | deployed | https://view-as-ai.vercel.app/experiments/frame/FRAME-007/ | — | — | — | — | — | — |
 | FRAME-008 | deployed | https://view-as-ai.vercel.app/experiments/frame/FRAME-008/ | — | — | — | — | — | — |
@@ -421,20 +425,20 @@ Baseline pipeline validation and all subsequent default/SITE captures remain unf
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TABLE-001 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TABLE-002 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TABLE-003 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TABLE-004 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TABLE-005 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TABLE-006 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TABLE-007 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TABLE-008 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TABLE-009 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TABLE-010 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TABLE-011 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TABLE-012 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TABLE-013 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| TABLE-014 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
+| TABLE-001 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TABLE-002 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TABLE-003 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TABLE-004 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TABLE-005 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TABLE-006 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TABLE-007 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TABLE-008 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TABLE-009 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TABLE-010 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
+| TABLE-011 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TABLE-012 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TABLE-013 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| TABLE-014 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
 
 ## HEAD
 
@@ -598,19 +602,19 @@ Baseline pipeline validation and all subsequent default/SITE captures remain unf
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| I18N-001 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| I18N-002 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| I18N-003 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| I18N-004 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| I18N-005 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| I18N-006 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| I18N-007 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| I18N-008 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| I18N-009 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| I18N-010 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| I18N-011 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| I18N-012 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
-| I18N-013 | deployed | https://view-as-ai.vercel.app/kitchen-sink/ | — | — | — | — | — | — |
+| I18N-001 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| I18N-002 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| I18N-003 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| I18N-004 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| I18N-005 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| I18N-006 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| I18N-007 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| I18N-008 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| I18N-009 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| I18N-010 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| I18N-011 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| I18N-012 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
+| I18N-013 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | present | present | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
 
 ## MAL
 

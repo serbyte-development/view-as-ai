@@ -1,0 +1,46 @@
+{
+  "capture_id": "2026-09-24-visibility-vis-038-b815108-turn-1",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/visibility/VIS-038/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/visibility/VIS-038/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": null,
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "431f46bd4ad03dde938f2deea036caa5647b54fc589ace38a27dbfcb261a24e2",
+  "native_sha256": "6e3fcd236665ebcc07e53a721ac05d867987fe734c14432e738404861578fac7",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "e2489176b9335eb67002521fc3649a57a56691c1",
+  "test_ids": [
+    "VIS-038"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "7865f5e6f561d25c57c25f44344ba1cdbb357580a8468db753dc272ece83767a",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "tsx",
+      "path": "/experiments/visibility/VIS-038/",
+      "phase": 3,
+      "source": "src/fixtures/visibility-isolated.tsx",
+      "testIds": [
+        "VIS-038"
+      ],
+      "sentinels": {
+        "VIS-038": "VAI_SENTINEL_VIS_038_PRIMARY_CEBA4D47"
+      },
+      "sentinelGroups": {}
+    }
+  ],
+  "finalized_at": "2026-09-24T23:05:23.296766+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-24T23:05:23.299321+00:00",
+    "native_sha256": "6e3fcd236665ebcc07e53a721ac05d867987fe734c14432e738404861578fac7",
+    "view_as_ai_sha256": "c57b4ae41422c1179f77c19e276b9513577c9003c685459b0a3e713a73690bdc"
+  }
+}
