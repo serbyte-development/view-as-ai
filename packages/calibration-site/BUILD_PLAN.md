@@ -238,45 +238,45 @@ Route pattern: `/experiments/visibility/<test-id>/`
 
 Coverage: `VIS-031..VIS-075`
 
-- [ ] Build one isolated route for each `VIS-031` through `VIS-075`.
-- [ ] Use the same base text/sentinel structure across cases.
-- [ ] Build distinct overflow-visible and overflow-hidden geometry controls.
-- [ ] Build offscreen positioning for absolute, relative, fixed, transform, translate, and margin
+- [x] Build one isolated route for each `VIS-031` through `VIS-075`.
+- [x] Use the same base text/sentinel structure across cases.
+- [x] Build distinct overflow-visible and overflow-hidden geometry controls.
+- [x] Build offscreen positioning for absolute, relative, fixed, transform, translate, and margin
   mechanisms.
-- [ ] Build cascade/`!important` pairs without unrelated stylesheet differences.
-- [ ] Add stable external stylesheet and `@import` resources.
-- [ ] Add media attribute and `@supports` variants.
+- [x] Build cascade/`!important` pairs without unrelated stylesheet differences.
+- [x] Add stable external stylesheet and `@import` resources.
+- [x] Add media attribute and `@supports` variants.
 
 ## Time-dependent transitions and animations
 
 Coverage: `VIS-076..VIS-091`
 
-- [ ] Build one isolated route for each `VIS-076` through `VIS-091`.
-- [ ] Keep animation keyframes deterministic.
-- [ ] Use exact documented durations/delays.
-- [ ] Add zero-duration final-state controls.
-- [ ] Add one-second enter/exit opacity and translation cases.
-- [ ] Add delayed, negative-delay, infinite, and reduced-motion cases.
-- [ ] Do not add JavaScript to CSS-only timing routes.
+- [x] Build one isolated route for each `VIS-076` through `VIS-091`.
+- [x] Keep animation keyframes deterministic.
+- [x] Use exact documented durations/delays.
+- [x] Add zero-duration final-state controls.
+- [x] Add one-second enter/exit opacity and translation cases.
+- [x] Add delayed, negative-delay, infinite, and reduced-motion cases.
+- [x] Do not add JavaScript to CSS-only timing routes.
 
 ## CSS state/pseudo-class behavior
 
 Coverage: `VIS-092..VIS-100`
 
-- [ ] Build isolated hover/focus/focus-within routes.
-- [ ] Build the `:target` base route and matching-fragment capture URL.
-- [ ] Build unchecked and checked CSS-disclosure variants.
-- [ ] Build the static `:has()` case.
+- [x] Build isolated hover/focus/focus-within routes.
+- [x] Build the `:target` base route and matching-fragment capture URL.
+- [x] Build unchecked and checked CSS-disclosure variants.
+- [x] Build the static `:has()` case.
 
 ## Viewport and responsive behavior
 
 Coverage: `VIS-101..VIS-110`
 
-- [ ] Build isolated breakpoint cases for 320, 768/769, and 1280 widths.
-- [ ] Build portrait/landscape media-query cases.
-- [ ] Build 100vh/500vh vertical placement cases.
-- [ ] Build horizontal overflow case.
-- [ ] Build the container-query case with explicit container sizing.
+- [x] Build isolated breakpoint cases for 320, 768/769, and 1280 widths.
+- [x] Build portrait/landscape media-query cases.
+- [x] Build 100vh/500vh vertical placement cases.
+- [x] Build horizontal overflow case.
+- [x] Build the container-query case with explicit container sizing.
 
 ---
 
