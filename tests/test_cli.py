@@ -1,5 +1,6 @@
 import io
 import json
+import socket
 import subprocess
 import sys
 from pathlib import Path
@@ -83,16 +84,94 @@ def test_schemeless_domain_defaults_to_https(mock_http, capsys):
     assert capsys.readouterr().out == "# Origin\n"
 
 
-def test_existing_dotted_path_remains_local(tmp_path, capsys):
+@pytest.mark.parametrize(
+    ("source", "expected"),
+    [
+        ("http:/launch.test/path", "http://launch.test/path"),
+        ("https:/launch.test/path", "https://launch.test/path"),
+        ("http:launch.test/path", "http://launch.test/path"),
+        ("HTTPS:launch.test/path", "https://launch.test/path"),
+    ],
+)
+def test_explicit_http_scheme_tolerates_missing_slashes(mock_http, capsys, source, expected):
+    def handler(request):
+        assert str(request.url) == expected
+        return httpx.Response(
+            200,
+            headers={"content-type": "text/html; charset=utf-8"},
+            text="<h1>Origin</h1>",
+            request=request,
+        )
+
+    mock_http(handler)
+    assert cli.main([source, "--format", "text"]) == 0
+    assert capsys.readouterr().out == "# Origin\n"
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        "https:/",
+        "https//launch.test",
+        "ftp://launch.test",
+        "launch.test:bad-port",
+    ],
+)
+def test_bad_url_reports_invalid_url(source, capsys):
+    assert cli.main([source]) == 1
+    error = capsys.readouterr().err
+    assert error.startswith("view-as-ai: Invalid URL:")
+    assert "No such file or directory" not in error
+
+
+def test_explicit_local_path_remains_local(tmp_path, capsys):
     source = tmp_path / "example.com"
     source.write_text("<h1>Local</h1>", encoding="utf-8")
     assert cli.main([str(source), "--format", "text"]) == 0
     assert capsys.readouterr().out == "# Local\n"
 
 
-def test_missing_html_filename_remains_local(capsys):
-    assert cli.main(["missing.html"]) == 1
-    assert "No such file or directory" in capsys.readouterr().err
+def test_bare_html_name_is_treated_as_website(mock_http, capsys):
+    def handler(request):
+        assert request.url == "https://page.html"
+        return httpx.Response(
+            200,
+            headers={"content-type": "text/html; charset=utf-8"},
+            text="<h1>Remote</h1>",
+            request=request,
+        )
+
+    mock_http(handler)
+    assert cli.main(["page.html", "--format", "text"]) == 0
+    assert capsys.readouterr().out == "# Remote\n"
+
+
+def test_existing_bare_html_name_is_still_treated_as_website(
+    tmp_path, monkeypatch, mock_http, capsys
+):
+    (tmp_path / "page.html").write_text("<h1>Local</h1>", encoding="utf-8")
+    monkeypatch.chdir(tmp_path)
+
+    def handler(request):
+        assert request.url == "https://page.html"
+        return httpx.Response(
+            200,
+            headers={"content-type": "text/html; charset=utf-8"},
+            text="<h1>Remote</h1>",
+            request=request,
+        )
+
+    mock_http(handler)
+    assert cli.main(["page.html", "--format", "text"]) == 0
+    assert capsys.readouterr().out == "# Remote\n"
+
+
+def test_dot_slash_html_path_is_local(tmp_path, monkeypatch, capsys):
+    source = tmp_path / "page.html"
+    source.write_text("<h1>Local</h1>", encoding="utf-8")
+    monkeypatch.chdir(tmp_path)
+    assert cli.main(["./page.html", "--format", "text"]) == 0
+    assert capsys.readouterr().out == "# Local\n"
 
 
 def test_redirect_and_http_charset(mock_http, capsys):
@@ -121,7 +200,40 @@ def test_http_errors(mock_http, capsys, status):
 
     mock_http(handler)
     assert cli.main(["https://launch.test/"]) == 1
-    assert str(status) in capsys.readouterr().err
+    assert capsys.readouterr().err.startswith(f"view-as-ai: HTTP {status} ")
+
+
+def test_dns_failure_is_clear(mock_http, capsys):
+    def handler(request):
+        try:
+            raise socket.gaierror(8, "nodename nor servname provided, or not known")
+        except socket.gaierror as exc:
+            raise httpx.ConnectError(str(exc), request=request) from exc
+
+    mock_http(handler)
+    assert cli.main(["page.html"]) == 1
+    assert capsys.readouterr().err == "view-as-ai: Could not resolve host: page.html\n"
+
+
+def test_connection_refused_is_clear(mock_http, capsys):
+    def handler(request):
+        try:
+            raise ConnectionRefusedError(61, "Connection refused")
+        except ConnectionRefusedError as exc:
+            raise httpx.ConnectError(str(exc), request=request) from exc
+
+    mock_http(handler)
+    assert cli.main(["localhost:9"]) == 1
+    assert capsys.readouterr().err == "view-as-ai: Connection refused: localhost\n"
+
+
+def test_timeout_is_clear(mock_http, capsys):
+    def handler(request):
+        raise httpx.ReadTimeout("timed out", request=request)
+
+    mock_http(handler)
+    assert cli.main(["launch.test"]) == 1
+    assert capsys.readouterr().err == "view-as-ai: Request timed out: launch.test\n"
 
 
 def test_unsupported_content_type(mock_http, capsys):
@@ -184,3 +296,15 @@ def test_version(capsys):
         cli.main(["--version"])
     assert exc.value.code == 0
     assert capsys.readouterr().out.strip() == "view-as-ai 1.0.2"
+
+
+def test_help_explains_common_usage(capsys):
+    with pytest.raises(SystemExit) as exc:
+        cli.main(["--help"])
+    assert exc.value.code == 0
+    output = capsys.readouterr().out
+    normalized = " ".join(output.split())
+    assert "Preview a website as an AI browsing model sees it." in normalized
+    assert "Bare domains use HTTPS" in normalized
+    assert "explicit local path (./page.html)" in normalized
+    assert "line-numbered view (default), plain text, or JSON" in normalized
