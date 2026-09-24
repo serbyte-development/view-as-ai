@@ -41,6 +41,7 @@ dependencies = [
 Homepage = "https://github.com/Serbyte-Development/view-as-ai"
 Repository = "https://github.com/Serbyte-Development/view-as-ai"
 Issues = "https://github.com/Serbyte-Development/view-as-ai/issues"
+Documentation = "https://github.com/Serbyte-Development/view-as-ai/blob/main/docs/how-chatgpt-sees-web-pages.md"
 
 [project.scripts]
 view-as-ai = "view_as_ai.cli:main"

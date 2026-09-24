@@ -3,11 +3,62 @@
 [![CI](https://github.com/Serbyte-Development/view-as-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Serbyte-Development/view-as-ai/actions/workflows/ci.yml)
 [![License: GPL-3.0-or-later](https://img.shields.io/badge/License-GPL--3.0--or--later-blue.svg)](LICENSE)
 
-**View Website As AI.** Preview the model-readable information a browsing system is likely to receive from a webpage.
+## The problem
 
-View as AI is a lightweight Python CLI and library empirically calibrated against native ChatGPT `web.run open()` output. It runs locally, uses direct HTTP origin HTML, and makes no OpenAI API calls.
+When ChatGPT browses a webpage, the model does not receive your raw HTML or the visual page you see in a browser. The page is transformed into a compact, Markdown-like model representation first: headings, prose, links, images, controls, tables, and selected surrounding context.
 
-The calibration target is information presence, omission, ordering, links, images, and controls. Markdown details and line layout can differ from native ChatGPT output.
+That makes a basic SEO and development question surprisingly hard to answer:
+
+**What does AI actually see when it opens my website?**
+
+## The solution
+
+**View as AI** locally reconstructs the model-readable page representation observed in ChatGPT's `web.run open()` output, so you can inspect the information an AI browsing model is likely to receive without making an OpenAI API call.
+
+The implementation started from OpenAI's public `gpt-oss` browser formatter and was empirically adapted against **100+ captured native `web.run` page representations**. On the primary 22-page development benchmark used to tune content selection, the current approach reached **99.94% selection F1**. Broader stress testing contains harder crawler and acquisition mismatches, so this is a best-effort reconstruction rather than a claim of universal 99% parity.
+
+## What you see vs. what the model sees
+
+**What you think AI sees**
+
+```text
+┌──────────────────────────────────────────────────────┐
+│ ACME ANALYTICS                          Docs   Login │
+│                                                      │
+│        Understand your data faster                  │
+│   Ship dashboards without fighting your stack.     │
+│                                                      │
+│        [ Start free ]   [ Read the docs ]           │
+└──────────────────────────────────────────────────────┘
+```
+
+**What the model-facing representation looks more like**
+
+```text
+# Understand your data faster
+
+Ship dashboards without fighting your stack.
+
+[Button: Start free]
+
+【0†Read the docs】
+```
+
+The exact output varies by page and by the browsing system. View as AI targets **information presence, omission, ordering, links, images, controls, and tables**. Exact Markdown shape, whitespace, reference numbering, and line layout are secondary.
+
+For the observed pipeline, calibration evidence, known element behavior, and the parts of OpenAI's browsing stack we still cannot see, read **[How ChatGPT web browsing represents a webpage](https://github.com/Serbyte-Development/view-as-ai/blob/main/docs/how-chatgpt-sees-web-pages.md)**.
+
+[Try it](#try-it-in-one-command) • [CLI](#cli) • [Python API](#python-api) • [How it works](#how-it-works) • [Calibration](#calibration-and-limitations)
+
+## Try it in one command
+
+If you have [uv](https://docs.astral.sh/uv/) installed, you can run View as AI directly from PyPI without installing it first:
+
+```sh
+uvx view-as-ai https://example.com
+```
+
+That command creates an isolated environment, runs the latest published `view-as-ai`, prints the model-readable representation, and exits.
 
 ## Install
 
@@ -97,7 +148,7 @@ print(page.urls)
 
 `process_html()` is pure and performs no I/O. It returns a `PageContents` dataclass with `url`, `text`, `title`, and `urls` fields. `prune_html()` applies the conservative provider-style pruning used by the CLI.
 
-## What it approximates
+## How it works
 
 The stable runtime path is deliberately small:
 
@@ -120,7 +171,9 @@ Client-side JavaScript execution, shadow DOM traversal, and fetching iframe docu
 
 ## Calibration and limitations
 
-View as AI is a best-effort approximation based on recorded native ChatGPT browsing observations. The broad stabilization calibration reached roughly **99% average information-level resemblance after normalization**. That figure is an aggregate calibration result, and individual pages can diverge.
+View as AI is a best-effort approximation based on recorded native ChatGPT browsing observations.
+
+The archived calibration work includes more than 100 native page representations across documentation, government, ecommerce, service-business, form, reference, and client-rendered page families. On the 22-page development benchmark used to tune the current selection rules, View as AI reached **99.94% content-selection F1**. A separate 109-page diagnostic stress corpus exposed harder acquisition and representation mismatches and was intentionally not treated as a universal 99% certification.
 
 Expected sources of difference include:
 
