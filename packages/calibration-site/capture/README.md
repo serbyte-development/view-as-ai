@@ -8,6 +8,11 @@ AI.
 Deploy the fixture to `https://view-as-ai.vercel.app/` and verify the public URL contains the
 expected test sentinels.
 
+For ordinary deployments, push the validated commit to GitHub and let the linked Vercel project's
+Git integration deploy it. Capture only after verifying that the public site is serving the
+intended commit. Manual Vercel CLI deployments are reserved for experiments that explicitly need a
+special deployment scenario.
+
 Use an immutable capture ID:
 
 ```text

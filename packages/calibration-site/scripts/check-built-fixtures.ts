@@ -18,15 +18,29 @@ const sitePlanIds = [...plan.matchAll(/^## (SITE-[A-Z-]+) —/gm)].map((match) =
 const planIds = [...numberedPlanIds, ...sitePlanIds];
 const planSet = new Set(planIds);
 
-const builtIds = manifest.routes.flatMap((route) => route.testIds);
+const builtIds = [
+  ...manifest.routes.flatMap((route) => route.testIds),
+  ...manifest.endpoints.flatMap((endpoint) => endpoint.testIds),
+];
 const builtSet = new Set(builtIds);
 const unknown = [...builtSet].filter((id) => !planSet.has(id)).sort();
 const missing = [...planSet].filter((id) => !builtSet.has(id)).sort();
 
-const routesByTestId = new Map<string, FixtureManifest["routes"]>();
+type AssignedFixture = {
+  allowDuplicateTestIds?: boolean;
+  allowRepeatedSentinels?: boolean;
+  path: string;
+};
+
+const routesByTestId = new Map<string, AssignedFixture[]>();
 for (const route of manifest.routes) {
   for (const id of route.testIds) {
     routesByTestId.set(id, [...(routesByTestId.get(id) ?? []), route]);
+  }
+}
+for (const endpoint of manifest.endpoints) {
+  for (const id of endpoint.testIds) {
+    routesByTestId.set(id, [...(routesByTestId.get(id) ?? []), endpoint]);
   }
 }
 const duplicatePrimaryIds = [...routesByTestId.entries()]
@@ -38,10 +52,15 @@ const duplicatePrimaryIds = [...routesByTestId.entries()]
   .map(([id]) => id)
   .sort();
 
-const sentinelToRoutes = new Map<string, FixtureManifest["routes"]>();
+const sentinelToRoutes = new Map<string, AssignedFixture[]>();
 for (const route of manifest.routes) {
   for (const value of Object.values(route.sentinels)) {
     sentinelToRoutes.set(value, [...(sentinelToRoutes.get(value) ?? []), route]);
+  }
+}
+for (const endpoint of manifest.endpoints) {
+  for (const value of Object.values(endpoint.sentinels)) {
+    sentinelToRoutes.set(value, [...(sentinelToRoutes.get(value) ?? []), endpoint]);
   }
 }
 const duplicateSentinels = [...sentinelToRoutes.entries()]
@@ -72,6 +91,6 @@ if (problems.length) {
   process.exitCode = 1;
 } else {
   console.log(
-    `Built-fixture validation OK: ${builtSet.size}/${planSet.size} calibration IDs emitted; scenario=${manifest.scenario}.`,
+    `Built-fixture validation OK: ${builtSet.size}/${planSet.size} calibration IDs available; scenario=${manifest.scenario}.`,
   );
 }

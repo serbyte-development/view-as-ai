@@ -77,6 +77,47 @@ def render_comparison(directory: Path, metadata: dict[str, object]) -> dict[str,
         raise SystemExit(f"missing saved origin HTML: {origin_path}")
 
     native = native_path.read_text("utf-8")
+    fetch_compatible = bool(metadata.get("view_as_ai_url_fetch_compatible", True))
+    if not fetch_compatible:
+        actual = (
+            "VIEW_AS_AI_FETCH_REJECTED "
+            f"status={metadata.get('http_status')} "
+            f"content_type={metadata.get('content_type') or '<missing>'}"
+        )
+        (directory / "view-as-ai.txt").write_text(actual + "\n", encoding="utf-8")
+
+        native_body = strip_file_terminator(native)
+        diff = "\n".join(
+            difflib.unified_diff(
+                native_body.splitlines(),
+                actual.splitlines(),
+                fromfile="native web.run",
+                tofile="view-as-ai fetch layer",
+                lineterm="",
+            )
+        )
+        if diff:
+            diff += "\n"
+        (directory / "diff.txt").write_text(diff, encoding="utf-8")
+
+        comparison = {
+            "mode": "fetch-layer",
+            "view_as_ai_fetch_compatible": False,
+            "view_as_ai_fetch_result": "rejected",
+            "exact_match": None,
+            "layout_tolerant_match": None,
+            "view_as_ai_version": __version__,
+            "compared_at": datetime.now(UTC).isoformat(),
+            "native_sha256": sha256(native_path.read_bytes()),
+            "view_as_ai_sha256": sha256((actual + "\n").encode("utf-8")),
+        }
+        metadata["comparison"] = comparison
+        (directory / "capture.json").write_text(
+            json.dumps(metadata, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        return comparison
+
     encoding = str(metadata.get("origin_encoding") or "utf-8")
     origin = origin_path.read_bytes().decode(encoding, errors="replace")
     url = str(metadata["final_url"])
@@ -127,9 +168,8 @@ def finalize(capture_id: str, url: str, test_ids: list[str]) -> None:
         raise SystemExit(f"unknown calibration test IDs: {', '.join(unknown_test_ids)}")
     manifest = fixture_manifest()
     if manifest is not None:
-        manifest_ids = {
-            test_id for route in manifest.get("routes", []) for test_id in route.get("testIds", [])
-        }
+        fixtures = [*manifest.get("routes", []), *manifest.get("endpoints", [])]
+        manifest_ids = {test_id for fixture in fixtures for test_id in fixture.get("testIds", [])}
         unbuilt_test_ids = sorted(set(test_ids) - manifest_ids)
         if unbuilt_test_ids:
             raise SystemExit(
@@ -151,12 +191,14 @@ def finalize(capture_id: str, url: str, test_ids: list[str]) -> None:
     }
     with httpx.Client(follow_redirects=True, timeout=30, headers=headers) as client:
         response = client.get(url)
-        response.raise_for_status()
 
     content_type = response.headers.get("content-type", "")
     media_type = content_type.split(";", 1)[0].strip().lower()
-    if media_type not in {"text/html", "application/xhtml+xml"}:
-        raise SystemExit(f"expected HTML origin; received {content_type or 'no content type'}")
+    fetch_compatible = (
+        response.is_success
+        and bool(response.content)
+        and (not media_type or media_type in {"text/html", "application/xhtml+xml"})
+    )
 
     origin_path = directory / "origin.html"
     origin_path.write_bytes(response.content)
@@ -167,6 +209,16 @@ def finalize(capture_id: str, url: str, test_ids: list[str]) -> None:
         "final_url": str(response.url),
         "http_status": response.status_code,
         "content_type": content_type,
+        "content_encoding": response.headers.get("content-encoding"),
+        "redirect_history": [
+            {
+                "status": item.status_code,
+                "url": str(item.url),
+                "location": item.headers.get("location"),
+            }
+            for item in response.history
+        ],
+        "view_as_ai_url_fetch_compatible": fetch_compatible,
         "origin_encoding": encoding,
         "origin_sha256": sha256(response.content),
         "deployment_commit": git_commit(),

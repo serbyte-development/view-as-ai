@@ -1,7 +1,14 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
   "files": {
-    "includes": ["src/**/*", "scripts/**/*", "package.json", "tsconfig.json"]
+    "includes": [
+      "api/**/*",
+      "src/**/*",
+      "scripts/**/*",
+      "package.json",
+      "tsconfig.json",
+      "vercel.json"
+    ]
   },
   "formatter": {
     "enabled": true,

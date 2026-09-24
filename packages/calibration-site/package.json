@@ -7,10 +7,11 @@
     "build": "tsx src/build.tsx",
     "capture:compare": "cd ../.. && uv run python packages/calibration-site/scripts/calibration-capture.py compare",
     "capture:finalize": "cd ../.. && uv run python packages/calibration-site/scripts/calibration-capture.py finalize",
-    "check": "tsx scripts/check-build-plan.ts && tsx scripts/check-calibration-results.ts && tsx scripts/check-site-context.ts && npm run check:fixtures && biome check . && tsc --noEmit",
+    "check": "tsx scripts/check-build-plan.ts && tsx scripts/check-calibration-results.ts && tsx scripts/check-site-context.ts && tsx scripts/check-server-fixtures.ts && npm run check:fixtures && biome check . && tsc --noEmit",
     "check:build-plan": "tsx scripts/check-build-plan.ts",
     "check:fixtures": "npm run build && tsx scripts/check-built-fixtures.ts",
     "check:results": "tsx scripts/check-calibration-results.ts",
+    "check:server-fixtures": "tsx scripts/check-server-fixtures.ts",
     "check:site-context": "tsx scripts/check-site-context.ts",
     "format": "biome format --write .",
     "lint": "biome check .",
@@ -27,7 +28,7 @@
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "tsx": "4.23.15",
-    "typescript": "7.0.2"
+    "typescript": "6.0.3"
   },
   "engines": {
     "node": ">=24"

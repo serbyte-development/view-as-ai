@@ -19,3 +19,15 @@ exactly one primary build unit before fixture work is considered complete.
 
 Record execution state and findings in `CALIBRATION_RESULTS.md`. Every plan test ID must have
 exactly one ledger row; `npm run check:results` enforces coverage.
+
+## Deployment
+
+The Vercel CLI resolves this package to the existing
+`serbyte-development/view-as-ai` project. That project uses
+`packages/calibration-site` as its Root Directory, the `Other` framework preset,
+`npm run build`, `dist`, and Node.js 24.x.
+
+Normal deployments are Git-driven: commit the completed work, push it to GitHub, and let the
+project's Vercel Git integration deploy that commit. Do not run a manual `vercel deploy` for
+ordinary phase work. Use the Vercel CLI for inspection, environment synchronization, or a
+deliberate special-scenario deployment when the calibration procedure specifically requires it.

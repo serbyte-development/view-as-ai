@@ -39,3 +39,25 @@ as static files. Normal fixture pages should not hydrate or ship client JavaScri
   assigns every calibration test ID to one primary build unit.
 - `CALIBRATION_RESULTS.md` is the authoritative execution ledger. It tracks every plan ID from
   planned through verified/mismatch and links to the corresponding raw evidence.
+
+## Deployment
+
+The package is connected to the Vercel project `serbyte-development/view-as-ai`. The project
+settings are:
+
+- Root Directory: `packages/calibration-site`
+- Framework Preset: `Other`
+- Build Command: `npm run build`
+- Output Directory: `dist`
+- Node.js: `24.x`
+
+The normal deployment path is GitHub, not a manual CLI deployment:
+
+1. complete and validate the phase locally;
+2. commit it;
+3. push the commit to GitHub;
+4. let the Vercel Git integration deploy that commit;
+5. verify the deployed commit/fixture before starting a native capture.
+
+The Vercel CLI may be used to inspect the linked project, synchronize environment configuration,
+or perform a deliberate special-scenario deployment when a calibration experiment requires one.

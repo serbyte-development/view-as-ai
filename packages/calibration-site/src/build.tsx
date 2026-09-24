@@ -2,8 +2,14 @@ import { copyFile, mkdir, rm, writeFile } from "node:fs/promises";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import type { FixtureManifest, FixtureManifestEntry, FixtureRoute } from "./fixture-types";
-import { assets, calibrationScenario, routes } from "./registry";
+import type {
+  FixtureEndpoint,
+  FixtureManifest,
+  FixtureManifestEndpoint,
+  FixtureManifestEntry,
+  FixtureRoute,
+} from "./fixture-types";
+import { assets, calibrationScenario, endpoints, routes } from "./registry";
 import { renderFixtureRoute } from "./render";
 
 const packageRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -72,6 +78,20 @@ function validateRouteRegistry(): void {
     }
     assetPaths.add(path);
   }
+
+  const endpointPaths = new Set<string>();
+  for (const endpoint of endpoints) {
+    if (!endpoint.path.startsWith("/")) {
+      throw new Error(`endpoint path must start with /: ${endpoint.path}`);
+    }
+    if (endpointPaths.has(endpoint.path)) {
+      throw new Error(`duplicate endpoint path: ${endpoint.path}`);
+    }
+    endpointPaths.add(endpoint.path);
+    if (seenPaths.has(endpoint.path) || assetPaths.has(endpoint.path)) {
+      throw new Error(`endpoint conflicts with static route/asset: ${endpoint.path}`);
+    }
+  }
 }
 
 async function buildRoute(route: FixtureRoute): Promise<FixtureManifestEntry> {
@@ -114,6 +134,18 @@ async function buildAsset(asset: (typeof assets)[number]): Promise<void> {
   await copyFile(join(packageRoot, asset.source), target);
 }
 
+function manifestEndpoint(endpoint: FixtureEndpoint): FixtureManifestEndpoint {
+  return {
+    notes: endpoint.metadata.notes,
+    path: endpoint.path,
+    phase: endpoint.metadata.phase,
+    source: endpoint.metadata.source,
+    testIds: endpoint.metadata.testIds,
+    sentinels: endpoint.metadata.sentinels ?? {},
+    sentinelGroups: endpoint.metadata.sentinelGroups ?? {},
+  };
+}
+
 validateRouteRegistry();
 await rm(outputRoot, { recursive: true, force: true });
 await rm(privateRoot, { recursive: true, force: true });
@@ -127,6 +159,7 @@ for (const route of routes) manifestEntries.push(await buildRoute(route));
 for (const asset of assets) await buildAsset(asset);
 
 const manifest: FixtureManifest = {
+  endpoints: endpoints.map(manifestEndpoint),
   generatedAt: new Date().toISOString(),
   scenario: calibrationScenario,
   routes: manifestEntries,
@@ -134,6 +167,6 @@ const manifest: FixtureManifest = {
 await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
 
 console.log(
-  `Built ${routes.length} routes and ${assets.length} assets at ${relative(process.cwd(), outputRoot)}`,
+  `Built ${routes.length} routes, ${endpoints.length} endpoints, and ${assets.length} assets at ${relative(process.cwd(), outputRoot)}`,
 );
 console.log(`Private fixture manifest: ${relative(process.cwd(), manifestPath)}`);

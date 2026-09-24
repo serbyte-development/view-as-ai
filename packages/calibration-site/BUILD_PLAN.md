@@ -601,39 +601,41 @@ These may use Vercel Functions or route configuration. Keep them isolated from t
 
 Coverage: `HTTP-001..HTTP-020`
 
-- [ ] Build ordinary 200 HTML endpoint.
-- [ ] Build 301, 302, 307, and 308 redirect endpoints.
-- [ ] Build redirect-chain endpoint.
-- [ ] Build cross-origin redirect endpoint.
-- [ ] Build 204 endpoint.
-- [ ] Build 404, 410, and 500 responses with deterministic HTML bodies.
-- [ ] Build `text/plain` HTML body endpoint.
-- [ ] Build `application/xhtml+xml` endpoint.
-- [ ] Build missing-content-type endpoint if Vercel permits it.
-- [ ] Build header-declared charset endpoint.
-- [ ] Build meta-only charset page.
-- [ ] Build conflicting HTTP/meta charset endpoint.
-- [ ] Build controlled compressed-response endpoint if Vercel permits exact encoding control.
-- [ ] Build very-large-response endpoint.
-- [ ] Build controlled slow-response endpoint.
-- [ ] Document/mark platform-blocked cases rather than approximating them inaccurately.
+- [x] Build ordinary 200 HTML endpoint.
+- [x] Build 301, 302, 307, and 308 redirect endpoints.
+- [x] Build redirect-chain endpoint.
+- [x] Build cross-origin redirect endpoint.
+- [x] Build 204 endpoint.
+- [x] Build 404, 410, and 500 responses with deterministic HTML bodies.
+- [x] Build `text/plain` HTML body endpoint.
+- [x] Build `application/xhtml+xml` endpoint.
+- [x] Build missing-content-type endpoint; Vercel function packaging accepts the response shape.
+- [x] Build header-declared charset endpoint.
+- [x] Build meta-only charset page.
+- [x] Build conflicting HTTP/meta charset endpoint.
+- [x] Build controlled gzip response endpoint; final edge/header behavior is verified after Git
+  deployment before capture.
+- [x] Build very-large-response endpoint.
+- [x] Build controlled slow-response endpoint.
+- [x] Preserve the results-ledger `blocked` path for any platform behavior that prevents an exact
+  HTTP treatment after deployment.
 
 ## Crawl/indexing directives
 
 Coverage: `CRAWL-001..CRAWL-011`
 
-- [ ] Build ordinary control route.
-- [ ] Build meta noindex route.
-- [ ] Build meta nofollow route.
-- [ ] Build `X-Robots-Tag: noindex` response.
-- [ ] Generate robots.txt allow scenario.
-- [ ] Generate robots.txt disallow scenario.
-- [ ] Generate sitemap with included route.
-- [ ] Generate sitemap-absent control.
-- [ ] Build self-canonical route.
-- [ ] Build canonical-to-other route.
-- [ ] Build two identical-content URLs with canonical relationship.
-- [ ] Keep direct-open behavior separate from search/indexing conclusions in later results.
+- [x] Build ordinary control route.
+- [x] Build meta noindex route.
+- [x] Build meta nofollow route.
+- [x] Build `X-Robots-Tag: noindex` response.
+- [x] Generate robots.txt allow scenario.
+- [x] Generate robots.txt disallow scenario.
+- [x] Generate sitemap with included route.
+- [x] Generate sitemap-absent control.
+- [x] Build self-canonical route.
+- [x] Build canonical-to-other route.
+- [x] Build two identical-content URLs with canonical relationship.
+- [x] Keep direct-open behavior separate from search/indexing conclusions in later results.
 
 ---
 
@@ -682,6 +684,9 @@ No calibration IDs are assigned yet; build this only after the static baseline r
 - [ ] Vercel serves emitted HTML without an application runtime/hydration layer for static routes.
 - [ ] Public origin bytes for representative routes match local `dist/` bytes where CDN/header
   behavior does not intentionally differ.
+- [ ] Commit the completed phase and push it to GitHub; normal Vercel deployments are triggered by
+  the project's Git integration rather than by running `vercel deploy` manually.
+- [ ] Verify that Vercel deployed the intended Git commit before starting capture.
 - [ ] The deployed commit/scenario is known before capture begins.
 - [ ] Only after these checks move applicable rows in `CALIBRATION_RESULTS.md` from `planned` to
   `deployed`.

@@ -13,12 +13,17 @@ import { orderRoutes } from "./fixtures/order";
 import { siteContextAssetsFor, siteContextRoutesFor } from "./fixtures/site-context";
 import { sizeRoutes } from "./fixtures/size";
 import { isolatedVisibilityAssets, isolatedVisibilityRoutes } from "./fixtures/visibility-isolated";
+import { crawlAssetsForScenario, crawlEndpointFixtures } from "./server/crawl-fixtures";
+import { httpEndpointFixtures } from "./server/http-fixtures";
 
 export const calibrationScenario = process.env.CALIBRATION_SITE_SCENARIO ?? "default";
 const siteContextRoutes = siteContextRoutesFor(calibrationScenario);
 const siteContextAssets = siteContextAssetsFor(calibrationScenario);
+const crawlAssets = crawlAssetsForScenario(calibrationScenario);
 
 export const requireFullCalibrationCoverage = false;
+
+export const endpoints = [...httpEndpointFixtures, ...crawlEndpointFixtures];
 
 export const routes: FixtureRoute[] = [
   ...homeRoutes,
@@ -43,6 +48,7 @@ export const assets: StaticAsset[] = [
   ...isolatedVisibilityAssets,
   ...activeAssets,
   ...siteContextAssets,
+  ...crawlAssets,
   {
     path: "/styles.css",
     source: "src/styles.css",
