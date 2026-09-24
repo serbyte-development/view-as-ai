@@ -21,16 +21,7 @@ The implementation started from OpenAI's public `gpt-oss` browser formatter and 
 
 **What you think AI sees**
 
-```text
-┌──────────────────────────────────────────────────────┐
-│ ACME ANALYTICS                          Docs   Login │
-│                                                      │
-│        Understand your data faster                  │
-│   Ship dashboards without fighting your stack.     │
-│                                                      │
-│        [ Start free ]   [ Read the docs ]           │
-└──────────────────────────────────────────────────────┘
-```
+![Example SaaS website as a browser user sees it, with navigation, a hero section, calls to action, and a dashboard preview](https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main/images/what-ai-sees-hero.webp)
 
 **What the model-facing representation looks more like**
 
