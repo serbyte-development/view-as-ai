@@ -682,21 +682,26 @@ violate the phase's own entry condition and introduce unneeded variables.
 
 # Deployment-readiness checklist
 
-- [ ] `npm run build` succeeds from `packages/calibration-site`.
-- [ ] `npm run check` succeeds.
-- [ ] Every test ID built in the current phase is present in the private build manifest.
-- [ ] No unexpected test sentinel appears in another route.
-- [ ] No private manifest or source metadata is present under `dist/`.
-- [ ] No experimental route accidentally inherits homepage CSS/chrome.
-- [ ] Vercel serves emitted HTML without an application runtime/hydration layer for static routes.
-- [ ] Public origin bytes for representative routes match local `dist/` bytes where CDN/header
+- [x] `npm run build` succeeds from `packages/calibration-site`.
+- [x] `npm run check` succeeds.
+- [x] Every test ID built in the current phase is present in the private build manifest.
+- [x] No unexpected test sentinel appears in another route.
+- [x] No private manifest or source metadata is present under `dist/`.
+- [x] No experimental route accidentally inherits homepage CSS/chrome.
+- [x] Vercel serves emitted HTML without an application runtime/hydration layer for static routes.
+- [x] Public origin bytes for representative routes match local `dist/` bytes where CDN/header
   behavior does not intentionally differ.
-- [ ] Commit the completed phase and push it to GitHub; normal Vercel deployments are triggered by
+- [x] Commit the completed phase and push it to GitHub; normal Vercel deployments are triggered by
   the project's Git integration rather than by running `vercel deploy` manually.
-- [ ] Verify that Vercel deployed the intended Git commit before starting capture.
-- [ ] The deployed commit/scenario is known before capture begins.
-- [ ] Only after these checks move applicable rows in `CALIBRATION_RESULTS.md` from `planned` to
+- [x] Verify that Vercel deployed the intended Git commit before starting capture.
+- [x] The deployed commit/scenario is known before capture begins.
+- [x] Only after these checks move applicable rows in `CALIBRATION_RESULTS.md` from `planned` to
   `deployed`.
+
+Default production deployment verification was performed against fixture commit `1fb8356` with
+scenario `default`. Representative baseline, kitchen-sink, visibility, JSON-LD, malformed, and
+size routes matched local `dist/` byte-for-byte. The default deployment contains 520 calibration
+IDs; the 11 `SITE-*` IDs remain intentionally undeployed until their scenario-specific runs.
 
 ---
 

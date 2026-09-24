@@ -16,6 +16,7 @@
     "format": "biome format --write .",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
+    "results:mark-deployed": "tsx scripts/mark-deployed-results.ts",
     "site:hash": "tsx scripts/hash-site-target.ts",
     "site:scenarios": "tsx scripts/list-site-scenarios.ts",
     "typecheck": "tsc --noEmit"

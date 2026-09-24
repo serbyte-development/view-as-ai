@@ -1,5 +1,13 @@
 # Decision Log
 
+## 2026-09-24 — Pin TypeScript 6 for Vercel functions
+
+The calibration package pins TypeScript 6.0.3 even though TypeScript 7 is available. Vercel's
+standalone function compiler failed with TypeScript 7.0.2 while the same functions built correctly
+with 6.0.3. The static site build was also changed to compile TSX with `tsc` and execute plain
+CommonJS output so production builds do not depend on the host-specific esbuild binary used by
+`tsx`. Local developer/check scripts may continue using `tsx`.
+
 Preserve major historical reasoning that helps a future agent understand why the project took its current direction.
 
 Add an entry when a significant decision, reversal, discovery, rejected approach, validation, or lesson from real usage would be useful to understand later and its reasoning is not obvious from the current code, wiki, or Git history.

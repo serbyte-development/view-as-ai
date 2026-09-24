@@ -20,6 +20,11 @@ could become another variable in extraction tests.
 TSX is an authoring convenience only. Pages are rendered with `renderToStaticMarkup()` and written
 as static files. Normal fixture pages should not hydrate or ship client JavaScript.
 
+The package pins TypeScript `6.0.3` for Vercel function compilation. TypeScript `7.0.2` passed
+local checks but failed Vercel's function compiler path during calibration-site deployment. The
+static build itself uses a small compiler-only wrapper rather than executing `tsx` on Vercel, so
+the production build does not depend on a platform-specific esbuild binary.
+
 ## Global Invariants
 
 - The baseline output is static origin HTML in `dist/`.
