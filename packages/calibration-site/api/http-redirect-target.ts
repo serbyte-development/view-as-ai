@@ -1,1 +1,1 @@
-export { handleHttpRedirectTarget as GET } from "../src/server/http-fixtures";
+export { handleHttpRedirectTarget as GET } from "../src/server/http-fixtures.js";

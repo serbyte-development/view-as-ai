@@ -1,1 +1,1 @@
-export { handleCrawlFixture as GET } from "../src/server/crawl-fixtures";
+export { handleCrawlFixture as GET } from "../src/server/crawl-fixtures.js";

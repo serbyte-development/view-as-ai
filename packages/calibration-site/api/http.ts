@@ -1,1 +1,1 @@
-export { handleHttpFixture as GET } from "../src/server/http-fixtures";
+export { handleHttpFixture as GET } from "../src/server/http-fixtures.js";

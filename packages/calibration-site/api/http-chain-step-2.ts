@@ -1,1 +1,1 @@
-export { handleHttpChainStepTwo as GET } from "../src/server/http-fixtures";
+export { handleHttpChainStepTwo as GET } from "../src/server/http-fixtures.js";

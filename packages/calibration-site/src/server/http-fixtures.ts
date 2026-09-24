@@ -1,7 +1,7 @@
 import { gzipSync } from "node:zlib";
 
 import type { FixtureEndpoint } from "../fixture-types";
-import { sentinel } from "../sentinel";
+import { sentinel } from "../sentinel.js";
 
 const BASE_URL = "https://view-as-ai.vercel.app";
 const s = (id: string) => sentinel(id);
