@@ -1,0 +1,26 @@
+{
+	"name": "@serbyte/view-as-ai-calibration-site",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "tsx src/build.tsx",
+		"check": "biome check . && tsc --noEmit",
+		"format": "biome format --write .",
+		"lint": "biome lint .",
+		"typecheck": "tsc --noEmit"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.5.14",
+		"@types/node": "24.10.0",
+		"@types/react": "19.3.0",
+		"@types/react-dom": "19.3.0",
+		"react": "19.3.0",
+		"react-dom": "19.3.0",
+		"tsx": "4.23.15",
+		"typescript": "7.0.2"
+	},
+	"engines": {
+		"node": ">=20"
+	}
+}

@@ -1,0 +1,12 @@
+{
+  "name": "view-as-ai-workspace",
+  "private": true,
+  "packageManager": "npm@11.19.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build:calibration": "npm run build --workspace @serbyte/view-as-ai-calibration-site",
+    "check:calibration": "npm run check --workspace @serbyte/view-as-ai-calibration-site"
+  }
+}
