@@ -23,6 +23,12 @@ set of real pages. That research corpus and its oracle tooling were archived
 after View as AI stabilized; the active repo keeps only compact golden fixtures
 and synthetic regressions.
 
+New controlled native experiments should use the public calibration site at
+`https://view-as-ai.vercel.app/`. The site is generated from
+`packages/calibration-site/` and provides public origin HTML that native
+browsing systems can fetch. Local synthetic HTML remains useful for regressions,
+but localhost-only behavior is not evidence of native `web.run` extraction.
+
 Do not restart broad calibration for routine maintenance. If native behavior
 changes enough to matter, reproduce the mismatch against current native output
 and add the smallest generic fix. Keep large oracle/calibration corpora outside

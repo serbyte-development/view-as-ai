@@ -22,5 +22,7 @@ Keep implementation direct and stable. Prefer practical maintenance fixes over n
 - OpenAI formatter code is copied into this repository and becomes locally owned code. Avoid taking dependency on full `gpt-oss` package.
 - Prefer keeping uncertain content over aggressive deletion. Pruning rules must remain generic and conservative.
 - Large calibration/oracle evidence is intentionally not part of the active repository. Keep durable findings summarized in the maintained wiki and regression fixtures.
+- Controlled native-browser experiments belong on the public calibration site at `https://view-as-ai.vercel.app/`; localhost fixtures alone cannot establish remote `web.run` behavior.
 
 Read [Parser Calibration](parser-calibration.md) for source lineage and regression boundaries.
+Read [Calibration Site](calibration-site.md) for the public fixture environment and its testing role.

@@ -55,3 +55,12 @@ The working name ModelView was replaced before public release. The selected publ
 `view-as-ai`. The main explanatory tagline is **“View Website As AI”**, with ChatGPT as the first
 calibrated browsing system. Keeping “as” in the name communicates perspective rather than generic
 AI visualization or model inspection.
+
+## 2026-09-24 — Added a dedicated public calibration site
+
+Future controlled reverse-engineering uses a dedicated static site at
+`https://view-as-ai.vercel.app/` rather than treating localhost-only fixtures as native-browser
+evidence. The site lives in `packages/calibration-site/` and renders TSX to static origin HTML with
+`react-dom/server`, no hydration by default, and minimal explicit CSS. This keeps baseline HTML
+controlled while allowing both dense single-page fixtures and multi-page experiments for possible
+site-level trimming signals such as repeated navigation or shared boilerplate.
