@@ -6,18 +6,12 @@ const frameSixChildSentinel = sentinel("FRAME-006");
 const frameEightChildSentinel = sentinel("FRAME-008");
 
 function FrameSixParent() {
-  return (
-    <Document
-      head={<title>FRAME-006 parent</title>}
-      body={<iframe src="/frame/child-six/" title="FRAME-006 child document" />}
-    />
-  );
+  return <Document body={<iframe src="/frame/child-six/" title="Embedded child document" />} />;
 }
 
 function FrameSevenPage() {
   return (
     <Document
-      head={<title>FRAME-007 object fallback</title>}
       body={
         <object data="/frame/object-target/" type="text/html">
           {sentinel("FRAME-007")} object fallback content
@@ -28,12 +22,7 @@ function FrameSevenPage() {
 }
 
 function FrameEightPage() {
-  return (
-    <Document
-      head={<title>FRAME-008 embed</title>}
-      body={<embed src="/frame/embed-target/" type="text/html" />}
-    />
-  );
+  return <Document body={<embed src="/frame/embed-target/" type="text/html" />} />;
 }
 
 export const frameFollowupRoutes: FixtureRoute[] = [
@@ -51,12 +40,7 @@ export const frameFollowupRoutes: FixtureRoute[] = [
   {
     kind: "tsx",
     path: "/frame/child-six/",
-    render: () => (
-      <Document
-        head={<title>FRAME-006 child</title>}
-        body={<p>{frameSixChildSentinel} iframe child-only content</p>}
-      />
-    ),
+    render: () => <Document body={<p>{frameSixChildSentinel} iframe child-only content</p>} />,
     metadata: {
       phase: 4,
       source: "src/fixtures/frame-followups.tsx",
@@ -78,9 +62,7 @@ export const frameFollowupRoutes: FixtureRoute[] = [
   {
     kind: "tsx",
     path: "/frame/object-target/",
-    render: () => (
-      <Document head={<title>Object target</title>} body={<p>object target document</p>} />
-    ),
+    render: () => <Document body={<p>object target document</p>} />,
     metadata: {
       phase: 4,
       source: "src/fixtures/frame-followups.tsx",
@@ -101,12 +83,7 @@ export const frameFollowupRoutes: FixtureRoute[] = [
   {
     kind: "tsx",
     path: "/frame/embed-target/",
-    render: () => (
-      <Document
-        head={<title>FRAME-008 embedded target</title>}
-        body={<p>{frameEightChildSentinel} embedded target content</p>}
-      />
-    ),
+    render: () => <Document body={<p>{frameEightChildSentinel} embedded target content</p>} />,
     metadata: {
       phase: 4,
       source: "src/fixtures/frame-followups.tsx",

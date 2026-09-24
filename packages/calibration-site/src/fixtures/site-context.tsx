@@ -8,8 +8,8 @@ const SIBLING_PREFIX = "/site-context/sibling-";
 
 const s = (id: string, label = "PRIMARY") => sentinel(id, label);
 
-function rawDocument(title: string, body: string, head = ""): string {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${title}</title>${head}</head><body>${body}</body></html>\n`;
+function rawDocument(_title: string, body: string, head = ""): string {
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8">${head}</head><body>${body}</body></html>\n`;
 }
 
 function rawRoute(
@@ -329,7 +329,6 @@ const templateMarker = s("SITE-TEMPLATE", "IDENTICAL");
 function SharedTemplatePage() {
   return (
     <Document
-      head={<title>Template parity fixture</title>}
       body={
         <>
           <header>
@@ -350,7 +349,6 @@ function IndependentlyAuthoredTemplatePage() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Template parity fixture</title>
       </head>
       <body>
         <header>

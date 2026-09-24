@@ -4,7 +4,7 @@ import { baselineAssets, baselineRoutes } from "./fixtures/baseline";
 import { boilerplateRoutes } from "./fixtures/boilerplate";
 import { duplicateRoutes } from "./fixtures/duplicate";
 import { frameFollowupRoutes } from "./fixtures/frame-followups";
-import { headMetadataRoutes } from "./fixtures/head-metadata";
+import { headMetadataAssets, headMetadataRoutes } from "./fixtures/head-metadata";
 import { homeRoutes } from "./fixtures/home";
 import { jsonLdRoutes } from "./fixtures/jsonld";
 import { kitchenSinkAssets, kitchenSinkRoutes } from "./fixtures/kitchen-sink";
@@ -45,6 +45,7 @@ export const routes: FixtureRoute[] = [
 export const assets: StaticAsset[] = [
   ...baselineAssets,
   ...kitchenSinkAssets,
+  ...headMetadataAssets,
   ...isolatedVisibilityAssets,
   ...activeAssets,
   ...siteContextAssets,

@@ -3,8 +3,8 @@ import { sentinel } from "../sentinel";
 
 const s = (id: string, label = "PRIMARY") => sentinel(id, label);
 
-function htmlDocument(title: string, body: string): string {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${title}</title></head><body>${body}</body></html>\n`;
+function htmlDocument(_title: string, body: string): string {
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"></head><body>${body}</body></html>\n`;
 }
 
 function filler(length: number): string {

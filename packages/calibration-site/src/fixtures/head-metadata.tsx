@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 import { Document } from "../components/Document";
-import type { FixtureRoute } from "../fixture-types";
+import type { FixtureRoute, StaticAsset } from "../fixture-types";
 import { sentinel } from "../sentinel";
 
 interface HeadCase {
@@ -133,12 +133,7 @@ const headCases: HeadCase[] = [
 ];
 
 function HeadFixturePage({ fixture }: { fixture: HeadCase }) {
-  return (
-    <Document
-      head={fixture.head}
-      body={fixture.body ?? <p>Neutral body content for {fixture.id}.</p>}
-    />
-  );
+  return <Document head={fixture.head} body={fixture.body ?? <p>Neutral body content.</p>} />;
 }
 
 export const headMetadataRoutes: FixtureRoute[] = [
@@ -165,5 +160,45 @@ export const headMetadataRoutes: FixtureRoute[] = [
       testIds: [],
       notes: "Supporting destination for HEAD-017.",
     },
+  },
+  {
+    kind: "tsx",
+    path: `/canonical/${s("HEAD-006")}/`,
+    render: () => (
+      <Document
+        head={<title>Canonical metadata target</title>}
+        body={<p>Stable canonical metadata target.</p>}
+      />
+    ),
+    metadata: {
+      phase: 5,
+      source: "src/fixtures/head-metadata.tsx",
+      testIds: [],
+      notes: "Supporting canonical destination for HEAD-006.",
+    },
+  },
+  {
+    kind: "tsx",
+    path: `/fr/${s("HEAD-015")}/`,
+    render: () => (
+      <Document
+        lang="fr"
+        head={<title>Cible de langue alternative</title>}
+        body={<p>Destination stable de langue alternative.</p>}
+      />
+    ),
+    metadata: {
+      phase: 5,
+      source: "src/fixtures/head-metadata.tsx",
+      testIds: [],
+      notes: "Supporting alternate-language destination for HEAD-015.",
+    },
+  },
+];
+
+export const headMetadataAssets: StaticAsset[] = [
+  {
+    path: "/icon.svg",
+    source: "src/assets/baseline.svg",
   },
 ];

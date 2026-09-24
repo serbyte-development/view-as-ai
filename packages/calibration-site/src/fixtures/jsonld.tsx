@@ -62,17 +62,7 @@ function route(
   return {
     kind: "tsx",
     path: `/experiments/jsonld/${id}/`,
-    render: () => (
-      <Document
-        head={
-          <>
-            <title>{`${id} JSON-LD fixture`}</title>
-            {options.head}
-          </>
-        }
-        body={body}
-      />
-    ),
+    render: () => <Document head={options.head} body={body} />,
     metadata,
   };
 }

@@ -507,17 +507,7 @@ const cases: VisibilityCase[] = [
 ];
 
 function VisibilityPage({ fixture }: { fixture: VisibilityCase }) {
-  return (
-    <Document
-      head={
-        <>
-          <title>{`${fixture.id} visibility fixture`}</title>
-          {fixture.head}
-        </>
-      }
-      body={fixture.body ?? <CaseBody id={fixture.id} />}
-    />
-  );
+  return <Document head={fixture.head} body={fixture.body ?? <CaseBody id={fixture.id} />} />;
 }
 
 export const isolatedVisibilityRoutes: FixtureRoute[] = cases.map((fixture) => ({

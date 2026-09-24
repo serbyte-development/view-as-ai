@@ -26,7 +26,7 @@ function activeRoute(
   return {
     kind: "tsx",
     path: `/experiments/active/${id}/`,
-    render: () => <Document head={<title>{`${id} active fixture`}</title>} body={body} />,
+    render: () => <Document body={body} />,
     metadata: {
       phase: 6,
       source: "src/fixtures/active.tsx",
@@ -224,7 +224,7 @@ export const activeRoutes: FixtureRoute[] = [
     kind: "raw",
     path: "/experiments/active/ACTIVE-015/",
     render: () =>
-      `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>ACTIVE-015 declarative shadow DOM</title></head><body><vai-dsd><template shadowrootmode="open"><span>${s(
+      `<!doctype html><html lang="en"><head><meta charset="utf-8"></head><body><vai-dsd><template shadowrootmode="open"><span>${s(
         "ACTIVE-015",
       )}</span></template></vai-dsd></body></html>\n`,
     metadata: {

@@ -715,29 +715,14 @@ function KitchenSinkPage() {
 function VisibilityThirtyPage() {
   return (
     <Document
-      head={
-        <>
-          <title>VIS-030 Fixture</title>
-          <style>{".hidden-md { display: none; }"}</style>
-        </>
-      }
+      head={<style>{".hidden-md { display: none; }"}</style>}
       body={<div className="hidden-md">{s("VIS-030")}</div>}
     />
   );
 }
 
 function LinkBasePage({ testId, base }: { testId: "LINK-031" | "LINK-033"; base: string }) {
-  return (
-    <Document
-      head={
-        <>
-          <title>{`${testId} Fixture`}</title>
-          <base href={base} />
-        </>
-      }
-      body={<a href="guide">{s(testId)}</a>}
-    />
-  );
+  return <Document head={<base href={base} />} body={<a href="guide">{s(testId)}</a>} />;
 }
 
 export const kitchenSinkRoutes: FixtureRoute[] = [
@@ -778,7 +763,7 @@ export const kitchenSinkRoutes: FixtureRoute[] = [
     kind: "raw",
     path: "/experiments/link/LINK-032/",
     render: () =>
-      `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>LINK-032 Fixture</title><base href="javascript:bad"></head><body><a href="/ok">${s("LINK-032")}</a></body></html>\n`,
+      `<!doctype html><html lang="en"><head><meta charset="utf-8"><base href="javascript:bad"></head><body><a href="/ok">${s("LINK-032")}</a></body></html>\n`,
     metadata: {
       phase: 2,
       source: "src/fixtures/kitchen-sink.tsx",
@@ -800,12 +785,7 @@ export const kitchenSinkRoutes: FixtureRoute[] = [
   ...[1, 2, 4, 5].map<FixtureRoute>((number) => ({
     kind: "tsx",
     path: `/frame/child-${["zero", "one", "two", "three", "four", "five"][number]}/`,
-    render: () => (
-      <Document
-        head={<title>{`Frame child ${number}`}</title>}
-        body={<p>{`VAI_FRAME_CHILD_${number}_CONTENT`}</p>}
-      />
-    ),
+    render: () => <Document body={<p>{`VAI_FRAME_CHILD_${number}_CONTENT`}</p>} />,
     metadata: {
       phase: 2,
       source: "src/fixtures/kitchen-sink.tsx",

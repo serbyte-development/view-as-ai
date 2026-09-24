@@ -5,7 +5,7 @@ const BASE_URL = "https://view-as-ai.vercel.app";
 const s = (id: string) => sentinel(id);
 
 function document(id: string, head = ""): string {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${id}</title>${head}</head><body><p>${s(
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8">${head}</head><body><p>${s(
     id,
   )}</p></body></html>\n`;
 }

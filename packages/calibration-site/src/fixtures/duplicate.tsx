@@ -10,7 +10,7 @@ function route(id: string, body: ReactNode): FixtureRoute {
   return {
     kind: "tsx",
     path: `/experiments/duplicate/${id}/`,
-    render: () => <Document head={<title>{`${id} duplication fixture`}</title>} body={body} />,
+    render: () => <Document body={body} />,
     metadata: {
       phase: 6,
       source: "src/fixtures/duplicate.tsx",

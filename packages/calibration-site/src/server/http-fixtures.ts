@@ -6,8 +6,8 @@ import { sentinel } from "../sentinel.js";
 const BASE_URL = "https://view-as-ai.vercel.app";
 const s = (id: string) => sentinel(id);
 
-function htmlDocument(id: string, body: string, head = ""): string {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${id}</title>${head}</head><body>${body}</body></html>\n`;
+function htmlDocument(_id: string, body: string, head = ""): string {
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8">${head}</head><body>${body}</body></html>\n`;
 }
 
 function htmlResponse(
@@ -67,7 +67,7 @@ export async function handleHttpFixture(request: Request): Promise<Response> {
       });
     case "HTTP-013":
       return new Response(
-        `<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml"><head><title>${id}</title></head><body><p>${marker}</p></body></html>\n`,
+        `<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml"><head></head><body><p>${marker}</p></body></html>\n`,
         {
           status: 200,
           headers: { "Content-Type": "application/xhtml+xml; charset=utf-8" },
@@ -85,7 +85,7 @@ export async function handleHttpFixture(request: Request): Promise<Response> {
       );
     case "HTTP-016":
       return new Response(
-        `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${id}</title></head><body><p>${marker} café</p></body></html>\n`,
+        `<!doctype html><html lang="en"><head><meta charset="utf-8"></head><body><p>${marker} café</p></body></html>\n`,
         {
           status: 200,
           headers: { "Content-Type": "text/html" },
@@ -93,7 +93,7 @@ export async function handleHttpFixture(request: Request): Promise<Response> {
       );
     case "HTTP-017":
       return new Response(
-        `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${id}</title></head><body><p>${marker} café</p></body></html>\n`,
+        `<!doctype html><html lang="en"><head><meta charset="utf-8"></head><body><p>${marker} café</p></body></html>\n`,
         {
           status: 200,
           headers: { "Content-Type": "text/html; charset=iso-8859-1" },

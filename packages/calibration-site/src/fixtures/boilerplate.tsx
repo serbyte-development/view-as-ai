@@ -251,7 +251,6 @@ const cases: BoilerplateCase[] = [
 function BoilerplatePage({ fixture }: { fixture: BoilerplateCase }) {
   return (
     <Document
-      head={<title>{`${fixture.id} boilerplate fixture`}</title>}
       body={
         <>
           <p>Neutral page content.</p>

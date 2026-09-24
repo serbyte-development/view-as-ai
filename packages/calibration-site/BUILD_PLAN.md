@@ -11,40 +11,40 @@ Do not record native findings here.
 
 A checklist item is complete only when:
 
-- [ ] the fixture source exists;
-- [ ] the static build emits the intended public route/resource;
-- [ ] every assigned test ID has one stable unique sentinel when the test can use a sentinel;
-- [ ] the treatment DOM contains no unrelated instrumentation that could change extraction behavior;
-- [ ] the private build manifest maps the test ID to its route and sentinel;
-- [ ] local validation confirms the expected sentinel exists in the emitted origin where applicable;
-- [ ] `npm run check:calibration` passes.
+- [x] the fixture source exists;
+- [x] the static build emits the intended public route/resource;
+- [x] every assigned test ID has one stable unique sentinel when the test can use a sentinel;
+- [x] the treatment DOM contains no unrelated instrumentation that could change extraction behavior;
+- [x] the private build manifest maps the test ID to its route and sentinel;
+- [x] local validation confirms the expected sentinel exists in the emitted origin where applicable;
+- [x] `npm run check:calibration` passes.
 
 Deployment and native capture are separate steps. A built test stays `planned` in
 `CALIBRATION_RESULTS.md` until it is actually deployed.
 
 ## Experimental page rules
 
-- [ ] Experimental routes have no shared site header, nav, sidebar, footer, cookie banner, or other
+- [x] Experimental routes have no shared site header, nav, sidebar, footer, cookie banner, or other
   chrome unless that chrome is the test.
-- [ ] The homepage may be human-friendly, but experimental routes must remain minimal.
-- [ ] Do not wrap every experiment in `<main>`; several pruning rules depend on whether content is
+- [x] The homepage may be human-friendly, but experimental routes remain minimal.
+- [x] Do not wrap every experiment in `<main>`; several pruning rules depend on whether content is
   inside or outside `main`.
-- [ ] Do not add `data-test-id`, ARIA labels, semantic classes, or other instrumentation to the
+- [x] Do not add `data-test-id`, ARIA labels, semantic classes, or other instrumentation to the
   treatment element unless the attribute itself is being tested.
-- [ ] Test metadata lives in source-side registries and the private build manifest, not in extra
+- [x] Test metadata lives in source-side registries and the private build manifest, not in extra
   rendered DOM.
-- [ ] A reusable `TestCase` helper, if used, must render a React fragment only and add no DOM.
-- [ ] Do not emit test IDs as visible labels solely for debugging. The unique sentinel already
+- [x] A reusable `TestCase` helper renders a React fragment only and adds no DOM.
+- [x] Do not emit test IDs as visible labels solely for debugging. The unique sentinel already
   identifies the case.
-- [ ] No generated manifest containing sentinel strings is deployed under `dist/`. A public
+- [x] No generated manifest containing sentinel strings is deployed under `dist/`. A public
   manifest could itself contaminate site-context tests.
-- [ ] General experimental pages use no global CSS unless required by the experiment.
-- [ ] CSS rules target only the intended test case.
-- [ ] JavaScript is shipped only on `ACTIVE-*`, JSON-LD mutation, or explicitly JavaScript-driven
+- [x] General experimental pages use no global CSS unless required by the experiment.
+- [x] CSS rules target only the intended test case.
+- [x] JavaScript is shipped only on `ACTIVE-*`, JSON-LD mutation, or explicitly JavaScript-driven
   routes.
-- [ ] Malformed/raw-HTTP experiments bypass React rendering when React would normalize the behavior
+- [x] Malformed/raw-HTTP experiments bypass React rendering when React would normalize the behavior
   being tested.
-- [ ] External assets use stable URLs and are documented in source.
+- [x] External assets use stable URLs and are documented in source.
 
 ---
 
@@ -613,8 +613,8 @@ Coverage: `HTTP-001..HTTP-020`
 - [x] Build header-declared charset endpoint.
 - [x] Build meta-only charset page.
 - [x] Build conflicting HTTP/meta charset endpoint.
-- [x] Build controlled gzip response endpoint; final edge/header behavior is verified after Git
-  deployment before capture.
+- [x] Build controlled gzip response endpoint; production Vercel preserves gzip when the client
+  advertises `Accept-Encoding: gzip` and serves the decoded representation otherwise.
 - [x] Build very-large-response endpoint.
 - [x] Build controlled slow-response endpoint.
 - [x] Preserve the results-ledger `blocked` path for any platform behavior that prevents an exact
@@ -643,33 +643,40 @@ Coverage: `CRAWL-001..CRAWL-011`
 
 No calibration IDs are assigned yet; build this only after the static baseline results justify it.
 
-- [ ] Preserve the static TSX site as the reference implementation.
-- [ ] Build an equivalent Next.js server/static-rendered page set.
-- [ ] Build an equivalent client-rendered React SPA shell/page set.
-- [ ] If useful, build one additional common framework control.
-- [ ] Keep content/sentinels logically equivalent across frameworks.
-- [ ] Compare origin HTML first before interpreting native differences.
+- [x] Preserve the static TSX site as the reference implementation.
+- [x] Defer the Next.js server/static-rendered control until native static results show a
+  framework-produced-origin question worth testing.
+- [x] Defer the client-rendered React SPA control until native static/ACTIVE results show a
+  framework-runtime question worth testing.
+- [x] Keep any third-framework control conditional on evidence from the first two controls.
+- [x] Require future framework controls to keep content/sentinels logically equivalent.
+- [x] Require origin-HTML comparison before interpreting any future native framework difference.
+
+Phase 10 is therefore **evidence-gated, not an outstanding prerequisite** for the current
+531-case calibration build. Creating framework projects before the static/native captures would
+violate the phase's own entry condition and introduce unneeded variables.
 
 ---
 
 # Supporting assets/resources checklist
 
-- [ ] Same-origin PNG fixture.
-- [ ] Same-origin SVG fixture.
-- [ ] Same-origin image used by hundreds-of-images generator.
-- [ ] External-image target chosen and documented.
-- [ ] Same-origin iframe child pages.
-- [ ] Cross-origin iframe target chosen and documented.
-- [ ] External visibility stylesheet.
-- [ ] Imported stylesheet.
-- [ ] External ACTIVE script.
-- [ ] Same-origin JSON resource for ACTIVE fetch test.
-- [ ] Minimal audio/video fallback fixture resources if needed.
-- [ ] Stable canonical/alternate-language target pages.
-- [ ] Stable redirect targets.
-- [ ] Deterministic large-text/code/table/link/image generators.
-- [ ] robots.txt generator/scenario support.
-- [ ] sitemap.xml generator/scenario support.
+- [x] Same-origin PNG fixture.
+- [x] Same-origin SVG fixture.
+- [x] Same-origin image used by hundreds-of-images generator.
+- [x] External-image target chosen and documented in the IMG fixture source.
+- [x] Same-origin iframe child pages.
+- [x] Cross-origin iframe target chosen and documented in the FRAME fixture source.
+- [x] External visibility stylesheet.
+- [x] Imported stylesheet.
+- [x] External ACTIVE script.
+- [x] Same-origin JSON resource for ACTIVE fetch test.
+- [x] No media resource is required for the audio/video fallback-text tests; the fallback source
+  itself is the treatment.
+- [x] Stable canonical/alternate-language target pages.
+- [x] Stable redirect targets.
+- [x] Deterministic large-text/code/table/link/image generators.
+- [x] robots.txt generator/scenario support.
+- [x] sitemap.xml generator/scenario support.
 
 ---
 
@@ -695,16 +702,17 @@ No calibration IDs are assigned yet; build this only after the static baseline r
 
 # Recommended implementation order
 
-- [ ] **Build 1:** infrastructure + private manifest + baseline.
-- [ ] **Build 2:** kitchen sink: TEXT, VIS-001..030, SEM, CTRL, LINK, IMG, FRAME-001..005, TABLE,
+- [x] **Build 1:** infrastructure + private manifest + baseline.
+- [x] **Build 2:** kitchen sink: TEXT, VIS-001..030, SEM, CTRL, LINK, IMG, FRAME-001..005, TABLE,
   I18N.
-- [ ] **Build 3:** isolated static visibility + local boilerplate + FRAME-006..008.
-- [ ] **Build 4:** HEAD + JSON-LD.
-- [ ] **Build 5:** ACTIVE + ORDER + DUP.
-- [ ] **Build 6:** MAL + SIZE.
-- [ ] **Build 7:** site-context scenario machinery and SITE experiments.
-- [ ] **Build 8:** HTTP + CRAWL infrastructure.
-- [ ] **Build 9:** optional cross-framework follow-up after static findings are understood.
+- [x] **Build 3:** isolated static visibility + local boilerplate + FRAME-006..008.
+- [x] **Build 4:** HEAD + JSON-LD.
+- [x] **Build 5:** ACTIVE + ORDER + DUP.
+- [x] **Build 6:** MAL + SIZE.
+- [x] **Build 7:** site-context scenario machinery and SITE experiments.
+- [x] **Build 8:** HTTP + CRAWL infrastructure.
+- [x] **Build 9:** cross-framework follow-up is explicitly evidence-gated until static/native
+  findings justify creating additional framework projects.
 
 Do not jump to later phases because they are interesting. The capture pipeline should be proven on
 `/baseline/`, then the broad static cases should establish which expensive isolated experiments
