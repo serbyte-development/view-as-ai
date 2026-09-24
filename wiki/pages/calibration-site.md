@@ -65,5 +65,9 @@ The complete test inventory and experiment design live in
 with controlled multi-page and sequential-deployment experiments rather than inferred from one
 kitchen-sink page.
 
+The concrete implementation checklist is `packages/calibration-site/BUILD_PLAN.md`. It maps every
+calibration ID to the route/resource/scenario that must be built and is coverage-checked by the
+package tooling.
+
 Execution status and findings live in `packages/calibration-site/CALIBRATION_RESULTS.md`. The
 package check verifies that every planned test ID has exactly one results row.

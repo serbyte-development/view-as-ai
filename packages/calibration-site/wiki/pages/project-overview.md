@@ -35,5 +35,7 @@ as static files. Normal fixture pages should not hydrate or ship client JavaScri
   parser comparison, evidence bundle, then results-ledger update.
 - `CALIBRATION_PLAN.md` is the canonical experimental plan. New fixture routes should map to a
   documented test family and use the controls/sentinel conventions defined there.
+- `BUILD_PLAN.md` turns that research plan into the concrete route/component/asset checklist and
+  assigns every calibration test ID to one primary build unit.
 - `CALIBRATION_RESULTS.md` is the authoritative execution ledger. It tracks every plan ID from
   planned through verified/mismatch and links to the corresponding raw evidence.

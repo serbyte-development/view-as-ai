@@ -14,5 +14,8 @@ For the complete operational sequence and capture artifact layout, follow `captu
 Before adding or changing calibration fixtures, read `CALIBRATION_PLAN.md`. It is the canonical
 inventory of known behavior, open questions, experimental controls, and planned test families.
 
+Use `BUILD_PLAN.md` as the implementation checklist. Every calibration test ID must be assigned to
+exactly one primary build unit before fixture work is considered complete.
+
 Record execution state and findings in `CALIBRATION_RESULTS.md`. Every plan test ID must have
 exactly one ledger row; `npm run check:results` enforces coverage.
