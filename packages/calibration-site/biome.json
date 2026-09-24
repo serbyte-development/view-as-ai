@@ -20,5 +20,29 @@
       "semicolons": "always",
       "trailingCommas": "all"
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["src/fixtures/**/*"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noInteractiveElementToNoninteractiveRole": "off",
+            "noRedundantAlt": "off",
+            "noRedundantRoles": "off",
+            "noSvgWithoutTitle": "off",
+            "useAltText": "off",
+            "useAnchorContent": "off",
+            "useIframeTitle": "off",
+            "useMediaCaption": "off",
+            "useSemanticElements": "off",
+            "useValidAnchor": "off"
+          },
+          "security": {
+            "noScriptUrl": "off"
+          }
+        }
+      }
+    }
+  ]
 }

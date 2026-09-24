@@ -141,89 +141,90 @@ sentinel. Surprising results move to isolated follow-up routes before changing V
 
 Coverage: `TEXT-001..TEXT-033`
 
-- [ ] Build all `TEXT-001` through `TEXT-033` on the kitchen-sink page.
-- [ ] Keep comment/template/noscript/dialog/details cases literal and source-verifiable.
-- [ ] Ensure TEXT-023's comment sentinel exists only in an HTML comment.
-- [ ] Avoid formatting helpers that normalize the whitespace cases before HTML is emitted.
+- [x] Build all `TEXT-001` through `TEXT-033` on the kitchen-sink page.
+- [x] Keep comment/template/noscript/dialog/details cases literal and source-verifiable.
+- [x] Ensure TEXT-023's comment sentinel exists only in an HTML comment.
+- [x] Avoid formatting helpers that normalize the whitespace cases before HTML is emitted.
 
 ## Common visibility cases
 
 Coverage: `VIS-001..VIS-030`
 
-- [ ] Build `VIS-001` through `VIS-030` on the kitchen-sink page.
-- [ ] Use explicit case-specific CSS for each CSS-driven treatment.
-- [ ] Include separate inline, embedded, and external-stylesheet cases exactly as specified.
-- [ ] Add the external visibility stylesheet as a stable unhashed asset.
-- [ ] Ensure generated `::before`/`::after` text exists only in CSS, not in DOM text.
-- [ ] Keep the Tailwind-like class-name control free of any actual Tailwind dependency.
+- [x] Build `VIS-001` through `VIS-029` on the kitchen-sink page and VIS-030 as the isolated
+  same-class/CSS treatment needed to avoid contaminating VIS-029.
+- [x] Use explicit case-specific CSS for each CSS-driven treatment.
+- [x] Include separate inline, embedded, and external-stylesheet cases exactly as specified.
+- [x] Add the external visibility stylesheet as a stable unhashed asset.
+- [x] Ensure generated `::before`/`::after` text exists only in CSS, not in DOM text.
+- [x] Keep the Tailwind-like class-name control free of any actual Tailwind dependency.
 
 ## Semantics and ARIA
 
 Coverage: `SEM-001..SEM-036`
 
-- [ ] Build `SEM-001` through `SEM-036` on the kitchen-sink page.
-- [ ] Preserve the exact semantic element/role distinction for every pair.
-- [ ] Put cases that are specified outside `main` outside any `main` ancestor.
-- [ ] Do not add helper ARIA attributes to unrelated cases.
+- [x] Build `SEM-001` through `SEM-036` on the kitchen-sink page.
+- [x] Preserve the exact semantic element/role distinction for every pair.
+- [x] Put cases that are specified outside `main` outside any `main` ancestor.
+- [x] Do not add helper ARIA attributes to unrelated cases.
 
 ## Controls
 
 Coverage: `CTRL-001..CTRL-035`
 
-- [ ] Build `CTRL-001` through `CTRL-035` on the kitchen-sink page.
-- [ ] Preserve initial values, checked state, disabled/read-only state, labels, options, and
+- [x] Build `CTRL-001` through `CTRL-035` on the kitchen-sink page.
+- [x] Preserve initial values, checked state, disabled/read-only state, labels, options, and
   placeholders exactly as specified.
-- [ ] Keep the hidden-wrapper case separate from the role-search case.
+- [x] Keep the hidden-wrapper case separate from the role-search case.
 
 ## Links
 
 Coverage: `LINK-001..LINK-033`
 
-- [ ] Build `LINK-001` through `LINK-033` on the kitchen-sink page.
-- [ ] Provide stable same-origin targets for relative/absolute/query/fragment cases.
-- [ ] Use a stable external HTTPS target for external-link cases.
-- [ ] Keep malformed/non-web schemes literal in source.
-- [ ] Ensure the `base href` cases are emitted in documents where the intended base does not
-  accidentally affect unrelated kitchen-sink links; if necessary, move LINK-031..033 to dedicated
-  documents while retaining this coverage assignment in the fixture registry.
+- [x] Build `LINK-001` through `LINK-030` on the kitchen-sink page and LINK-031..033 as
+  dedicated base-href documents.
+- [x] Provide stable same-origin targets for relative/absolute/query/fragment cases.
+- [x] Use a stable external HTTPS target for external-link cases.
+- [x] Keep malformed/non-web schemes literal in source.
+- [x] Ensure the `base href` cases are emitted in documents where the intended base does not
+  affect unrelated kitchen-sink links.
 
 ## Images and media
 
 Coverage: `IMG-001..IMG-021`
 
-- [ ] Build `IMG-001` through `IMG-021`.
-- [ ] Add stable same-origin PNG/SVG fixtures.
-- [ ] Add a stable external-image URL for external-source behavior.
-- [ ] Include picture/srcset variants without JavaScript.
-- [ ] Include inline SVG title/desc/text variants.
-- [ ] Include canvas/video/audio fallback text without client rendering.
+- [x] Build `IMG-001` through `IMG-021`.
+- [x] Add stable same-origin PNG/SVG fixtures.
+- [x] Add a stable external-image URL for external-source behavior.
+- [x] Include picture/srcset variants without JavaScript.
+- [x] Include inline SVG title/desc/text variants.
+- [x] Include canvas/video/audio fallback text without client rendering.
 
 ## Basic iframe/reference behavior
 
 Coverage: `FRAME-001..FRAME-005`
 
-- [ ] Build `FRAME-001` through `FRAME-005` on the kitchen-sink page.
-- [ ] Add same-origin iframe child documents with stable URLs.
-- [ ] Use a stable cross-origin iframe URL for FRAME-003.
-- [ ] Keep iframe body/fallback sentinels unique from parent-page sentinels.
+- [x] Build `FRAME-001` through `FRAME-005` on the kitchen-sink page.
+- [x] Add same-origin iframe child documents with stable URLs.
+- [x] Use a stable cross-origin iframe URL for FRAME-003.
+- [x] Keep iframe body/fallback sentinels unique from parent-page sentinels.
 
 ## Tables
 
 Coverage: `TABLE-001..TABLE-014`
 
-- [ ] Build `TABLE-001` through `TABLE-014` on the kitchen-sink page.
-- [ ] Preserve malformed-table intent where React can represent it faithfully; otherwise emit the
+- [x] Build `TABLE-001` through `TABLE-014` on the kitchen-sink page.
+- [x] Preserve malformed-table intent where React can represent it faithfully; otherwise emit the
   affected case through a raw fixture document.
-- [ ] Keep hidden-header CSS scoped only to TABLE-013.
+- [x] Keep hidden-header CSS scoped only to TABLE-013.
 
 ## International text
 
 Coverage: `I18N-001..I18N-013`
 
-- [ ] Build `I18N-001` through `I18N-013` on the kitchen-sink page.
-- [ ] Preserve Unicode code points exactly, especially combining characters, zero-width characters,
+- [x] Build `I18N-001` through `I18N-013` on the kitchen-sink page.
+- [x] Preserve Unicode code points exactly, especially combining characters, zero-width characters,
   soft hyphens, bidi controls, and literal citation delimiters.
-- [ ] Validate emitted origin bytes, not only visually rendered text.
+- [x] Validate emitted origin bytes, not only visually rendered text.
 
 ---
 

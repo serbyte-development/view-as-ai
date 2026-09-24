@@ -19,6 +19,9 @@ export function HomePage() {
           <p>
             <a href="/baseline/">Baseline fixture</a>
           </p>
+          <p>
+            <a href="/kitchen-sink/">Kitchen-sink fixture</a>
+          </p>
         </main>
       </body>
     </html>
