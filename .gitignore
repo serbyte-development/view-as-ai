@@ -1,6 +1,7 @@
 .venv/
 node_modules/
 packages/calibration-site/.calibration/
+packages/calibration-site/.calibration-build/
 __pycache__/
 .pytest_cache/
 .ruff_cache/

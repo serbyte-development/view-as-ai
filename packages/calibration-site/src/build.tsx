@@ -1,6 +1,5 @@
 import { copyFile, mkdir, rm, writeFile } from "node:fs/promises";
 import { dirname, join, relative } from "node:path";
-import { fileURLToPath } from "node:url";
 
 import type {
   FixtureEndpoint,
@@ -12,7 +11,7 @@ import type {
 import { assets, calibrationScenario, endpoints, routes } from "./registry";
 import { renderFixtureRoute } from "./render";
 
-const packageRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
+const packageRoot = process.cwd();
 const outputRoot = join(packageRoot, "dist");
 const privateRoot = join(packageRoot, ".calibration");
 const manifestPath = join(privateRoot, "manifest.json");
@@ -146,27 +145,31 @@ function manifestEndpoint(endpoint: FixtureEndpoint): FixtureManifestEndpoint {
   };
 }
 
-validateRouteRegistry();
-await rm(outputRoot, { recursive: true, force: true });
-await rm(privateRoot, { recursive: true, force: true });
-await Promise.all([
-  mkdir(outputRoot, { recursive: true }),
-  mkdir(privateRoot, { recursive: true }),
-]);
+async function main(): Promise<void> {
+  validateRouteRegistry();
+  await rm(outputRoot, { recursive: true, force: true });
+  await rm(privateRoot, { recursive: true, force: true });
+  await Promise.all([
+    mkdir(outputRoot, { recursive: true }),
+    mkdir(privateRoot, { recursive: true }),
+  ]);
 
-const manifestEntries: FixtureManifestEntry[] = [];
-for (const route of routes) manifestEntries.push(await buildRoute(route));
-for (const asset of assets) await buildAsset(asset);
+  const manifestEntries: FixtureManifestEntry[] = [];
+  for (const route of routes) manifestEntries.push(await buildRoute(route));
+  for (const asset of assets) await buildAsset(asset);
 
-const manifest: FixtureManifest = {
-  endpoints: endpoints.map(manifestEndpoint),
-  generatedAt: new Date().toISOString(),
-  scenario: calibrationScenario,
-  routes: manifestEntries,
-};
-await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+  const manifest: FixtureManifest = {
+    endpoints: endpoints.map(manifestEndpoint),
+    generatedAt: new Date().toISOString(),
+    scenario: calibrationScenario,
+    routes: manifestEntries,
+  };
+  await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
 
-console.log(
-  `Built ${routes.length} routes, ${endpoints.length} endpoints, and ${assets.length} assets at ${relative(process.cwd(), outputRoot)}`,
-);
-console.log(`Private fixture manifest: ${relative(process.cwd(), manifestPath)}`);
+  console.log(
+    `Built ${routes.length} routes, ${endpoints.length} endpoints, and ${assets.length} assets at ${relative(process.cwd(), outputRoot)}`,
+  );
+  console.log(`Private fixture manifest: ${relative(process.cwd(), manifestPath)}`);
+}
+
+void main();

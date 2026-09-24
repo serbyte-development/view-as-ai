@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsx src/build.tsx",
+    "build": "node scripts/build.mjs",
     "capture:compare": "cd ../.. && uv run python packages/calibration-site/scripts/calibration-capture.py compare",
     "capture:finalize": "cd ../.. && uv run python packages/calibration-site/scripts/calibration-capture.py finalize",
     "check": "tsx scripts/check-build-plan.ts && tsx scripts/check-calibration-results.ts && tsx scripts/check-site-context.ts && tsx scripts/check-server-fixtures.ts && npm run check:fixtures && biome check . && tsc --noEmit",
