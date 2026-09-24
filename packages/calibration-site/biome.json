@@ -28,6 +28,7 @@
         "rules": {
           "a11y": {
             "noInteractiveElementToNoninteractiveRole": "off",
+            "noPositiveTabindex": "off",
             "noRedundantAlt": "off",
             "noRedundantRoles": "off",
             "noSvgWithoutTitle": "off",

@@ -112,11 +112,15 @@ async function buildRoute(route: FixtureRoute): Promise<FixtureManifestEntry> {
   };
 }
 
-async function buildAsset(path: string, source: string): Promise<void> {
-  const target = assetOutputPath(path);
-  const sourcePath = join(packageRoot, source);
+async function buildAsset(asset: (typeof assets)[number]): Promise<void> {
+  const target = assetOutputPath(asset.path);
   await mkdir(dirname(target), { recursive: true });
-  await copyFile(sourcePath, target);
+  if (asset.content !== undefined) {
+    await writeFile(target, asset.content);
+    return;
+  }
+  if (!asset.source) throw new Error(`asset must provide source or content: ${asset.path}`);
+  await copyFile(join(packageRoot, asset.source), target);
 }
 
 validateRouteRegistry();
@@ -129,7 +133,7 @@ await Promise.all([
 
 const manifestEntries: FixtureManifestEntry[] = [];
 for (const route of routes) manifestEntries.push(await buildRoute(route));
-for (const asset of assets) await buildAsset(asset.path, asset.source);
+for (const asset of assets) await buildAsset(asset);
 
 const manifest: FixtureManifest = {
   generatedAt: new Date().toISOString(),

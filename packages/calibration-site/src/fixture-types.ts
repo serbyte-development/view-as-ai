@@ -31,8 +31,9 @@ export interface RawFixtureRoute extends BaseFixtureRoute {
 export type FixtureRoute = TsxFixtureRoute | RawFixtureRoute;
 
 export interface StaticAsset {
+  content?: string | Uint8Array;
   path: string;
-  source: string;
+  source?: string;
 }
 
 export interface FixtureManifestEntry {

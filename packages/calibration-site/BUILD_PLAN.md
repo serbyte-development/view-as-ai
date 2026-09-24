@@ -400,17 +400,17 @@ Route pattern: `/experiments/active/<test-id>/`
 
 Coverage: `ACTIVE-001..ACTIVE-017`
 
-- [ ] Build inline-script and external-script source-only controls.
-- [ ] Build immediate, DOMContentLoaded, zero-delay, and one-second insertion routes.
-- [ ] Build modification and removal routes.
-- [ ] Build display/visibility mutation routes.
-- [ ] Build `document.write` route.
-- [ ] Add stable same-origin JSON resource for fetch-and-insert case.
-- [ ] Build light-DOM custom element.
-- [ ] Build imperative shadow-DOM custom element.
-- [ ] Build declarative-shadow-DOM route.
-- [ ] Build SPA shell route with empty initial body target and client-only content.
-- [ ] Build paired noscript/client-rendered route.
+- [x] Build inline-script and external-script source-only controls.
+- [x] Build immediate, DOMContentLoaded, zero-delay, and one-second insertion routes.
+- [x] Build modification and removal routes.
+- [x] Build display/visibility mutation routes.
+- [x] Build `document.write` route.
+- [x] Add stable same-origin JSON resource for fetch-and-insert case.
+- [x] Build light-DOM custom element.
+- [x] Build imperative shadow-DOM custom element.
+- [x] Build declarative-shadow-DOM route.
+- [x] Build SPA shell route with empty initial body target and client-only content.
+- [x] Build paired noscript/client-rendered route.
 
 ## DOM order versus visual/accessibility order
 
@@ -418,9 +418,9 @@ Route pattern: `/experiments/order/<test-id>/`
 
 Coverage: `ORDER-001..ORDER-009`
 
-- [ ] Build one isolated route per ORDER case.
-- [ ] Keep DOM source order identical across comparable pairs.
-- [ ] Apply only the intended flex/grid/absolute/RTL/tabindex/ARIA/fixed-position change.
+- [x] Build one isolated route per ORDER case.
+- [x] Keep DOM source order identical across comparable pairs.
+- [x] Apply only the intended flex/grid/absolute/RTL/tabindex/ARIA/fixed-position change.
 
 ## Within-page duplication
 
@@ -428,10 +428,10 @@ Route pattern: `/experiments/duplicate/<test-id>/`
 
 Coverage: `DUP-001..DUP-011`
 
-- [ ] Build one isolated route per DUP case.
-- [ ] Generate exact duplicates from one canonical string to avoid accidental textual drift.
-- [ ] Build framework clone-class cases exactly.
-- [ ] Keep header/main and footer/main repeated-text comparisons otherwise structurally equivalent.
+- [x] Build one isolated route per DUP case.
+- [x] Generate exact duplicates from one canonical string to avoid accidental textual drift.
+- [x] Build framework clone-class cases exactly.
+- [x] Keep header/main and footer/main repeated-text comparisons otherwise structurally equivalent.
 
 ---
 
