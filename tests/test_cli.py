@@ -68,6 +68,33 @@ def test_url_fetches_origin_html_by_default(mock_http, capsys):
     assert result["urls"] == {"0": "https://launch.test/next"}
 
 
+def test_schemeless_domain_defaults_to_https(mock_http, capsys):
+    def handler(request):
+        assert request.url == "https://launch.test/path"
+        return httpx.Response(
+            200,
+            headers={"content-type": "text/html; charset=utf-8"},
+            text="<h1>Origin</h1>",
+            request=request,
+        )
+
+    mock_http(handler)
+    assert cli.main(["launch.test/path", "--format", "text"]) == 0
+    assert capsys.readouterr().out == "# Origin\n"
+
+
+def test_existing_dotted_path_remains_local(tmp_path, capsys):
+    source = tmp_path / "example.com"
+    source.write_text("<h1>Local</h1>", encoding="utf-8")
+    assert cli.main([str(source), "--format", "text"]) == 0
+    assert capsys.readouterr().out == "# Local\n"
+
+
+def test_missing_html_filename_remains_local(capsys):
+    assert cli.main(["missing.html"]) == 1
+    assert "No such file or directory" in capsys.readouterr().err
+
+
 def test_redirect_and_http_charset(mock_http, capsys):
     def handler(request):
         if request.url.path == "/start":
@@ -130,6 +157,12 @@ def test_base_url_validation(value):
     assert exc.value.code == 2
 
 
+def test_base_url_rejects_schemeless_remote():
+    with pytest.raises(SystemExit) as exc:
+        cli.main(["launch.test", "--base-url", "https://base.test/"])
+    assert exc.value.code == 2
+
+
 def test_invalid_remote_port_is_clear_error(capsys):
     assert cli.main(["https://launch.test:invalid/"]) == 1
     assert "Invalid URL" in capsys.readouterr().err
@@ -150,4 +183,4 @@ def test_version(capsys):
     with pytest.raises(SystemExit) as exc:
         cli.main(["--version"])
     assert exc.value.code == 0
-    assert capsys.readouterr().out.strip() == "view-as-ai 1.0.1"
+    assert capsys.readouterr().out.strip() == "view-as-ai 1.0.2"

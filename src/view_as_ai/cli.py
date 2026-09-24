@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import ipaddress
 import json
 import math
 import sys
@@ -21,6 +22,7 @@ DEFAULT_USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
 )
+LOCAL_HTML_SUFFIXES = frozenset({".htm", ".html", ".xhtml"})
 
 
 def _configure_stdio() -> None:
@@ -39,6 +41,42 @@ def _validate_http_url(value: str) -> None:
         raise ValueError(f"Invalid URL: {exc}") from exc
     if parsed.scheme not in ("http", "https") or not parsed.hostname:
         raise ValueError("URL must use http:// or https:// and include a hostname")
+
+
+def _remote_url(source: str) -> str | None:
+    """Resolve URL-like CLI input while giving explicit/existing local paths priority."""
+    if source.startswith(("http://", "https://")):
+        return source
+    if (
+        source == "-"
+        or Path(source).exists()
+        or source.startswith(("/", "./", "../", "~"))
+        or "\\" in source
+        or ("/" not in source and Path(source).suffix.lower() in LOCAL_HTML_SUFFIXES)
+    ):
+        return None
+
+    try:
+        parsed = urlsplit(f"//{source}")
+        hostname = parsed.hostname
+        _ = parsed.port
+    except ValueError:
+        return None
+    if not hostname:
+        return None
+
+    if hostname == "localhost":
+        scheme = "http"
+    else:
+        try:
+            address = ipaddress.ip_address(hostname)
+        except ValueError:
+            if "." not in hostname:
+                return None
+            scheme = "https"
+        else:
+            scheme = "http" if address.is_loopback or address.is_private else "https"
+    return f"{scheme}://{source}"
 
 
 def _fetch_url(url: str, timeout: float) -> tuple[str, str]:
@@ -62,7 +100,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Preview the information a browsing model is likely to receive from HTML."
     )
-    parser.add_argument("source", help="HTTP(S) URL, local HTML file, or - for stdin")
+    parser.add_argument("source", help="URL, local HTML file, or - for stdin")
     parser.add_argument("--base-url", help="Resolve relative links against this URL for local HTML")
     parser.add_argument("--format", choices=("view", "text", "json"), default="view")
     parser.add_argument("-o", "--output", type=Path, help="Write the preview to a file")
@@ -71,6 +109,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--version", action="version", version=f"view-as-ai {__version__}")
     args = parser.parse_args(argv)
+    remote_url = _remote_url(args.source)
 
     if not math.isfinite(args.timeout) or args.timeout <= 0:
         parser.error("--timeout must be a finite positive number")
@@ -80,12 +119,12 @@ def main(argv: list[str] | None = None) -> int:
             _validate_http_url(args.base_url)
         except ValueError:
             parser.error("--base-url must be an HTTP(S) URL with a hostname")
-        if args.source.startswith(("http://", "https://")):
+        if remote_url is not None:
             parser.error("--base-url applies only to local HTML files and stdin")
 
     try:
-        if args.source.startswith(("http://", "https://")):
-            html, url = _fetch_url(args.source, args.timeout)
+        if remote_url is not None:
+            html, url = _fetch_url(remote_url, args.timeout)
         else:
             html = sys.stdin.read() if args.source == "-" else Path(args.source).read_text("utf-8")
             url = args.base_url or "http://localhost/"

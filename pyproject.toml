@@ -1,6 +1,6 @@
 [project]
 name = "view-as-ai"
-version = "1.0.1"
+version = "1.0.2"
 description = "Preview website content as AI web browsers and LLM agents see it, calibrated against ChatGPT web browsing"
 readme = "README.md"
 requires-python = ">=3.11"

@@ -52,13 +52,13 @@ For the observed pipeline, calibration evidence, known element behavior, and the
 **macOS / Linux**
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main/run.sh | sh -s -- https://example.com
+curl -fsSL https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main/run.sh | sh -s -- example.com
 ```
 
 **Windows PowerShell**
 
 ```powershell
-& ([scriptblock]::Create((irm 'https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main/run.ps1'))) 'https://example.com'
+& ([scriptblock]::Create((irm 'https://raw.githubusercontent.com/Serbyte-Development/view-as-ai/main/run.ps1'))) 'example.com'
 ```
 
 The launcher detects your operating system and CPU architecture, downloads the matching standalone executable from the latest GitHub Release, verifies its SHA-256 checksum, runs it, and removes the temporary copy.
@@ -66,7 +66,7 @@ The launcher detects your operating system and CPU architecture, downloads the m
 ## CLI
 
 ```sh
-view-as-ai https://example.com
+view-as-ai example.com
 ```
 
 Common options: `--format text`, `--format json`, `-o preview.txt`, or pass a local HTML file with `--base-url`. Run `view-as-ai --help` for the complete interface.
