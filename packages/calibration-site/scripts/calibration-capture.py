@@ -87,6 +87,7 @@ def import_batch(
         raise SystemExit("batch label must use capture-ID-safe characters")
 
     source = batch_file.read_text("utf-8")
+    source = re.sub(r'^id="[0-9]+"\n', "", source, count=1)
     matches = list(BATCH_CAPTURE_RE.finditer(source))
     if not matches:
         raise SystemExit(f"no native URL capture blocks found in {batch_file}")
