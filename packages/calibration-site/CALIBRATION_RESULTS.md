@@ -69,11 +69,11 @@ all persisted successfully.
 - Isolated visibility: `VIS-031..VIS-038` under matching
   `captures/2026-09-24-visibility-*-b815108-turn-1/` directories.
 - Original returned batch source: `capture/turn-1.md`.
-- Native evidence now exists for 333 of 531 calibration IDs: 106 `verified`, 55 `mismatch`,
-  and 172 `captured`. 187 default-deployment IDs remain
+- Native evidence now exists for 353 of 531 calibration IDs: 126 `verified`, 55 `mismatch`,
+  and 172 `captured`. 167 default-deployment IDs remain
   `deployed` without native evidence, and the 11 `SITE-*` IDs remain `planned`.
 
-Continue with the remaining default-deployment capture units, beginning at `HEAD-005`.
+Continue with the remaining default-deployment capture units, beginning at `JSONLD-008`.
 
 ## TEXT
 
@@ -448,31 +448,31 @@ Continue with the remaining default-deployment capture units, beginning at `HEAD
 | HEAD-002 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-002/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-002-b815108-turn-12/ | 2026-09-24 @ b815108 | Title is absent in both native web and View as AI output. |
 | HEAD-003 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-003/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-003-b815108-turn-12/ | 2026-09-24 @ b815108 | Meta-description sentinel is omitted by both native web and View as AI. |
 | HEAD-004 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-004/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-004-b815108-turn-12/ | 2026-09-24 @ b815108 | Meta-keywords sentinel is omitted by both native web and View as AI. |
-| HEAD-005 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-005/ | — | — | — | — | — | — |
-| HEAD-006 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-006/ | — | — | — | — | — | — |
-| HEAD-007 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-007/ | — | — | — | — | — | — |
-| HEAD-008 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-008/ | — | — | — | — | — | — |
-| HEAD-009 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-009/ | — | — | — | — | — | — |
-| HEAD-010 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-010/ | — | — | — | — | — | — |
-| HEAD-011 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-011/ | — | — | — | — | — | — |
-| HEAD-012 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-012/ | — | — | — | — | — | — |
-| HEAD-013 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-013/ | — | — | — | — | — | — |
-| HEAD-014 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-014/ | — | — | — | — | — | — |
-| HEAD-015 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-015/ | — | — | — | — | — | — |
-| HEAD-016 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-016/ | — | — | — | — | — | — |
-| HEAD-017 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-017/ | — | — | — | — | — | — |
+| HEAD-005 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-005/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-005-b815108-turn-13/ | 2026-09-24 @ b815108 | Meta-author sentinel is omitted by both native web and View as AI. |
+| HEAD-006 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-006/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-006-b815108-turn-13/ | 2026-09-24 @ b815108 | Canonical-link sentinel is omitted by both native web and View as AI. |
+| HEAD-007 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-007/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-007-b815108-turn-13/ | 2026-09-24 @ b815108 | Robots index/follow metadata is not surfaced by either output. |
+| HEAD-008 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-008/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-008-b815108-turn-13/ | 2026-09-24 @ b815108 | Robots noindex metadata is not surfaced by either direct-open output. |
+| HEAD-009 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-009/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-009-b815108-turn-13/ | 2026-09-24 @ b815108 | Robots nofollow metadata is not surfaced by either direct-open output. |
+| HEAD-010 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-010/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-010-b815108-turn-13/ | 2026-09-24 @ b815108 | Open Graph sentinel is omitted by both native web and View as AI. |
+| HEAD-011 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-011/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-011-b815108-turn-13/ | 2026-09-24 @ b815108 | Twitter-card sentinel is omitted by both native web and View as AI. |
+| HEAD-012 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-012/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-012-b815108-turn-13/ | 2026-09-24 @ b815108 | JSON-LD smoke-test sentinel is omitted by both native web and View as AI. |
+| HEAD-013 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-013/ | present | present | yes | captures/2026-09-24-experiments-head-head-013-b815108-turn-13/ | 2026-09-24 @ b815108 | Microdata body sentinel is exposed by both native web and View as AI. |
+| HEAD-014 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-014/ | present | present | yes | captures/2026-09-24-experiments-head-head-014-b815108-turn-13/ | 2026-09-24 @ b815108 | RDFa body sentinel is exposed by both native web and View as AI. |
+| HEAD-015 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-015/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-015-b815108-turn-14/ | 2026-09-24 @ b815108 | Alternate-language link sentinel is omitted by both native web and View as AI. |
+| HEAD-016 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-016/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-016-b815108-turn-14/ | 2026-09-24 @ b815108 | Icon metadata sentinel is omitted by both native web and View as AI. |
+| HEAD-017 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-017/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-017-b815108-turn-14/ | 2026-09-24 @ b815108 | Meta-refresh sentinel is omitted and the direct-open page remains the same in both outputs. |
 
 ## JSONLD
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| JSONLD-001 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-001/ | — | — | — | — | — | — |
-| JSONLD-002 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-002/ | — | — | — | — | — | — |
-| JSONLD-003 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-003/ | — | — | — | — | — | — |
-| JSONLD-004 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-004/ | — | — | — | — | — | — |
-| JSONLD-005 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-005/ | — | — | — | — | — | — |
-| JSONLD-006 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-006/ | — | — | — | — | — | — |
-| JSONLD-007 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-007/ | — | — | — | — | — | — |
+| JSONLD-001 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-001/ | present | present | yes | captures/2026-09-24-experiments-jsonld-jsonld-001-b815108-turn-14/ | 2026-09-24 @ b815108 | Visible body control is exposed by both native web and View as AI. |
+| JSONLD-002 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-002/ | absent | absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-002-b815108-turn-14/ | 2026-09-24 @ b815108 | JSON-LD-only sentinel is omitted by both native web and View as AI. |
+| JSONLD-003 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-003/ | absent | absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-003-b815108-turn-14/ | 2026-09-24 @ b815108 | application/json script sentinel is omitted by both native web and View as AI. |
+| JSONLD-004 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-004/ | absent | absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-004-b815108-turn-14/ | 2026-09-24 @ b815108 | Executable-script string sentinel is omitted by both native web and View as AI. |
+| JSONLD-005 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-005/ | absent | absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-005-b815108-turn-14/ | 2026-09-24 @ b815108 | Head JSON-LD sentinel is omitted by both native web and View as AI. |
+| JSONLD-006 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-006/ | absent | absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-006-b815108-turn-14/ | 2026-09-24 @ b815108 | Body JSON-LD sentinel is omitted by both native web and View as AI. |
+| JSONLD-007 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-007/ | absent | absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-007-b815108-turn-14/ | 2026-09-24 @ b815108 | Both JSON-LD block sentinels are omitted by native web and View as AI. |
 | JSONLD-008 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-008/ | — | — | — | — | — | — |
 | JSONLD-009 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-009/ | — | — | — | — | — | — |
 | JSONLD-010 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-010/ | — | — | — | — | — | — |
