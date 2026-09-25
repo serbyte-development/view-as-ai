@@ -69,11 +69,11 @@ all persisted successfully.
 - Isolated visibility: `VIS-031..VIS-038` under matching
   `captures/2026-09-24-visibility-*-b815108-turn-1/` directories.
 - Original returned batch source: `capture/turn-1.md`.
-- Native evidence now exists for 254 of 531 calibration IDs: 38 `verified`, 44 clear `mismatch`,
-  and 172 `captured` pending case-specific interpretation. 266 default-deployment IDs remain
+- Native evidence now exists for 264 of 531 calibration IDs: 48 `verified`, 44 clear `mismatch`,
+  and 172 `captured` pending case-specific interpretation. 256 default-deployment IDs remain
   `deployed` without native evidence, and the 11 `SITE-*` IDs remain `planned`.
 
-Continue with the remaining default-deployment capture units, beginning at `VIS-069`.
+Continue with the remaining default-deployment capture units, beginning at `VIS-079`.
 
 ## TEXT
 
@@ -185,16 +185,16 @@ Continue with the remaining default-deployment capture units, beginning at `VIS-
 | VIS-066 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-066/ | present | present | yes | captures/2026-09-24-visibility-vis-066-b815108-turn-4/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
 | VIS-067 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-067/ | present | present | yes | captures/2026-09-24-visibility-vis-067-b815108-turn-4/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
 | VIS-068 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-068/ | present | present | yes | captures/2026-09-24-visibility-vis-068-b815108-turn-4/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
-| VIS-069 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-069/ | — | — | — | — | — | — |
-| VIS-070 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-070/ | — | — | — | — | — | — |
-| VIS-071 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-071/ | — | — | — | — | — | — |
-| VIS-072 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-072/ | — | — | — | — | — | — |
-| VIS-073 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-073/ | — | — | — | — | — | — |
-| VIS-074 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-074/ | — | — | — | — | — | — |
-| VIS-075 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-075/ | — | — | — | — | — | — |
-| VIS-076 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-076/ | — | — | — | — | — | — |
-| VIS-077 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-077/ | — | — | — | — | — | — |
-| VIS-078 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-078/ | — | — | — | — | — | — |
+| VIS-069 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-069/ | present | present | yes | captures/2026-09-24-visibility-vis-069-b815108-turn-5/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-070 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-070/ | present | present | yes | captures/2026-09-24-visibility-vis-070-b815108-turn-5/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-071 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-071/ | present | present | yes | captures/2026-09-24-visibility-vis-071-b815108-turn-5/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-072 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-072/ | present | present | yes | captures/2026-09-24-visibility-vis-072-b815108-turn-5/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-073 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-073/ | present | present | yes | captures/2026-09-24-visibility-vis-073-b815108-turn-5/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-074 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-074/ | present | present | yes | captures/2026-09-24-visibility-vis-074-b815108-turn-5/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-075 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-075/ | present | present | yes | captures/2026-09-24-visibility-vis-075-b815108-turn-5/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-076 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-076/ | present | present | yes | captures/2026-09-24-visibility-vis-076-b815108-turn-5/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-077 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-077/ | present | present | yes | captures/2026-09-24-visibility-vis-077-b815108-turn-5/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
+| VIS-078 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-078/ | present | present | yes | captures/2026-09-24-visibility-vis-078-b815108-turn-5/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
 | VIS-079 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-079/ | — | — | — | — | — | — |
 | VIS-080 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-080/ | — | — | — | — | — | — |
 | VIS-081 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-081/ | — | — | — | — | — | — |
