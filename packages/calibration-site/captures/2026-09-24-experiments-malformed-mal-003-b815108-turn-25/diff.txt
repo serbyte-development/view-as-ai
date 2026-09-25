@@ -1,0 +1,11 @@
+--- native web.run
++++ view-as-ai
+@@ -1,5 +1,3 @@
+-view-as-ai.vercel.app (https://view-as-ai.vercel.app/experiments/malformed/MAL-003/)
+-citeturn330052view4 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://view-as-ai.vercel.app/experiments/malformed/MAL-003/","lineno":null}); Total lines: 3
+-L0: VAI_SENTINEL_MAL_003_PRIMARY_8D9E8658 paragraph
+-L1: 
+-L2: invalid block inside paragraph tail
++VAI_SENTINEL_MAL_003_PRIMARY_8D9E8658 paragraph
++
++invalid block inside paragraph tail

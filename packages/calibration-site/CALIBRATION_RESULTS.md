@@ -146,7 +146,7 @@ Continue with the remaining default-deployment capture units, beginning at `ACTI
 | VIS-027 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
 | VIS-028 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
 | VIS-029 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
-| VIS-030 | deployed | https://view-as-ai.vercel.app/experiments/visibility/VIS-030/ | — | — | — | — | — | — |
+| VIS-030 | mismatch | https://view-as-ai.vercel.app/experiments/visibility/VIS-030/ | absent | present | no | captures/2026-09-24-visibility-vis-030-b815108-turn-26/ | 2026-09-24 @ b815108 | Native web omits the element hidden by the real CSS rule; View as AI retains it. |
 | VIS-031 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-031/ | present | present | yes | captures/2026-09-24-visibility-vis-031-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
 | VIS-032 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-032/ | present | present | yes | captures/2026-09-24-visibility-vis-032-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
 | VIS-033 | verified | https://view-as-ai.vercel.app/experiments/visibility/VIS-033/ | present | present | yes | captures/2026-09-24-visibility-vis-033-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel is exposed by both native web and View as AI. |
@@ -378,9 +378,9 @@ Continue with the remaining default-deployment capture units, beginning at `ACTI
 | LINK-028 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
 | LINK-029 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
 | LINK-030 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
-| LINK-031 | deployed | https://view-as-ai.vercel.app/experiments/link/LINK-031/ | — | — | — | — | — | — |
-| LINK-032 | deployed | https://view-as-ai.vercel.app/experiments/link/LINK-032/ | — | — | — | — | — | — |
-| LINK-033 | deployed | https://view-as-ai.vercel.app/experiments/link/LINK-033/ | — | — | — | — | — | — |
+| LINK-031 | follow-up | https://view-as-ai.vercel.app/experiments/link/LINK-031/ | link present | link present | partial | captures/2026-09-24-experiments-link-link-031-b815108-turn-26/ | 2026-09-24 @ b815108 | Both expose the link label; native click-resolution evidence is still required to verify valid base-href resolution. |
+| LINK-032 | follow-up | https://view-as-ai.vercel.app/experiments/link/LINK-032/ | link present | link present | partial | captures/2026-09-24-experiments-link-link-032-b815108-turn-26/ | 2026-09-24 @ b815108 | Both expose the link label; native click-resolution evidence is still required to verify invalid-base handling. |
+| LINK-033 | follow-up | https://view-as-ai.vercel.app/experiments/link/LINK-033/ | link present | external link present | partial | captures/2026-09-24-experiments-link-link-033-b815108-turn-26/ | 2026-09-24 @ b815108 | View as AI resolves the external base to example.com; native click-resolution evidence is still required. |
 
 ## IMG
 
@@ -588,15 +588,15 @@ Continue with the remaining default-deployment capture units, beginning at `ACTI
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | DUP-001 | verified | https://view-as-ai.vercel.app/experiments/duplicate/DUP-001/ | 2 copies | 2 copies | yes | captures/2026-09-24-experiments-duplicate-dup-001-b815108-turn-24/ | 2026-09-24 @ b815108 | Both outputs preserve two exact duplicate occurrences. |
 | DUP-002 | verified | https://view-as-ai.vercel.app/experiments/duplicate/DUP-002/ | 10 copies | 10 copies | yes | captures/2026-09-24-experiments-duplicate-dup-002-b815108-turn-24/ | 2026-09-24 @ b815108 | Both outputs preserve ten exact duplicate occurrences. |
-| DUP-003 | deployed | https://view-as-ai.vercel.app/experiments/duplicate/DUP-003/ | — | — | — | — | — | — |
-| DUP-004 | deployed | https://view-as-ai.vercel.app/experiments/duplicate/DUP-004/ | — | — | — | — | — | — |
-| DUP-005 | deployed | https://view-as-ai.vercel.app/experiments/duplicate/DUP-005/ | — | — | — | — | — | — |
-| DUP-006 | deployed | https://view-as-ai.vercel.app/experiments/duplicate/DUP-006/ | — | — | — | — | — | — |
-| DUP-007 | deployed | https://view-as-ai.vercel.app/experiments/duplicate/DUP-007/ | — | — | — | — | — | — |
-| DUP-008 | deployed | https://view-as-ai.vercel.app/experiments/duplicate/DUP-008/ | — | — | — | — | — | — |
-| DUP-009 | deployed | https://view-as-ai.vercel.app/experiments/duplicate/DUP-009/ | — | — | — | — | — | — |
-| DUP-010 | deployed | https://view-as-ai.vercel.app/experiments/duplicate/DUP-010/ | — | — | — | — | — | — |
-| DUP-011 | deployed | https://view-as-ai.vercel.app/experiments/duplicate/DUP-011/ | — | — | — | — | — | — |
+| DUP-003 | verified | https://view-as-ai.vercel.app/experiments/duplicate/DUP-003/ | 2 copies | 2 copies | yes | captures/2026-09-24-experiments-duplicate-dup-003-b815108-turn-26/ | 2026-09-24 @ b815108 | Both outputs preserve both identical linked blocks. |
+| DUP-004 | verified | https://view-as-ai.vercel.app/experiments/duplicate/DUP-004/ | 2 copies | 2 copies | yes | captures/2026-09-24-experiments-duplicate-dup-004-b815108-turn-26/ | 2026-09-24 @ b815108 | Both outputs preserve both identical navigation blocks. |
+| DUP-005 | verified | https://view-as-ai.vercel.app/experiments/duplicate/DUP-005/ | 2 copies | 2 copies | yes | captures/2026-09-24-experiments-duplicate-dup-005-b815108-turn-26/ | 2026-09-24 @ b815108 | Both outputs preserve the visible carousel item and exact clone. |
+| DUP-006 | mismatch | https://view-as-ai.vercel.app/experiments/duplicate/DUP-006/ | 2 copies | 1 copy | no | captures/2026-09-24-experiments-duplicate-dup-006-b815108-turn-26/ | 2026-09-24 @ b815108 | Native web preserves both copies; View as AI removes the slick-cloned duplicate. |
+| DUP-007 | mismatch | https://view-as-ai.vercel.app/experiments/duplicate/DUP-007/ | 2 copies | 1 copy | no | captures/2026-09-24-experiments-duplicate-dup-007-b815108-turn-26/ | 2026-09-24 @ b815108 | Native web preserves both copies; View as AI removes the swiper-slide-duplicate clone. |
+| DUP-008 | verified | https://view-as-ai.vercel.app/experiments/duplicate/DUP-008/ | 2 variants | 2 variants | yes | captures/2026-09-24-experiments-duplicate-dup-008-b815108-turn-26/ | 2026-09-24 @ b815108 | Both outputs preserve the two near-duplicate blocks. |
+| DUP-009 | verified | https://view-as-ai.vercel.app/experiments/duplicate/DUP-009/ | unique child present once | unique child present once | yes | captures/2026-09-24-experiments-duplicate-dup-009-b815108-turn-25/ | 2026-09-24 @ b815108 | Both outputs retain the unique child inside repeated wrappers. |
+| DUP-010 | verified | https://view-as-ai.vercel.app/experiments/duplicate/DUP-010/ | 2 copies | 2 copies | yes | captures/2026-09-24-experiments-duplicate-dup-010-b815108-turn-25/ | 2026-09-24 @ b815108 | Both outputs retain repeated text in header and main. |
+| DUP-011 | verified | https://view-as-ai.vercel.app/experiments/duplicate/DUP-011/ | 2 copies | 2 copies | yes | captures/2026-09-24-experiments-duplicate-dup-011-b815108-turn-25/ | 2026-09-24 @ b815108 | Both outputs retain repeated text in footer and main. |
 
 ## I18N
 
@@ -620,13 +620,13 @@ Continue with the remaining default-deployment capture units, beginning at `ACTI
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| MAL-001 | deployed | https://view-as-ai.vercel.app/experiments/malformed/MAL-001/ | — | — | — | — | — | — |
-| MAL-002 | deployed | https://view-as-ai.vercel.app/experiments/malformed/MAL-002/ | — | — | — | — | — | — |
-| MAL-003 | deployed | https://view-as-ai.vercel.app/experiments/malformed/MAL-003/ | — | — | — | — | — | — |
-| MAL-004 | deployed | https://view-as-ai.vercel.app/experiments/malformed/MAL-004/ | — | — | — | — | — | — |
-| MAL-005 | deployed | https://view-as-ai.vercel.app/experiments/malformed/MAL-005/ | — | — | — | — | — | — |
-| MAL-006 | deployed | https://view-as-ai.vercel.app/experiments/malformed/MAL-006/ | — | — | — | — | — | — |
-| MAL-007 | deployed | https://view-as-ai.vercel.app/experiments/malformed/MAL-007/ | — | — | — | — | — | — |
+| MAL-001 | verified | https://view-as-ai.vercel.app/experiments/malformed/MAL-001/ | treatment text present | treatment text present | yes | captures/2026-09-24-experiments-malformed-mal-001-b815108-turn-25/ | 2026-09-24 @ b815108 | Unclosed paragraph recovers to readable treatment text in both outputs. |
+| MAL-002 | verified | https://view-as-ai.vercel.app/experiments/malformed/MAL-002/ | treatment text present | treatment text present | yes | captures/2026-09-24-experiments-malformed-mal-002-b815108-turn-25/ | 2026-09-24 @ b815108 | Unclosed anchor treatment survives parser recovery in both outputs. |
+| MAL-003 | verified | https://view-as-ai.vercel.app/experiments/malformed/MAL-003/ | treatment text present | treatment text present | yes | captures/2026-09-24-experiments-malformed-mal-003-b815108-turn-25/ | 2026-09-24 @ b815108 | Invalid nesting recovers with the treatment text in both outputs. |
+| MAL-004 | verified | https://view-as-ai.vercel.app/experiments/malformed/MAL-004/ | treatment text present | treatment text present | yes | captures/2026-09-24-experiments-malformed-mal-004-b815108-turn-25/ | 2026-09-24 @ b815108 | Duplicate IDs do not remove the treatment text in either output. |
+| MAL-005 | verified | https://view-as-ai.vercel.app/experiments/malformed/MAL-005/ | treatment text present | treatment text present | yes | captures/2026-09-24-experiments-malformed-mal-005-b815108-turn-25/ | 2026-09-24 @ b815108 | Duplicate attributes still yield the same treatment text in both outputs. |
+| MAL-006 | verified | https://view-as-ai.vercel.app/experiments/malformed/MAL-006/ | treatment text present | treatment text present | yes | captures/2026-09-24-experiments-malformed-mal-006-b815108-turn-25/ | 2026-09-24 @ b815108 | Invalid URL attribute does not remove the link text in either output. |
+| MAL-007 | verified | https://view-as-ai.vercel.app/experiments/malformed/MAL-007/ | treatment text present | treatment text present | yes | captures/2026-09-24-experiments-malformed-mal-007-b815108-turn-25/ | 2026-09-24 @ b815108 | XML declaration before HTML does not change treatment-text extraction. |
 | MAL-008 | deployed | https://view-as-ai.vercel.app/experiments/malformed/MAL-008/ | — | — | — | — | — | — |
 | MAL-009 | deployed | https://view-as-ai.vercel.app/experiments/malformed/MAL-009/ | — | — | — | — | — | — |
 | MAL-010 | deployed | https://view-as-ai.vercel.app/experiments/malformed/MAL-010/ | — | — | — | — | — | — |

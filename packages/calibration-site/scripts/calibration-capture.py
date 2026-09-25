@@ -78,20 +78,7 @@ def capture_slug(url: str) -> str:
     return re.sub(r"[^a-z0-9._-]+", "-", slug).strip("-")
 
 
-def import_batch(
-    batch_file: Path,
-    *,
-    capture_date: str,
-    deployment_commit: str,
-    batch_label: str | None = None,
-) -> None:
-    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", capture_date):
-        raise SystemExit("capture date must use YYYY-MM-DD")
-    if not re.fullmatch(r"[0-9a-fA-F]{7,40}", deployment_commit):
-        raise SystemExit("deployment commit must be a 7–40 character Git SHA")
-    if batch_label and not CAPTURE_ID_RE.fullmatch(batch_label):
-        raise SystemExit("batch label must use capture-ID-safe characters")
-
+def read_batch_entries(batch_file: Path) -> list[tuple[str, str]]:
     source = batch_file.read_text("utf-8")
     source = re.sub(r'^id="[0-9]+"\n', "", source, count=1)
 
@@ -148,6 +135,25 @@ def import_batch(
                 )
         entries = [(match.group("url"), match.group("text")) for match in matches]
 
+    return entries
+
+
+def import_batch(
+    batch_file: Path,
+    *,
+    capture_date: str,
+    deployment_commit: str,
+    batch_label: str | None = None,
+) -> None:
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", capture_date):
+        raise SystemExit("capture date must use YYYY-MM-DD")
+    if not re.fullmatch(r"[0-9a-fA-F]{7,40}", deployment_commit):
+        raise SystemExit("deployment commit must be a 7–40 character Git SHA")
+    if batch_label and not CAPTURE_ID_RE.fullmatch(batch_label):
+        raise SystemExit("batch label must use capture-ID-safe characters")
+
+    entries = read_batch_entries(batch_file)
+
     seen_urls: set[str] = set()
     short_commit = deployment_commit[:7].lower()
     imported: list[tuple[str, str]] = []
@@ -171,6 +177,54 @@ def import_batch(
 
     for capture_id, url in imported:
         print(f"{capture_id}\t{url}")
+
+
+def finalize_batch(
+    batch_file: Path,
+    *,
+    capture_date: str,
+    deployment_commit: str,
+    batch_label: str,
+    fixture_scenario: str | None = None,
+) -> None:
+    entries = read_batch_entries(batch_file)
+    import_batch(
+        batch_file,
+        capture_date=capture_date,
+        deployment_commit=deployment_commit,
+        batch_label=batch_label,
+    )
+
+    manifest = fixture_manifest()
+    if manifest is None:
+        raise SystemExit("finalize-batch requires the private fixture manifest")
+    fixtures = [*manifest.get("routes", []), *manifest.get("endpoints", [])]
+    short_commit = deployment_commit[:7].lower()
+
+    for url, _ in entries:
+        parsed = urlsplit(url)
+        manifest_path = parsed.path
+        if parsed.query:
+            manifest_path += f"?{parsed.query}"
+
+        matches = [fixture for fixture in fixtures if fixture.get("path") == manifest_path]
+        if len(matches) != 1:
+            raise SystemExit(
+                f"expected exactly one fixture manifest entry for {manifest_path}; "
+                f"found {len(matches)}"
+            )
+        test_ids = list(matches[0].get("testIds", []))
+        if not test_ids:
+            raise SystemExit(f"fixture has no test IDs for batch finalization: {manifest_path}")
+
+        capture_id = f"{capture_date}-{capture_slug(url)}-{short_commit}-{batch_label}"
+        finalize(
+            capture_id,
+            url,
+            test_ids,
+            deployment_commit=deployment_commit,
+            fixture_scenario=fixture_scenario,
+        )
 
 
 def normalize_for_layout_comparison(text: str) -> str:
@@ -432,6 +486,13 @@ def main() -> None:
     import_parser.add_argument("--deployment-commit", required=True)
     import_parser.add_argument("--batch-label")
 
+    finalize_batch_parser = subparsers.add_parser("finalize-batch")
+    finalize_batch_parser.add_argument("batch_file", type=Path)
+    finalize_batch_parser.add_argument("--capture-date", required=True)
+    finalize_batch_parser.add_argument("--deployment-commit", required=True)
+    finalize_batch_parser.add_argument("--batch-label", required=True)
+    finalize_batch_parser.add_argument("--fixture-scenario")
+
     finalize_parser = subparsers.add_parser("finalize")
     finalize_parser.add_argument("capture_id")
     finalize_parser.add_argument("url")
@@ -455,6 +516,14 @@ def main() -> None:
             capture_date=args.capture_date,
             deployment_commit=args.deployment_commit,
             batch_label=args.batch_label,
+        )
+    elif args.command == "finalize-batch":
+        finalize_batch(
+            args.batch_file,
+            capture_date=args.capture_date,
+            deployment_commit=args.deployment_commit,
+            batch_label=args.batch_label,
+            fixture_scenario=args.fixture_scenario,
         )
     elif args.command == "finalize":
         finalize(

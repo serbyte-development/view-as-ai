@@ -1,0 +1,46 @@
+{
+  "capture_id": "2026-09-24-experiments-link-link-032-b815108-turn-26",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/link/LINK-032/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/link/LINK-032/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": null,
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "d363743167faaa354e2299dacc9bab984323893e26de9d413dcb7f5e48bd84aa",
+  "native_sha256": "a61047f409d9ebb89914e6ee6d7114384ee8f41e9d9952940adba1c952c8822c",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "1e1c1ea4a5d0ad9442df8e4b3f82bb555eaf38a7",
+  "test_ids": [
+    "LINK-032"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "948dc4713d216d5215f337860115fd248a3b556afd53139e10a2e31d1d249067",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "raw",
+      "path": "/experiments/link/LINK-032/",
+      "phase": 2,
+      "source": "src/fixtures/kitchen-sink.tsx",
+      "testIds": [
+        "LINK-032"
+      ],
+      "sentinels": {
+        "LINK-032": "VAI_SENTINEL_LINK_032_PRIMARY_6EB7B0EB"
+      },
+      "sentinelGroups": {}
+    }
+  ],
+  "finalized_at": "2026-09-25T01:53:22.090045+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T01:53:22.092642+00:00",
+    "native_sha256": "a61047f409d9ebb89914e6ee6d7114384ee8f41e9d9952940adba1c952c8822c",
+    "view_as_ai_sha256": "51a4639099def249d638b5100065cf40e7c5ffa87e0496e4ab25b080ee24e9e8"
+  }
+}

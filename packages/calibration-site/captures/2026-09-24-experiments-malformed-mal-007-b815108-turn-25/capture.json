@@ -1,0 +1,46 @@
+{
+  "capture_id": "2026-09-24-experiments-malformed-mal-007-b815108-turn-25",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/malformed/MAL-007/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/malformed/MAL-007/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": null,
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "131e7c012515758c2085899587f38a8a38744d054a315639f452a468dfbcbe64",
+  "native_sha256": "241b1ec7479be94629f39a55231dcec59479319c711aeba7382c266ab5eeb890",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "1e1c1ea4a5d0ad9442df8e4b3f82bb555eaf38a7",
+  "test_ids": [
+    "MAL-007"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "948dc4713d216d5215f337860115fd248a3b556afd53139e10a2e31d1d249067",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "raw",
+      "path": "/experiments/malformed/MAL-007/",
+      "phase": 7,
+      "source": "src/fixtures/malformed.ts",
+      "testIds": [
+        "MAL-007"
+      ],
+      "sentinels": {
+        "MAL-007": "VAI_SENTINEL_MAL_007_PRIMARY_D5C6B957"
+      },
+      "sentinelGroups": {}
+    }
+  ],
+  "finalized_at": "2026-09-25T01:53:20.823521+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T01:53:20.825647+00:00",
+    "native_sha256": "241b1ec7479be94629f39a55231dcec59479319c711aeba7382c266ab5eeb890",
+    "view_as_ai_sha256": "582993ae1a552b4546d38e50c091326dac35bb642fb7e0146b13e973277482d6"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "capture_id": "2026-09-24-experiments-duplicate-dup-009-b815108-turn-25",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/duplicate/DUP-009/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/duplicate/DUP-009/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": null,
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "25d0ec14c47351c29199579d85802e695c38d2603e2c9b52151ecf508a071f02",
+  "native_sha256": "079a471a71484e4ebe7aaa6b3e406f57053c76564f9eabded25881a16f0d0836",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "1e1c1ea4a5d0ad9442df8e4b3f82bb555eaf38a7",
+  "test_ids": [
+    "DUP-009"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "948dc4713d216d5215f337860115fd248a3b556afd53139e10a2e31d1d249067",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "tsx",
+      "path": "/experiments/duplicate/DUP-009/",
+      "phase": 6,
+      "source": "src/fixtures/duplicate.tsx",
+      "testIds": [
+        "DUP-009"
+      ],
+      "sentinels": {
+        "DUP-009": "VAI_SENTINEL_DUP_009_PRIMARY_361A09EE"
+      },
+      "sentinelGroups": {}
+    }
+  ],
+  "finalized_at": "2026-09-25T01:53:17.727559+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T01:53:17.734365+00:00",
+    "native_sha256": "079a471a71484e4ebe7aaa6b3e406f57053c76564f9eabded25881a16f0d0836",
+    "view_as_ai_sha256": "dd34bebaf53c5ad174a892eebddfabae93533ca2622717d433d8ecef609e0cda"
+  }
+}
