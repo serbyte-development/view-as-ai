@@ -59,7 +59,8 @@ Mode.
 2. Start or reuse a delegated capture subagent that has **never used a connector**. Tell it only to:
    - use native `web.run` from Code Mode;
    - open the exact requested public URLs;
-   - immediately pass each model-facing native result through `text()`;
+   - immediately UTF-8/base64 encode each complete model-facing native result in Code Mode, then
+     pass `text(JSON.stringify({ url, result_base64 }))`, where `url` is the exact requested URL;
    - preserve the exact URL/result association;
    - avoid summarizing or interpreting the result;
    - avoid every connector/MCP tool other than the native web capability.
@@ -69,21 +70,25 @@ Mode.
 3. Verify in the parent that the requested fixture URLs are public deployed URLs under
    `https://view-as-ai.vercel.app/`. Verify the intended production commit using deployment
    metadata. Keep the deployment stable while the batch is being captured.
-4. **Capture turn:** let the delegated subagent call native `web.run/open` for every URL and emit
-   every native result through `text()`. Native access failures may appear as `Internal Error` /
+4. **Capture turn:** let the delegated subagent call native `web.run/open` for every URL. In the
+   same Code Mode execution, encode the complete returned model-facing text as UTF-8 base64 and emit
+   `text(JSON.stringify({ url, result_base64 }))`. Base64 is the preferred relay because native
+   citation tokens can otherwise be interpreted or merged when the retained text is reproduced on
+   the next turn. Native access failures may appear as `Internal Error` /
    `URL ... is not accessible via this tool.`; retain those results too. An intentionally tested
    HTTP error remains an experiment outcome rather than a capture-system failure.
 5. **Return turn:** continue with the **same subagent** and make **no new tool calls**. Ask it to
-   reproduce the already-retained results in original order inside one quadruple-backtick fenced
-   block, with:
+   reproduce the already-retained `text()` outputs in original order inside one
+   quadruple-backtick fenced block, one JSON string per line:
 
    ```text
-   URL: <exact URL>
-   <retained native result>
+   {"url":"https://view-as-ai.vercel.app/...","result_base64":"<base64>"}
    ```
 
-   repeated for each capture. Do not start a fresh subagent between the capture and return turns;
-   turn history is what preserves the `text()` output.
+   Do not ask the model to rebuild JSON or base64 manually; the capture turn should have produced
+   each JSON string and base64 payload programmatically before passing it to `text()`. Do not
+   start a fresh subagent between the capture and return turns; turn history is what preserves the
+   `text()` output.
 6. In the parent's Code Mode call, retrieve that return turn using `subagent_result`. The response
    may include MCP/subagent metadata before or after the assistant content. Programmatically extract
    only the single quadruple-backtick block. Do not manually copy the block through the model.
@@ -118,9 +123,11 @@ Mode.
    })
    ```
 
-8. Import the saved batch mechanically with `capture:import-batch`. The importer accepts both the
-   older per-URL triple-fenced format and the newer raw `URL:`-delimited batch format, rejects
-   partial parses/duplicates/collisions, and creates one immutable `native.web.txt` per URL.
+8. Import the saved batch mechanically with `capture:import-batch`. The importer prefers the
+   canonical JSON-lines/base64 relay format, decodes each `result_base64` back to UTF-8, and also
+   accepts the older JSON `result`, per-URL triple-fenced, and raw `URL:`-delimited formats. It
+   rejects partial parses, duplicate URLs, unexpected hosts, malformed base64, and existing
+   destinations, then creates one immutable `native.web.txt` per URL.
 9. Finalize each capture against the verified deployed commit/scenario, generate
    `origin.html`, `view-as-ai.txt`, `diff.txt`, and `capture.json`, then update
    `CALIBRATION_RESULTS.md`.

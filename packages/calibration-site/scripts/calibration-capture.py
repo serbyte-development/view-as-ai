@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import difflib
 import hashlib
 import json
@@ -93,30 +94,66 @@ def import_batch(
 
     source = batch_file.read_text("utf-8")
     source = re.sub(r'^id="[0-9]+"\n', "", source, count=1)
-    matches = list(BATCH_CAPTURE_RE.finditer(source))
-    if matches:
-        consumed = BATCH_CAPTURE_RE.sub("", source).strip()
-        if consumed:
-            raise SystemExit(
-                "batch file contains text outside recognized URL/fenced capture blocks; "
-                "refusing a partial import"
-            )
-    else:
-        matches = list(RAW_BATCH_CAPTURE_RE.finditer(source))
-        if not matches:
-            raise SystemExit(f"no native URL capture blocks found in {batch_file}")
-        consumed = RAW_BATCH_CAPTURE_RE.sub("", source).strip()
-        if consumed:
-            raise SystemExit(
-                "batch file contains text outside recognized raw URL capture blocks; "
-                "refusing a partial import"
-            )
+
+    entries: list[tuple[str, str]] = []
+    json_lines = [line for line in source.splitlines() if line.strip()]
+    json_batch = bool(json_lines)
+    if json_batch:
+        for line in json_lines:
+            try:
+                item = json.loads(line)
+            except json.JSONDecodeError:
+                json_batch = False
+                entries.clear()
+                break
+            if not isinstance(item, dict) or not isinstance(item.get("url"), str):
+                json_batch = False
+                entries.clear()
+                break
+            if isinstance(item.get("result_base64"), str):
+                try:
+                    result_text = base64.b64decode(item["result_base64"], validate=True).decode(
+                        "utf-8"
+                    )
+                except (ValueError, UnicodeDecodeError):
+                    json_batch = False
+                    entries.clear()
+                    break
+            elif isinstance(item.get("result"), str):
+                result_text = item["result"]
+            else:
+                json_batch = False
+                entries.clear()
+                break
+            entries.append((item["url"], result_text))
+
+    if not json_batch:
+        matches = list(BATCH_CAPTURE_RE.finditer(source))
+        if matches:
+            consumed = BATCH_CAPTURE_RE.sub("", source).strip()
+            if consumed:
+                raise SystemExit(
+                    "batch file contains text outside recognized URL/fenced capture blocks; "
+                    "refusing a partial import"
+                )
+        else:
+            matches = list(RAW_BATCH_CAPTURE_RE.finditer(source))
+            if not matches:
+                raise SystemExit(f"no native URL capture blocks found in {batch_file}")
+            consumed = RAW_BATCH_CAPTURE_RE.sub("", source).strip()
+            if consumed:
+                raise SystemExit(
+                    "batch file contains text outside recognized raw URL capture blocks; "
+                    "refusing a partial import"
+                )
+        entries = [(match.group("url"), match.group("text")) for match in matches]
 
     seen_urls: set[str] = set()
     short_commit = deployment_commit[:7].lower()
     imported: list[tuple[str, str]] = []
-    for match in matches:
-        url = match.group("url")
+    for url, text in entries:
+        if not url.startswith("https://view-as-ai.vercel.app/"):
+            raise SystemExit(f"unexpected capture URL in batch: {url}")
         if url in seen_urls:
             raise SystemExit(f"duplicate URL in batch: {url}")
         seen_urls.add(url)
@@ -129,7 +166,7 @@ def import_batch(
             raise SystemExit(f"capture directory already exists: {directory}")
 
         directory.mkdir(parents=True)
-        native_path.write_text(match.group("text").rstrip("\n") + "\n", encoding="utf-8")
+        native_path.write_text(text.rstrip("\n") + "\n", encoding="utf-8")
         imported.append((capture_id, url))
 
     for capture_id, url in imported:
