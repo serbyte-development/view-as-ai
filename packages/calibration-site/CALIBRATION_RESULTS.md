@@ -558,36 +558,36 @@ Continue with the remaining default-deployment capture units, beginning at `ACTI
 | ACTIVE-006 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-006/ | absent | absent | yes | captures/2026-09-24-experiments-active-active-006-b815108-turn-22/ | 2026-09-24 @ b815108 | One-second script insertion does not execute in either output. |
 | ACTIVE-007 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-007/ | initial value | initial value | yes | captures/2026-09-24-experiments-active-active-007-b815108-turn-22/ | 2026-09-24 @ b815108 | Initial origin value remains in both outputs; the modifying script does not execute. |
 | ACTIVE-008 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-008/ | present | present | yes | captures/2026-09-24-experiments-active-active-008-b815108-turn-22/ | 2026-09-24 @ b815108 | Origin-visible sentinel remains in both outputs; the removal script does not execute. |
-| ACTIVE-009 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-009/ | — | — | — | — | — | — |
-| ACTIVE-010 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-010/ | — | — | — | — | — | — |
-| ACTIVE-011 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-011/ | — | — | — | — | — | — |
-| ACTIVE-012 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-012/ | — | — | — | — | — | — |
-| ACTIVE-013 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-013/ | — | — | — | — | — | — |
-| ACTIVE-014 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-014/ | — | — | — | — | — | — |
-| ACTIVE-015 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-015/ | — | — | — | — | — | — |
-| ACTIVE-016 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-016/ | — | — | — | — | — | — |
-| ACTIVE-017 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-017/ | — | — | — | — | — | — |
+| ACTIVE-009 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-009/ | present | present | yes | captures/2026-09-24-experiments-active-active-009-b815108-turn-23/ | 2026-09-24 @ b815108 | Origin-hidden sentinel is exposed by both outputs; the visibility-changing script does not need to execute. |
+| ACTIVE-010 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-010/ | present | present | yes | captures/2026-09-24-experiments-active-active-010-b815108-turn-23/ | 2026-09-24 @ b815108 | Origin-visible sentinel remains in both outputs; the hiding script does not execute. |
+| ACTIVE-011 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-011/ | absent | absent | yes | captures/2026-09-24-experiments-active-active-011-b815108-turn-23/ | 2026-09-24 @ b815108 | document.write does not execute in either native web or View as AI extraction. |
+| ACTIVE-012 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-012/ | absent | absent | yes | captures/2026-09-24-experiments-active-active-012-b815108-turn-23/ | 2026-09-24 @ b815108 | Client fetch-and-insert does not execute in either output. |
+| ACTIVE-013 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-013/ | present | present | yes | captures/2026-09-24-experiments-active-active-013-b815108-turn-23/ | 2026-09-24 @ b815108 | Custom-element light DOM is exposed by both outputs. |
+| ACTIVE-014 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-014/ | absent | absent | yes | captures/2026-09-24-experiments-active-active-014-b815108-turn-23/ | 2026-09-24 @ b815108 | Imperatively attached shadow DOM is absent because the client script does not execute. |
+| ACTIVE-015 | mismatch | https://view-as-ai.vercel.app/experiments/active/ACTIVE-015/ | absent | present | no | captures/2026-09-24-experiments-active-active-015-b815108-turn-23/ | 2026-09-24 @ b815108 | Native web omits declarative shadow-DOM sentinel while View as AI exposes it. |
+| ACTIVE-016 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-016/ | absent | absent | yes | captures/2026-09-24-experiments-active-active-016-b815108-turn-23/ | 2026-09-24 @ b815108 | SPA client-route sentinel is absent in both outputs; client routing does not execute. |
+| ACTIVE-017 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-017/ | noscript present; client absent | noscript present; client absent | yes | captures/2026-09-24-experiments-active-active-017-b815108-turn-23/ | 2026-09-24 @ b815108 | Both outputs expose noscript content and omit the client-rendered equivalent. |
 
 ## ORDER
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ORDER-001 | deployed | https://view-as-ai.vercel.app/experiments/order/ORDER-001/ | — | — | — | — | — | — |
-| ORDER-002 | deployed | https://view-as-ai.vercel.app/experiments/order/ORDER-002/ | — | — | — | — | — | — |
-| ORDER-003 | deployed | https://view-as-ai.vercel.app/experiments/order/ORDER-003/ | — | — | — | — | — | — |
-| ORDER-004 | deployed | https://view-as-ai.vercel.app/experiments/order/ORDER-004/ | — | — | — | — | — | — |
-| ORDER-005 | deployed | https://view-as-ai.vercel.app/experiments/order/ORDER-005/ | — | — | — | — | — | — |
-| ORDER-006 | deployed | https://view-as-ai.vercel.app/experiments/order/ORDER-006/ | — | — | — | — | — | — |
-| ORDER-007 | deployed | https://view-as-ai.vercel.app/experiments/order/ORDER-007/ | — | — | — | — | — | — |
-| ORDER-008 | deployed | https://view-as-ai.vercel.app/experiments/order/ORDER-008/ | — | — | — | — | — | — |
-| ORDER-009 | deployed | https://view-as-ai.vercel.app/experiments/order/ORDER-009/ | — | — | — | — | — | — |
+| ORDER-001 | verified | https://view-as-ai.vercel.app/experiments/order/ORDER-001/ | 1→2→3 | 1→2→3 | yes | captures/2026-09-24-experiments-order-order-001-b815108-turn-23/ | 2026-09-24 @ b815108 | Ordinary control preserves DOM order in both outputs. |
+| ORDER-002 | verified | https://view-as-ai.vercel.app/experiments/order/ORDER-002/ | 1→2→3 | 1→2→3 | yes | captures/2026-09-24-experiments-order-order-002-b815108-turn-24/ | 2026-09-24 @ b815108 | Flexbox order does not change extracted order; both follow DOM order. |
+| ORDER-003 | verified | https://view-as-ai.vercel.app/experiments/order/ORDER-003/ | 1→2→3 | 1→2→3 | yes | captures/2026-09-24-experiments-order-order-003-b815108-turn-24/ | 2026-09-24 @ b815108 | row-reverse does not change extracted order; both follow DOM order. |
+| ORDER-004 | verified | https://view-as-ai.vercel.app/experiments/order/ORDER-004/ | 1→2→3 | 1→2→3 | yes | captures/2026-09-24-experiments-order-order-004-b815108-turn-24/ | 2026-09-24 @ b815108 | Grid placement does not change extracted order; both follow DOM order. |
+| ORDER-005 | verified | https://view-as-ai.vercel.app/experiments/order/ORDER-005/ | 1→2→3 | 1→2→3 | yes | captures/2026-09-24-experiments-order-order-005-b815108-turn-24/ | 2026-09-24 @ b815108 | Absolute visual positioning does not change extracted order. |
+| ORDER-006 | verified | https://view-as-ai.vercel.app/experiments/order/ORDER-006/ | 1→2→3 | 1→2→3 | yes | captures/2026-09-24-experiments-order-order-006-b815108-turn-24/ | 2026-09-24 @ b815108 | RTL direction does not change extracted order. |
+| ORDER-007 | verified | https://view-as-ai.vercel.app/experiments/order/ORDER-007/ | 1→2→3 | 1→2→3 | yes | captures/2026-09-24-experiments-order-order-007-b815108-turn-24/ | 2026-09-24 @ b815108 | Positive tabindex does not reorder extracted text; both follow DOM order. |
+| ORDER-008 | verified | https://view-as-ai.vercel.app/experiments/order/ORDER-008/ | 1→2→3 | 1→2→3 | yes | captures/2026-09-24-experiments-order-order-008-b815108-turn-24/ | 2026-09-24 @ b815108 | aria-flowto does not reorder extracted text. |
+| ORDER-009 | verified | https://view-as-ai.vercel.app/experiments/order/ORDER-009/ | 1→2→3 | 1→2→3 | yes | captures/2026-09-24-experiments-order-order-009-b815108-turn-24/ | 2026-09-24 @ b815108 | Fixed/sticky visual placement does not change DOM extraction order. |
 
 ## DUP
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| DUP-001 | deployed | https://view-as-ai.vercel.app/experiments/duplicate/DUP-001/ | — | — | — | — | — | — |
-| DUP-002 | deployed | https://view-as-ai.vercel.app/experiments/duplicate/DUP-002/ | — | — | — | — | — | — |
+| DUP-001 | verified | https://view-as-ai.vercel.app/experiments/duplicate/DUP-001/ | 2 copies | 2 copies | yes | captures/2026-09-24-experiments-duplicate-dup-001-b815108-turn-24/ | 2026-09-24 @ b815108 | Both outputs preserve two exact duplicate occurrences. |
+| DUP-002 | verified | https://view-as-ai.vercel.app/experiments/duplicate/DUP-002/ | 10 copies | 10 copies | yes | captures/2026-09-24-experiments-duplicate-dup-002-b815108-turn-24/ | 2026-09-24 @ b815108 | Both outputs preserve ten exact duplicate occurrences. |
 | DUP-003 | deployed | https://view-as-ai.vercel.app/experiments/duplicate/DUP-003/ | — | — | — | — | — | — |
 | DUP-004 | deployed | https://view-as-ai.vercel.app/experiments/duplicate/DUP-004/ | — | — | — | — | — | — |
 | DUP-005 | deployed | https://view-as-ai.vercel.app/experiments/duplicate/DUP-005/ | — | — | — | — | — | — |

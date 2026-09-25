@@ -1,0 +1,52 @@
+{
+  "capture_id": "2026-09-24-experiments-order-order-005-b815108-turn-24",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/order/ORDER-005/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/order/ORDER-005/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": null,
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "675e97e889275b3c5d9120aaa12c5ebdbabeb03916c629f32ed3e1d78b9adfd9",
+  "native_sha256": "a61f1f35beec3dbbb3157c9313e8bdf79057a70555ec4512b17f72275ac2fce3",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "d919aed1e17e69b77c4b1ac9ca7c834cfff7f0e0",
+  "test_ids": [
+    "ORDER-005"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "948dc4713d216d5215f337860115fd248a3b556afd53139e10a2e31d1d249067",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "tsx",
+      "path": "/experiments/order/ORDER-005/",
+      "phase": 6,
+      "source": "src/fixtures/order.tsx",
+      "testIds": [
+        "ORDER-005"
+      ],
+      "sentinels": {
+        "ORDER-005": "VAI_SENTINEL_ORDER_005_FIRST_7BB66AC4"
+      },
+      "sentinelGroups": {
+        "orderedMarkers": [
+          "VAI_SENTINEL_ORDER_005_FIRST_7BB66AC4",
+          "VAI_SENTINEL_ORDER_005_SECOND_B18E8FDD",
+          "VAI_SENTINEL_ORDER_005_THIRD_727A1C85"
+        ]
+      }
+    }
+  ],
+  "finalized_at": "2026-09-25T01:35:25.818125+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T01:35:25.820599+00:00",
+    "native_sha256": "a61f1f35beec3dbbb3157c9313e8bdf79057a70555ec4512b17f72275ac2fce3",
+    "view_as_ai_sha256": "2632553117113942e4e1ae76e6eda373bcfaf1110b2fa7f6acfa5e28da549892"
+  }
+}
