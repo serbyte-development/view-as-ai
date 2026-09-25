@@ -28,6 +28,11 @@ BATCH_CAPTURE_RE = re.compile(
     r"```\n(?P<text>[\s\S]*?)\n```(?=\nURL: |\n?\Z)",
     flags=re.MULTILINE,
 )
+RAW_BATCH_CAPTURE_RE = re.compile(
+    r"^URL: (?P<url>https://view-as-ai\.vercel\.app/[^\n]*)\n"
+    r"(?P<text>[\s\S]*?)(?=^URL: |\Z)",
+    flags=re.MULTILINE,
+)
 
 
 def sha256(data: bytes) -> str:
@@ -89,15 +94,23 @@ def import_batch(
     source = batch_file.read_text("utf-8")
     source = re.sub(r'^id="[0-9]+"\n', "", source, count=1)
     matches = list(BATCH_CAPTURE_RE.finditer(source))
-    if not matches:
-        raise SystemExit(f"no native URL capture blocks found in {batch_file}")
-
-    consumed = BATCH_CAPTURE_RE.sub("", source).strip()
-    if consumed:
-        raise SystemExit(
-            "batch file contains text outside recognized URL/fenced capture blocks; "
-            "refusing a partial import"
-        )
+    if matches:
+        consumed = BATCH_CAPTURE_RE.sub("", source).strip()
+        if consumed:
+            raise SystemExit(
+                "batch file contains text outside recognized URL/fenced capture blocks; "
+                "refusing a partial import"
+            )
+    else:
+        matches = list(RAW_BATCH_CAPTURE_RE.finditer(source))
+        if not matches:
+            raise SystemExit(f"no native URL capture blocks found in {batch_file}")
+        consumed = RAW_BATCH_CAPTURE_RE.sub("", source).strip()
+        if consumed:
+            raise SystemExit(
+                "batch file contains text outside recognized raw URL capture blocks; "
+                "refusing a partial import"
+            )
 
     seen_urls: set[str] = set()
     short_commit = deployment_commit[:7].lower()
@@ -116,7 +129,7 @@ def import_batch(
             raise SystemExit(f"capture directory already exists: {directory}")
 
         directory.mkdir(parents=True)
-        native_path.write_text(match.group("text") + "\n", encoding="utf-8")
+        native_path.write_text(match.group("text").rstrip("\n") + "\n", encoding="utf-8")
         imported.append((capture_id, url))
 
     for capture_id, url in imported:
