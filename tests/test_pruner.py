@@ -18,6 +18,28 @@ def test_explicit_menu_popup_is_pruned_but_primary_nav_is_kept():
     assert "# Page" in text
 
 
+def test_menubar_role_is_pruned_like_menu():
+    text = _text('<div role="menubar">Menubar content</div>')
+    assert "Menubar content" not in text
+
+
+def test_responsive_hidden_class_is_pruned_without_css_rule():
+    text = _text('<div class="hidden-md">Responsive hidden content</div>')
+    assert "Responsive hidden content" not in text
+
+
+def test_schema_breadcrumb_microdata_is_retained():
+    html = """
+    <nav aria-label="Breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <span itemprop="name">Microdata breadcrumb</span>
+      <a href="/">Visible breadcrumb</a>
+    </nav>
+    """
+    text = _text(html)
+    assert "Microdata breadcrumb" in text
+    assert "Visible breadcrumb" in text
+
+
 def test_plain_hidden_control_wrapper_is_retained_without_stronger_signal():
     html = """
     <div class="hidden"><form><input placeholder="Search this book ..."></form></div>
@@ -26,6 +48,16 @@ def test_plain_hidden_control_wrapper_is_retained_without_stronger_signal():
     text = _text(html)
     assert "Search this book" in text
     assert "Readable content" in text
+
+
+def test_carousel_clone_classes_are_retained_without_stronger_signal():
+    html = """
+    <div class="carousel-item slick-cloned">Slick clone</div>
+    <div class="swiper-slide swiper-slide-duplicate">Swiper clone</div>
+    """
+    text = _text(html)
+    assert "Slick clone" in text
+    assert "Swiper clone" in text
 
 
 def test_contextual_related_navigation_is_pruned():
@@ -44,7 +76,17 @@ def test_contextual_related_navigation_is_pruned():
     assert "Fees" not in text
 
 
-def test_preference_switcher_is_pruned_without_touching_forms():
+def test_contextual_sidebar_and_footer_are_retained_without_related_navigation_signal():
+    html = """
+    <aside class="contextual-sidebar"><a href="/context">Context</a></aside>
+    <div class="contextual-footer">Context footer</div>
+    """
+    text = _text(html)
+    assert "Context" in text
+    assert "Context footer" in text
+
+
+def test_preference_switchers_are_retained_without_stronger_signal():
     html = """
     <div class="color-theme"><button>Theme</button><button>Dark</button></div>
     <div class="language-switcher"><a href="/fr">Français</a></div>
@@ -52,14 +94,14 @@ def test_preference_switcher_is_pruned_without_touching_forms():
     <main><p>Body</p></main>
     """
     text = _text(html)
-    assert "Theme" not in text
-    assert "Dark" not in text
-    assert "Français" not in text
+    assert "Theme" in text
+    assert "Dark" in text
+    assert "Français" in text
     assert "[Input: Email]" in text
     assert "Body" in text
 
 
-def test_secondary_navigation_items_are_pruned_without_dropping_global_nav():
+def test_secondary_navigation_items_are_retained_without_stronger_signal():
     html = """
     <nav class="global-nav"><a href="/missions">Missions</a></nav>
     <div class="hds-secondary-navigation-menu-items"><nav><a href="/mars">Mars Home</a></nav></div>
@@ -67,7 +109,7 @@ def test_secondary_navigation_items_are_pruned_without_dropping_global_nav():
     """
     text = _text(html)
     assert "Missions" in text
-    assert "Mars Home" not in text
+    assert "Mars Home" in text
     assert "# Mars Facts" in text
 
 
@@ -95,7 +137,7 @@ def test_explicit_contentinfo_region_is_pruned():
     assert "Contact" not in text
 
 
-def test_explicit_utility_navigation_is_pruned():
+def test_explicit_utility_navigation_is_retained_without_stronger_signal():
     html = """
     <nav><a href="/home">Home</a></nav>
     <ul class="site-utility-nav"><li><a href="/alerts">Alerts</a></li></ul>
@@ -103,8 +145,34 @@ def test_explicit_utility_navigation_is_pruned():
     """
     text = _text(html)
     assert "Home" in text
-    assert "Alerts" not in text
+    assert "Alerts" in text
     assert "# Visit" in text
+
+
+def test_banner_inside_main_is_pruned_without_pruning_main_itself():
+    html = """
+    <main class="page-banner">
+      <p>Primary content</p>
+      <section class="promo-banner">Promo</section>
+    </main>
+    """
+    text = _text(html)
+    assert "Primary content" in text
+    assert "Promo" not in text
+
+
+def test_cookie_social_and_share_widgets_are_pruned():
+    html = """
+    <div class="cookie-notice">Cookie preferences</div>
+    <ul class="social-links"><li><a href="https://example.test/social">Social</a></li></ul>
+    <div class="share-buttons"><a href="https://example.test/share">Share</a></div>
+    <main><p>Body</p></main>
+    """
+    text = _text(html)
+    assert "Cookie preferences" not in text
+    assert "Social" not in text
+    assert "Share" not in text
+    assert "Body" in text
 
 
 def test_bootstrap_navbar_is_pruned_without_dropping_ordinary_nav():

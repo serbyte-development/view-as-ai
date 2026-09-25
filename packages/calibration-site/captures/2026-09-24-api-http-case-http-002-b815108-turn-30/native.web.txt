@@ -1,0 +1,3 @@
+view-as-ai.vercel.app (https://view-as-ai.vercel.app/api/http?case=HTTP-002)
+citeturn340299view6 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://view-as-ai.vercel.app/api/http?case=HTTP-002","lineno":null}); Redirected to URL: https://view-as-ai.vercel.app/api/http-redirect-target?case=HTTP-002; Total lines: 1
+L0: VAI_SENTINEL_HTTP_002_PRIMARY_493A34A8 redirect destination

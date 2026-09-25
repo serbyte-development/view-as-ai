@@ -1,0 +1,46 @@
+{
+  "capture_id": "2026-09-24-experiments-size-size-006-b815108-turn-27-recovery",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/size/SIZE-006/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/size/SIZE-006/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": "gzip",
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "0691e9ab2677e2955593dfe0aee54a3c558a33b842ca12456b593f3c9ae09f33",
+  "native_sha256": "364c8417ed4854d97f199654f07d80dc81bca7d6ef83927f45769aec381e3b15",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "da204fd30cf1888d7b5d65c9b95ba3bb7f4d1ae9",
+  "test_ids": [
+    "SIZE-006"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "3b70cc1ea95060b21006ed3480f5999fa387f4591de378a82fd20e701e361263",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "raw",
+      "path": "/experiments/size/SIZE-006/",
+      "phase": 7,
+      "source": "src/fixtures/size.ts",
+      "testIds": [
+        "SIZE-006"
+      ],
+      "sentinels": {
+        "SIZE-006": "VAI_SENTINEL_SIZE_006_PRIMARY_817247B4"
+      },
+      "sentinelGroups": {}
+    }
+  ],
+  "finalized_at": "2026-09-25T04:27:51.838928+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T04:27:51.859439+00:00",
+    "native_sha256": "364c8417ed4854d97f199654f07d80dc81bca7d6ef83927f45769aec381e3b15",
+    "view_as_ai_sha256": "fd0457707abc8fe8234ccfbe9fd326680d9ee97c564d7e5c91dafba542754bbf"
+  }
+}

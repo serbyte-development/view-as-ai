@@ -8,15 +8,8 @@ import lxml.etree
 import lxml.html
 
 BANNER_TOKEN_RE = re.compile(r"(^|[-_])banner($|[-_])", re.IGNORECASE)
-CAROUSEL_CLONE_CLASS_TOKENS = frozenset({"slick-cloned", "swiper-slide-duplicate"})
 RESPONSIVE_HIDDEN_TOKEN_RE = re.compile(r"hidden-(?:xs|sm|md|lg)\Z")
 NAVBAR_TOKEN_RE = re.compile(r"(^|[-_])navbar($|[-_])", re.IGNORECASE)
-PREFERENCE_WIDGET_TOKEN_RE = re.compile(
-    r"(^|[-_])(color-theme|language-switcher|language_switcher)([-_]|$)", re.IGNORECASE
-)
-SECONDARY_NAV_ITEMS_RE = re.compile(
-    r"(^|[-_])secondary-navigation-menu-items([-_]|$)", re.IGNORECASE
-)
 
 
 def _is_banner_like(node: lxml.html.HtmlElement) -> bool:
@@ -27,24 +20,18 @@ def _is_banner_like(node: lxml.html.HtmlElement) -> bool:
 
 
 def _is_breadcrumb(node: lxml.html.HtmlElement) -> bool:
+    item_type = node.get("itemtype", "").strip().lower()
+    if node.get("itemscope") is not None and "schema.org/breadcrumblist" in item_type:
+        return False
     aria_label = node.get("aria-label", "").strip().lower()
     values = [node.get("id", ""), *node.get("class", "").split()]
     return aria_label == "breadcrumb" or any("breadcrumb" in value.lower() for value in values)
 
 
-def _is_explicit_carousel_clone(node: lxml.html.HtmlElement) -> bool:
-    return bool(CAROUSEL_CLONE_CLASS_TOKENS.intersection(node.get("class", "").split()))
-
-
-def _is_hidden_header_control(node: lxml.html.HtmlElement) -> bool:
-    """Match the responsive header links/wrappers omitted in five native pages."""
-    return (
-        node.tag in ("a", "div", "nav")
-        and bool(node.xpath("ancestor::header | ancestor::nav"))
-        and not node.xpath("ancestor::main")
-        and any(
-            RESPONSIVE_HIDDEN_TOKEN_RE.fullmatch(token) for token in node.get("class", "").split()
-        )
+def _is_responsive_hidden_control(node: lxml.html.HtmlElement) -> bool:
+    """Match responsive hidden class tokens supported by native captures."""
+    return node.tag in ("a", "div", "nav") and any(
+        RESPONSIVE_HIDDEN_TOKEN_RE.fullmatch(token) for token in node.get("class", "").split()
     )
 
 
@@ -74,6 +61,8 @@ def _is_framework_social_widget(node: lxml.html.HtmlElement) -> bool:
     classes = node.get("class", "").split()
     return (
         (node.tag == "ul" and "et_pb_social_media_follow" in classes)
+        or (node.tag == "ul" and "social-links" in classes)
+        or (node.tag == "div" and "share-buttons" in classes)
         or (node.tag == "a" and "elementor-social-icon" in classes)
         or (node.tag == "a" and "skip-link" in classes)
     )
@@ -101,7 +90,7 @@ def _is_search_utility_bar(node: lxml.html.HtmlElement) -> bool:
 
 def _is_menu_popup(node: lxml.html.HtmlElement) -> bool:
     """Remove explicit menu popups while preserving ordinary navigation lists."""
-    return node.get("role", "").strip().lower() == "menu" and not node.xpath(
+    return node.get("role", "").strip().lower() in {"menu", "menubar"} and not node.xpath(
         "ancestor-or-self::main"
     )
 
@@ -112,30 +101,14 @@ def _is_related_navigation(node: lxml.html.HtmlElement) -> bool:
         return False
     values = [node.get("id", ""), *node.get("class", "").split()]
     lowered = [value.lower() for value in values if value]
-    return any(
-        "related-navigation" in value
-        or "contextual-sidebar" in value
-        or "contextual-footer" in value
-        for value in lowered
-    )
+    return any("related-navigation" in value for value in lowered)
 
 
-def _is_preference_widget(node: lxml.html.HtmlElement) -> bool:
-    """Remove non-content color-theme/language switcher widgets outside main."""
-    if node.xpath("ancestor-or-self::main") or node.xpath(".//form | ancestor::form"):
-        return False
-    if node.tag not in {"div", "ul", "mdn-color-theme", "mdn-language-switcher"}:
+def _is_cookie_notice(node: lxml.html.HtmlElement) -> bool:
+    if node.tag not in {"aside", "div", "section"}:
         return False
     values = [node.get("id", ""), *node.get("class", "").split()]
-    return any(PREFERENCE_WIDGET_TOKEN_RE.search(value) for value in values if value)
-
-
-def _is_secondary_navigation_items(node: lxml.html.HtmlElement) -> bool:
-    """Remove page-local secondary-navigation item containers, not global nav."""
-    if node.tag not in {"div", "nav"}:
-        return False
-    values = [node.get("id", ""), *node.get("class", "").split()]
-    return any(SECONDARY_NAV_ITEMS_RE.search(value) for value in values if value)
+    return any(value.lower() in {"cookie-notice", "cookie_notice"} for value in values if value)
 
 
 def _is_complementary_region(node: lxml.html.HtmlElement) -> bool:
@@ -146,15 +119,6 @@ def _is_complementary_region(node: lxml.html.HtmlElement) -> bool:
 def _is_contentinfo_region(node: lxml.html.HtmlElement) -> bool:
     """Remove explicit contentinfo regions supported across multiple page families."""
     return node.get("role", "").strip().lower() == "contentinfo"
-
-
-def _is_utility_navigation(node: lxml.html.HtmlElement) -> bool:
-    """Remove explicitly named utility-navigation containers, not primary nav."""
-    if node.tag not in {"nav", "ul", "div"}:
-        return False
-    values = [node.get("id", ""), *node.get("class", "").split()]
-    lowered = [value.lower() for value in values if value]
-    return any("utility-nav" in value or value == "utilitynav" for value in lowered)
 
 
 def _is_navbar_navigation(node: lxml.html.HtmlElement) -> bool:
@@ -173,11 +137,11 @@ def prune_html(html: str) -> str:
     """Remove provider-style boilerplate before model-readable formatting.
 
     Current rules are limited to patterns supported by the native fixture corpus:
-    explicit ARIA navigation landmarks, banner-labelled blocks outside main
-    content, breadcrumbs, framework-marked carousel clones, responsive header
-    alternates, purely decorative hidden images, explicit popup/related/utility
-    navigation, complementary sidebars, and selected framework preference/social
-    widgets. HTML ``nav`` elements without another supported signal remain.
+    explicit ARIA navigation landmarks, selected banner blocks, ordinary
+    breadcrumbs, responsive hidden class tokens, purely decorative hidden images,
+    explicit popup/related navigation, complementary/contentinfo regions, cookie
+    notices, and selected social/share widgets. Plain navigation and preference
+    controls remain unless another supported signal applies.
     """
     root = lxml.html.document_fromstring(
         (html if html.strip() else "<html></html>").encode("utf-8"),
@@ -188,28 +152,27 @@ def prune_html(html: str) -> str:
     candidates.extend(
         node
         for node in root.xpath(".//*")
-        if _is_banner_like(node) and not node.xpath("ancestor-or-self::main")
+        if _is_banner_like(node)
+        and (
+            not node.xpath("ancestor-or-self::main")
+            or "promo-banner" in node.get("class", "").split()
+        )
     )
     candidates.extend(node for node in root.xpath(".//nav | .//ul | .//ol") if _is_breadcrumb(node))
     candidates.extend(
-        node for node in root.xpath(".//*[@class]") if _is_explicit_carousel_clone(node)
-    )
-    candidates.extend(
         node
         for node in root.xpath(".//*[@class]")
-        if _is_hidden_header_control(node)
+        if _is_responsive_hidden_control(node)
         or _is_search_utility_bar(node)
         or _is_hidden_decorative_image_wrapper(node)
         or _is_framework_social_widget(node)
         or _is_private_use_social_link(node)
-        or _is_preference_widget(node)
-        or _is_secondary_navigation_items(node)
     )
     candidates.extend(node for node in root.xpath(".//*") if _is_menu_popup(node))
     candidates.extend(node for node in root.xpath(".//*") if _is_related_navigation(node))
+    candidates.extend(node for node in root.xpath(".//*") if _is_cookie_notice(node))
     candidates.extend(node for node in root.xpath(".//*") if _is_complementary_region(node))
     candidates.extend(node for node in root.xpath(".//*") if _is_contentinfo_region(node))
-    candidates.extend(node for node in root.xpath(".//*") if _is_utility_navigation(node))
     candidates.extend(node for node in root.xpath(".//nav") if _is_navbar_navigation(node))
     # Native captures omit closed-state alternate labels and hidden separators.
     # Conditional class variants and screen-reader-only text keep their content.

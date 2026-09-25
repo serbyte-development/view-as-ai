@@ -43,8 +43,8 @@
     "exact_match": false,
     "layout_tolerant_match": false,
     "view_as_ai_version": "1.0.2",
-    "compared_at": "2026-09-25T01:35:22.664684+00:00",
+    "compared_at": "2026-09-25T15:02:21.457839+00:00",
     "native_sha256": "41ee01357b1a2f0342efcef2409b3c8ed47cf3df5c76dbc45b4d5272527304f8",
-    "view_as_ai_sha256": "872802a799d2d7342565b77d0b5ebd07ca74de9fd0ad1fcbf7052b98af1e0fd4"
+    "view_as_ai_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   }
 }

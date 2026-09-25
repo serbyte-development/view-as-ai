@@ -258,8 +258,17 @@ def render_comparison(directory: Path, metadata: dict[str, object]) -> dict[str,
         raise SystemExit(f"missing saved origin HTML: {origin_path}")
 
     native = native_path.read_text("utf-8")
-    fetch_compatible = bool(metadata.get("view_as_ai_url_fetch_compatible", True))
-    if not fetch_compatible:
+    status = int(metadata.get("http_status") or 0)
+    content_type = str(metadata.get("content_type") or "")
+    media_type = content_type.split(";", 1)[0].strip().lower()
+    fetch_mode = (
+        "html"
+        if 200 <= status < 300 and media_type == "text/html"
+        else "text"
+        if 200 <= status < 300 and media_type in {"", "text/plain"}
+        else "reject"
+    )
+    if fetch_mode == "reject":
         actual = (
             "VIEW_AS_AI_FETCH_REJECTED "
             f"status={metadata.get('http_status')} "
@@ -284,6 +293,7 @@ def render_comparison(directory: Path, metadata: dict[str, object]) -> dict[str,
         comparison = {
             "mode": "fetch-layer",
             "view_as_ai_fetch_compatible": False,
+            "view_as_ai_fetch_mode": "reject",
             "view_as_ai_fetch_result": "rejected",
             "exact_match": None,
             "layout_tolerant_match": None,
@@ -303,7 +313,11 @@ def render_comparison(directory: Path, metadata: dict[str, object]) -> dict[str,
     origin = origin_path.read_bytes().decode(encoding, errors="replace")
     url = str(metadata["final_url"])
 
-    actual = process_html(prune_html(origin), url).text
+    actual = (
+        process_html(prune_html(origin), url).text
+        if fetch_mode == "html"
+        else origin.rstrip("\r\n")
+    )
     (directory / "view-as-ai.txt").write_text(actual, encoding="utf-8")
 
     native_body = strip_file_terminator(native)
@@ -328,6 +342,7 @@ def render_comparison(directory: Path, metadata: dict[str, object]) -> dict[str,
             == normalize_for_layout_comparison(actual_body)
         ),
         "view_as_ai_version": __version__,
+        "view_as_ai_fetch_mode": fetch_mode,
         "compared_at": datetime.now(UTC).isoformat(),
         "native_sha256": sha256(native_path.read_bytes()),
         "view_as_ai_sha256": sha256(actual.encode("utf-8")),
@@ -391,9 +406,14 @@ def finalize(
 
     content_type = response.headers.get("content-type", "")
     media_type = content_type.split(";", 1)[0].strip().lower()
-    fetch_compatible = response.is_success and (
-        not media_type or media_type in {"text/html", "application/xhtml+xml"}
+    fetch_mode = (
+        "html"
+        if response.is_success and media_type == "text/html"
+        else "text"
+        if response.is_success and media_type in {"", "text/plain"}
+        else "reject"
     )
+    fetch_compatible = fetch_mode != "reject"
 
     origin_path = directory / "origin.html"
     origin_path.write_bytes(response.content)
@@ -414,6 +434,7 @@ def finalize(
             for item in response.history
         ],
         "view_as_ai_url_fetch_compatible": fetch_compatible,
+        "view_as_ai_fetch_mode": fetch_mode,
         "origin_encoding": encoding,
         "origin_sha256": sha256(response.content),
         "native_sha256": sha256(native_path.read_bytes()),

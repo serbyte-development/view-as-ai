@@ -274,11 +274,13 @@ Examples:
 
 `/site-context/<experiment>/...`
 
-These use several pages and, in some cases, sequential deployments to determine whether native
-extraction uses site-level recurrence or sibling-page information.
+These are deferred until the default-deployment native capture campaign is complete and the SITE
+campaign is explicitly resumed.
 
-These experiments must be designed separately from the kitchen sink because adding all recurrence
-conditions to one deployment can contaminate the variable being measured.
+When resumed, use the three-deployment SITE campaign defined below. Give each hypothesis its own
+stable target route so many controlled conditions can coexist in one deployment without changing
+another target's origin HTML. Do not execute the existing per-variant scenario list as dozens of
+independent deployments.
 
 ---
 
@@ -978,12 +980,49 @@ The goal is to find information-loss thresholds and whether truncation favors pa
 
 # Site-wide and cross-page test matrix
 
-This is the most important later phase because it can determine whether View as AI needs any notion
-of site context rather than purely page-local pruning.
+Status: **deferred**. Finish the current default-deployment capture/finalization work before
+executing any SITE experiment.
+
+When resumed, run SITE as one controlled three-deployment campaign. The current implementation's
+large per-variant scenario list is superseded as an execution plan; it remains implementation
+scaffolding until the campaign is consolidated.
+
+## Three-deployment campaign
+
+### Deployment A: page-local baseline
+
+- Publish every SITE target at a distinct stable route.
+- Publish no sibling that repeats the target's treatment block.
+- Include all target variants needed by `SITE-COUNT`, `SITE-TEXT`, `SITE-REGION`,
+  `SITE-UNIQUE-CHILD`, `SITE-NAV-LINKAGE`, `SITE-TEMPLATE`, `SITE-CLASS`, and at least two
+  independent `SITE-CHANGE` families.
+- Capture every target in fresh native sessions and record the target origin hash.
+
+### Deployment B: recurrence treatment
+
+- Keep every Deployment A target byte-identical.
+- Add the sibling corpora for all experiments at once, isolated by target path and sentinel family.
+- Represent repetition counts with separate stable targets for +1, +2, +4, and +9 siblings instead
+  of sequentially mutating one target through five deployments.
+- Add each text/markup, region, unique-child, linkage, and class treatment around its own target.
+- Run `SITE-CONVERSATION` session-order captures against this stable deployment.
+- Capture the same targets in fresh sessions and verify their origin hashes still match Deployment A.
+
+### Deployment C: reversal / cache control
+
+- Keep the target pages byte-identical again.
+- Remove or mutate the recurrence sibling corpora so they no longer repeat the target treatment.
+- Capture the same targets again in fresh sessions.
+- Record deployment timing and compare A -> B -> C to distinguish a reversible site-context effect
+  from caching, crawl/index lag, or nondeterministic extraction.
+
+The campaign is capped at these three same-host deployments. `SITE-SUBDOMAIN` remains evidence
+gated and deferred separately; run it only if A/B/C produces a reproducible same-host effect that
+needs host-scope testing.
 
 ## SITE-BASE — Establish the page-local baseline
 
-Create a target page containing:
+Use a dedicated target containing:
 
 - unique header sentinel;
 - unique nav sentinel;
@@ -991,23 +1030,14 @@ Create a target page containing:
 - unique sidebar sentinel;
 - unique footer sentinel.
 
-Capture native output before adding any sibling pages that repeat those blocks.
-
-This establishes what happens when every block is unique to one page.
+Deployment A establishes the page-local result. Keep this target unchanged through B and C so it
+also acts as a campaign-level control.
 
 ## SITE-COUNT — Does repetition count change trimming?
 
-Use the same target page structure across sequential controlled deployments.
-
-Repeat the exact same nav/footer/sidebar block on:
-
-1. target only;
-2. target + 1 sibling;
-3. target + 2 siblings;
-4. target + 4 siblings;
-5. target + 9 siblings.
-
-Capture the target after each deployment.
+Create four byte-stable target routes for the +1, +2, +4, and +9 sibling conditions. In Deployment
+A each target has zero repeating siblings. In Deployment B each receives its assigned number of
+siblings repeating the exact treatment block. In Deployment C those repeats are removed or mutated.
 
 Questions:
 
@@ -1017,7 +1047,8 @@ Questions:
 
 ## SITE-TEXT — Exact text versus structural repetition
 
-Compare:
+Use a separate stable target for each comparison and add the corresponding sibling treatment only
+in Deployment B:
 
 - same markup + same text across pages;
 - same markup + different text;
@@ -1029,7 +1060,9 @@ This separates textual deduplication from template/DOM recognition.
 
 ## SITE-REGION — Does repeated location/landmark matter?
 
-Repeat the same sentinel-bearing block across pages as:
+Use one stable target per region variant. Deployment A has no repeating sibling; Deployment B adds
+siblings repeating that target's sentinel-bearing block in the same region; Deployment C removes or
+mutates those repeats. Cover:
 
 - `header`;
 - `nav`;
@@ -1047,8 +1080,8 @@ removed in footer, region semantics likely matter independently of recurrence.
 
 ## SITE-UNIQUE-CHILD — Unique content inside repeated wrappers
 
-Create a repeated site-wide footer/nav wrapper whose majority is identical but each page contains
-one unique item.
+Use one stable target per child type. Deployment B adds repeated footer/nav wrappers whose majority
+is identical while each page contains one unique item.
 
 Test whether native output:
 
@@ -1067,7 +1100,7 @@ This directly tests how dangerous container-level pruning is.
 
 ## SITE-NAV-LINKAGE — Does discoverability matter?
 
-Compare sibling pages that are:
+Use separate targets/corpora in Deployment B for sibling pages that are:
 
 - linked from the target's nav;
 - linked only from another sibling;
@@ -1093,7 +1126,9 @@ behavior.
 
 ## SITE-CLASS — Local class signals versus recurrence
 
-Repeat identical blocks with:
+Use one stable target for each class token. Deployment A measures the class locally with no sibling
+recurrence. Deployment B adds exact repeated siblings for the same target. Deployment C removes or
+mutates the repeats. Class tokens:
 
 - neutral class names;
 - `navbar`;
@@ -1103,8 +1138,6 @@ Repeat identical blocks with:
 - `contextual-sidebar`;
 - `banner`.
 
-Run each both unique-to-one-page and repeated site-wide.
-
 This can distinguish:
 
 - class/token heuristics;
@@ -1113,13 +1146,13 @@ This can distinguish:
 
 ## SITE-CHANGE — Before/after deployment experiment
 
-For the strongest recurrence test:
+`SITE-CHANGE` is the cross-deployment proof carried by A/B/C. Use at least two independent target
+families with different sentinel/block shapes:
 
-1. deploy target page with a block unique to that page;
-2. verify and capture target;
-3. deploy several siblings repeating the exact block without changing target HTML;
-4. verify target origin bytes are unchanged;
-5. capture target again in a fresh session.
+1. A: target block is unique to the target;
+2. B: add several siblings repeating the exact block while target bytes remain unchanged;
+3. C: remove or materially mutate those siblings while target bytes remain unchanged;
+4. capture the target in fresh sessions at every stage and record timing plus origin hashes.
 
 If the target output changes while target HTML is byte-identical, that is strong evidence for a
 cross-page or external-state signal.
@@ -1131,11 +1164,12 @@ Potential confounders:
 - Vercel/CDN caching;
 - nondeterministic provider extraction.
 
-Therefore repeat the experiment, use new sentinel families, and record timing.
+The second independent family and Deployment C provide the repeatability and reversal controls
+without requiring dozens of deployments.
 
 ## SITE-CONVERSATION — Session context versus site context
 
-Use identical deployments with fresh ChatGPT sessions:
+Run this against stable Deployment B with fresh ChatGPT sessions:
 
 - capture target directly;
 - open siblings first, then target in the same conversation;
@@ -1147,7 +1181,8 @@ Do not mix these observations into normal calibration until the effect is reprod
 
 ## SITE-SUBDOMAIN — Scope of site context
 
-Later, if needed, repeat a shared block across:
+This remains deferred after the three-deployment campaign. Run it only if A/B/C first demonstrates
+a reproducible same-host site-context effect. If justified, compare a shared block across:
 
 - same hostname;
 - sibling subdomain;
@@ -1254,13 +1289,10 @@ This is where conclusions should become strong enough to change View as AI.
 
 ## Phase 3 — Site-wide recurrence and boilerplate
 
-Run the SITE experiments through deliberate sequential deployments.
-
-Do not begin this phase by publishing every recurrence variant simultaneously. If native extraction
-uses whole-host context, doing so can contaminate all variants.
-
-The strongest experiment is SITE-CHANGE: keep target HTML byte-identical and alter only sibling
-pages across deployments.
+Deferred until the default-deployment capture campaign is complete. When resumed, execute the
+three-deployment A/B/C campaign defined in the SITE matrix. Each hypothesis gets its own stable
+target route, all A/B/C targets remain byte-identical, and sibling corpora change around them.
+`SITE-SUBDOMAIN` stays evidence gated beyond this campaign.
 
 ## Phase 4 — Large-page and truncation
 
@@ -1272,17 +1304,6 @@ Add Vercel route configuration or controlled serverless endpoints only for the c
 expressed as static HTML.
 
 Keep these implementation details isolated from the baseline fixture routes.
-
-## Phase 6 — Cross-framework validation
-
-Only after the static baseline is understood, consider equivalent pages generated by:
-
-- Next.js server/static rendering;
-- a client-rendered React SPA;
-- another common framework.
-
-The purpose would be to test framework-produced origin markup and client behavior, not to replace
-the controlled static baseline.
 
 ---
 

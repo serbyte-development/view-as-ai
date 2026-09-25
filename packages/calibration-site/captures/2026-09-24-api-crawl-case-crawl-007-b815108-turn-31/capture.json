@@ -1,0 +1,43 @@
+{
+  "capture_id": "2026-09-24-api-crawl-case-crawl-007-b815108-turn-31",
+  "requested_url": "https://view-as-ai.vercel.app/api/crawl?case=CRAWL-007",
+  "final_url": "https://view-as-ai.vercel.app/api/crawl?case=CRAWL-007",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": "gzip",
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "d7c43c4c6c275c21d3b1e056d286bc95fc7b8e0c06d1c75579bb7d1986c480b7",
+  "native_sha256": "bedf4dc0f1dbf8c58c14428f6f06bd9dc8f612b2d9d7f1fca3e70e8c7436ea21",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "da204fd30cf1888d7b5d65c9b95ba3bb7f4d1ae9",
+  "test_ids": [
+    "CRAWL-007"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "3b70cc1ea95060b21006ed3480f5999fa387f4591de378a82fd20e701e361263",
+  "fixture_definitions": [
+    {
+      "path": "/api/crawl?case=CRAWL-007",
+      "phase": 9,
+      "source": "src/server/crawl-fixtures.ts",
+      "testIds": [
+        "CRAWL-007"
+      ],
+      "sentinels": {
+        "CRAWL-007": "VAI_SENTINEL_CRAWL_007_PRIMARY_5CEA2C1F"
+      },
+      "sentinelGroups": {}
+    }
+  ],
+  "finalized_at": "2026-09-25T04:20:47.495501+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T04:20:47.497370+00:00",
+    "native_sha256": "bedf4dc0f1dbf8c58c14428f6f06bd9dc8f612b2d9d7f1fca3e70e8c7436ea21",
+    "view_as_ai_sha256": "76bacfe02fd0a221e640ceaef550eba0328bbb8ea4430f96ebf2de8b4e1f9e37"
+  }
+}

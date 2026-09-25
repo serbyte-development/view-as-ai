@@ -42,6 +42,17 @@ the active repository.
 - Fragment links stay references. Reference IDs are local to a particular extracted document.
 - Image descriptions refer to image URLs. Tables need cell boundaries; mixed row-header tables have no invented header divider.
 - Preserve preformatted indentation and surrounding text when removing a node. Global converter mutation is unnecessary.
+- Template contents, including declarative shadow-DOM templates, are omitted from model-visible text.
+- U+200B zero-width spaces survive native extraction and should be preserved.
+- `slick-cloned` and `swiper-slide-duplicate` class tokens alone do not justify pruning.
+- Controlled fixtures preserve utility-navigation, secondary-navigation, contextual-sidebar/footer,
+  language-switcher, and color-theme blocks. Related-navigation, controlled promo-banner,
+  cookie-notice, social-links, and share-buttons fixtures are omitted.
+- The responsive `hidden-md` token is omitted in controlled captures even without a CSS rule.
+- Ordinary breadcrumb signals are pruned, while visible schema.org `BreadcrumbList` microdata is
+  retained.
+- Remote fetch behavior parses `text/html`, exposes `text/plain` or missing `Content-Type`
+  literally, and rejects `application/xhtml+xml`.
 
 ## Known residuals
 
@@ -49,5 +60,7 @@ Native results can prune navigation differently and use different blank lines,
 Markdown structure, or reference numbering. Those formatting differences are
 not primary. Avoid selectors specific to individual sites. Client-rendered-only
 content, shadow DOM, and fetched iframe documents are outside the stable runtime.
+Large-response truncation remains a native-tool boundary. The broad link/image/iframe omissions
+seen on the kitchen-sink page require isolated follow-up before changing formatter behavior.
 
 Usage and checks live in `README.md`; concise durable state lives in this wiki.

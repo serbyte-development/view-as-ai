@@ -76,7 +76,7 @@ def get_domain(url: str) -> str:
 
 
 def _replace_special_chars(text: str) -> str:
-    replacements = {"【": "〖", "】": "〗", "◼": "◾", "\u200b": ""}
+    replacements = {"【": "〖", "】": "〗", "◼": "◾"}
     regex = re.compile("(" + "|".join(map(re.escape, replacements)) + ")")
     return regex.sub(lambda mo: replacements[mo.group(1)], text)
 
@@ -137,6 +137,9 @@ def replace_references(root: lxml.html.HtmlElement, cur_url: str, base_url: str)
             text = _get_link_text(node).strip().replace("†", "‡")
             image_only = not text and node.find(".//img") is not None
             if not text and not image_only:
+                continue
+            if not link:
+                node.drop_tag()
                 continue
             try:
                 link = urljoin(base_url, link)
@@ -261,6 +264,11 @@ def prepare_tables(root: lxml.html.HtmlElement) -> None:
         rows = table.xpath("./tr | ./thead/tr | ./tbody/tr | ./tfoot/tr")
         for index, row in enumerate(rows):
             cells = row.xpath("./th | ./td")
+            for cell in cells:
+                for nested in cell.xpath(".//th | .//td"):
+                    ancestor_tables = nested.xpath("ancestor::table[1]")
+                    if ancestor_tables and ancestor_tables[0] is table:
+                        nested.text = " | " + (nested.text or "")
             for cell in cells[:-1]:
                 cell.tail = " | " + (cell.tail or "")
             if index == 0 and cells and all(cell.tag == "th" for cell in cells):
@@ -287,7 +295,7 @@ def process_html(html: str, url: str, title: str | None = None) -> PageContents:
 
     # Remove non-reading content before link/button text extraction can flatten
     # it into an otherwise visible label. Preserve surrounding text and tails.
-    for node in reversed(root.xpath(".//script | .//style | .//math")):
+    for node in reversed(root.xpath(".//script | .//style | .//math | .//template")):
         replace_node_with_text(node, "")
 
     base = root.find(".//base[@href]")

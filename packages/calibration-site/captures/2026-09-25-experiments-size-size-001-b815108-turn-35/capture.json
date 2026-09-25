@@ -1,0 +1,52 @@
+{
+  "capture_id": "2026-09-25-experiments-size-size-001-b815108-turn-35",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/size/SIZE-001/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/size/SIZE-001/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": "gzip",
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "ab72be0587b0392b77d4135acfdc8c9899755bf80fdc50d2e6eaaf31f9519cbf",
+  "native_sha256": "c5872b4bf996866a62cecc8f01ba5990ba510bfb963edbda92126534d884dbbc",
+  "deployment_commit": "b815108",
+  "local_commit": "da204fd30cf1888d7b5d65c9b95ba3bb7f4d1ae9",
+  "test_ids": [
+    "SIZE-001"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "3b70cc1ea95060b21006ed3480f5999fa387f4591de378a82fd20e701e361263",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "raw",
+      "path": "/experiments/size/SIZE-001/",
+      "phase": 7,
+      "source": "src/fixtures/size.ts",
+      "testIds": [
+        "SIZE-001"
+      ],
+      "sentinels": {
+        "SIZE-001": "VAI_SENTINEL_SIZE_001_BEGINNING_614398D3"
+      },
+      "sentinelGroups": {
+        "positions": [
+          "VAI_SENTINEL_SIZE_001_BEGINNING_614398D3",
+          "VAI_SENTINEL_SIZE_001_MIDDLE_7B660E49",
+          "VAI_SENTINEL_SIZE_001_END_F2BC613A"
+        ]
+      }
+    }
+  ],
+  "finalized_at": "2026-09-25T14:38:12.576313+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T14:38:12.581509+00:00",
+    "native_sha256": "c5872b4bf996866a62cecc8f01ba5990ba510bfb963edbda92126534d884dbbc",
+    "view_as_ai_sha256": "1e32aabbab2fbd2f7493ce09ac24dead5edcd8ddb4a3665f19a3698dedc6083c"
+  }
+}

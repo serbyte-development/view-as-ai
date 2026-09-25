@@ -16,7 +16,7 @@ import httpx
 import lxml.etree
 
 from . import __version__
-from .parser import process_html
+from .parser import PageContents, process_html
 from .pruner import prune_html
 
 DEFAULT_USER_AGENT = (
@@ -92,7 +92,7 @@ def _remote_url(source: str) -> str | None:
     return url
 
 
-def _fetch_url(url: str, timeout: float) -> tuple[str, str]:
+def _fetch_url(url: str, timeout: float) -> tuple[str, str, str]:
     _validate_http_url(url)
     host = urlsplit(url).hostname or url
     headers = {
@@ -122,9 +122,13 @@ def _fetch_url(url: str, timeout: float) -> tuple[str, str]:
         reason = exc.response.reason_phrase
         raise CLIError(f"HTTP {status} {reason}: {exc.request.url}") from exc
     content_type = response.headers.get("content-type", "").split(";", 1)[0].strip().lower()
-    if content_type and content_type not in ("text/html", "application/xhtml+xml"):
-        raise ValueError(f"Expected HTML; received {content_type}")
-    return response.text, str(response.url)
+    if content_type == "text/html":
+        mode = "html"
+    elif content_type in ("", "text/plain"):
+        mode = "text"
+    else:
+        raise ValueError(f"Expected HTML or text/plain; received {content_type}")
+    return response.text, str(response.url), mode
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -187,14 +191,26 @@ def main(argv: list[str] | None = None) -> int:
             parser.error("--base-url applies only to local HTML files and stdin")
 
     try:
+        content_mode = "html"
         if remote_url is not None:
-            html, url = _fetch_url(remote_url, args.timeout)
+            source_text, url, content_mode = _fetch_url(remote_url, args.timeout)
         else:
-            html = sys.stdin.read() if args.source == "-" else Path(args.source).read_text("utf-8")
+            source_text = (
+                sys.stdin.read() if args.source == "-" else Path(args.source).read_text("utf-8")
+            )
             url = args.base_url or "http://localhost/"
 
-        page = process_html(prune_html(html), url)
-        if not page.text.strip():
+        if content_mode == "html":
+            page = process_html(prune_html(source_text), url)
+        else:
+            page = PageContents(
+                url=url,
+                text=source_text.rstrip("\r\n"),
+                title="",
+                urls={},
+            )
+
+        if content_mode == "html" and not page.text.strip():
             print(
                 "view-as-ai: no readable HTML text found; client-rendered JavaScript content "
                 "is intentionally not executed.",

@@ -1,0 +1,1 @@
+VIEW_AS_AI_FETCH_REJECTED status=200 content_type=application/xhtml+xml; charset=utf-8

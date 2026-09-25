@@ -98,7 +98,9 @@ Use `--format text` when you want only the parsed page body without the tool-sty
 }
 ```
 
-The CLI follows HTTP redirects, accepts HTML/XHTML responses, and uses a 30-second default timeout.
+The CLI follows HTTP redirects, parses `text/html`, exposes `text/plain` or a missing
+`Content-Type` literally, rejects other response media types, and uses a 30-second default
+timeout.
 
 <details>
 <summary><strong>Install permanently or use the Python package</strong></summary>

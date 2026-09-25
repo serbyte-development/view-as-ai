@@ -59,6 +59,12 @@ def test_duplicate_relative_external_and_fragment_links():
     assert page.text == "【0†Buy】 【0†Again】 【1†FAQ】 【2†More†elsewhere.test】"
 
 
+def test_empty_href_keeps_anchor_text_without_creating_reference():
+    page = process_html('<a href="">Current label</a><a>No href label</a>', URL)
+    assert page.text == "Current label No href label"
+    assert page.urls == {}
+
+
 def test_base_href_applies_to_links_and_images():
     page = process_html(
         '<base href="/assets/"><a href="guide">Guide</a><img src="cover.png" alt="Cover">',
@@ -231,6 +237,12 @@ def test_table_with_row_headers_has_no_invented_column_header():
     assert page.text == "Price | £5"
 
 
+def test_malformed_nested_table_cell_keeps_boundary():
+    page = process_html("<table><tr><td>Outer<div><td>Nested</table>", URL)
+    assert "Outer" in page.text
+    assert "| Nested" in page.text
+
+
 def test_plaintext_links_and_invalid_hrefs():
     page = process_html(
         '<a href="javascript:alert(1)">Action</a>'
@@ -267,6 +279,18 @@ def test_scripts_and_styles_stay_out_of_text():
     assert page.text == "# Visible"
 
 
+def test_template_content_stays_out_of_text():
+    page = process_html(
+        "<p>Before</p><template><span>Hidden template content</span></template><p>After</p>"
+        '<vai-dsd><template shadowrootmode="open"><span>Hidden shadow content</span></template></vai-dsd>',
+        URL,
+    )
+    assert "Before" in page.text
+    assert "After" in page.text
+    assert "Hidden template content" not in page.text
+    assert "Hidden shadow content" not in page.text
+
+
 def test_preformatted_code_preserves_indentation_and_spacing():
     page = process_html("<pre><code>a  b\n  c\n</code></pre>", URL)
     assert page.text == "    a  b\n      c"
@@ -296,6 +320,10 @@ def test_math_removal_preserves_surrounding_text():
 def test_unicode_entities_and_citation_delimiters():
     text = process_html("<p>😀 café 中文 &amp; 【source】</p>", URL).text
     assert text == "😀 café 中文 & 〖source〗"
+
+
+def test_zero_width_space_is_preserved():
+    assert process_html("<p>alpha\u200bbeta</p>", URL).text == "alpha\u200bbeta"
 
 
 def test_xml_encoding_declaration_and_malformed_html():

@@ -242,7 +242,47 @@ def test_unsupported_content_type(mock_http, capsys):
 
     mock_http(handler)
     assert cli.main(["https://launch.test/"]) == 1
-    assert "Expected HTML; received application/pdf" in capsys.readouterr().err
+    assert "Expected HTML or text/plain; received application/pdf" in capsys.readouterr().err
+
+
+def test_plain_text_response_is_exposed_literally(mock_http, capsys):
+    def handler(request):
+        return httpx.Response(
+            200,
+            headers={"content-type": "text/plain; charset=utf-8"},
+            content=b"<h1>Literal source</h1>",
+            request=request,
+        )
+
+    mock_http(handler)
+    assert cli.main(["https://launch.test/", "--format", "text"]) == 0
+    assert capsys.readouterr().out == "<h1>Literal source</h1>\n"
+
+
+def test_missing_content_type_is_exposed_literally(mock_http, capsys):
+    def handler(request):
+        return httpx.Response(200, content=b"<h1>Literal source</h1>", request=request)
+
+    mock_http(handler)
+    assert cli.main(["https://launch.test/", "--format", "json"]) == 0
+    result = json.loads(capsys.readouterr().out)
+    assert result["text"] == "<h1>Literal source</h1>"
+    assert result["title"] == ""
+    assert result["urls"] == {}
+
+
+def test_xhtml_response_is_rejected(mock_http, capsys):
+    def handler(request):
+        return httpx.Response(
+            200,
+            headers={"content-type": "application/xhtml+xml; charset=utf-8"},
+            content=b"<html><body>Body</body></html>",
+            request=request,
+        )
+
+    mock_http(handler)
+    assert cli.main(["https://launch.test/"]) == 1
+    assert "Expected HTML or text/plain; received application/xhtml+xml" in capsys.readouterr().err
 
 
 def test_empty_html_warns_about_client_rendering(monkeypatch, capsys):

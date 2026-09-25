@@ -3,15 +3,9 @@
 Use this workflow for every authoritative comparison between native ChatGPT `web.run` and View as
 AI.
 
-## 1. Deploy and verify
 
-Deploy the fixture to `https://view-as-ai.vercel.app/` and verify the public URL contains the
-expected test sentinels.
-
-For ordinary deployments, push the validated commit to GitHub and let the linked Vercel project's
-Git integration deploy it. Capture only after verifying that the public site is serving the
-intended commit. Manual Vercel CLI deployments are reserved for experiments that explicitly need a
-special deployment scenario.
+For ordinary new deployments, push the validated commit to GitHub and let the linked Vercel project's
+Git integration deploy it.
 
 Use an immutable capture ID:
 
@@ -25,7 +19,7 @@ Example:
 2026-09-24-kitchen-sink-a1b2c3d
 ```
 
-## 2. Capture native web.run
+## 2. Capture native web.run turns for this batch
 
 Follow `code-mode-prompt.md`. The native model-facing page text should move programmatically from
 the live OpenAI web tool result to:
@@ -53,6 +47,8 @@ npm run capture:import-batch --workspace @serbyte/view-as-ai-calibration-site --
   --deployment-commit <verified-deployed-sha> \
   --batch-label turn-2
 ```
+
+You should finish capturing all the turns for this batch before finalizing the evidence bundle.
 
 ## 3. Finalize the evidence bundle
 

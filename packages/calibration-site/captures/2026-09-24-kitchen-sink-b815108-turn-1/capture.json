@@ -676,8 +676,9 @@
     "exact_match": false,
     "layout_tolerant_match": false,
     "view_as_ai_version": "1.0.2",
-    "compared_at": "2026-09-24T23:05:20.115914+00:00",
+    "view_as_ai_fetch_mode": "html",
+    "compared_at": "2026-09-25T15:13:47.379660+00:00",
     "native_sha256": "113c8faf8eab8adb5483187861d2130b377f1d3963eeb38cb9337c8485fe8bac",
-    "view_as_ai_sha256": "ddafcfedd9aca320d80308fc3db560ba9516f474bc2927f6cde44b2c5dc077c2"
+    "view_as_ai_sha256": "fd20a6b3d31c41d920753add597855c660bb404abd27fd977d2345846f3c1623"
   }
 }

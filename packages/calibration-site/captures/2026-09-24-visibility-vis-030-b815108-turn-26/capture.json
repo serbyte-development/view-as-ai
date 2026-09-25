@@ -39,8 +39,9 @@
     "exact_match": false,
     "layout_tolerant_match": false,
     "view_as_ai_version": "1.0.2",
-    "compared_at": "2026-09-25T01:53:21.395085+00:00",
+    "view_as_ai_fetch_mode": "html",
+    "compared_at": "2026-09-25T15:11:56.922262+00:00",
     "native_sha256": "e01aa9430300b5eeefaf1f7868d9c170ebde5359b0f4d7b580e2bfcdab6708d3",
-    "view_as_ai_sha256": "6d6ebe3f15c3210df78e479328a17a0f8662aeb76cfbec9fb739ab168a3f4b05"
+    "view_as_ai_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   }
 }

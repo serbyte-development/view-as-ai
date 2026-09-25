@@ -471,7 +471,14 @@ Coverage: `SIZE-001..SIZE-011`
 
 # Phase 8 — Site-context / cross-page experiments
 
-These are sequential deployment scenarios. Do **not** deploy all variants simultaneously.
+Status: **deferred**. Finish the default-deployment native capture/finalization campaign before
+resuming this phase.
+
+The existing per-variant scenario machinery was useful scaffolding, but the plan to execute roughly
+50 separate site-context scenarios is superseded. When this phase resumes, consolidate execution
+into three same-host deployments: A baseline, B recurrence treatment, and C reversal/cache control.
+Give each experiment a distinct stable target route so all treatments can coexist while each target
+remains byte-identical across A/B/C.
 
 ## Scenario build mode
 
@@ -481,115 +488,96 @@ These are sequential deployment scenarios. Do **not** deploy all variants simult
 - [x] Keep the target page source and emitted bytes stable across scenarios that require an unchanged
   target.
 - [x] Add a local command that prints/hashes the site-context target HTML before deployment.
+- [ ] Replace the many per-variant deployment scenarios with consolidated A/B/C campaign builds.
+- [ ] Give every SITE hypothesis its own stable target route and sentinel family.
+- [ ] Assert every target hash is identical across A/B/C.
+- [ ] Build Deployment A with all targets and no repeating treatment siblings.
+- [ ] Build Deployment B with all isolated recurrence/linkage/class/count sibling corpora present.
+- [ ] Build Deployment C with targets unchanged and B's repeating corpora removed or mutated.
+- [ ] Keep `SITE-SUBDOMAIN` outside A/B/C and evidence gated on a reproducible same-host effect.
 
 ## Page-local baseline
 
 Coverage: `SITE-BASE`
 
-- [x] Build target page with unique header/nav/main/sidebar/footer blocks.
-- [x] Build no sibling containing those blocks in the SITE-BASE scenario.
+- [ ] Fold the target into Deployment A as a campaign-level page-local control.
+- [ ] Preserve the exact target bytes through B and C.
 
 ## Repetition-count scenarios
 
 Coverage: `SITE-COUNT`
 
-- [x] Build target-only scenario.
-- [x] Build target + 1 sibling scenario.
-- [x] Build target + 2 siblings scenario.
-- [x] Build target + 4 siblings scenario.
-- [x] Build target + 9 siblings scenario.
-- [x] Keep target bytes identical across all five scenarios.
+- [ ] Create separate stable targets for +1, +2, +4, and +9 sibling treatments.
+- [ ] Keep each target sibling-free in A, add its assigned sibling count in B, and remove/mutate the
+  repeats in C.
 
 ## Text versus structural repetition
 
 Coverage: `SITE-TEXT`
 
-- [x] Build same markup + same text scenario.
-- [x] Build same markup + different text scenario.
-- [x] Build different markup + same text scenario.
-- [x] Build same link destinations + different labels scenario.
-- [x] Build same labels + different link destinations scenario.
+- [ ] Create one stable target per text/structure/link comparison.
+- [ ] Add all corresponding sibling treatments together in B.
 
 ## Region/landmark recurrence
 
 Coverage: `SITE-REGION`
 
-- [x] Build repeated header variant.
-- [x] Build repeated nav variant.
-- [x] Build repeated neutral div before main.
-- [x] Build repeated aside variant.
-- [x] Build repeated neutral div after main.
-- [x] Build repeated footer variant.
-- [x] Build repeated block inside main.
-- [x] Build role-navigation variant.
-- [x] Build role-complementary variant.
-- [x] Build role-contentinfo variant.
+- [ ] Create one stable target per region/landmark variant.
+- [ ] Add all corresponding repeated sibling blocks together in B.
 
 ## Unique child inside repeated wrapper
 
 Coverage: `SITE-UNIQUE-CHILD`
 
-- [x] Build repeated wrapper + unique plain text child.
-- [x] Build repeated wrapper + unique link child.
-- [x] Build repeated wrapper + unique heading child.
-- [x] Build repeated wrapper + unique alert/status child.
+- [ ] Create stable targets for unique text, link, heading, and alert children.
+- [ ] Add their repeated-wrapper sibling corpora together in B.
 
 ## Discoverability/linkage
 
 Coverage: `SITE-NAV-LINKAGE`
 
-- [x] Build sibling linked from target nav.
-- [x] Build sibling linked only from another sibling.
-- [x] Build sitemap-only sibling.
-- [x] Build completely unlinked sibling.
-- [x] Build noindex sibling.
-- [x] Build robots-excluded sibling scenario for later direct-open verification.
+- [ ] Create isolated target/corpus pairs for nav-linked, sibling-linked, sitemap-only, unlinked,
+  noindex, and robots-excluded discoverability conditions.
+- [ ] Publish the complete linkage matrix in B.
 
 ## Template sanity check
 
 Coverage: `SITE-TEMPLATE`
 
-- [x] Build one shared-component page set.
-- [x] Build one independently authored page set that emits byte-identical HTML.
-- [x] Add an assertion proving the compared origin bytes are identical.
+- [ ] Carry the existing shared-component and independently authored byte-identical sets into the
+  consolidated campaign.
+- [ ] Keep the byte-identity assertion.
 
 ## Class-signal versus recurrence
 
 Coverage: `SITE-CLASS`
 
-- [x] Build neutral-class unique and repeated variants.
-- [x] Build navbar unique and repeated variants.
-- [x] Build breadcrumb unique and repeated variants.
-- [x] Build utility-nav unique and repeated variants.
-- [x] Build related-navigation unique and repeated variants.
-- [x] Build contextual-sidebar unique and repeated variants.
-- [x] Build banner unique and repeated variants.
+- [ ] Create one stable target per class token.
+- [ ] Measure each class with no recurrence in A, exact recurrence in B, and removed/mutated
+  recurrence in C.
 
 ## Before/after unchanged-target experiment
 
 Coverage: `SITE-CHANGE`
 
-- [x] Build scenario A: target block unique.
-- [x] Build scenario B: sibling pages repeat exact target block.
-- [x] Add build-time assertion that target HTML hash is identical between A and B.
-- [x] Make sibling sentinel family unique to this experiment.
+- [ ] Use A/B/C as the before/treatment/reversal sequence.
+- [ ] Include at least two independent target/sentinel/block families.
+- [ ] Assert each target HTML hash is identical across all three deployments.
 
 ## Conversation/session-context corpus
 
 Coverage: `SITE-CONVERSATION`
 
-- [x] Build stable target and sibling pages that can be opened in different conversation orders.
-- [x] Do not require deployment mutation between conversation-order captures.
+- [ ] Carry the stable target and sibling corpus into B.
+- [ ] Run direct-target, siblings-first, and fresh-session captures without another deployment.
 
 ## Host/subdomain scope
 
 Coverage: `SITE-SUBDOMAIN`
 
-- [x] Build the same repeatable block corpus for the Vercel hostname.
-- [x] Prepare a host-agnostic sibling-subdomain scenario that can be deployed unchanged to a second
-  hostname.
-- [x] Keep the different-host control conditional on same-host/sibling-subdomain evidence rather
-  than publishing it prematurely.
+- [ ] Keep this deferred beyond A/B/C.
+- [ ] Run only if the same-host campaign demonstrates a reproducible site-context effect whose host
+  scope is worth measuring.
 
 ---
 
@@ -701,7 +689,7 @@ violate the phase's own entry condition and introduce unneeded variables.
 Default production deployment verification was performed against fixture commit `1fb8356` with
 scenario `default`. Representative baseline, kitchen-sink, visibility, JSON-LD, malformed, and
 size routes matched local `dist/` byte-for-byte. The default deployment contains 520 calibration
-IDs; the 11 `SITE-*` IDs remain intentionally undeployed until their scenario-specific runs.
+IDs; the 11 `SITE-*` IDs are deferred until the consolidated A/B/C campaign is resumed.
 
 ---
 

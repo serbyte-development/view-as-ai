@@ -1,0 +1,47 @@
+{
+  "capture_id": "2026-09-24-api-http-case-http-013-b815108-turn-29",
+  "requested_url": "https://view-as-ai.vercel.app/api/http?case=HTTP-013",
+  "final_url": "https://view-as-ai.vercel.app/api/http?case=HTTP-013",
+  "http_status": 200,
+  "content_type": "application/xhtml+xml; charset=utf-8",
+  "content_encoding": "gzip",
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "c62ba98a9559bdab81d017d3acf366fe420b05d06dca1c4e12627fd5206e69db",
+  "native_sha256": "177382a0d7cb8b0a0f46c86b1ba750f2b1fc37c93345fc0cc2a091acdd1419c1",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "da204fd30cf1888d7b5d65c9b95ba3bb7f4d1ae9",
+  "test_ids": [
+    "HTTP-013"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "948dc4713d216d5215f337860115fd248a3b556afd53139e10a2e31d1d249067",
+  "fixture_definitions": [
+    {
+      "path": "/api/http?case=HTTP-013",
+      "phase": 9,
+      "source": "src/server/http-fixtures.ts",
+      "testIds": [
+        "HTTP-013"
+      ],
+      "sentinels": {
+        "HTTP-013": "VAI_SENTINEL_HTTP_013_PRIMARY_5284F754"
+      },
+      "sentinelGroups": {}
+    }
+  ],
+  "finalized_at": "2026-09-25T02:10:45.347235+00:00",
+  "comparison": {
+    "mode": "fetch-layer",
+    "view_as_ai_fetch_compatible": false,
+    "view_as_ai_fetch_mode": "reject",
+    "view_as_ai_fetch_result": "rejected",
+    "exact_match": null,
+    "layout_tolerant_match": null,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T15:09:26.332146+00:00",
+    "native_sha256": "177382a0d7cb8b0a0f46c86b1ba750f2b1fc37c93345fc0cc2a091acdd1419c1",
+    "view_as_ai_sha256": "7798ea3b1d8853052fc08e152dbd8bea84e53e776e7218180f4309d60e15cfbb"
+  }
+}
