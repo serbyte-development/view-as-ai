@@ -69,11 +69,11 @@ all persisted successfully.
 - Isolated visibility: `VIS-031..VIS-038` under matching
   `captures/2026-09-24-visibility-*-b815108-turn-1/` directories.
 - Original returned batch source: `capture/turn-1.md`.
-- Native evidence now exists for 413 of 531 calibration IDs: 186 `verified`, 55 `mismatch`,
-  and 172 `captured`. 107 default-deployment IDs remain
+- Native evidence now exists for 433 of 531 calibration IDs: 205 `verified`, 56 `mismatch`,
+  and 172 `captured`. 87 default-deployment IDs remain
   `deployed` without native evidence, and the 11 `SITE-*` IDs remain `planned`.
 
-Continue with the remaining default-deployment capture units, beginning at `JSONLD-068`.
+Continue with the remaining default-deployment capture units, beginning at `ACTIVE-009`.
 
 ## TEXT
 
@@ -533,31 +533,31 @@ Continue with the remaining default-deployment capture units, beginning at `JSON
 | JSONLD-065 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-065/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-065-b815108-turn-20/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
 | JSONLD-066 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-066/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-066-b815108-turn-20/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
 | JSONLD-067 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-067/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-067-b815108-turn-20/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
-| JSONLD-068 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-068/ | — | — | — | — | — | — |
-| JSONLD-069 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-069/ | — | — | — | — | — | — |
-| JSONLD-070 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-070/ | — | — | — | — | — | — |
-| JSONLD-071 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-071/ | — | — | — | — | — | — |
-| JSONLD-072 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-072/ | — | — | — | — | — | — |
-| JSONLD-073 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-073/ | — | — | — | — | — | — |
-| JSONLD-074 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-074/ | — | — | — | — | — | — |
-| JSONLD-075 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-075/ | — | — | — | — | — | — |
-| JSONLD-076 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-076/ | — | — | — | — | — | — |
-| JSONLD-077 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-077/ | — | — | — | — | — | — |
-| JSONLD-078 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-078/ | — | — | — | — | — | — |
-| JSONLD-079 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-079/ | — | — | — | — | — | — |
+| JSONLD-068 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-068/ | sentinel groups match | sentinel groups match | yes | captures/2026-09-24-experiments-jsonld-jsonld-068-b815108-turn-21/ | 2026-09-24 @ b815108 | Configured visible/microdata/RDFa and JSON-LD sentinel groups match native web; JSON-LD-only values remain omitted. |
+| JSONLD-069 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-069/ | sentinel groups match | sentinel groups match | yes | captures/2026-09-24-experiments-jsonld-jsonld-069-b815108-turn-21/ | 2026-09-24 @ b815108 | Configured visible/microdata/RDFa and JSON-LD sentinel groups match native web; JSON-LD-only values remain omitted. |
+| JSONLD-070 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-070/ | sentinel groups match | sentinel groups match | yes | captures/2026-09-24-experiments-jsonld-jsonld-070-b815108-turn-21/ | 2026-09-24 @ b815108 | Configured visible/microdata/RDFa and JSON-LD sentinel groups match native web; JSON-LD-only values remain omitted. |
+| JSONLD-071 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-071/ | sentinel groups match | sentinel groups match | yes | captures/2026-09-24-experiments-jsonld-jsonld-071-b815108-turn-21/ | 2026-09-24 @ b815108 | Configured visible/microdata/RDFa and JSON-LD sentinel groups match native web; JSON-LD-only values remain omitted. |
+| JSONLD-072 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-072/ | sentinel groups match | sentinel groups match | yes | captures/2026-09-24-experiments-jsonld-jsonld-072-b815108-turn-21/ | 2026-09-24 @ b815108 | Configured visible/microdata/RDFa and JSON-LD sentinel groups match native web; JSON-LD-only values remain omitted. |
+| JSONLD-073 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-073/ | sentinel groups match | sentinel groups match | yes | captures/2026-09-24-experiments-jsonld-jsonld-073-b815108-turn-21/ | 2026-09-24 @ b815108 | Configured visible/microdata/RDFa and JSON-LD sentinel groups match native web; JSON-LD-only values remain omitted. |
+| JSONLD-074 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-074/ | sentinel groups match | sentinel groups match | yes | captures/2026-09-24-experiments-jsonld-jsonld-074-b815108-turn-21/ | 2026-09-24 @ b815108 | Configured visible/microdata/RDFa and JSON-LD sentinel groups match native web; JSON-LD-only values remain omitted. |
+| JSONLD-075 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-075/ | sentinel groups match | sentinel groups match | yes | captures/2026-09-24-experiments-jsonld-jsonld-075-b815108-turn-21/ | 2026-09-24 @ b815108 | Configured visible/microdata/RDFa and JSON-LD sentinel groups match native web; JSON-LD-only values remain omitted. |
+| JSONLD-076 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-076/ | sentinel groups match | sentinel groups match | yes | captures/2026-09-24-experiments-jsonld-jsonld-076-b815108-turn-21/ | 2026-09-24 @ b815108 | Configured visible/microdata/RDFa and JSON-LD sentinel groups match native web; JSON-LD-only values remain omitted. |
+| JSONLD-077 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-077/ | sentinel groups match | sentinel groups match | yes | captures/2026-09-24-experiments-jsonld-jsonld-077-b815108-turn-21/ | 2026-09-24 @ b815108 | Configured visible/microdata/RDFa and JSON-LD sentinel groups match native web; JSON-LD-only values remain omitted. |
+| JSONLD-078 | mismatch | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-078/ | microdata/visible present; JSON-LD absent | microdata/visible absent; JSON-LD absent | no | captures/2026-09-24-experiments-jsonld-jsonld-078-b815108-turn-22/ | 2026-09-24 @ b815108 | Native web preserves the visible breadcrumb/microdata sentinels while View as AI prunes them; both omit the JSON-LD-only sentinel. |
+| JSONLD-079 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-079/ | sentinel groups match | sentinel groups match | yes | captures/2026-09-24-experiments-jsonld-jsonld-079-b815108-turn-22/ | 2026-09-24 @ b815108 | Configured visible/microdata/RDFa and JSON-LD sentinel groups match native web; JSON-LD-only values remain omitted. |
 
 ## ACTIVE
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ACTIVE-001 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-001/ | — | — | — | — | — | — |
-| ACTIVE-002 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-002/ | — | — | — | — | — | — |
-| ACTIVE-003 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-003/ | — | — | — | — | — | — |
-| ACTIVE-004 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-004/ | — | — | — | — | — | — |
-| ACTIVE-005 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-005/ | — | — | — | — | — | — |
-| ACTIVE-006 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-006/ | — | — | — | — | — | — |
-| ACTIVE-007 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-007/ | — | — | — | — | — | — |
-| ACTIVE-008 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-008/ | — | — | — | — | — | — |
+| ACTIVE-001 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-001/ | absent | absent | yes | captures/2026-09-24-experiments-active-active-001-b815108-turn-22/ | 2026-09-24 @ b815108 | Inline script source sentinel is absent in both outputs; native web does not expose script source. |
+| ACTIVE-002 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-002/ | absent | absent | yes | captures/2026-09-24-experiments-active-active-002-b815108-turn-22/ | 2026-09-24 @ b815108 | External-script-only sentinel is absent in both outputs. |
+| ACTIVE-003 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-003/ | absent | absent | yes | captures/2026-09-24-experiments-active-active-003-b815108-turn-22/ | 2026-09-24 @ b815108 | Immediate script insertion does not execute in either native web extraction or View as AI. |
+| ACTIVE-004 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-004/ | absent | absent | yes | captures/2026-09-24-experiments-active-active-004-b815108-turn-22/ | 2026-09-24 @ b815108 | DOMContentLoaded script insertion does not execute in either output. |
+| ACTIVE-005 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-005/ | absent | absent | yes | captures/2026-09-24-experiments-active-active-005-b815108-turn-22/ | 2026-09-24 @ b815108 | Zero-delay script insertion does not execute in either output. |
+| ACTIVE-006 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-006/ | absent | absent | yes | captures/2026-09-24-experiments-active-active-006-b815108-turn-22/ | 2026-09-24 @ b815108 | One-second script insertion does not execute in either output. |
+| ACTIVE-007 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-007/ | initial value | initial value | yes | captures/2026-09-24-experiments-active-active-007-b815108-turn-22/ | 2026-09-24 @ b815108 | Initial origin value remains in both outputs; the modifying script does not execute. |
+| ACTIVE-008 | verified | https://view-as-ai.vercel.app/experiments/active/ACTIVE-008/ | present | present | yes | captures/2026-09-24-experiments-active-active-008-b815108-turn-22/ | 2026-09-24 @ b815108 | Origin-visible sentinel remains in both outputs; the removal script does not execute. |
 | ACTIVE-009 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-009/ | — | — | — | — | — | — |
 | ACTIVE-010 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-010/ | — | — | — | — | — | — |
 | ACTIVE-011 | deployed | https://view-as-ai.vercel.app/experiments/active/ACTIVE-011/ | — | — | — | — | — | — |

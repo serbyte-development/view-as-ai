@@ -1,0 +1,56 @@
+{
+  "capture_id": "2026-09-24-experiments-jsonld-jsonld-078-b815108-turn-22",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-078/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-078/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": null,
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "05f38bc7546f880c3de700a6a458f92c2abc9c5e6bc7cadaa1bedb49358be3fc",
+  "native_sha256": "eb5ec308af381d31f90c3968e7739da5e20efe203139b81afbe35efe09f2ba32",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "2f7c8580e7b20ff8551f528e08eef396b086ce3e",
+  "test_ids": [
+    "JSONLD-078"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "948dc4713d216d5215f337860115fd248a3b556afd53139e10a2e31d1d249067",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "tsx",
+      "path": "/experiments/jsonld/JSONLD-078/",
+      "phase": 5,
+      "source": "src/fixtures/jsonld.tsx",
+      "testIds": [
+        "JSONLD-078"
+      ],
+      "sentinels": {
+        "JSONLD-078": "VAI_SENTINEL_JSONLD_078_JSONLD_39AACDBF"
+      },
+      "sentinelGroups": {
+        "jsonldOnly": [
+          "VAI_SENTINEL_JSONLD_078_JSONLD_39AACDBF"
+        ],
+        "microdata": [
+          "VAI_SENTINEL_JSONLD_078_MICRODATA_FF20C15B"
+        ],
+        "visible": [
+          "VAI_SENTINEL_JSONLD_078_VISIBLE_D837EA5C"
+        ]
+      }
+    }
+  ],
+  "finalized_at": "2026-09-25T01:32:35.938779+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T01:32:35.942489+00:00",
+    "native_sha256": "eb5ec308af381d31f90c3968e7739da5e20efe203139b81afbe35efe09f2ba32",
+    "view_as_ai_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

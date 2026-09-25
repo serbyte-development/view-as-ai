@@ -1,0 +1,56 @@
+{
+  "capture_id": "2026-09-24-experiments-jsonld-jsonld-076-b815108-turn-21",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-076/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-076/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": null,
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "42c0e7e538941574f3b7ec47d21e1b9fb5b6d2e562cfe165afd2c36ce3c4182a",
+  "native_sha256": "40f85f78cd8796cc5179eb74ad692d63fc39587537ca3218f89206e9bd82e702",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "2f7c8580e7b20ff8551f528e08eef396b086ce3e",
+  "test_ids": [
+    "JSONLD-076"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "948dc4713d216d5215f337860115fd248a3b556afd53139e10a2e31d1d249067",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "tsx",
+      "path": "/experiments/jsonld/JSONLD-076/",
+      "phase": 5,
+      "source": "src/fixtures/jsonld.tsx",
+      "testIds": [
+        "JSONLD-076"
+      ],
+      "sentinels": {
+        "JSONLD-076": "VAI_SENTINEL_JSONLD_076_JSONLD_7D2153A9"
+      },
+      "sentinelGroups": {
+        "jsonldOnly": [
+          "VAI_SENTINEL_JSONLD_076_JSONLD_7D2153A9"
+        ],
+        "microdata": [
+          "VAI_SENTINEL_JSONLD_076_MICRODATA_263795DC"
+        ],
+        "rdfa": [
+          "VAI_SENTINEL_JSONLD_076_RDFA_00EE5FA3"
+        ]
+      }
+    }
+  ],
+  "finalized_at": "2026-09-25T01:32:34.676355+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T01:32:34.678901+00:00",
+    "native_sha256": "40f85f78cd8796cc5179eb74ad692d63fc39587537ca3218f89206e9bd82e702",
+    "view_as_ai_sha256": "ab1919c6111369cbe4557d1bb1fda5e88acffa8b50b31a3b645497db4f0bc716"
+  }
+}

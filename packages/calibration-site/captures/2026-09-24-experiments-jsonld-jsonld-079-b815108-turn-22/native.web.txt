@@ -1,0 +1,5 @@
+view-as-ai.vercel.app (https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-079/)
+citeturn118152view0 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-079/","lineno":null}); Total lines: 3
+L0: VAI_SENTINEL_JSONLD_079_MICRODATA_5DFBEA69
+L1: 
+L2: VAI_SENTINEL_JSONLD_079_VISIBLE_3DD26836

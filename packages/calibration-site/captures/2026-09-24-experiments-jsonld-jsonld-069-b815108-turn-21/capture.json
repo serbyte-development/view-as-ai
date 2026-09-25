@@ -1,0 +1,50 @@
+{
+  "capture_id": "2026-09-24-experiments-jsonld-jsonld-069-b815108-turn-21",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-069/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-069/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": null,
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "37948fc945b8e113a189ad8b84bb50667bf87c1b5301486b6e30605e26856cdf",
+  "native_sha256": "0995bce3c765685ad3c24435244ce7338ae7e5613dbd554e12e7387914889ab4",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "2f7c8580e7b20ff8551f528e08eef396b086ce3e",
+  "test_ids": [
+    "JSONLD-069"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "948dc4713d216d5215f337860115fd248a3b556afd53139e10a2e31d1d249067",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "tsx",
+      "path": "/experiments/jsonld/JSONLD-069/",
+      "phase": 5,
+      "source": "src/fixtures/jsonld.tsx",
+      "testIds": [
+        "JSONLD-069"
+      ],
+      "sentinels": {
+        "JSONLD-069": "VAI_SENTINEL_JSONLD_069_JSONLD_5BF75CE6"
+      },
+      "sentinelGroups": {
+        "jsonldOnly": [
+          "VAI_SENTINEL_JSONLD_069_JSONLD_5BF75CE6"
+        ]
+      }
+    }
+  ],
+  "finalized_at": "2026-09-25T01:32:30.912567+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T01:32:30.914444+00:00",
+    "native_sha256": "0995bce3c765685ad3c24435244ce7338ae7e5613dbd554e12e7387914889ab4",
+    "view_as_ai_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
