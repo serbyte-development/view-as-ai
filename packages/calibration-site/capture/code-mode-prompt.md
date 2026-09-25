@@ -3,10 +3,16 @@
 Use this file as the handoff for a fresh ChatGPT session that needs to capture native ChatGPT
 `web.run` output for View as AI calibration.
 
-## Required tools: Work Mode not Chat Mode
+## Required environment: Work Mode with delegated native-web capture
 
-Enable native web browsing and `@[...] Macbook`. Use Code Mode (`functions.exec`) for the
-OpenAI-side web capture and `@[...] Macbook` for repository writes and validation.
+Use Work Mode so a delegated subagent can call native `web.run` from Code Mode. Repository writes,
+origin fetching, finalization, and validation happen in the parent agent through `@[...] Macbook`.
+
+**Do not let the delegated capture subagent call any connector tool.** During calibration we
+confirmed that once the capture subagent touches a connector such as `@[...] Macbook`, Shellby,
+`fetch_url`, Files, or another MCP connector, native `web.run` may stop being able to open
+previously unknown hosts such as `view-as-ai.vercel.app` for the rest of that subagent session.
+The parent agent may use connectors while the delegated capture subagent is working.
 
 The public calibration site is:
 
@@ -28,98 +34,101 @@ content, and ordering. Incidental file-transport formatting is not part of the o
 newline added by a patch/write tool, CRLF/LF normalization, or an equivalent text-file terminator
 does not invalidate a capture.
 
-The data path must remain programmatic:
+The preferred data path is:
 
 ```text
-live native web/open result
-  -> JavaScript string in Code Mode
-  -> programmatically constructed patch text
-  -> @[...] Macbook apply_patch
+delegated subagent native web/open result
+  -> text() inside the subagent's Code Mode turn
+  -> same subagent returns retained batch in a quadruple-backtick block
+  -> parent subagent_result result
+  -> parent Code Mode extracts only that fenced block
+  -> parent @[...] Macbook apply_patch
+  -> capture/turn-N.md
+  -> capture:import-batch
   -> captures/<capture-id>/native.web.txt
 ```
 
-The model should never be the transport layer for the captured page body.
+The native result must not be manually copied, summarized, reconstructed, or retyped by the parent
+agent. The parent should chain the returned subagent response directly into `apply_patch` from Code
+Mode.
 
 ## Procedure
 
-1. Initialize `@[...] Macbook` with `start_here` in coding mode once per conversation. Reuse an
-   existing initialized connection.
-2. In Code Mode, inspect `ALL_TOOLS` and identify the live OpenAI web-browsing callable that can
-   open a URL, plus the selected Macbook's `apply_patch` callable. Use their exposed names and
-   schemas. During the 2026-09-24 preflight, the native callable was
-   `tools.mcp__codex_apps__search_service_web_run`, with an `open` argument such as
-   `{ open: [{ ref_id: fixtureUrl }], response_length: "long" }`. The Macbook writer was
-   `tools.mcp__codex_apps__austins_macbook_apply_patch`. These exposed names use lowercase;
-   matching `"Macbook"` or requiring an `"__apply_patch"` suffix misses this writer.
-   Confirm discovery in each new environment. Use the native OpenAI callable for the oracle;
-   curl, HTTP clients, browser automation, and Shellby `fetch_url` can verify the origin separately.
-3. Verify that the requested fixture URL is the public deployed URL under
+1. Initialize `@[...] Macbook` in the **parent** conversation with `start_here` in coding mode
+   once per conversation. Reuse that initialized connection for repository work.
+2. Start or reuse a delegated capture subagent that has **never used a connector**. Tell it only to:
+   - use native `web.run` from Code Mode;
+   - open the exact requested public URLs;
+   - immediately pass each model-facing native result through `text()`;
+   - preserve the exact URL/result association;
+   - avoid summarizing or interpreting the result;
+   - avoid every connector/MCP tool other than the native web capability.
+
+   A batch of about 10 URLs is a safe default. Larger batches may be reasonable for known one-line
+   fixtures, but keep the returned response comfortably below tool/context limits.
+3. Verify in the parent that the requested fixture URLs are public deployed URLs under
    `https://view-as-ai.vercel.app/`. Verify the intended production commit using deployment
-   metadata, and choose an unused capture directory. Check that `native.web.txt` does not already
-   exist before writing; preserve existing evidence and use a new capture ID for another run.
-4. Invoke the native `open` callable from Code Mode and keep its returned value in JavaScript.
-   After the call, check both the tool error flag and the returned text. Native access failures can
-   appear as `Internal Error` / `URL ... is not accessible via this tool.` even when `isError` is
-   false. Preserve those responses as diagnostic evidence and record the access failure.
-   An unexpected baseline access failure blocks pipeline validation. An HTTP error deliberately
-   tested by an experiment remains an experiment outcome to interpret.
+   metadata. Keep the deployment stable while the batch is being captured.
+4. **Capture turn:** let the delegated subagent call native `web.run/open` for every URL and emit
+   every native result through `text()`. Native access failures may appear as `Internal Error` /
+   `URL ... is not accessible via this tool.`; retain those results too. An intentionally tested
+   HTTP error remains an experiment outcome rather than a capture-system failure.
+5. **Return turn:** continue with the **same subagent** and make **no new tool calls**. Ask it to
+   reproduce the already-retained results in original order inside one quadruple-backtick fenced
+   block, with:
 
-   Verify the result's reported source/resolved URL against the requested URL and the experiment's
-   documented redirect behavior. Inspect source metadata or the returned header; a matching URL in
-   an ordinary body link is insufficient. Preserve both requested and resolved URLs for intended
-   redirects. Stop on an unexplained different source URL.
-5. Inspect the result structure programmatically and select the complete model-facing text directly
-   from it. An MCP response uses a `content` array; when its sole block has type `text`, the string
-   is `result.content[0].text`. Check the structure before using that path. For a different
-   response shape, identify the returned text fields without guessing, silently dropping blocks,
-   or serializing the whole response object as page text.
+   ```text
+   URL: <exact URL>
+   <retained native result>
+   ```
 
-   Preserve tool-supplied headers, citation/reference notation, line labels, and truncation notices
-   when they are part of the returned text. Preserve characters, punctuation, Unicode, content,
-   and ordering. Incidental line-ending normalization or a terminal file newline is acceptable.
-   Record any returned truncation or partial output when interpreting the capture.
-6. Build the repository patch entirely in the same Code Mode execution from that captured string.
-   The following write fragment assumes steps 3–5 have verified a fresh destination and selected
-   `capturedText` directly from the live result:
+   repeated for each capture. Do not start a fresh subagent between the capture and return turns;
+   turn history is what preserves the `text()` output.
+6. In the parent's Code Mode call, retrieve that return turn using `subagent_result`. The response
+   may include MCP/subagent metadata before or after the assistant content. Programmatically extract
+   only the single quadruple-backtick block. Do not manually copy the block through the model.
+7. In that same parent Code Mode execution, build an `apply_patch` request from the extracted block
+   and write it to:
+
+   `packages/calibration-site/capture/turn-N.md`
+
+   Example parent-side extraction/write:
 
    ```js
-   const repoDir = "/Users/austinserb/Desktop/agent-workspace/projects/modelview"
-   const fixture = "packages/calibration-site/captures/<capture-id>/native.web.txt"
+   const result = await tools.<subagent_result>({
+     turn_ids: ["<return-turn-id>"],
+     wait_ms: 30000,
+   })
 
-   const applyPatchTool = ALL_TOOLS.find(
-     ({ name }) =>
-       name.toLowerCase().includes("austins_macbook") && name.endsWith("_apply_patch"),
-   )
-   if (!applyPatchTool) throw new Error("Macbook apply_patch tool not found")
-   if (typeof capturedText !== "string" || capturedText.length === 0) {
-     throw new Error("Expected model-facing text directly from the native result")
-   }
+   const raw = result.text ?? String(result)
+   const match = raw.match(/````(?:[^\n]*)\n([\s\S]*?)\n````/)
+   if (!match) throw new Error("Expected one quadruple-backtick capture block")
 
-   // Keep the returned text. A terminal newline added by apply_patch is acceptable.
+   const capturedBatch = match[1]
    const patch = [
      "*** Begin Patch",
-     `*** Add File: ${fixture}`,
-     ...capturedText.split("\n").map((line) => `+${line}`),
+     "*** Add File: packages/calibration-site/capture/turn-N.md",
+     ...capturedBatch.split("\n").map((line) => `+${line}`),
      "*** End Patch",
    ].join("\n")
 
-   const writeResult = await tools[applyPatchTool.name]({
-     cwd: repoDir,
+   await tools.<macbook_apply_patch>({
+     cwd: "/Users/austinserb/Desktop/agent-workspace/projects/modelview",
      patch,
    })
-   if (writeResult.isError) throw new Error("Native capture write failed")
-   text(writeResult)
    ```
 
-   Confirm the write succeeded and the file exists. Do not delete an earlier capture, trim the
-   returned text, or add an EOF-repair step for a harmless terminal newline. Hashes may identify
-   the saved artifact; byte equality with the in-memory string is not a capture requirement.
-7. Keep the entire capture, extraction, and patch construction in that Code Mode execution path.
-   Do not print the raw capture into chat and then copy it into a later tool call.
-8. After the raw capture is persisted, use `@[...] Macbook` to fetch/save the corresponding origin
-   HTML independently when the task requires a paired comparison.
-9. Run the repository checks or comparison scripts requested by the task only after the raw native
-   capture is safely persisted.
+8. Import the saved batch mechanically with `capture:import-batch`. The importer accepts both the
+   older per-URL triple-fenced format and the newer raw `URL:`-delimited batch format, rejects
+   partial parses/duplicates/collisions, and creates one immutable `native.web.txt` per URL.
+9. Finalize each capture against the verified deployed commit/scenario, generate
+   `origin.html`, `view-as-ai.txt`, `diff.txt`, and `capture.json`, then update
+   `CALIBRATION_RESULTS.md`.
+10. Validate and commit coherent completed batches locally. Do not push capture-only commits while
+    the production fixture deployment must remain pinned to an earlier verified commit.
+11. The same connector-free subagent may be reused for later native-web batches. Parent connector
+    usage does not contaminate the delegated subagent session; only connector use **inside the
+    delegated subagent** is known to trigger the web-access problem.
 
 After the raw native file exists, return to `capture/README.md` and run the finalize step. That
 fetches the paired origin HTML and generates the current View as AI output and diff.
@@ -138,12 +147,17 @@ fetches the paired origin HTML and generates the current View as AI output and d
   again from the live public URL.
 - Keep raw native captures separate from normalized or derived comparison fixtures. Generate derived
   artifacts with repository code rather than editing the raw capture by hand.
+- Do not make the delegated native-web subagent read repository files or call repository connectors
+  before/during its capture work. Give it the URLs and capture instructions directly in the prompt.
+- Connector/subagent metadata returned by `subagent_result` is not part of the native capture.
+  Strip it programmatically by extracting only the fenced capture block before writing the batch
+  file.
 - If the live web/open callable is unavailable, inaccessible, stale, or returns the wrong URL, stop
   and report that condition instead of creating misleading evidence.
 
 ## Why this matters
 
 Local fixtures can validate View as AI's parser, but only a publicly reachable page can establish
-what native ChatGPT web browsing actually exposes to the model. Keeping the native result on a
-programmatic path from the OpenAI tool response to disk avoids substantive transcription changes
-introduced by the assistant itself.
+what native ChatGPT web browsing actually exposes to the model. The two-turn delegated flow keeps
+native browsing isolated from connector side effects while still giving the parent a programmatic
+path from the retained subagent result to disk.
