@@ -69,11 +69,11 @@ all persisted successfully.
 - Isolated visibility: `VIS-031..VIS-038` under matching
   `captures/2026-09-24-visibility-*-b815108-turn-1/` directories.
 - Original returned batch source: `capture/turn-1.md`.
-- Native evidence now exists for 393 of 531 calibration IDs: 166 `verified`, 55 `mismatch`,
-  and 172 `captured`. 127 default-deployment IDs remain
+- Native evidence now exists for 413 of 531 calibration IDs: 186 `verified`, 55 `mismatch`,
+  and 172 `captured`. 107 default-deployment IDs remain
   `deployed` without native evidence, and the 11 `SITE-*` IDs remain `planned`.
 
-Continue with the remaining default-deployment capture units, beginning at `JSONLD-048`.
+Continue with the remaining default-deployment capture units, beginning at `JSONLD-068`.
 
 ## TEXT
 
@@ -513,26 +513,26 @@ Continue with the remaining default-deployment capture units, beginning at `JSON
 | JSONLD-045 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-045/ | JSON-LD absent | JSON-LD absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-045-b815108-turn-18/ | 2026-09-24 @ b815108 | JSON-LD-only sentinel is omitted by both native web and View as AI. |
 | JSONLD-046 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-046/ | sentinel groups match | sentinel groups match | yes | captures/2026-09-24-experiments-jsonld-jsonld-046-b815108-turn-18/ | 2026-09-24 @ b815108 | Configured visible and JSON-LD sentinel groups match native web; JSON-LD-only values remain omitted. |
 | JSONLD-047 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-047/ | JSON-LD absent | JSON-LD absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-047-b815108-turn-18/ | 2026-09-24 @ b815108 | JSON-LD-only sentinel is omitted by both native web and View as AI. |
-| JSONLD-048 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-048/ | — | — | — | — | — | — |
-| JSONLD-049 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-049/ | — | — | — | — | — | — |
-| JSONLD-050 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-050/ | — | — | — | — | — | — |
-| JSONLD-051 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-051/ | — | — | — | — | — | — |
-| JSONLD-052 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-052/ | — | — | — | — | — | — |
-| JSONLD-053 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-053/ | — | — | — | — | — | — |
-| JSONLD-054 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-054/ | — | — | — | — | — | — |
-| JSONLD-055 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-055/ | — | — | — | — | — | — |
-| JSONLD-056 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-056/ | — | — | — | — | — | — |
-| JSONLD-057 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-057/ | — | — | — | — | — | — |
-| JSONLD-058 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-058/ | — | — | — | — | — | — |
-| JSONLD-059 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-059/ | — | — | — | — | — | — |
-| JSONLD-060 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-060/ | — | — | — | — | — | — |
-| JSONLD-061 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-061/ | — | — | — | — | — | — |
-| JSONLD-062 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-062/ | — | — | — | — | — | — |
-| JSONLD-063 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-063/ | — | — | — | — | — | — |
-| JSONLD-064 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-064/ | — | — | — | — | — | — |
-| JSONLD-065 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-065/ | — | — | — | — | — | — |
-| JSONLD-066 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-066/ | — | — | — | — | — | — |
-| JSONLD-067 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-067/ | — | — | — | — | — | — |
+| JSONLD-048 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-048/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-048-b815108-turn-19/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-049 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-049/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-049-b815108-turn-19/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-050 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-050/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-050-b815108-turn-19/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-051 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-051/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-051-b815108-turn-19/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-052 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-052/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-052-b815108-turn-19/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-053 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-053/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-053-b815108-turn-19/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-054 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-054/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-054-b815108-turn-19/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-055 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-055/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-055-b815108-turn-19/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-056 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-056/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-056-b815108-turn-19/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-057 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-057/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-057-b815108-turn-19/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-058 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-058/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-058-b815108-turn-20/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-059 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-059/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-059-b815108-turn-20/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-060 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-060/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-060-b815108-turn-20/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-061 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-061/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-061-b815108-turn-20/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-062 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-062/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-062-b815108-turn-20/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-063 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-063/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-063-b815108-turn-20/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-064 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-064/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-064-b815108-turn-20/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-065 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-065/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-065-b815108-turn-20/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-066 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-066/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-066-b815108-turn-20/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
+| JSONLD-067 | verified | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-067/ | structured-only absent | structured-only absent | yes | captures/2026-09-24-experiments-jsonld-jsonld-067-b815108-turn-20/ | 2026-09-24 @ b815108 | Configured JSON-LD/script-only sentinel groups are omitted by both native web and View as AI. |
 | JSONLD-068 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-068/ | — | — | — | — | — | — |
 | JSONLD-069 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-069/ | — | — | — | — | — | — |
 | JSONLD-070 | deployed | https://view-as-ai.vercel.app/experiments/jsonld/JSONLD-070/ | — | — | — | — | — | — |
