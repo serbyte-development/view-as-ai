@@ -1,0 +1,45 @@
+{
+  "capture_id": "2026-09-24-experiments-frame-frame-008-b815108-turn-12",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/frame/FRAME-008/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/frame/FRAME-008/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": null,
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "62b580915ee89e2b8cb42ab1365b67c6883bf030add07bf23c5e726e83b53985",
+  "native_sha256": "653bd766e6f3b6992c0095637d6cba159a0ed716530f25d5fdef9203d7a03c56",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "5e57fe3517c0fe1bb93162440cb12704b816aa00",
+  "test_ids": [
+    "FRAME-008"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "20e5b2dd4798b0a651476ef8460aab6ed0367298f6220802d1c90b0cf311feab",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "tsx",
+      "notes": "The FRAME-008 sentinel exists only in the embedded same-origin target.",
+      "path": "/experiments/frame/FRAME-008/",
+      "phase": 4,
+      "source": "src/fixtures/frame-followups.tsx",
+      "testIds": [
+        "FRAME-008"
+      ],
+      "sentinels": {},
+      "sentinelGroups": {}
+    }
+  ],
+  "finalized_at": "2026-09-25T01:18:13.513165+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T01:18:13.515026+00:00",
+    "native_sha256": "653bd766e6f3b6992c0095637d6cba159a0ed716530f25d5fdef9203d7a03c56",
+    "view_as_ai_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

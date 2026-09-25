@@ -1,0 +1,9 @@
+--- native web.run
++++ view-as-ai
+@@ -1,5 +1 @@
+-view-as-ai.vercel.app (https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-021/)
+-citeturn841447view0 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-021/","lineno":null}); Total lines: 3
+-L0: Neutral page content.
+-L1: 
+-L2: [Button: VAI_SENTINEL_BOIL_021_PRIMARY_1506BC2B]
++Neutral page content.

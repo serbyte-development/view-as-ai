@@ -69,11 +69,11 @@ all persisted successfully.
 - Isolated visibility: `VIS-031..VIS-038` under matching
   `captures/2026-09-24-visibility-*-b815108-turn-1/` directories.
 - Original returned batch source: `capture/turn-1.md`.
-- Native evidence now exists for 313 of 531 calibration IDs: 90 `verified`, 51 `mismatch`,
-  and 172 `captured`. 207 default-deployment IDs remain
+- Native evidence now exists for 333 of 531 calibration IDs: 106 `verified`, 55 `mismatch`,
+  and 172 `captured`. 187 default-deployment IDs remain
   `deployed` without native evidence, and the 11 `SITE-*` IDs remain `planned`.
 
-Continue with the remaining default-deployment capture units, beginning at `BOIL-018`.
+Continue with the remaining default-deployment capture units, beginning at `HEAD-005`.
 
 ## TEXT
 
@@ -290,19 +290,19 @@ Continue with the remaining default-deployment capture units, beginning at `BOIL
 | BOIL-015 | mismatch | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-015/ | absent | present | no | captures/2026-09-24-experiments-boilerplate-boil-015-b815108-turn-10/ | 2026-09-24 @ b815108 | Primary-sentinel exposure differs between native web and View as AI. |
 | BOIL-016 | verified | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-016/ | absent | absent | yes | captures/2026-09-24-experiments-boilerplate-boil-016-b815108-turn-10/ | 2026-09-24 @ b815108 | Primary-sentinel exposure matches native web. |
 | BOIL-017 | verified | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-017/ | absent | absent | yes | captures/2026-09-24-experiments-boilerplate-boil-017-b815108-turn-10/ | 2026-09-24 @ b815108 | Primary-sentinel exposure matches native web. |
-| BOIL-018 | deployed | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-018/ | — | — | — | — | — | — |
-| BOIL-019 | deployed | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-019/ | — | — | — | — | — | — |
-| BOIL-020 | deployed | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-020/ | — | — | — | — | — | — |
-| BOIL-021 | deployed | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-021/ | — | — | — | — | — | — |
-| BOIL-022 | deployed | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-022/ | — | — | — | — | — | — |
-| BOIL-023 | deployed | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-023/ | — | — | — | — | — | — |
-| BOIL-024 | deployed | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-024/ | — | — | — | — | — | — |
-| BOIL-025 | deployed | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-025/ | — | — | — | — | — | — |
-| BOIL-026 | deployed | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-026/ | — | — | — | — | — | — |
-| BOIL-027 | deployed | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-027/ | — | — | — | — | — | — |
-| BOIL-028 | deployed | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-028/ | — | — | — | — | — | — |
-| BOIL-029 | deployed | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-029/ | — | — | — | — | — | — |
-| BOIL-030 | deployed | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-030/ | — | — | — | — | — | — |
+| BOIL-018 | verified | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-018/ | absent | absent | yes | captures/2026-09-24-experiments-boilerplate-boil-018-b815108-turn-11/ | 2026-09-24 @ b815108 | Primary-sentinel exposure matches native web. |
+| BOIL-019 | verified | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-019/ | present | present | yes | captures/2026-09-24-experiments-boilerplate-boil-019-b815108-turn-11/ | 2026-09-24 @ b815108 | Primary-sentinel exposure matches native web. |
+| BOIL-020 | mismatch | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-020/ | present | absent | no | captures/2026-09-24-experiments-boilerplate-boil-020-b815108-turn-11/ | 2026-09-24 @ b815108 | Primary-sentinel exposure differs between native web and View as AI. |
+| BOIL-021 | mismatch | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-021/ | present | absent | no | captures/2026-09-24-experiments-boilerplate-boil-021-b815108-turn-11/ | 2026-09-24 @ b815108 | Primary-sentinel exposure differs between native web and View as AI. |
+| BOIL-022 | verified | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-022/ | present | present | yes | captures/2026-09-24-experiments-boilerplate-boil-022-b815108-turn-11/ | 2026-09-24 @ b815108 | Primary-sentinel exposure matches native web. |
+| BOIL-023 | verified | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-023/ | present | present | yes | captures/2026-09-24-experiments-boilerplate-boil-023-b815108-turn-11/ | 2026-09-24 @ b815108 | Primary-sentinel exposure matches native web. |
+| BOIL-024 | verified | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-024/ | present | present | yes | captures/2026-09-24-experiments-boilerplate-boil-024-b815108-turn-11/ | 2026-09-24 @ b815108 | Primary-sentinel exposure matches native web. |
+| BOIL-025 | verified | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-025/ | present | present | yes | captures/2026-09-24-experiments-boilerplate-boil-025-b815108-turn-11/ | 2026-09-24 @ b815108 | Primary-sentinel exposure matches native web. |
+| BOIL-026 | verified | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-026/ | present | present | yes | captures/2026-09-24-experiments-boilerplate-boil-026-b815108-turn-11/ | 2026-09-24 @ b815108 | Primary-sentinel exposure matches native web. |
+| BOIL-027 | mismatch | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-027/ | absent | present | no | captures/2026-09-24-experiments-boilerplate-boil-027-b815108-turn-11/ | 2026-09-24 @ b815108 | Primary-sentinel exposure differs between native web and View as AI. |
+| BOIL-028 | verified | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-028/ | present | present | yes | captures/2026-09-24-experiments-boilerplate-boil-028-b815108-turn-12/ | 2026-09-24 @ b815108 | Primary-sentinel exposure matches native web. |
+| BOIL-029 | verified | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-029/ | present | present | yes | captures/2026-09-24-experiments-boilerplate-boil-029-b815108-turn-12/ | 2026-09-24 @ b815108 | Primary-sentinel exposure matches native web. |
+| BOIL-030 | verified | https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-030/ | present | present | yes | captures/2026-09-24-experiments-boilerplate-boil-030-b815108-turn-12/ | 2026-09-24 @ b815108 | Primary-sentinel exposure matches native web. |
 
 ## CTRL
 
@@ -417,9 +417,9 @@ Continue with the remaining default-deployment capture units, beginning at `BOIL
 | FRAME-003 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
 | FRAME-004 | captured | https://view-as-ai.vercel.app/kitchen-sink/ | absent | absent | — | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary-sentinel outcome captured; case-specific interpretation pending. |
 | FRAME-005 | mismatch | https://view-as-ai.vercel.app/kitchen-sink/ | absent | present | no | captures/2026-09-24-kitchen-sink-b815108-turn-1/ | 2026-09-24 @ b815108 | Primary sentinel differs between native web and View as AI. |
-| FRAME-006 | deployed | https://view-as-ai.vercel.app/experiments/frame/FRAME-006/ | — | — | — | — | — | — |
-| FRAME-007 | deployed | https://view-as-ai.vercel.app/experiments/frame/FRAME-007/ | — | — | — | — | — | — |
-| FRAME-008 | deployed | https://view-as-ai.vercel.app/experiments/frame/FRAME-008/ | — | — | — | — | — | — |
+| FRAME-006 | verified | https://view-as-ai.vercel.app/experiments/frame/FRAME-006/ | absent | absent | yes | captures/2026-09-24-experiments-frame-frame-006-b815108-turn-12/ | 2026-09-24 @ b815108 | Same-origin iframe child sentinel is not inlined by either native web or View as AI. |
+| FRAME-007 | verified | https://view-as-ai.vercel.app/experiments/frame/FRAME-007/ | present | present | yes | captures/2026-09-24-experiments-frame-frame-007-b815108-turn-12/ | 2026-09-24 @ b815108 | Object fallback sentinel is exposed by both native web and View as AI. |
+| FRAME-008 | verified | https://view-as-ai.vercel.app/experiments/frame/FRAME-008/ | absent | absent | yes | captures/2026-09-24-experiments-frame-frame-008-b815108-turn-12/ | 2026-09-24 @ b815108 | Embedded target sentinel is not inlined by either native web or View as AI. |
 
 ## TABLE
 
@@ -444,10 +444,10 @@ Continue with the remaining default-deployment capture units, beginning at `BOIL
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| HEAD-001 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-001/ | — | — | — | — | — | — |
-| HEAD-002 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-002/ | — | — | — | — | — | — |
-| HEAD-003 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-003/ | — | — | — | — | — | — |
-| HEAD-004 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-004/ | — | — | — | — | — | — |
+| HEAD-001 | mismatch | https://view-as-ai.vercel.app/experiments/head/HEAD-001/ | present | absent | no | captures/2026-09-24-experiments-head-head-001-b815108-turn-12/ | 2026-09-24 @ b815108 | Native web exposes the document-title sentinel; View as AI drops it. |
+| HEAD-002 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-002/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-002-b815108-turn-12/ | 2026-09-24 @ b815108 | Title is absent in both native web and View as AI output. |
+| HEAD-003 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-003/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-003-b815108-turn-12/ | 2026-09-24 @ b815108 | Meta-description sentinel is omitted by both native web and View as AI. |
+| HEAD-004 | verified | https://view-as-ai.vercel.app/experiments/head/HEAD-004/ | absent | absent | yes | captures/2026-09-24-experiments-head-head-004-b815108-turn-12/ | 2026-09-24 @ b815108 | Meta-keywords sentinel is omitted by both native web and View as AI. |
 | HEAD-005 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-005/ | — | — | — | — | — | — |
 | HEAD-006 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-006/ | — | — | — | — | — | — |
 | HEAD-007 | deployed | https://view-as-ai.vercel.app/experiments/head/HEAD-007/ | — | — | — | — | — | — |

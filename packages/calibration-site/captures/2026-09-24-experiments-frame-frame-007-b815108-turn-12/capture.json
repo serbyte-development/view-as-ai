@@ -1,0 +1,46 @@
+{
+  "capture_id": "2026-09-24-experiments-frame-frame-007-b815108-turn-12",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/frame/FRAME-007/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/frame/FRAME-007/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": null,
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "587d86f7f8bdd7b2e6e0c7767d0bc05dbd6e3d1d92f4ff6123afe4ab285cb5d4",
+  "native_sha256": "54449d70e4705ccd386a140bc9fbe7bd5aaf772417d12e0431b73d684062bdcf",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "5e57fe3517c0fe1bb93162440cb12704b816aa00",
+  "test_ids": [
+    "FRAME-007"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "20e5b2dd4798b0a651476ef8460aab6ed0367298f6220802d1c90b0cf311feab",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "tsx",
+      "path": "/experiments/frame/FRAME-007/",
+      "phase": 4,
+      "source": "src/fixtures/frame-followups.tsx",
+      "testIds": [
+        "FRAME-007"
+      ],
+      "sentinels": {
+        "FRAME-007": "VAI_SENTINEL_FRAME_007_PRIMARY_C487D173"
+      },
+      "sentinelGroups": {}
+    }
+  ],
+  "finalized_at": "2026-09-25T01:18:13.044188+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T01:18:13.046101+00:00",
+    "native_sha256": "54449d70e4705ccd386a140bc9fbe7bd5aaf772417d12e0431b73d684062bdcf",
+    "view_as_ai_sha256": "264478cc66131cc9afce15cf64690f57f6f6e67dea38b8a13ef50d55deec77fd"
+  }
+}

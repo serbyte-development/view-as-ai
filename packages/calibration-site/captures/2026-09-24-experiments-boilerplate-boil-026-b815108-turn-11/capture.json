@@ -1,0 +1,46 @@
+{
+  "capture_id": "2026-09-24-experiments-boilerplate-boil-026-b815108-turn-11",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-026/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/boilerplate/BOIL-026/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": null,
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "e348283f7e63a429905e6f1a3c9659ec3893d5878226cc90897f8bfe4a0d6cdf",
+  "native_sha256": "5d8fd2489d1437f3063b55db70441daea46163e45ea60f1d594c8bac3c09f60a",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "5e57fe3517c0fe1bb93162440cb12704b816aa00",
+  "test_ids": [
+    "BOIL-026"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "20e5b2dd4798b0a651476ef8460aab6ed0367298f6220802d1c90b0cf311feab",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "tsx",
+      "path": "/experiments/boilerplate/BOIL-026/",
+      "phase": 4,
+      "source": "src/fixtures/boilerplate.tsx",
+      "testIds": [
+        "BOIL-026"
+      ],
+      "sentinels": {
+        "BOIL-026": "VAI_SENTINEL_BOIL_026_PRIMARY_24699D07"
+      },
+      "sentinelGroups": {}
+    }
+  ],
+  "finalized_at": "2026-09-25T01:18:10.309460+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T01:18:10.311531+00:00",
+    "native_sha256": "5d8fd2489d1437f3063b55db70441daea46163e45ea60f1d594c8bac3c09f60a",
+    "view_as_ai_sha256": "f6d8f20eed05abe5a49b16296a465a8d24f646ebc8b81540fd3fc7d2fae2b055"
+  }
+}

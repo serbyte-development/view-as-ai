@@ -1,0 +1,45 @@
+{
+  "capture_id": "2026-09-24-experiments-frame-frame-006-b815108-turn-12",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/frame/FRAME-006/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/frame/FRAME-006/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": null,
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "origin_encoding": "utf-8",
+  "origin_sha256": "2751b41ea3b93994333560231ad1622d59c7874f453976d5387e12888d903df7",
+  "native_sha256": "35efe3a40c8ebdd32e8df948aed67c2b9fefd3f964123649dd1a506a86919fa8",
+  "deployment_commit": "b8151082d794b71bc4b1a54f6b1eb6195ee86a36",
+  "local_commit": "5e57fe3517c0fe1bb93162440cb12704b816aa00",
+  "test_ids": [
+    "FRAME-006"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "20e5b2dd4798b0a651476ef8460aab6ed0367298f6220802d1c90b0cf311feab",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "tsx",
+      "notes": "The FRAME-006 sentinel exists only in the same-origin iframe child.",
+      "path": "/experiments/frame/FRAME-006/",
+      "phase": 4,
+      "source": "src/fixtures/frame-followups.tsx",
+      "testIds": [
+        "FRAME-006"
+      ],
+      "sentinels": {},
+      "sentinelGroups": {}
+    }
+  ],
+  "finalized_at": "2026-09-25T01:18:12.570872+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "compared_at": "2026-09-25T01:18:12.573095+00:00",
+    "native_sha256": "35efe3a40c8ebdd32e8df948aed67c2b9fefd3f964123649dd1a506a86919fa8",
+    "view_as_ai_sha256": "ba77df28b3e25b3117dfe3e46de1fe62408230be3e657f88d46f075a7839256a"
+  }
+}
