@@ -1,3 +1,5 @@
+import pytest
+
 from view_as_ai import process_html, prune_html
 
 
@@ -28,6 +30,60 @@ def test_responsive_hidden_class_is_pruned_without_css_rule():
     assert "Responsive hidden content" not in text
 
 
+@pytest.mark.parametrize(
+    "tag,markup",
+    [
+        ("div", '<div class="hidden-md">TARGET</div>'),
+        ("span", '<span class="hidden-md">TARGET</span>'),
+        ("a", '<a class="hidden-md" href="/target">TARGET</a>'),
+        ("nav", '<nav class="hidden-md">TARGET</nav>'),
+        ("section", '<section class="hidden-md">TARGET</section>'),
+        ("p", '<p class="hidden-md">TARGET</p>'),
+        ("button", '<button class="hidden-md">TARGET</button>'),
+        ("form", '<form class="hidden-md">TARGET</form>'),
+        ("header", '<header class="hidden-md">TARGET</header>'),
+        ("footer", '<footer class="hidden-md">TARGET</footer>'),
+        ("aside", '<aside class="hidden-md">TARGET</aside>'),
+        ("main", '<main class="hidden-md">TARGET</main>'),
+        ("ul", '<ul class="hidden-md"><li>TARGET</li></ul>'),
+        ("li", '<ul><li class="hidden-md">TARGET</li></ul>'),
+    ],
+)
+def test_responsive_hidden_class_is_pruned_across_element_types(tag, markup):
+    assert "TARGET" not in _text(markup), tag
+
+
+@pytest.mark.parametrize("token", ["hidden", "hide", "d-none"])
+def test_exact_visibility_utility_tokens_are_pruned(token):
+    assert "TARGET" not in _text(f'<div class="{token}">TARGET</div>')
+
+
+@pytest.mark.parametrize(
+    "token",
+    [
+        "d-sm-none",
+        "d-md-none",
+        "d-lg-none",
+        "Hidden-MD",
+        "hidden_md",
+        "hiddenmd",
+        "hidden-md-x",
+        "x-hidden-md",
+        "foo-hidden-md-bar",
+        "sm:hidden",
+        "xl:hidden",
+    ],
+)
+def test_nearby_visibility_tokens_are_retained(token):
+    assert "TARGET" in _text(f'<div class="{token}">TARGET</div>')
+
+
+@pytest.mark.parametrize("token", ["hidden", "d-none", "hidden-md"])
+@pytest.mark.parametrize("style", ["display:block", "display:none"])
+def test_inline_style_suppresses_visibility_class_pruning(token, style):
+    assert "TARGET" in _text(f'<div class="{token}" style="{style}">TARGET</div>')
+
+
 def test_schema_breadcrumb_microdata_is_retained():
     html = """
     <nav aria-label="Breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -40,6 +96,11 @@ def test_schema_breadcrumb_microdata_is_retained():
     assert "Visible breadcrumb" in text
 
 
+@pytest.mark.parametrize("token", ["breadcrumb", "breadcrumbs"])
+def test_breadcrumb_class_is_pruned_on_plain_elements(token):
+    assert "TARGET" not in _text(f'<div class="{token}">TARGET</div>')
+
+
 def test_plain_hidden_control_wrapper_is_retained_without_stronger_signal():
     html = """
     <div class="hidden"><form><input placeholder="Search this book ..."></form></div>
@@ -48,6 +109,19 @@ def test_plain_hidden_control_wrapper_is_retained_without_stronger_signal():
     text = _text(html)
     assert "Search this book" in text
     assert "Readable content" in text
+
+
+@pytest.mark.parametrize("token", ["social-links", "skip-link", "ad", "ad-slot"])
+def test_exact_provider_class_tokens_are_pruned(token):
+    assert "TARGET" not in _text(f'<div class="{token}">TARGET</div>')
+
+
+def test_advertisement_class_is_retained():
+    assert "TARGET" in _text('<div class="advertisement">TARGET</div>')
+
+
+def test_share_buttons_token_alone_is_retained():
+    assert "TARGET" in _text('<div class="share-buttons">TARGET</div>')
 
 
 def test_carousel_clone_classes_are_retained_without_stronger_signal():
@@ -159,6 +233,16 @@ def test_banner_inside_main_is_pruned_without_pruning_main_itself():
     text = _text(html)
     assert "Primary content" in text
     assert "Promo" not in text
+
+
+def test_banner_class_on_header_is_pruned_but_plain_banner_role_is_retained():
+    html = """
+    <header class="banner">Class banner</header>
+    <header role="banner">Role banner</header>
+    """
+    text = _text(html)
+    assert "Class banner" not in text
+    assert "Role banner" in text
 
 
 def test_cookie_social_and_share_widgets_are_pruned():

@@ -10,11 +10,44 @@ import lxml.html
 BANNER_TOKEN_RE = re.compile(r"(^|[-_])banner($|[-_])", re.IGNORECASE)
 RESPONSIVE_HIDDEN_TOKEN_RE = re.compile(r"hidden-(?:xs|sm|md|lg)\Z")
 NAVBAR_TOKEN_RE = re.compile(r"(^|[-_])navbar($|[-_])", re.IGNORECASE)
+EXACT_VISIBILITY_CLASS_TOKENS = {"hidden", "hide", "d-none"}
+EXACT_PROVIDER_CLASS_TOKENS = {"social-links", "skip-link", "ad", "ad-slot"}
+
+
+def _class_tokens(node: lxml.html.HtmlElement) -> list[str]:
+    return node.get("class", "").split()
+
+
+def _has_inline_style(node: lxml.html.HtmlElement) -> bool:
+    return node.get("style") is not None
+
+
+def _is_visibility_utility(node: lxml.html.HtmlElement) -> bool:
+    """Match exact visibility utility tokens supported by native captures."""
+    if _has_inline_style(node):
+        return False
+
+    classes = _class_tokens(node)
+    if any(RESPONSIVE_HIDDEN_TOKEN_RE.fullmatch(token) for token in classes):
+        return True
+
+    if not any(token in EXACT_VISIBILITY_CLASS_TOKENS for token in classes):
+        return False
+
+    # Historical native evidence preserves hidden wrappers whose purpose is to
+    # contain form controls. Keep that narrower control case while pruning
+    # ordinary exact-token content blocks.
+    return not (
+        "hidden" in classes
+        and node.xpath(".//form | .//input | .//select | .//textarea | .//button")
+    )
+
+
+def _is_exact_provider_class(node: lxml.html.HtmlElement) -> bool:
+    return any(token in EXACT_PROVIDER_CLASS_TOKENS for token in _class_tokens(node))
 
 
 def _is_banner_like(node: lxml.html.HtmlElement) -> bool:
-    if node.tag == "header":
-        return False
     values = [node.get("id", ""), *node.get("class", "").split()]
     return any(BANNER_TOKEN_RE.search(value) for value in values if value)
 
@@ -24,15 +57,10 @@ def _is_breadcrumb(node: lxml.html.HtmlElement) -> bool:
     if node.get("itemscope") is not None and "schema.org/breadcrumblist" in item_type:
         return False
     aria_label = node.get("aria-label", "").strip().lower()
-    values = [node.get("id", ""), *node.get("class", "").split()]
-    return aria_label == "breadcrumb" or any("breadcrumb" in value.lower() for value in values)
-
-
-def _is_responsive_hidden_control(node: lxml.html.HtmlElement) -> bool:
-    """Match responsive hidden class tokens supported by native captures."""
-    return node.tag in ("a", "div", "nav") and any(
-        RESPONSIVE_HIDDEN_TOKEN_RE.fullmatch(token) for token in node.get("class", "").split()
-    )
+    classes = _class_tokens(node)
+    if aria_label == "breadcrumb" or any("breadcrumb" in value.lower() for value in classes):
+        return True
+    return node.tag in {"nav", "ul", "ol"} and "breadcrumb" in node.get("id", "").lower()
 
 
 def _is_hidden_decorative_image_wrapper(node: lxml.html.HtmlElement) -> bool:
@@ -58,13 +86,13 @@ def _is_hidden_decorative_image_wrapper(node: lxml.html.HtmlElement) -> bool:
 
 def _is_framework_social_widget(node: lxml.html.HtmlElement) -> bool:
     """Match framework-declared social widgets and skip-navigation links."""
-    classes = node.get("class", "").split()
+    classes = _class_tokens(node)
     return (
         (node.tag == "ul" and "et_pb_social_media_follow" in classes)
-        or (node.tag == "ul" and "social-links" in classes)
-        or (node.tag == "div" and "share-buttons" in classes)
+        or "social-links" in classes
+        or ("share-buttons" in classes and bool(node.xpath(".//a")))
         or (node.tag == "a" and "elementor-social-icon" in classes)
-        or (node.tag == "a" and "skip-link" in classes)
+        or "skip-link" in classes
     )
 
 
@@ -138,10 +166,10 @@ def prune_html(html: str) -> str:
 
     Current rules are limited to patterns supported by the native fixture corpus:
     explicit ARIA navigation landmarks, selected banner blocks, ordinary
-    breadcrumbs, responsive hidden class tokens, purely decorative hidden images,
-    explicit popup/related navigation, complementary/contentinfo regions, cookie
-    notices, and selected social/share widgets. Plain navigation and preference
-    controls remain unless another supported signal applies.
+    breadcrumbs, exact visibility utility class tokens, purely decorative hidden
+    images, explicit popup/related navigation, complementary/contentinfo regions,
+    cookie notices, and selected social/share/ad widgets. Plain navigation and
+    preference controls remain unless another supported signal applies.
     """
     root = lxml.html.document_fromstring(
         (html if html.strip() else "<html></html>").encode("utf-8"),
@@ -158,15 +186,16 @@ def prune_html(html: str) -> str:
             or "promo-banner" in node.get("class", "").split()
         )
     )
-    candidates.extend(node for node in root.xpath(".//nav | .//ul | .//ol") if _is_breadcrumb(node))
+    candidates.extend(node for node in root.xpath(".//*") if _is_breadcrumb(node))
     candidates.extend(
         node
         for node in root.xpath(".//*[@class]")
-        if _is_responsive_hidden_control(node)
+        if _is_visibility_utility(node)
         or _is_search_utility_bar(node)
         or _is_hidden_decorative_image_wrapper(node)
         or _is_framework_social_widget(node)
         or _is_private_use_social_link(node)
+        or _is_exact_provider_class(node)
     )
     candidates.extend(node for node in root.xpath(".//*") if _is_menu_popup(node))
     candidates.extend(node for node in root.xpath(".//*") if _is_related_navigation(node))
@@ -174,12 +203,6 @@ def prune_html(html: str) -> str:
     candidates.extend(node for node in root.xpath(".//*") if _is_complementary_region(node))
     candidates.extend(node for node in root.xpath(".//*") if _is_contentinfo_region(node))
     candidates.extend(node for node in root.xpath(".//nav") if _is_navbar_navigation(node))
-    # Native captures omit closed-state alternate labels and hidden separators.
-    # Conditional class variants and screen-reader-only text keep their content.
-    candidates.extend(
-        node for node in root.xpath(".//span[@class]") if "hidden" in node.get("class", "").split()
-    )
-
     selected: list[lxml.html.HtmlElement] = []
     candidate_ids = {id(node) for node in candidates}
     for node in candidates:

@@ -664,7 +664,7 @@ before additional runtime changes.
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TOKEN-001 | mismatch | https://view-as-ai.vercel.app/experiments/dense/token-semantics/ | lexical class-token pruning observed; treatments retained through 75% control | differs on 27 non-terminal sentinels plus 95% truncation control | no | captures/2026-09-28-experiments-dense-token-semantics-1e55bfb-turn-36/ | 2026-09-28 @ 1e55bfb | Native prunes several exact class tokens including `hidden`, `hide`, Bootstrap responsive-hidden tokens, `d-none`, navbar/breadcrumb/social/skip/ad vocabulary, and `hidden-md` across all tested element types. Exact-token mutations survive; inline `style` changes the `hidden-md` outcome and needs isolated follow-up before changing the runtime. |
+| TOKEN-001 | mismatch | https://view-as-ai.vercel.app/experiments/dense/token-semantics/ | lexical class-token pruning observed; treatments retained through 75% control | matches calibrated visibility/social/ad/banner/breadcrumb class rules; retains navbar/navbar-nav and schema breadcrumb; full page retained | no | captures/2026-09-28-experiments-dense-token-semantics-1e55bfb-turn-36/ | 2026-09-28 @ 1e55bfb | Current pruning now reproduces the unambiguous exact-token behavior, including `hidden`/`hide`/`d-none`, responsive `hidden-*`, element-type coverage, inline-style suppression, and exact-token mutation boundaries. Navbar behavior conflicts within the dense page, schema breadcrumb conflicts with prior verified evidence, and the 95% marker is a native truncation boundary. |
 
 ## CHAN
 
