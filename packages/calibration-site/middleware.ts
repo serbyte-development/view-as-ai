@@ -1,4 +1,4 @@
-import { buildRequestTelemetry } from "./src/request-telemetry";
+import { buildRequestTelemetry } from "./src/request-telemetry.js";
 
 export default function middleware(request: Request): void {
   const telemetry = buildRequestTelemetry(request);
