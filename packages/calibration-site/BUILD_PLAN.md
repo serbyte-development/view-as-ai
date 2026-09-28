@@ -646,6 +646,19 @@ Coverage: `TOKEN-001`
   interactions with unique labeled sentinels.
 - [x] Spread position controls through the page so a truncated native result is detectable.
 
+## Navbar heuristic follow-up matrix
+
+Route: `/experiments/dense/navbar-heuristics/`
+
+Coverage: `TOKEN-002`
+
+- [x] Generate roughly 6,000 words of deterministic neutral filler without framework CSS.
+- [x] Isolate element type, content/link density, roles/ARIA, Bootstrap class combinations,
+  surrounding landmark/main context, inline styles, and within-page repetition.
+- [x] Repeat the same simple navbar shape at early/middle/late positions to test positional effects.
+- [x] Keep all actual navbar treatments before the 75 percent marker and retain 10/25/50/75/95
+  percent truncation controls.
+
 ## Non-text-node channel matrix
 
 Route: `/experiments/dense/non-text-channels/`

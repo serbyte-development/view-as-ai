@@ -971,6 +971,11 @@ roughly 6,000-word page and use unique labeled sentinels for each matrix cell.
   navigation/chrome vocabulary, token mutations, `class` versus `id`/other attributes, element
   types, and a small set of CSS/context interactions. No framework stylesheet is loaded. The page
   includes 10/25/50/75/95 percent position controls so truncation cannot be mistaken for pruning.
+- **TOKEN-002:** one dense navbar follow-up page isolating the contradictory `navbar` result from
+  TOKEN-001. Test element type, link/form density, navigation roles/ARIA labels, Bootstrap class
+  combinations, inside/outside-main and landmark context, inline styles, within-page repetition,
+  class versus non-class attributes, and the same simple `div.navbar` shape at early/middle/late
+  positions. Keep all treatment groups before the 75 percent position control.
 
 Primary questions:
 
@@ -981,6 +986,8 @@ Primary questions:
 - Does contradictory inline CSS override or fail to override a lexical heuristic?
 - Are semantic/chrome tokens such as `navbar`, `breadcrumb`, `banner`, cookie/social/share, and
   related-navigation vocabulary recognized independently of actual page recurrence?
+- For `navbar`, which local structural/context signal explains why the same bare class was both
+  omitted and retained in TOKEN-001?
 
 ## CHAN — Dense non-text-node and fetch-metadata channels
 

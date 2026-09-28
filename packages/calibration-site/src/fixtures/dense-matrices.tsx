@@ -3,6 +3,7 @@ import type { FixtureRoute } from "../fixture-types";
 import { sentinel } from "../sentinel";
 
 const TOKEN_ID = "TOKEN-001";
+const NAVBAR_ID = "TOKEN-002";
 const CHANNEL_ID = "CHAN-001";
 
 const neutralVocabulary = [
@@ -89,6 +90,7 @@ function Filler({ segment }: { segment: number }) {
 }
 
 const tokenMarker = (label: string) => sentinel(TOKEN_ID, label);
+const navbarMarker = (label: string) => sentinel(NAVBAR_ID, label);
 const channelMarker = (label: string) => sentinel(CHANNEL_ID, label);
 
 const classTokens: Array<[string, string]> = [
@@ -363,6 +365,324 @@ function TokenMatrixPage() {
   );
 }
 
+const navbarGroupLabels = {
+  element_types: [
+    "ELEMENT_DIV",
+    "ELEMENT_NAV",
+    "ELEMENT_HEADER",
+    "ELEMENT_SECTION",
+    "ELEMENT_ASIDE",
+    "ELEMENT_FORM",
+  ],
+  content_shapes: [
+    "CONTENT_TEXT_ONLY",
+    "CONTENT_ONE_LINK",
+    "CONTENT_FIVE_LINKS",
+    "CONTENT_THIRTY_ONE_LINKS",
+    "CONTENT_LIST_LINKS",
+    "CONTENT_FORM_ONLY",
+    "CONTENT_FORM_AND_LINKS",
+    "CONTENT_HEADING_PARAGRAPH",
+    "CONTENT_ARTICLE_CHILD",
+  ],
+  semantics: [
+    "SEM_ROLE_NAVIGATION",
+    "SEM_ROLE_SEARCH",
+    "SEM_ARIA_MAIN",
+    "SEM_ARIA_PRIMARY",
+    "SEM_ARIA_UTILITY",
+    "SEM_NAV_ROLE_NAVIGATION",
+    "SEM_NAV_ARIA_MAIN",
+    "SEM_NAV_ARIA_PRIMARY",
+  ],
+  class_combinations: [
+    "CLASS_NAVBAR_NAV",
+    "CLASS_NAVBAR_NAVBAR_NAV",
+    "CLASS_NAVBAR_EXPAND_LG",
+    "CLASS_NAVBAR_LIGHT",
+    "CLASS_NAVBAR_DARK",
+    "CLASS_NAVBAR_BRAND",
+    "CLASS_BOOTSTRAP_COMBO",
+    "CLASS_REVERSED_COMBO",
+    "CLASS_NAVBAR_X",
+    "CLASS_X_NAVBAR",
+    "CLASS_NAV_BAR",
+    "CLASS_NAVBAR_UNDERSCORE",
+  ],
+  contexts: [
+    "CONTEXT_OUTSIDE_MAIN",
+    "CONTEXT_INSIDE_MAIN",
+    "CONTEXT_INSIDE_HEADER",
+    "CONTEXT_INSIDE_FOOTER",
+    "CONTEXT_INSIDE_ASIDE",
+    "CONTEXT_INSIDE_ARTICLE",
+    "CONTEXT_BEFORE_ARTICLE",
+    "CONTEXT_AFTER_ARTICLE",
+  ],
+  styles: [
+    "STYLE_DISPLAY_BLOCK",
+    "STYLE_DISPLAY_NONE",
+    "STYLE_VISIBILITY_HIDDEN",
+    "STYLE_OPACITY_ZERO",
+  ],
+  repetition: ["REPEAT_SINGLE", "REPEAT_TRIPLE_A", "REPEAT_TRIPLE_B", "REPEAT_TRIPLE_C"],
+  position_variants: ["POSITION_EARLY", "POSITION_MIDDLE", "POSITION_LATE"],
+  attribute_controls: ["ATTR_ID_NAVBAR", "ATTR_DATA_NAVBAR", "ATTR_ARIA_NAVBAR"],
+  position_controls: ["POS_10", "POS_25", "POS_50", "POS_75", "POS_95"],
+};
+
+const navbarSentinelGroups = Object.fromEntries(
+  Object.entries(navbarGroupLabels).map(([group, labels]) => [group, labels.map(navbarMarker)]),
+);
+
+function NavbarLinks({ count }: { count: number }) {
+  const hrefs = Array.from(
+    { length: count },
+    (_, index) => `/navbar-target-${count}-${index + 1}/`,
+  );
+  return (
+    <>
+      {hrefs.map((href, index) => (
+        <a href={href} key={href}>
+          Navbar target {index + 1}
+        </a>
+      ))}
+    </>
+  );
+}
+
+function NavbarElementCases() {
+  return (
+    <>
+      <div className="navbar">{navbarMarker("ELEMENT_DIV")}</div>
+      <nav className="navbar">{navbarMarker("ELEMENT_NAV")}</nav>
+      <header className="navbar">{navbarMarker("ELEMENT_HEADER")}</header>
+      <section className="navbar">{navbarMarker("ELEMENT_SECTION")}</section>
+      <aside className="navbar">{navbarMarker("ELEMENT_ASIDE")}</aside>
+      <form className="navbar">{navbarMarker("ELEMENT_FORM")}</form>
+    </>
+  );
+}
+
+function NavbarContentCases() {
+  return (
+    <>
+      <div className="navbar">{navbarMarker("CONTENT_TEXT_ONLY")}</div>
+      <div className="navbar">
+        <span>{navbarMarker("CONTENT_ONE_LINK")}</span>
+        <NavbarLinks count={1} />
+      </div>
+      <div className="navbar">
+        <span>{navbarMarker("CONTENT_FIVE_LINKS")}</span>
+        <NavbarLinks count={5} />
+      </div>
+      <div className="navbar">
+        <span>{navbarMarker("CONTENT_THIRTY_ONE_LINKS")}</span>
+        <NavbarLinks count={31} />
+      </div>
+      <div className="navbar">
+        <span>{navbarMarker("CONTENT_LIST_LINKS")}</span>
+        <ul>
+          <li>
+            <a href="/navbar-list-1/">List 1</a>
+          </li>
+          <li>
+            <a href="/navbar-list-2/">List 2</a>
+          </li>
+          <li>
+            <a href="/navbar-list-3/">List 3</a>
+          </li>
+        </ul>
+      </div>
+      <div className="navbar">
+        <span>{navbarMarker("CONTENT_FORM_ONLY")}</span>
+        <form>
+          <input placeholder="Search matrix" />
+        </form>
+      </div>
+      <div className="navbar">
+        <span>{navbarMarker("CONTENT_FORM_AND_LINKS")}</span>
+        <form>
+          <input placeholder="Search links" />
+        </form>
+        <NavbarLinks count={5} />
+      </div>
+      <div className="navbar">
+        <h2>{navbarMarker("CONTENT_HEADING_PARAGRAPH")}</h2>
+        <p>Neutral navbar paragraph.</p>
+      </div>
+      <div className="navbar">
+        <article>
+          <p>{navbarMarker("CONTENT_ARTICLE_CHILD")}</p>
+        </article>
+      </div>
+    </>
+  );
+}
+
+function NavbarSemanticCases() {
+  return (
+    <>
+      <div className="navbar" role="navigation">
+        {navbarMarker("SEM_ROLE_NAVIGATION")}
+      </div>
+      <div className="navbar" role="search">
+        {navbarMarker("SEM_ROLE_SEARCH")}
+      </div>
+      {/* biome-ignore lint/a11y/useAriaPropsSupportedByRole: exact div/attribute placement is the calibration variable. */}
+      <div className="navbar" aria-label="main">
+        {navbarMarker("SEM_ARIA_MAIN")}
+      </div>
+      {/* biome-ignore lint/a11y/useAriaPropsSupportedByRole: exact div/attribute placement is the calibration variable. */}
+      <div className="navbar" aria-label="primary">
+        {navbarMarker("SEM_ARIA_PRIMARY")}
+      </div>
+      {/* biome-ignore lint/a11y/useAriaPropsSupportedByRole: exact div/attribute placement is the calibration variable. */}
+      <div className="navbar" aria-label="utility">
+        {navbarMarker("SEM_ARIA_UTILITY")}
+      </div>
+      <nav className="navbar" role="navigation">
+        {navbarMarker("SEM_NAV_ROLE_NAVIGATION")}
+      </nav>
+      <nav className="navbar" aria-label="main">
+        {navbarMarker("SEM_NAV_ARIA_MAIN")}
+      </nav>
+      <nav className="navbar" aria-label="primary">
+        {navbarMarker("SEM_NAV_ARIA_PRIMARY")}
+      </nav>
+    </>
+  );
+}
+
+function NavbarClassCases() {
+  return (
+    <>
+      <div className="navbar-nav">{navbarMarker("CLASS_NAVBAR_NAV")}</div>
+      <div className="navbar navbar-nav">{navbarMarker("CLASS_NAVBAR_NAVBAR_NAV")}</div>
+      <div className="navbar navbar-expand-lg">{navbarMarker("CLASS_NAVBAR_EXPAND_LG")}</div>
+      <div className="navbar navbar-light">{navbarMarker("CLASS_NAVBAR_LIGHT")}</div>
+      <div className="navbar navbar-dark">{navbarMarker("CLASS_NAVBAR_DARK")}</div>
+      <div className="navbar navbar-brand">{navbarMarker("CLASS_NAVBAR_BRAND")}</div>
+      <div className="navbar navbar-expand-lg navbar-light">
+        {navbarMarker("CLASS_BOOTSTRAP_COMBO")}
+      </div>
+      <div className="navbar-light navbar-expand-lg navbar">
+        {navbarMarker("CLASS_REVERSED_COMBO")}
+      </div>
+      <div className="navbar-x">{navbarMarker("CLASS_NAVBAR_X")}</div>
+      <div className="x-navbar">{navbarMarker("CLASS_X_NAVBAR")}</div>
+      <div className="nav-bar">{navbarMarker("CLASS_NAV_BAR")}</div>
+      <div className="navbar_custom">{navbarMarker("CLASS_NAVBAR_UNDERSCORE")}</div>
+    </>
+  );
+}
+
+function NavbarContextCases() {
+  return (
+    <>
+      <div className="navbar">{navbarMarker("CONTEXT_OUTSIDE_MAIN")}</div>
+      <main>
+        <div className="navbar">{navbarMarker("CONTEXT_INSIDE_MAIN")}</div>
+      </main>
+      <header>
+        <div className="navbar">{navbarMarker("CONTEXT_INSIDE_HEADER")}</div>
+      </header>
+      <footer>
+        <div className="navbar">{navbarMarker("CONTEXT_INSIDE_FOOTER")}</div>
+      </footer>
+      <aside>
+        <div className="navbar">{navbarMarker("CONTEXT_INSIDE_ASIDE")}</div>
+      </aside>
+      <article>
+        <div className="navbar">{navbarMarker("CONTEXT_INSIDE_ARTICLE")}</div>
+      </article>
+      <div className="navbar">{navbarMarker("CONTEXT_BEFORE_ARTICLE")}</div>
+      <article>
+        <p>Neutral article between navbar controls.</p>
+      </article>
+      <div className="navbar">{navbarMarker("CONTEXT_AFTER_ARTICLE")}</div>
+    </>
+  );
+}
+
+function NavbarStyleCases() {
+  return (
+    <>
+      <div className="navbar" style={{ display: "block" }}>
+        {navbarMarker("STYLE_DISPLAY_BLOCK")}
+      </div>
+      <div className="navbar" style={{ display: "none" }}>
+        {navbarMarker("STYLE_DISPLAY_NONE")}
+      </div>
+      <div className="navbar" style={{ visibility: "hidden" }}>
+        {navbarMarker("STYLE_VISIBILITY_HIDDEN")}
+      </div>
+      <div className="navbar" style={{ opacity: 0 }}>
+        {navbarMarker("STYLE_OPACITY_ZERO")}
+      </div>
+    </>
+  );
+}
+
+function NavbarRepetitionCases() {
+  return (
+    <>
+      <div className="navbar">{navbarMarker("REPEAT_SINGLE")}</div>
+      <div className="navbar">{navbarMarker("REPEAT_TRIPLE_A")}</div>
+      <div className="navbar">{navbarMarker("REPEAT_TRIPLE_B")}</div>
+      <div className="navbar">{navbarMarker("REPEAT_TRIPLE_C")}</div>
+    </>
+  );
+}
+
+function NavbarAttributeControls() {
+  return (
+    <>
+      <div id="navbar">{navbarMarker("ATTR_ID_NAVBAR")}</div>
+      <div data-token="navbar">{navbarMarker("ATTR_DATA_NAVBAR")}</div>
+      {/* biome-ignore lint/a11y/useAriaPropsSupportedByRole: exact div/attribute placement is the calibration variable. */}
+      <div aria-label="navbar">{navbarMarker("ATTR_ARIA_NAVBAR")}</div>
+    </>
+  );
+}
+
+function NavbarFollowupPage() {
+  return (
+    <Document
+      head={<title>Dense navbar heuristic matrix</title>}
+      body={
+        <>
+          <p>{sentinel(NAVBAR_ID, "BODY_CONTROL")}</p>
+          <Filler segment={31} />
+          <p>{navbarMarker("POS_10")}</p>
+          <div className="navbar">{navbarMarker("POSITION_EARLY")}</div>
+          <NavbarElementCases />
+          <NavbarContentCases />
+          <Filler segment={32} />
+          <p>{navbarMarker("POS_25")}</p>
+          <NavbarSemanticCases />
+          <NavbarClassCases />
+          <Filler segment={33} />
+          <div className="navbar">{navbarMarker("POSITION_MIDDLE")}</div>
+          <NavbarContextCases />
+          <Filler segment={34} />
+          <p>{navbarMarker("POS_50")}</p>
+          <NavbarStyleCases />
+          <NavbarRepetitionCases />
+          <NavbarAttributeControls />
+          <Filler segment={35} />
+          <div className="navbar">{navbarMarker("POSITION_LATE")}</div>
+          <Filler segment={36} />
+          <p>{navbarMarker("POS_75")}</p>
+          <Filler segment={37} />
+          <p>{navbarMarker("POS_95")}</p>
+          <Filler segment={38} />
+        </>
+      }
+    />
+  );
+}
+
 const channelLabels = {
   attributes: [
     "ATTR_DIV_TITLE",
@@ -594,6 +914,20 @@ export const denseMatrixRoutes: FixtureRoute[] = [
       sentinelGroups: tokenGroupValues,
       notes:
         "Dense 6k-word page testing class-token dictionaries, mutations, attribute placement, element type, and CSS/context interactions in one native capture.",
+    },
+  },
+  {
+    path: "/experiments/dense/navbar-heuristics/",
+    kind: "tsx",
+    render: () => <NavbarFollowupPage />,
+    metadata: {
+      phase: 10,
+      source: "src/fixtures/dense-matrices.tsx",
+      testIds: [NAVBAR_ID],
+      sentinels: { [NAVBAR_ID]: sentinel(NAVBAR_ID, "BODY_CONTROL") },
+      sentinelGroups: navbarSentinelGroups,
+      notes:
+        "Dense 6k-word follow-up isolating navbar token behavior across element type, content shape, semantics, class combinations, page context, styles, repetition, attributes, and page position.",
     },
   },
   {
