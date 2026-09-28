@@ -1,0 +1,70 @@
+[
+  [
+    "age",
+    "0"
+  ],
+  [
+    "cache-control",
+    "public, max-age=0, must-revalidate"
+  ],
+  [
+    "content-disposition",
+    "inline; filename=\"VAI_SENTINEL_CHAN_002_HEADER_FILENAME_B34A6BAA.html\""
+  ],
+  [
+    "content-encoding",
+    "gzip"
+  ],
+  [
+    "content-location",
+    "/channel/VAI_SENTINEL_CHAN_002_HEADER_CONTENT_LOCATION_DAA335D9"
+  ],
+  [
+    "content-type",
+    "text/html; charset=utf-8"
+  ],
+  [
+    "date",
+    "Mon, 28 Sep 2026 13:20:25 GMT"
+  ],
+  [
+    "etag",
+    "W/\"VAI_SENTINEL_CHAN_002_HEADER_ETAG_6CDDF904\""
+  ],
+  [
+    "link",
+    "<https://view-as-ai.vercel.app/channel/VAI_SENTINEL_CHAN_002_HEADER_LINK_F7F338FA>; rel=\"canonical\""
+  ],
+  [
+    "server",
+    "Vercel"
+  ],
+  [
+    "server-timing",
+    "vai;desc=\"VAI_SENTINEL_CHAN_002_HEADER_SERVER_TIMING_83A34E8E\""
+  ],
+  [
+    "strict-transport-security",
+    "max-age=63072000; includeSubDomains; preload"
+  ],
+  [
+    "x-robots-tag",
+    "noindex, VAI_SENTINEL_CHAN_002_HEADER_ROBOTS_DAB4F7C7"
+  ],
+  [
+    "x-vai-marker",
+    "VAI_SENTINEL_CHAN_002_HEADER_CUSTOM_3085C78C"
+  ],
+  [
+    "x-vercel-cache",
+    "MISS"
+  ],
+  [
+    "x-vercel-id",
+    "pdx1::iad1::vpx8f-1790601625582-a5b21dc39082"
+  ],
+  [
+    "transfer-encoding",
+    "chunked"
+  ]
+]

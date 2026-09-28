@@ -1,0 +1,114 @@
+{
+  "capture_id": "2026-09-28-experiments-dense-non-text-channels-1e55bfb-turn-36",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/dense/non-text-channels/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/dense/non-text-channels/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": "gzip",
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "view_as_ai_fetch_mode": "html",
+  "origin_encoding": "utf-8",
+  "origin_sha256": "666d2957f5176c6b83c48235d9b88a51f9f9921902f32d64d3952be9aee59283",
+  "origin_headers_sha256": "24e43acd894bd260b6f43b6aa4916aef83220f5649ffd1a9bd84d3103953bad6",
+  "native_sha256": "56755344aa2d36478ca4b55c60e05a6eb74a0a588c8db1d50aafdc6eef8e9904",
+  "deployment_commit": "1e55bfb6277a2bdf7fc3686e42574e60cb6e6d45",
+  "local_commit": "1e55bfb6277a2bdf7fc3686e42574e60cb6e6d45",
+  "test_ids": [
+    "CHAN-001"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "db35fefe2b76024c55d415defc1ac1d4f87a862a886808665c1c271493baefa7",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "tsx",
+      "notes": "Dense 6k-word page testing values outside ordinary DOM text nodes: attributes, head metadata, CSS-generated/source-only content, and source-only script/comment channels.",
+      "path": "/experiments/dense/non-text-channels/",
+      "phase": 10,
+      "source": "src/fixtures/dense-matrices.tsx",
+      "testIds": [
+        "CHAN-001"
+      ],
+      "sentinels": {
+        "CHAN-001": "VAI_SENTINEL_CHAN_001_BODY_CONTROL_724EA6B9"
+      },
+      "sentinelGroups": {
+        "attributes": [
+          "VAI_SENTINEL_CHAN_001_ATTR_DIV_TITLE_941E4D8B",
+          "VAI_SENTINEL_CHAN_001_ATTR_DIV_ARIA_LABEL_F79A9D93",
+          "VAI_SENTINEL_CHAN_001_ATTR_DIV_DATA_06FC9443",
+          "VAI_SENTINEL_CHAN_001_ATTR_DIV_ID_E891E405",
+          "VAI_SENTINEL_CHAN_001_ATTR_DIV_CLASS_87FF1053",
+          "VAI_SENTINEL_CHAN_001_ATTR_ABBR_TITLE_52A466CC",
+          "VAI_SENTINEL_CHAN_001_ATTR_TIME_DATETIME_FE746906",
+          "VAI_SENTINEL_CHAN_001_ATTR_DATA_VALUE_49A0FEE2",
+          "VAI_SENTINEL_CHAN_001_ATTR_INPUT_PLACEHOLDER_5C31228D",
+          "VAI_SENTINEL_CHAN_001_ATTR_INPUT_VALUE_3F8339A3",
+          "VAI_SENTINEL_CHAN_001_ATTR_INPUT_NAME_2AA03D75",
+          "VAI_SENTINEL_CHAN_001_ATTR_TEXTAREA_PLACEHOLDER_670AE973",
+          "VAI_SENTINEL_CHAN_001_ATTR_BUTTON_ARIA_LABEL_0B31A973",
+          "VAI_SENTINEL_CHAN_001_ATTR_BUTTON_VALUE_4D02B326",
+          "VAI_SENTINEL_CHAN_001_ATTR_OPTION_VALUE_9353B84A",
+          "VAI_SENTINEL_CHAN_001_ATTR_IMG_ALT_4441EA87",
+          "VAI_SENTINEL_CHAN_001_ATTR_IMG_TITLE_C3EE7918",
+          "VAI_SENTINEL_CHAN_001_ATTR_IMG_SRC_2216BE9F",
+          "VAI_SENTINEL_CHAN_001_ATTR_ANCHOR_HREF_4ED48883",
+          "VAI_SENTINEL_CHAN_001_ATTR_ANCHOR_TITLE_65F69575",
+          "VAI_SENTINEL_CHAN_001_ATTR_IFRAME_TITLE_E7EAF6D7",
+          "VAI_SENTINEL_CHAN_001_ATTR_IFRAME_SRC_A9F9CB58",
+          "VAI_SENTINEL_CHAN_001_ATTR_OBJECT_DATA_CAD3ACDA",
+          "VAI_SENTINEL_CHAN_001_ATTR_EMBED_SRC_85EBEFBE",
+          "VAI_SENTINEL_CHAN_001_ATTR_SOURCE_SRCSET_FC181BE7",
+          "VAI_SENTINEL_CHAN_001_ATTR_BLOCKQUOTE_CITE_809269A2",
+          "VAI_SENTINEL_CHAN_001_ATTR_DOWNLOAD_FILENAME_36780D80",
+          "VAI_SENTINEL_CHAN_001_ATTR_FORM_ACTION_8FD6DF3D",
+          "VAI_SENTINEL_CHAN_001_ATTR_BUTTON_FORMACTION_D4A486F3",
+          "VAI_SENTINEL_CHAN_001_ATTR_MICRODATA_CONTENT_D3EB7E95",
+          "VAI_SENTINEL_CHAN_001_ATTR_RDFA_CONTENT_0DF86F9D",
+          "VAI_SENTINEL_CHAN_001_ATTR_ITEMID_7865A61D"
+        ],
+        "head": [
+          "VAI_SENTINEL_CHAN_001_HEAD_TITLE_327EA5A3",
+          "VAI_SENTINEL_CHAN_001_HEAD_DESCRIPTION_7AE5425B",
+          "VAI_SENTINEL_CHAN_001_HEAD_OG_TITLE_97DD8C30",
+          "VAI_SENTINEL_CHAN_001_HEAD_CANONICAL_BA2191B1",
+          "VAI_SENTINEL_CHAN_001_HEAD_ALTERNATE_6611F969"
+        ],
+        "css_source_only": [
+          "VAI_SENTINEL_CHAN_001_CSS_BEFORE_FC6B9109",
+          "VAI_SENTINEL_CHAN_001_CSS_AFTER_B62204F5",
+          "VAI_SENTINEL_CHAN_001_CSS_ATTR_CONTENT_D427DFE5",
+          "VAI_SENTINEL_CHAN_001_CSS_CUSTOM_PROPERTY_2898C0D9",
+          "VAI_SENTINEL_CHAN_001_CSS_BACKGROUND_URL_745518D7",
+          "VAI_SENTINEL_CHAN_001_CSS_FONT_FAMILY_4E242397"
+        ],
+        "source_only": [
+          "VAI_SENTINEL_CHAN_001_SOURCE_COMMENT_4EB2ACC8",
+          "VAI_SENTINEL_CHAN_001_SOURCE_TEMPLATE_4CB557CF",
+          "VAI_SENTINEL_CHAN_001_SOURCE_APPLICATION_JSON_E3B6C2B7",
+          "VAI_SENTINEL_CHAN_001_SOURCE_JSON_LD_50CC8562",
+          "VAI_SENTINEL_CHAN_001_SOURCE_EXECUTABLE_SCRIPT_A4637822"
+        ],
+        "position_controls": [
+          "VAI_SENTINEL_CHAN_001_POS_10_E1E33496",
+          "VAI_SENTINEL_CHAN_001_POS_25_B821F4C5",
+          "VAI_SENTINEL_CHAN_001_POS_50_226FA3BD",
+          "VAI_SENTINEL_CHAN_001_POS_75_B0CA7B2D",
+          "VAI_SENTINEL_CHAN_001_POS_95_9D8B1E74"
+        ]
+      }
+    }
+  ],
+  "finalized_at": "2026-09-28T13:20:25.853454+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "view_as_ai_fetch_mode": "html",
+    "compared_at": "2026-09-28T13:20:25.872151+00:00",
+    "native_sha256": "56755344aa2d36478ca4b55c60e05a6eb74a0a588c8db1d50aafdc6eef8e9904",
+    "view_as_ai_sha256": "3044fd5be1a0a6e906413a68c4b66e6fb8452ed1bfefd893ffdb030ec2a15738"
+  }
+}

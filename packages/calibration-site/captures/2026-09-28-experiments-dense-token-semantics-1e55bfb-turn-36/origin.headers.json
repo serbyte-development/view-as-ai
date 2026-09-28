@@ -1,0 +1,58 @@
+[
+  [
+    "access-control-allow-origin",
+    "*"
+  ],
+  [
+    "age",
+    "19617"
+  ],
+  [
+    "cache-control",
+    "public, max-age=0, must-revalidate"
+  ],
+  [
+    "content-disposition",
+    "inline; filename=\"token-semantics\""
+  ],
+  [
+    "content-encoding",
+    "gzip"
+  ],
+  [
+    "content-type",
+    "text/html; charset=utf-8"
+  ],
+  [
+    "date",
+    "Mon, 28 Sep 2026 13:20:25 GMT"
+  ],
+  [
+    "etag",
+    "W/\"0a81db7de5f02b02aa5b72005fe5dda0\""
+  ],
+  [
+    "last-modified",
+    "Mon, 28 Sep 2026 07:53:28 GMT"
+  ],
+  [
+    "server",
+    "Vercel"
+  ],
+  [
+    "strict-transport-security",
+    "max-age=63072000; includeSubDomains; preload"
+  ],
+  [
+    "x-vercel-cache",
+    "HIT"
+  ],
+  [
+    "x-vercel-id",
+    "pdx1::x29l5-1790601625579-9a35d748435e"
+  ],
+  [
+    "transfer-encoding",
+    "chunked"
+  ]
+]

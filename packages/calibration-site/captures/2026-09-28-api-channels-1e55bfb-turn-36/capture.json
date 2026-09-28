@@ -1,0 +1,58 @@
+{
+  "capture_id": "2026-09-28-api-channels-1e55bfb-turn-36",
+  "requested_url": "https://view-as-ai.vercel.app/api/channels",
+  "final_url": "https://view-as-ai.vercel.app/api/channels",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": "gzip",
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "view_as_ai_fetch_mode": "html",
+  "origin_encoding": "utf-8",
+  "origin_sha256": "2467fdee9326f5000a122fb0ce965bc4be56ce918da6a6097bf5d3bb1295895a",
+  "origin_headers_sha256": "1d5a98bb8f75e42c0d71cbb4df031d214bd3e8cb1b3d678e12a893b9b9ad9047",
+  "native_sha256": "7a249cef2ceeafc3b4e6f9f8e1bd68f0a81108ce711a2960dc4968bbec345ffa",
+  "deployment_commit": "1e55bfb6277a2bdf7fc3686e42574e60cb6e6d45",
+  "local_commit": "1e55bfb6277a2bdf7fc3686e42574e60cb6e6d45",
+  "test_ids": [
+    "CHAN-002"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "db35fefe2b76024c55d415defc1ac1d4f87a862a886808665c1c271493baefa7",
+  "fixture_definitions": [
+    {
+      "notes": "Header-only sentinels test whether native model-facing output exposes HTTP response metadata that never enters the HTML DOM.",
+      "path": "/api/channels",
+      "phase": 10,
+      "source": "src/server/channel-fixtures.ts",
+      "testIds": [
+        "CHAN-002"
+      ],
+      "sentinels": {
+        "CHAN-002": "VAI_SENTINEL_CHAN_002_BODY_CONTROL_BBA0BDF5"
+      },
+      "sentinelGroups": {
+        "response_metadata": [
+          "VAI_SENTINEL_CHAN_002_STATUS_TEXT_5F7F556C",
+          "VAI_SENTINEL_CHAN_002_HEADER_CUSTOM_3085C78C",
+          "VAI_SENTINEL_CHAN_002_HEADER_FILENAME_B34A6BAA",
+          "VAI_SENTINEL_CHAN_002_HEADER_CONTENT_LOCATION_DAA335D9",
+          "VAI_SENTINEL_CHAN_002_HEADER_LINK_F7F338FA",
+          "VAI_SENTINEL_CHAN_002_HEADER_ETAG_6CDDF904",
+          "VAI_SENTINEL_CHAN_002_HEADER_SERVER_TIMING_83A34E8E",
+          "VAI_SENTINEL_CHAN_002_HEADER_ROBOTS_DAB4F7C7"
+        ]
+      }
+    }
+  ],
+  "finalized_at": "2026-09-28T13:20:25.885334+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "view_as_ai_fetch_mode": "html",
+    "compared_at": "2026-09-28T13:20:25.887408+00:00",
+    "native_sha256": "7a249cef2ceeafc3b4e6f9f8e1bd68f0a81108ce711a2960dc4968bbec345ffa",
+    "view_as_ai_sha256": "1291185af09e68bb160160364530c710937fa79fac331529352a3be88b195f3e"
+  }
+}

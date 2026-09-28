@@ -71,8 +71,8 @@ all persisted successfully.
 - Original returned batch source: `capture/turn-1.md`.
 - The production checkpoint deployment contains 520 calibration IDs. Authoritative native evidence is preserved
   for 517 of them.
-- Current ledger state across all 534 IDs: 458 `verified`, 6 `mismatch`,
-  52 `follow-up`, 3 `blocked`, 1 `inconclusive`, 11 `deferred`, and 3 `planned` dense follow-ups.
+- Current ledger state across all 534 IDs: 459 `verified`, 8 `mismatch`,
+  52 `follow-up`, 3 `blocked`, 1 `inconclusive`, and 11 `deferred`.
 - No default-deployment IDs remain in `deployed` state.
 - `SIZE-002` is blocked because repeated delegated native captures failed before an authoritative
   artifact could be preserved. `SIZE-007` and `SIZE-008` are blocked because their returned
@@ -664,14 +664,14 @@ before additional runtime changes.
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TOKEN-001 | planned | — | — | — | — | — | — | Dense single-page token semantics matrix; one capture will test framework/semantic class vocabulary, mutations, attribute placement, element types, CSS interactions, and truncation controls. |
+| TOKEN-001 | mismatch | https://view-as-ai.vercel.app/experiments/dense/token-semantics/ | lexical class-token pruning observed; treatments retained through 75% control | differs on 27 non-terminal sentinels plus 95% truncation control | no | captures/2026-09-28-experiments-dense-token-semantics-1e55bfb-turn-36/ | 2026-09-28 @ 1e55bfb | Native prunes several exact class tokens including `hidden`, `hide`, Bootstrap responsive-hidden tokens, `d-none`, navbar/breadcrumb/social/skip/ad vocabulary, and `hidden-md` across all tested element types. Exact-token mutations survive; inline `style` changes the `hidden-md` outcome and needs isolated follow-up before changing the runtime. |
 
 ## CHAN
 
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| CHAN-001 | planned | — | — | — | — | — | — | Dense single-page matrix for attribute-derived, head, CSS-generated, and source-only channels outside ordinary body text nodes. |
-| CHAN-002 | planned | — | — | — | — | — | — | HTTP response-metadata matrix; body control is separate from header/status sentinels and finalized evidence must preserve origin response headers. |
+| CHAN-001 | mismatch | https://view-as-ai.vercel.app/experiments/dense/non-text-channels/ | title, `abbr[title]`, and input placeholder surfaced; other tested channels omitted; output truncates before 75% control | additionally emits image alt/title and iframe title; full body retained | no | captures/2026-09-28-experiments-dense-non-text-channels-1e55bfb-turn-36/ | 2026-09-28 @ 1e55bfb | Native exposes only the document title, `abbr` title, and input placeholder among the tested non-body-text values. Meta/OG/canonical, CSS-generated/source values, comments/templates/scripts/JSON-LD, and the remaining attribute-only sentinels are absent. |
+| CHAN-002 | verified | https://view-as-ai.vercel.app/api/channels | body sentinel only; header-only sentinels absent | body sentinel only; header-only sentinels absent | yes | captures/2026-09-28-api-channels-1e55bfb-turn-36/ | 2026-09-28 @ 1e55bfb | Seven header-only sentinels are preserved in the saved public response headers and none enter native model-facing output. The custom status-text treatment is normalized away by the deployed HTTP path, so it provides no independent signal. |
 
 ## HTTP
 
