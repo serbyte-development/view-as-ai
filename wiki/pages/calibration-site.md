@@ -83,8 +83,65 @@ vercel logs --project view-as-ai --scope serbyte-development \
   --environment production --since 30m --query 'VAI_REQUEST_TELEMETRY' --expand
 ```
 
-Prefer route/time/request-ID filtering when multiple requests are active. Do not render request
-telemetry into calibration pages because doing so would alter the origin being measured.
+### Native `web.run` telemetry workflow
+
+Use a unique query marker when opening a fixture so the request can be found unambiguously in the
+runtime logs. The query value itself is calibration-neutral unless the test is specifically about
+URLs or query strings.
+
+For example, open this URL through native ChatGPT `web.run`:
+
+```text
+https://view-as-ai.vercel.app/baseline/?telemetry_probe=native-2026-09-28-01
+```
+
+Then retrieve only the matching request:
+
+```bash
+vercel logs \
+  --project view-as-ai \
+  --scope serbyte-development \
+  --environment production \
+  --since 30m \
+  --query 'native-2026-09-28-01' \
+  --expand
+```
+
+To inspect all recent telemetry instead:
+
+```bash
+vercel logs \
+  --project view-as-ai \
+  --scope serbyte-development \
+  --environment production \
+  --since 30m \
+  --query 'VAI_REQUEST_TELEMETRY' \
+  --expand
+```
+
+For a live capture, start log streaming before opening the URL:
+
+```bash
+vercel logs \
+  --project view-as-ai \
+  --scope serbyte-development \
+  --environment production \
+  --follow \
+  --json
+```
+
+Look for a `VAI_REQUEST_TELEMETRY` message whose `pathname` and `search` match the requested fixture.
+The JSON payload records the caller's HTTP headers plus Vercel-provided request metadata. Useful
+fields include `user-agent`, `accept*`, `x-request-id`, Vercel region/geolocation fields, and
+`x-vercel-ja4-digest`. Treat Vercel geolocation as the network egress location seen by Vercel, not
+as evidence of a physical client device or user location.
+
+If multiple requests hit the same URL, use the unique query marker first, then preserve the
+telemetry ID, Vercel request ID, timestamp, deployment Git SHA, and relevant header values with the
+capture notes. Credential-like header values are redacted by middleware before logging.
+
+Do not render request telemetry into calibration pages. That would alter the origin being measured
+and could change native extraction behavior.
 
 The complete test inventory and experiment design live in
 `packages/calibration-site/CALIBRATION_PLAN.md`. In particular, site-wide recurrence must be tested
