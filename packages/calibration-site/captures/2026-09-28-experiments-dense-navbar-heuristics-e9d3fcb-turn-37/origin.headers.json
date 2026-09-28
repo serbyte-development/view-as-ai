@@ -1,0 +1,58 @@
+[
+  [
+    "access-control-allow-origin",
+    "*"
+  ],
+  [
+    "age",
+    "244"
+  ],
+  [
+    "cache-control",
+    "public, max-age=0, must-revalidate"
+  ],
+  [
+    "content-disposition",
+    "inline; filename=\"navbar-heuristics\""
+  ],
+  [
+    "content-encoding",
+    "gzip"
+  ],
+  [
+    "content-type",
+    "text/html; charset=utf-8"
+  ],
+  [
+    "date",
+    "Mon, 28 Sep 2026 14:15:47 GMT"
+  ],
+  [
+    "etag",
+    "W/\"e0c7f6d8af05a75c43fd19a269cbbc79\""
+  ],
+  [
+    "last-modified",
+    "Mon, 28 Sep 2026 14:11:43 GMT"
+  ],
+  [
+    "server",
+    "Vercel"
+  ],
+  [
+    "strict-transport-security",
+    "max-age=63072000; includeSubDomains; preload"
+  ],
+  [
+    "x-vercel-cache",
+    "HIT"
+  ],
+  [
+    "x-vercel-id",
+    "pdx1::zdgkj-1790604947497-0879d87a6e26"
+  ],
+  [
+    "transfer-encoding",
+    "chunked"
+  ]
+]

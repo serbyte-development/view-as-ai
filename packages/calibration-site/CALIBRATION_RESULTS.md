@@ -72,7 +72,7 @@ all persisted successfully.
 - The production checkpoint deployment contains 520 calibration IDs. Authoritative native evidence is preserved
   for 517 of them.
 - Current ledger state across all 535 IDs: 459 `verified`, 8 `mismatch`,
-  52 `follow-up`, 3 `blocked`, 1 `inconclusive`, 11 `deferred`, and 1 `planned` navbar follow-up.
+  53 `follow-up`, 3 `blocked`, 1 `inconclusive`, and 11 `deferred`.
 - No default-deployment IDs remain in `deployed` state.
 - `SIZE-002` is blocked because repeated delegated native captures failed before an authoritative
   artifact could be preserved. `SIZE-007` and `SIZE-008` are blocked because their returned
@@ -665,7 +665,7 @@ before additional runtime changes.
 | ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | TOKEN-001 | mismatch | https://view-as-ai.vercel.app/experiments/dense/token-semantics/ | lexical class-token pruning observed; treatments retained through 75% control | matches calibrated visibility/social/ad/banner/breadcrumb class rules; retains navbar/navbar-nav and schema breadcrumb; full page retained | no | captures/2026-09-28-experiments-dense-token-semantics-1e55bfb-turn-36/ | 2026-09-28 @ 1e55bfb | Current pruning now reproduces the unambiguous exact-token behavior, including `hidden`/`hide`/`d-none`, responsive `hidden-*`, element-type coverage, inline-style suppression, and exact-token mutation boundaries. Navbar behavior conflicts within the dense page, schema breadcrumb conflicts with prior verified evidence, and the 95% marker is a native truncation boundary. |
-| TOKEN-002 | planned | — | — | — | — | — | — | Dense navbar follow-up matrix isolates element type, content shape, semantics, Bootstrap class combinations, page context, style, repetition, attributes, and position without requiring multiple deployments. |
+| TOKEN-002 | follow-up | https://view-as-ai.vercel.app/experiments/dense/navbar-heuristics/ | context-sensitive navbar pruning; all non-class navbar attribute controls present; capture reaches 50% control | differs across several navbar shapes; full page retained | partial | captures/2026-09-28-experiments-dense-navbar-heuristics-e9d3fcb-turn-37/ | 2026-09-28 @ e9d3fcb | Native does not support unconditional `navbar` pruning: early bare/navbar element variants are omitted, link-rich and all eight context variants are selectively retained, several Bootstrap combinations survive, and `id`/`data-*`/`aria-label` controls survive. Repetition blocks are omitted. Native truncates after the attribute controls and before the late-position/75% markers, so the final position case is unresolved. |
 
 ## CHAN
 

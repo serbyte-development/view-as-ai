@@ -1,0 +1,133 @@
+{
+  "capture_id": "2026-09-28-experiments-dense-navbar-heuristics-e9d3fcb-turn-37",
+  "requested_url": "https://view-as-ai.vercel.app/experiments/dense/navbar-heuristics/",
+  "final_url": "https://view-as-ai.vercel.app/experiments/dense/navbar-heuristics/",
+  "http_status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "content_encoding": "gzip",
+  "redirect_history": [],
+  "view_as_ai_url_fetch_compatible": true,
+  "view_as_ai_fetch_mode": "html",
+  "origin_encoding": "utf-8",
+  "origin_sha256": "ec07fa377a6aa2aa75deebd68375c8968f09047b2570a5ff1103dfa02109cc8e",
+  "origin_headers_sha256": "fdf740f4856f2ff7dc3dd2ce4678e5b63fac8229507e1093fb236fd8eb9d6438",
+  "native_sha256": "6a237183bf3f1ae0e98035eef0a618a5c835ed30870a018814e05c82605a6f5a",
+  "deployment_commit": "e9d3fcb7cbebe176da02e87c573b26fcfe495e0a",
+  "local_commit": "e9d3fcb7cbebe176da02e87c573b26fcfe495e0a",
+  "test_ids": [
+    "TOKEN-002"
+  ],
+  "fixture_scenario": "default",
+  "fixture_manifest_sha256": "fba3d86b76df6b8c18d235a9eb86cd1676db54cfe72f26400783ca52dd806226",
+  "fixture_definitions": [
+    {
+      "allowDuplicateTestIds": false,
+      "allowRepeatedSentinels": false,
+      "kind": "tsx",
+      "notes": "Dense 6k-word follow-up isolating navbar token behavior across element type, content shape, semantics, class combinations, page context, styles, repetition, attributes, and page position.",
+      "path": "/experiments/dense/navbar-heuristics/",
+      "phase": 10,
+      "source": "src/fixtures/dense-matrices.tsx",
+      "testIds": [
+        "TOKEN-002"
+      ],
+      "sentinels": {
+        "TOKEN-002": "VAI_SENTINEL_TOKEN_002_BODY_CONTROL_8038C57B"
+      },
+      "sentinelGroups": {
+        "element_types": [
+          "VAI_SENTINEL_TOKEN_002_ELEMENT_DIV_28D51042",
+          "VAI_SENTINEL_TOKEN_002_ELEMENT_NAV_A24FF49B",
+          "VAI_SENTINEL_TOKEN_002_ELEMENT_HEADER_2BCCBA57",
+          "VAI_SENTINEL_TOKEN_002_ELEMENT_SECTION_EF2FB404",
+          "VAI_SENTINEL_TOKEN_002_ELEMENT_ASIDE_9B4CFEE0",
+          "VAI_SENTINEL_TOKEN_002_ELEMENT_FORM_B5434A22"
+        ],
+        "content_shapes": [
+          "VAI_SENTINEL_TOKEN_002_CONTENT_TEXT_ONLY_CB5C8343",
+          "VAI_SENTINEL_TOKEN_002_CONTENT_ONE_LINK_1A6D40BE",
+          "VAI_SENTINEL_TOKEN_002_CONTENT_FIVE_LINKS_33780B1B",
+          "VAI_SENTINEL_TOKEN_002_CONTENT_THIRTY_ONE_LINKS_CE96626F",
+          "VAI_SENTINEL_TOKEN_002_CONTENT_LIST_LINKS_EB9F80F4",
+          "VAI_SENTINEL_TOKEN_002_CONTENT_FORM_ONLY_53FC6000",
+          "VAI_SENTINEL_TOKEN_002_CONTENT_FORM_AND_LINKS_9AB26944",
+          "VAI_SENTINEL_TOKEN_002_CONTENT_HEADING_PARAGRAPH_31912C05",
+          "VAI_SENTINEL_TOKEN_002_CONTENT_ARTICLE_CHILD_03DE010A"
+        ],
+        "semantics": [
+          "VAI_SENTINEL_TOKEN_002_SEM_ROLE_NAVIGATION_FB57C9E7",
+          "VAI_SENTINEL_TOKEN_002_SEM_ROLE_SEARCH_665E26F3",
+          "VAI_SENTINEL_TOKEN_002_SEM_ARIA_MAIN_CD3EDA3D",
+          "VAI_SENTINEL_TOKEN_002_SEM_ARIA_PRIMARY_AC2D519E",
+          "VAI_SENTINEL_TOKEN_002_SEM_ARIA_UTILITY_D602CBEB",
+          "VAI_SENTINEL_TOKEN_002_SEM_NAV_ROLE_NAVIGATION_CD1F6EF2",
+          "VAI_SENTINEL_TOKEN_002_SEM_NAV_ARIA_MAIN_9BCF7A3E",
+          "VAI_SENTINEL_TOKEN_002_SEM_NAV_ARIA_PRIMARY_CC455D8C"
+        ],
+        "class_combinations": [
+          "VAI_SENTINEL_TOKEN_002_CLASS_NAVBAR_NAV_EF9E9104",
+          "VAI_SENTINEL_TOKEN_002_CLASS_NAVBAR_NAVBAR_NAV_4C48D6BB",
+          "VAI_SENTINEL_TOKEN_002_CLASS_NAVBAR_EXPAND_LG_CAF57E0E",
+          "VAI_SENTINEL_TOKEN_002_CLASS_NAVBAR_LIGHT_8BCE5A6F",
+          "VAI_SENTINEL_TOKEN_002_CLASS_NAVBAR_DARK_C9C391E5",
+          "VAI_SENTINEL_TOKEN_002_CLASS_NAVBAR_BRAND_87BBF347",
+          "VAI_SENTINEL_TOKEN_002_CLASS_BOOTSTRAP_COMBO_E8722AE7",
+          "VAI_SENTINEL_TOKEN_002_CLASS_REVERSED_COMBO_361ADC84",
+          "VAI_SENTINEL_TOKEN_002_CLASS_NAVBAR_X_A98F70DA",
+          "VAI_SENTINEL_TOKEN_002_CLASS_X_NAVBAR_A734046B",
+          "VAI_SENTINEL_TOKEN_002_CLASS_NAV_BAR_3AD366EA",
+          "VAI_SENTINEL_TOKEN_002_CLASS_NAVBAR_UNDERSCORE_92BB45B6"
+        ],
+        "contexts": [
+          "VAI_SENTINEL_TOKEN_002_CONTEXT_OUTSIDE_MAIN_749BD639",
+          "VAI_SENTINEL_TOKEN_002_CONTEXT_INSIDE_MAIN_B460AF8F",
+          "VAI_SENTINEL_TOKEN_002_CONTEXT_INSIDE_HEADER_5EB6B95D",
+          "VAI_SENTINEL_TOKEN_002_CONTEXT_INSIDE_FOOTER_873B5FFB",
+          "VAI_SENTINEL_TOKEN_002_CONTEXT_INSIDE_ASIDE_B91B934B",
+          "VAI_SENTINEL_TOKEN_002_CONTEXT_INSIDE_ARTICLE_FBEDE886",
+          "VAI_SENTINEL_TOKEN_002_CONTEXT_BEFORE_ARTICLE_D5AF655B",
+          "VAI_SENTINEL_TOKEN_002_CONTEXT_AFTER_ARTICLE_6F705B55"
+        ],
+        "styles": [
+          "VAI_SENTINEL_TOKEN_002_STYLE_DISPLAY_BLOCK_5DA4FB92",
+          "VAI_SENTINEL_TOKEN_002_STYLE_DISPLAY_NONE_0BEB301A",
+          "VAI_SENTINEL_TOKEN_002_STYLE_VISIBILITY_HIDDEN_50F2487D",
+          "VAI_SENTINEL_TOKEN_002_STYLE_OPACITY_ZERO_233446B5"
+        ],
+        "repetition": [
+          "VAI_SENTINEL_TOKEN_002_REPEAT_SINGLE_223ED306",
+          "VAI_SENTINEL_TOKEN_002_REPEAT_TRIPLE_A_0078A5D2",
+          "VAI_SENTINEL_TOKEN_002_REPEAT_TRIPLE_B_5F8D2C18",
+          "VAI_SENTINEL_TOKEN_002_REPEAT_TRIPLE_C_67C2D73D"
+        ],
+        "position_variants": [
+          "VAI_SENTINEL_TOKEN_002_POSITION_EARLY_AE43E460",
+          "VAI_SENTINEL_TOKEN_002_POSITION_MIDDLE_95A6D0EB",
+          "VAI_SENTINEL_TOKEN_002_POSITION_LATE_8C1836AE"
+        ],
+        "attribute_controls": [
+          "VAI_SENTINEL_TOKEN_002_ATTR_ID_NAVBAR_DBB1E010",
+          "VAI_SENTINEL_TOKEN_002_ATTR_DATA_NAVBAR_56C6005B",
+          "VAI_SENTINEL_TOKEN_002_ATTR_ARIA_NAVBAR_9AC96D77"
+        ],
+        "position_controls": [
+          "VAI_SENTINEL_TOKEN_002_POS_10_E7C63C25",
+          "VAI_SENTINEL_TOKEN_002_POS_25_A51CBDE9",
+          "VAI_SENTINEL_TOKEN_002_POS_50_2027FD2A",
+          "VAI_SENTINEL_TOKEN_002_POS_75_6342D751",
+          "VAI_SENTINEL_TOKEN_002_POS_95_4704DDAC"
+        ]
+      }
+    }
+  ],
+  "finalized_at": "2026-09-28T14:15:47.591795+00:00",
+  "comparison": {
+    "exact_match": false,
+    "layout_tolerant_match": false,
+    "view_as_ai_version": "1.0.2",
+    "view_as_ai_fetch_mode": "html",
+    "compared_at": "2026-09-28T14:15:47.611751+00:00",
+    "native_sha256": "6a237183bf3f1ae0e98035eef0a618a5c835ed30870a018814e05c82605a6f5a",
+    "view_as_ai_sha256": "f37d89fd37d8cb8f4e71a62caebadbaf753923014516f803820000a9f11f251a"
+  }
+}
