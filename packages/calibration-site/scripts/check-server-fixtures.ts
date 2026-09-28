@@ -1,3 +1,4 @@
+import { channelEndpointFixtures, handleChannelFixture } from "../src/server/channel-fixtures";
 import {
   crawlAssetsForScenario,
   crawlEndpointFixtures,
@@ -132,4 +133,16 @@ assert(crawlAssetsForScenario("site-base").length === 0, "site scenarios must om
 assert(httpEndpointFixtures.length === 20, "expected 20 HTTP endpoint fixtures");
 assert(crawlEndpointFixtures.length === 11, "expected 11 CRAWL endpoint fixtures");
 
-console.log("Server fixture validation OK: 20 HTTP and 11 CRAWL cases.");
+const channelResponse = handleChannelFixture();
+assert(channelResponse.status === 200, "CHAN-002 must return 200");
+assert(
+  channelResponse.headers.get("x-vai-marker")?.includes("VAI_SENTINEL_CHAN_002_HEADER_CUSTOM"),
+  "CHAN-002 custom header marker",
+);
+assert(
+  (await channelResponse.text()).includes("VAI_SENTINEL_CHAN_002_BODY_CONTROL"),
+  "CHAN-002 body control",
+);
+assert(channelEndpointFixtures.length === 1, "expected one CHAN endpoint fixture");
+
+console.log("Server fixture validation OK: 20 HTTP, 11 CRAWL, and 1 CHAN cases.");

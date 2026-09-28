@@ -177,6 +177,23 @@ Each test family should include:
 
 This makes a failed capture distinguishable from a real extraction result.
 
+### Dense matrix pages for page-local hypotheses
+
+Prefer one dense public page when many independent treatments can coexist without changing one
+another. A matrix page should target roughly 5,000 to 10,000 words of neutral surrounding text,
+spread treatments across the page, and include explicit position sentinels near the beginning,
+quarter points, middle, and end. This lets one native `web.run` capture answer dozens of page-local
+hypotheses while also revealing truncation.
+
+Use one stable calibration ID for the matrix and named sentinel groups for its internal treatments.
+The sentinel label must encode the exact treatment so a single capture remains mechanically
+interpretable. Move a surprising result to an isolated route only when interaction effects need to
+be separated.
+
+Reserve multi-deployment A/B/C campaigns for hypotheses that genuinely depend on cross-page or
+cross-deployment state. Do not require a redeploy merely to compare independent class tokens,
+attributes, element types, or source channels.
+
 ### Preserve raw native evidence
 
 Use `capture/code-mode-prompt.md` for text-faithful native captures. The native result is the
@@ -942,6 +959,47 @@ Keep these routes isolated so JavaScript behavior does not contaminate baseline 
 - **I18N-011:** literal `【】` and `†`.
 - **I18N-012:** HTML named/numeric entities.
 - **I18N-013:** page `lang` differing from content language.
+
+## TOKEN — Dense class/token semantics matrix
+
+This family tests the hypothesis that native extraction applies lexical heuristics to DOM
+attributes, including framework vocabulary, without requiring computed CSS. Keep all cases on one
+roughly 6,000-word page and use unique labeled sentinels for each matrix cell.
+
+- **TOKEN-001:** one dense page covering common visibility utilities, Bootstrap-style responsive
+  tokens, Tailwind-style variants, Bulma/Foundation/WordPress/builder accessibility tokens,
+  navigation/chrome vocabulary, token mutations, `class` versus `id`/other attributes, element
+  types, and a small set of CSS/context interactions. No framework stylesheet is loaded. The page
+  includes 10/25/50/75/95 percent position controls so truncation cannot be mistaken for pruning.
+
+Primary questions:
+
+- Is pruning driven by exact class tokens, prefixes/substrings, case folding, or punctuation?
+- Are known framework vocabularies treated specially?
+- Does the same lexical token matter in `id`, `data-*`, `name`, `title`, or `aria-label`?
+- Does the element type change token behavior?
+- Does contradictory inline CSS override or fail to override a lexical heuristic?
+- Are semantic/chrome tokens such as `navbar`, `breadcrumb`, `banner`, cookie/social/share, and
+  related-navigation vocabulary recognized independently of actual page recurrence?
+
+## CHAN — Dense non-text-node and fetch-metadata channels
+
+These cases ask whether native output can expose information that is absent from ordinary body text
+nodes. Existing positive/negative controls include the document-title channel, input placeholders,
+omitted `aria-label`-only controls, omitted CSS pseudo-content, and HTTP redirect `Location` text in
+native fetch errors.
+
+- **CHAN-001:** one dense roughly 6,000-word page containing unique sentinels only in attribute
+  values, URL-bearing attributes, head metadata, CSS generated/source-only values, comments,
+  templates, JSON/script source, and related non-body-text channels. Include 10/25/50/75/95 percent
+  position controls.
+- **CHAN-002:** one HTML response whose body contains only a visible control sentinel while separate
+  sentinels exist exclusively in HTTP response metadata: status text, custom header, filename,
+  `Content-Location`, `Link`, `ETag`, `Server-Timing`, and `X-Robots-Tag`. Preserve the exact origin
+  response headers in the evidence bundle before interpreting this case.
+
+For CHAN, distinguish three outcomes: literal body extraction, formatter-derived values from DOM
+attributes, and fetch/tool metadata emitted outside the parsed page representation.
 
 ## MAL — Parser/error tolerance
 

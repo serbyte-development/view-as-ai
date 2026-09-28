@@ -2,6 +2,7 @@ import type { FixtureRoute, StaticAsset } from "./fixture-types";
 import { activeAssets, activeRoutes } from "./fixtures/active";
 import { baselineAssets, baselineRoutes } from "./fixtures/baseline";
 import { boilerplateRoutes } from "./fixtures/boilerplate";
+import { denseMatrixRoutes } from "./fixtures/dense-matrices";
 import { duplicateRoutes } from "./fixtures/duplicate";
 import { frameFollowupRoutes } from "./fixtures/frame-followups";
 import { headMetadataAssets, headMetadataRoutes } from "./fixtures/head-metadata";
@@ -13,6 +14,7 @@ import { orderRoutes } from "./fixtures/order";
 import { siteContextAssetsFor, siteContextRoutesFor } from "./fixtures/site-context";
 import { sizeRoutes } from "./fixtures/size";
 import { isolatedVisibilityAssets, isolatedVisibilityRoutes } from "./fixtures/visibility-isolated";
+import { channelEndpointFixtures } from "./server/channel-fixtures";
 import { crawlAssetsForScenario, crawlEndpointFixtures } from "./server/crawl-fixtures";
 import { httpEndpointFixtures } from "./server/http-fixtures";
 
@@ -23,7 +25,11 @@ const crawlAssets = crawlAssetsForScenario(calibrationScenario);
 
 export const requireFullCalibrationCoverage = false;
 
-export const endpoints = [...httpEndpointFixtures, ...crawlEndpointFixtures];
+export const endpoints = [
+  ...httpEndpointFixtures,
+  ...crawlEndpointFixtures,
+  ...channelEndpointFixtures,
+];
 
 export const routes: FixtureRoute[] = [
   ...homeRoutes,
@@ -37,6 +43,7 @@ export const routes: FixtureRoute[] = [
   ...activeRoutes,
   ...orderRoutes,
   ...duplicateRoutes,
+  ...denseMatrixRoutes,
   ...malformedRoutes,
   ...sizeRoutes,
   ...siteContextRoutes,

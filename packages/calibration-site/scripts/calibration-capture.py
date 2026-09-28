@@ -393,7 +393,11 @@ def finalize(
         raise SystemExit(
             f"capture native web.run first; expected {native_path.relative_to(REPO_ROOT)}"
         )
-    if (directory / "origin.html").exists() or (directory / "capture.json").exists():
+    if (
+        (directory / "origin.html").exists()
+        or (directory / "origin.headers.json").exists()
+        or (directory / "capture.json").exists()
+    ):
         raise SystemExit("saved origin/metadata already exists; use compare or a new capture ID")
 
     headers = {
@@ -417,6 +421,11 @@ def finalize(
 
     origin_path = directory / "origin.html"
     origin_path.write_bytes(response.content)
+    origin_headers = list(response.headers.multi_items())
+    origin_headers_bytes = (
+        json.dumps(origin_headers, ensure_ascii=False, indent=2) + "\n"
+    ).encode("utf-8")
+    (directory / "origin.headers.json").write_bytes(origin_headers_bytes)
     encoding = response.encoding or "utf-8"
     metadata: dict[str, object] = {
         "capture_id": capture_id,
@@ -437,6 +446,7 @@ def finalize(
         "view_as_ai_fetch_mode": fetch_mode,
         "origin_encoding": encoding,
         "origin_sha256": sha256(response.content),
+        "origin_headers_sha256": sha256(origin_headers_bytes),
         "native_sha256": sha256(native_path.read_bytes()),
         "deployment_commit": deployment_commit,
         "local_commit": git_commit(),
@@ -481,6 +491,14 @@ def compare(capture_id: str) -> None:
     origin_path = directory / "origin.html"
     if not origin_path.exists() or sha256(origin_path.read_bytes()) != metadata["origin_sha256"]:
         raise SystemExit("saved origin does not match its capture hash")
+    origin_headers_hash = metadata.get("origin_headers_sha256")
+    if origin_headers_hash:
+        origin_headers_path = directory / "origin.headers.json"
+        if (
+            not origin_headers_path.exists()
+            or sha256(origin_headers_path.read_bytes()) != origin_headers_hash
+        ):
+            raise SystemExit("saved origin headers do not match their capture hash")
     native_hash = metadata.get("native_sha256") or metadata.get("comparison", {}).get(
         "native_sha256"
     )

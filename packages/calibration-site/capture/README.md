@@ -85,13 +85,16 @@ This creates:
 captures/<capture-id>/
 ├── native.web.txt   # authoritative native capture; never generated locally
 ├── origin.html      # public origin response used for the parser comparison
+├── origin.headers.json # exact independently fetched origin response headers
 ├── capture.json     # URL, commits, scenario, hashes, fixture/sentinel definitions, comparison
 ├── view-as-ai.txt   # generated from origin.html by the current parser
 └── diff.txt         # generated native-vs-parser unified diff
 ```
 
-`native.web.txt` is the oracle. `origin.html` is the paired public input. The parser output and
-diff are derived artifacts and may be regenerated after parser changes.
+`native.web.txt` is the oracle. `origin.html` and `origin.headers.json` are the paired public input
+and response metadata. The parser output and diff are derived artifacts and may be regenerated
+after parser changes. Header evidence is required for experiments whose treatment exists outside
+the HTML body.
 
 Finalization refuses to overwrite an existing origin or capture metadata. Use `capture:compare`
 for saved evidence and a new capture ID for another native run. Relevant fixture definitions,

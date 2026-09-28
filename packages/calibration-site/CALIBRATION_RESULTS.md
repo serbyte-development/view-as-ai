@@ -69,10 +69,10 @@ all persisted successfully.
 - Isolated visibility: `VIS-031..VIS-038` under matching
   `captures/2026-09-24-visibility-*-b815108-turn-1/` directories.
 - Original returned batch source: `capture/turn-1.md`.
-- The default deployment contains 520 calibration IDs. Authoritative native evidence is preserved
+- The production checkpoint deployment contains 520 calibration IDs. Authoritative native evidence is preserved
   for 517 of them.
-- Current ledger state across all 531 IDs: 458 `verified`, 6 `mismatch`,
-  52 `follow-up`, 3 `blocked`, 1 `inconclusive`, and 11 `deferred`.
+- Current ledger state across all 534 IDs: 458 `verified`, 6 `mismatch`,
+  52 `follow-up`, 3 `blocked`, 1 `inconclusive`, 11 `deferred`, and 3 `planned` dense follow-ups.
 - No default-deployment IDs remain in `deployed` state.
 - `SIZE-002` is blocked because repeated delegated native captures failed before an authoritative
   artifact could be preserved. `SIZE-007` and `SIZE-008` are blocked because their returned
@@ -659,6 +659,19 @@ before additional runtime changes.
 | SIZE-009 | verified | https://view-as-ai.vercel.app/experiments/size/SIZE-009/ | all 500 link labels present | all 500 link labels present | yes | captures/2026-09-24-experiments-size-size-009-b815108-turn-32/ | 2026-09-24 @ b815108 | Native web and View as AI both retain all 500 generated links. |
 | SIZE-010 | verified | https://view-as-ai.vercel.app/experiments/size/SIZE-010/ | all 500 image labels present | all 500 image labels present | yes | captures/2026-09-24-experiments-size-size-010-b815108-turn-32/ | 2026-09-24 @ b815108 | Native web and View as AI both retain all 500 generated image descriptions. |
 | SIZE-011 | mismatch | https://view-as-ai.vercel.app/experiments/size/SIZE-011/ | repeated boilerplate prefix only; unique article absent | repeated boilerplate and unique article present | no | captures/2026-09-24-experiments-size-size-011-b815108-turn-32/ | 2026-09-24 @ b815108 | Native web truncates inside the large repeated prefix before reaching the unique article; View as AI emits the article. |
+
+## TOKEN
+
+| ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| TOKEN-001 | planned | — | — | — | — | — | — | Dense single-page token semantics matrix; one capture will test framework/semantic class vocabulary, mutations, attribute placement, element types, CSS interactions, and truncation controls. |
+
+## CHAN
+
+| ID | Status | URL | Native | View as AI | Match | Evidence | Last tested | Finding |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| CHAN-001 | planned | — | — | — | — | — | — | Dense single-page matrix for attribute-derived, head, CSS-generated, and source-only channels outside ordinary body text nodes. |
+| CHAN-002 | planned | — | — | — | — | — | — | HTTP response-metadata matrix; body control is separate from header/status sentinels and finalized evidence must preserve origin response headers. |
 
 ## HTTP
 

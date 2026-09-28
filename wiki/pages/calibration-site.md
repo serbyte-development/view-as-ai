@@ -42,11 +42,16 @@ The main fixture can test many DOM-level behaviors on one page, but a single pag
 every extraction question. Site-level behavior may depend on repeated navigation, shared
 boilerplate, sibling pages, internal links, or other cross-page signals.
 
-Future fixtures may therefore include both:
+Fixtures therefore use both:
 
-- dense single-page "kitchen sink" cases with unique sentinel text for each behavior;
+- dense single-page matrix cases with unique sentinel text for each behavior;
 - multiple related pages designed to test recurrence, shared templates, navigation, and other
   site-level signals.
+
+For independent page-local hypotheses, prefer a dense matrix over many one-case routes. Current
+follow-up matrices target roughly 5,000 to 10,000 words with treatments distributed through the
+page and position sentinels that reveal truncation. Multi-deployment testing is reserved for
+questions that genuinely depend on site-wide recurrence or deployment state.
 
 When a native behavior is established from this public site, preserve the smallest useful evidence
 in the active regression suite and summarize durable findings in the wiki.
@@ -60,6 +65,8 @@ is acceptable; substantive text changes are not.
 The end-to-end agent workflow is
 `packages/calibration-site/capture/README.md`: capture native output, finalize the evidence bundle,
 compare the saved origin with the current parser, then record the finding in the results ledger.
+Finalized captures preserve both the origin body and response headers so fetch-metadata experiments
+have fixed paired evidence.
 
 The complete test inventory and experiment design live in
 `packages/calibration-site/CALIBRATION_PLAN.md`. In particular, site-wide recurrence must be tested

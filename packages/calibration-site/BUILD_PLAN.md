@@ -627,7 +627,50 @@ Coverage: `CRAWL-001..CRAWL-011`
 
 ---
 
-# Phase 10 — Cross-framework follow-up
+# Phase 10 — Dense follow-up matrices
+
+These routes consolidate high-value page-local questions so one native capture can score many
+independent treatments. They deliberately replace one-case-per-route execution for these follow-up
+hypotheses.
+
+## Token semantics matrix
+
+Route: `/experiments/dense/token-semantics/`
+
+Coverage: `TOKEN-001`
+
+- [x] Generate roughly 6,000 words of deterministic neutral filler without framework CSS.
+- [x] Cover generic visibility terms plus Bootstrap, Tailwind, Bulma, Foundation, WordPress/builder,
+  and semantic/chrome class vocabulary.
+- [x] Cover mutations, alternate attribute locations, element types, and selected CSS/context
+  interactions with unique labeled sentinels.
+- [x] Spread position controls through the page so a truncated native result is detectable.
+
+## Non-text-node channel matrix
+
+Route: `/experiments/dense/non-text-channels/`
+
+Coverage: `CHAN-001`
+
+- [x] Generate roughly 6,000 words of deterministic neutral filler.
+- [x] Test attribute-only values, URL-bearing attributes, head metadata, CSS source/generated
+  channels, comments/templates, and script-source-only values in one page.
+- [x] Include known positive and negative controls and position sentinels.
+
+## HTTP response-metadata channel
+
+Route: `/api/channels`
+
+Coverage: `CHAN-002`
+
+- [x] Keep the body sentinel independent from all response-metadata sentinels.
+- [x] Put unique sentinels in status text and several response headers.
+- [x] Preserve origin response headers in finalized capture bundles so header-only conclusions have
+  paired public evidence.
+
+---
+
+# Phase 11 — Cross-framework follow-up
 
 No calibration IDs are assigned yet; build this only after the static baseline results justify it.
 
@@ -640,8 +683,8 @@ No calibration IDs are assigned yet; build this only after the static baseline r
 - [x] Require future framework controls to keep content/sentinels logically equivalent.
 - [x] Require origin-HTML comparison before interpreting any future native framework difference.
 
-Phase 10 is therefore **evidence-gated, not an outstanding prerequisite** for the current
-531-case calibration build. Creating framework projects before the static/native captures would
+Phase 11 is therefore **evidence-gated, not an outstanding prerequisite** for the current
+534-case calibration build. Creating framework projects before the static/native captures would
 violate the phase's own entry condition and introduce unneeded variables.
 
 ---
@@ -704,7 +747,8 @@ IDs; the 11 `SITE-*` IDs are deferred until the consolidated A/B/C campaign is r
 - [x] **Build 6:** MAL + SIZE.
 - [x] **Build 7:** site-context scenario machinery and SITE experiments.
 - [x] **Build 8:** HTTP + CRAWL infrastructure.
-- [x] **Build 9:** cross-framework follow-up is explicitly evidence-gated until static/native
+- [x] **Build 9:** dense TOKEN/CHAN follow-up matrices and response-metadata endpoint.
+- [x] **Build 10:** cross-framework follow-up is explicitly evidence-gated until static/native
   findings justify creating additional framework projects.
 
 Do not jump to later phases because they are interesting. The capture pipeline should be proven on
