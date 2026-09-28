@@ -15,8 +15,11 @@ function isSensitiveHeader(name: string): boolean {
     SENSITIVE_HEADER_NAMES.has(lower) ||
     lower.includes("authorization") ||
     lower.includes("cookie") ||
+    lower.includes("credential") ||
     lower.includes("password") ||
     lower.includes("secret") ||
+    lower.includes("signature") ||
+    lower.includes("bypass") ||
     lower.endsWith("-token")
   );
 }

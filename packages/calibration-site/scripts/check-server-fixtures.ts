@@ -152,6 +152,7 @@ const telemetryHeaders = new Headers({
   Cookie: "session=should-not-leak",
   "User-Agent": "ViewAsAITelemetryTest/1.0",
   "X-Forwarded-For": "203.0.113.7",
+  "X-Vercel-Proxy-Signature": "Bearer should-not-leak",
   "X-Secret": "should-not-leak",
 });
 const sanitizedTelemetryHeaders = sanitizeRequestHeaders(telemetryHeaders);
@@ -170,6 +171,10 @@ assert(
 assert(sanitizedTelemetryHeaders.authorization === "<redacted>", "authorization must be redacted");
 assert(sanitizedTelemetryHeaders.cookie === "<redacted>", "cookies must be redacted");
 assert(sanitizedTelemetryHeaders["x-secret"] === "<redacted>", "secret headers must be redacted");
+assert(
+  sanitizedTelemetryHeaders["x-vercel-proxy-signature"] === "<redacted>",
+  "signature headers must be redacted",
+);
 
 const telemetry = buildRequestTelemetry(
   new Request("https://view-as-ai.vercel.app/experiments/dense/token-semantics/?case=test", {
