@@ -3,6 +3,7 @@
   "files": {
     "includes": [
       "api/**/*",
+      "middleware.ts",
       "src/**/*",
       "scripts/**/*",
       "package.json",

@@ -68,6 +68,24 @@ compare the saved origin with the current parser, then record the finding in the
 Finalized captures preserve both the origin body and response headers so fetch-metadata experiments
 have fixed paired evidence.
 
+## Request telemetry
+
+The public calibration deployment uses Vercel Routing Middleware to log a structured request
+fingerprint before routing/cache handling. Each log line begins with `VAI_REQUEST_TELEMETRY` and
+contains the request method, path/query, host, sorted incoming headers, deployment/runtime metadata,
+timestamp, and a generated telemetry ID. Authorization, cookie, secret, token, and bypass-header
+values are redacted while their presence remains visible.
+
+Use Vercel runtime logs to inspect a native capture's request without modifying fixture HTML:
+
+```bash
+vercel logs --project view-as-ai --scope serbyte-development \
+  --environment production --since 30m --query 'VAI_REQUEST_TELEMETRY' --expand
+```
+
+Prefer route/time/request-ID filtering when multiple requests are active. Do not render request
+telemetry into calibration pages because doing so would alter the origin being measured.
+
 The complete test inventory and experiment design live in
 `packages/calibration-site/CALIBRATION_PLAN.md`. In particular, site-wide recurrence must be tested
 with controlled multi-page and sequential-deployment experiments rather than inferred from one

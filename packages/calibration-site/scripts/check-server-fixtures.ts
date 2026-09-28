@@ -1,3 +1,4 @@
+import { buildRequestTelemetry, sanitizeRequestHeaders } from "../src/request-telemetry";
 import { channelEndpointFixtures, handleChannelFixture } from "../src/server/channel-fixtures";
 import {
   crawlAssetsForScenario,
@@ -144,5 +145,44 @@ assert(
   "CHAN-002 body control",
 );
 assert(channelEndpointFixtures.length === 1, "expected one CHAN endpoint fixture");
+
+const telemetryHeaders = new Headers({
+  Accept: "text/html",
+  Authorization: "Bearer should-not-leak",
+  Cookie: "session=should-not-leak",
+  "User-Agent": "ViewAsAITelemetryTest/1.0",
+  "X-Forwarded-For": "203.0.113.7",
+  "X-Secret": "should-not-leak",
+});
+const sanitizedTelemetryHeaders = sanitizeRequestHeaders(telemetryHeaders);
+assert(
+  sanitizedTelemetryHeaders.accept === "text/html",
+  "telemetry must preserve ordinary headers",
+);
+assert(
+  sanitizedTelemetryHeaders["user-agent"] === "ViewAsAITelemetryTest/1.0",
+  "telemetry must preserve user agent",
+);
+assert(
+  sanitizedTelemetryHeaders["x-forwarded-for"] === "203.0.113.7",
+  "telemetry must preserve network fingerprint headers",
+);
+assert(sanitizedTelemetryHeaders.authorization === "<redacted>", "authorization must be redacted");
+assert(sanitizedTelemetryHeaders.cookie === "<redacted>", "cookies must be redacted");
+assert(sanitizedTelemetryHeaders["x-secret"] === "<redacted>", "secret headers must be redacted");
+
+const telemetry = buildRequestTelemetry(
+  new Request("https://view-as-ai.vercel.app/experiments/dense/token-semantics/?case=test", {
+    headers: telemetryHeaders,
+  }),
+  {
+    telemetryId: "telemetry-test-id",
+    timestamp: "2026-09-28T00:00:00.000Z",
+  },
+);
+assert(telemetry.type === "vai_request_telemetry", "telemetry event type");
+assert(telemetry.telemetryId === "telemetry-test-id", "telemetry ID override");
+assert(telemetry.pathname === "/experiments/dense/token-semantics/", "telemetry pathname");
+assert(telemetry.search === "?case=test", "telemetry search params");
 
 console.log("Server fixture validation OK: 20 HTTP, 11 CRAWL, and 1 CHAN cases.");
