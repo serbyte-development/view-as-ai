@@ -134,7 +134,8 @@ def replace_references(root: lxml.html.HtmlElement, cur_url: str, base_url: str)
             continue
         if node.tag == "a":
             link = node.attrib["href"]
-            text = _get_link_text(node).strip().replace("†", "‡")
+            raw_text = _get_link_text(node).replace("†", "‡")
+            text = raw_text.strip()
             image_only = not text and node.find(".//img") is not None
             if not text and not image_only:
                 continue
@@ -171,7 +172,14 @@ def replace_references(root: lxml.html.HtmlElement, cur_url: str, base_url: str)
                 replacement = f"【{link_id}†{text}】"
             else:
                 replacement = f"【{link_id}†{text}†{domain}】"
-            replace_node_with_text(node, " " + replacement + " ")
+            if raw_text[:1].isspace():
+                replacement = " " + replacement
+            # Native web.run does not synthesize a leading separator before a
+            # reference, but it does emit a trailing separator after one. That
+            # asymmetry preserves observed text→reference adjacency while also
+            # separating adjacent references and reference→text boundaries.
+            replacement += " "
+            replace_node_with_text(node, replacement)
             continue
 
         # Images inside anchors are represented by the anchor's readable text,

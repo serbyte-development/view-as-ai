@@ -40,6 +40,9 @@ the active repository.
 - Selects become `[Select]`; options disappear. OpenAI docs' adjacent `Docs Overview` is separate DOM text.
 - Native buttons use their text. A `role` or ARIA label alone has no inferred transformation rule.
 - Fragment links stay references. Reference IDs are local to a particular extracted document.
+- Reference whitespace is asymmetric in observed native output: an HTTP(S) reference does not get
+  an invented leading separator, but it does get a trailing separator. Thus source like
+  `text<a>link</a>` can serialize as `text【ref】`, while adjacent references remain separated.
 - Image descriptions refer to image URLs. Tables need cell boundaries; mixed row-header tables have no invented header divider.
 - Preserve preformatted indentation and surrounding text when removing a node. Global converter mutation is unnecessary.
 - Template contents, including declarative shadow-DOM templates, are omitted from model-visible text.

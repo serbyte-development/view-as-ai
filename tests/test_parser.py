@@ -140,6 +140,29 @@ def test_link_text_preserves_inline_word_boundaries_and_spaces():
     assert page.text == "【0†SERBYTE】 【1†Read more】 【2†Oneword】"
 
 
+def test_reference_spacing_matches_observed_web_run_boundaries():
+    text_then_reference = process_html('<p>Logo by<a href="/creator">@creator</a></p>', URL)
+    assert text_then_reference.text == "Logo by【0†@creator】"
+
+    nonweb_then_reference = process_html(
+        '<p><a href="tel:123">Call Now</a><a href="/quote">Get Quote</a></p>',
+        URL,
+    )
+    assert nonweb_then_reference.text == "Call Now【0†Get Quote】"
+
+    authored_space = process_html(
+        '<p><a href="/privacy">Privacy Policy </a><span>|</span><a href="/terms">Terms</a></p>',
+        URL,
+    )
+    assert authored_space.text == "【0†Privacy Policy】 |【1†Terms】"
+
+    adjacent_references = process_html(
+        '<p><a href="/learn">Learn React</a><a href="/reference">API Reference</a></p>',
+        URL,
+    )
+    assert adjacent_references.text == "【0†Learn React】 【1†API Reference】"
+
+
 def test_link_text_separates_block_nodes_and_their_tails():
     page = process_html('<a href="/card">Start<div><h2>Title</h2><p>Details</p></div>Tail</a>', URL)
     assert page.text == "【0†Start Title Details Tail】"
