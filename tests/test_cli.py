@@ -38,6 +38,50 @@ def test_output_file(tmp_path, capsys):
     assert capsys.readouterr().out == ""
 
 
+def test_markdown_links_render_model_references(capsys):
+    assert (
+        cli.main(
+            [
+                str(FIXTURE),
+                "--base-url",
+                "https://example.com/",
+                "--format",
+                "text",
+                "--markdown-links",
+            ]
+        )
+        == 0
+    )
+    output = capsys.readouterr().out
+    assert "[Learn more](https://iana.org/domains/example)" in output
+    assert "【0†" not in output
+
+
+def test_md_links_alias_and_json_keep_url_map(capsys):
+    assert (
+        cli.main(
+            [
+                str(FIXTURE),
+                "--base-url",
+                "https://example.com/",
+                "--format",
+                "json",
+                "--md-links",
+            ]
+        )
+        == 0
+    )
+    data = json.loads(capsys.readouterr().out)
+    assert "[Learn more](https://iana.org/domains/example)" in data["text"]
+    assert data["urls"] == {"0": "https://iana.org/domains/example"}
+
+
+def test_markdown_links_escape_label_and_destination():
+    text = "【0†A [label]】"
+    urls = {"0": "https://example.test/a_(b)"}
+    assert cli._markdown_links(text, urls) == r"[A \[label\]](https://example.test/a_\(b\))"
+
+
 @pytest.fixture
 def mock_http(monkeypatch):
     real_client = httpx.Client
@@ -348,3 +392,5 @@ def test_help_explains_common_usage(capsys):
     assert "Bare domains use HTTPS" in normalized
     assert "explicit local path (./page.html)" in normalized
     assert "line-numbered view (default), plain text, or JSON" in normalized
+    assert "--markdown-links" in normalized
+    assert "--md-links" in normalized

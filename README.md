@@ -69,7 +69,9 @@ The launcher detects your operating system and CPU architecture, downloads the m
 view-as-ai example.com
 ```
 
-Common options: `--format text`, `--format json`, `-o preview.txt`, or pass a local HTML file with `--base-url`. Run `view-as-ai --help` for the complete interface.
+Common options: `--format text`, `--format json`, `--markdown-links` (or `--md-links`),
+`-o preview.txt`, or pass a local HTML file with `--base-url`. Run `view-as-ai --help` for the
+complete interface.
 
 Native `web.run open()` returns line-numbered output, so `view` mirrors it with `L<n>:` prefixes:
 
@@ -84,6 +86,11 @@ L4: 【0†Learn more†iana.org】
 ```
 
 Use `--format text` when you want only the parsed page body without the tool-style line-number wrapper.
+
+Use `--markdown-links` when you want ordinary Markdown links instead of native-style model
+references. For example, `【0†Learn more†iana.org】` becomes
+`[Learn more](https://iana.org/domains/example)`. This only changes presentation; the page is
+fetched, pruned, and parsed the same way.
 
 `--format json` returns the page URL, model-readable text, title, and the reference URL map:
 

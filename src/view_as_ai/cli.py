@@ -6,6 +6,7 @@ import argparse
 import ipaddress
 import json
 import math
+import re
 import socket
 import sys
 from dataclasses import asdict
@@ -27,6 +28,23 @@ DEFAULT_USER_AGENT = (
 
 class CLIError(Exception):
     """User-facing operational failure."""
+
+
+MODEL_REFERENCE_RE = re.compile(r"【(?P<id>\d+)†(?P<label>[^】]*?)(?:†[^】]*)?】")
+
+
+def _markdown_links(text: str, urls: dict[str, str]) -> str:
+    """Render model references as ordinary Markdown links."""
+
+    def replace(match: re.Match[str]) -> str:
+        url = urls.get(match.group("id"))
+        if url is None:
+            return match.group(0)
+        label = match.group("label").replace("\\", "\\\\").replace("[", "\\[").replace("]", "\\]")
+        target = url.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
+        return f"[{label}]({target})"
+
+    return MODEL_REFERENCE_RE.sub(replace, text)
 
 
 def _configure_stdio() -> None:
@@ -152,6 +170,12 @@ def main(argv: list[str] | None = None) -> int:
         help="Output: line-numbered view (default), plain text, or JSON",
     )
     parser.add_argument(
+        "--markdown-links",
+        "--md-links",
+        action="store_true",
+        help="Render model references as Markdown links",
+    )
+    parser.add_argument(
         "-o",
         "--output",
         type=Path,
@@ -217,12 +241,16 @@ def main(argv: list[str] | None = None) -> int:
                 file=sys.stderr,
             )
 
+        display_text = _markdown_links(page.text, page.urls) if args.markdown_links else page.text
+
         if args.format == "json":
-            output = json.dumps(asdict(page), ensure_ascii=False, indent=2)
+            data = asdict(page)
+            data["text"] = display_text
+            output = json.dumps(data, ensure_ascii=False, indent=2)
         elif args.format == "text":
-            output = page.text
+            output = display_text
         else:
-            lines = page.text.splitlines()
+            lines = display_text.splitlines()
             numbered = "\n".join(f"L{i}: {line}" for i, line in enumerate(lines))
             output = (
                 f"{page.title} ({page.url})\n"
