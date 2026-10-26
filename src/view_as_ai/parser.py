@@ -301,9 +301,10 @@ def process_html(html: str, url: str, title: str | None = None) -> PageContents:
     else:
         final_title = get_domain(url) if url else ""
 
-    # Remove non-reading content before link/button text extraction can flatten
-    # it into an otherwise visible label. Preserve surrounding text and tails.
-    for node in reversed(root.xpath(".//script | .//style | .//math | .//template")):
+    # Native web.run omits these subtrees, including inline SVG text and links.
+    # Remove them before link/button extraction can flatten hidden descendants
+    # into otherwise visible labels. Preserve surrounding text and tails.
+    for node in reversed(root.xpath(".//script | .//style | .//math | .//template | .//svg")):
         replace_node_with_text(node, "")
 
     base = root.find(".//base[@href]")

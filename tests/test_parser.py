@@ -314,6 +314,20 @@ def test_template_content_stays_out_of_text():
     assert "Hidden shadow content" not in page.text
 
 
+def test_svg_subtree_stays_out_of_text_and_references():
+    page = process_html(
+        '<p>Before</p><svg xmlns="http://www.w3.org/2000/svg">'
+        '<title>Chart title</title><desc>Chart description</desc>'
+        '<text x="5" y="15">I love SVG!</text>'
+        '<a href="/svg-link"><text>SVG link</text></a>'
+        "Fallback SVG text"
+        "</svg><p>After</p>",
+        URL,
+    )
+    assert page.text == "Before\n\nAfter"
+    assert page.urls == {}
+
+
 def test_preformatted_code_preserves_indentation_and_spacing():
     page = process_html("<pre><code>a  b\n  c\n</code></pre>", URL)
     assert page.text == "    a  b\n      c"
