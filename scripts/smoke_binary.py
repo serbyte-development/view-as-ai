@@ -23,23 +23,38 @@ def main() -> int:
     if not version.startswith("view-as-ai "):
         raise RuntimeError(f"Unexpected version output: {version!r}")
 
+    fixture = (
+        "<title>Frozen Smoke</title><h1>Frozen Smoke</h1>"
+        '<p>Before <a href="/next">Next</a></p>'
+        "<svg><text>SVG_LEAK</text></svg><p>After</p>"
+    )
     result = subprocess.run(
-        [str(binary), "https://example.com", "--format", "text"],
+        [
+            str(binary),
+            "-",
+            "--base-url",
+            "https://example.test/",
+            "--format",
+            "text",
+            "--markdown-links",
+        ],
         check=False,
         capture_output=True,
+        input=fixture,
         text=True,
         encoding="utf-8",
-        timeout=60,
+        timeout=30,
     )
     if result.returncode != 0:
         raise RuntimeError(
-            "Frozen executable failed to fetch example.com:\n"
+            "Frozen executable failed deterministic HTML smoke test:\n"
             f"stdout:\n{result.stdout}\n"
             f"stderr:\n{result.stderr}"
         )
     page = result.stdout
-    if "# Example Domain" not in page or "Learn more" not in page:
-        raise RuntimeError("Frozen executable did not produce the expected example.com preview")
+    expected = ("# Frozen Smoke", "[Next](https://example.test/next)", "After")
+    if any(value not in page for value in expected) or "SVG_LEAK" in page:
+        raise RuntimeError("Frozen executable did not produce the expected deterministic preview")
 
     print(version)
     return 0

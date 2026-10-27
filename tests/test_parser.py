@@ -317,7 +317,7 @@ def test_template_content_stays_out_of_text():
 def test_svg_subtree_stays_out_of_text_and_references():
     page = process_html(
         '<p>Before</p><svg xmlns="http://www.w3.org/2000/svg">'
-        '<title>Chart title</title><desc>Chart description</desc>'
+        "<title>Chart title</title><desc>Chart description</desc>"
         '<text x="5" y="15">I love SVG!</text>'
         '<a href="/svg-link"><text>SVG link</text></a>'
         "Fallback SVG text"
