@@ -379,7 +379,7 @@ def test_version(capsys):
     with pytest.raises(SystemExit) as exc:
         cli.main(["--version"])
     assert exc.value.code == 0
-    assert capsys.readouterr().out.strip() == "view-as-ai 1.0.2"
+    assert capsys.readouterr().out.strip() == "view-as-ai 1.0.3"
 
 
 def test_help_explains_common_usage(capsys):
