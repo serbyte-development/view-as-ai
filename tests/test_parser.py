@@ -25,14 +25,14 @@ def test_provider_pruning_navigation_role_and_non_main_banner():
     assert "Gone banner" not in page.text
 
 
-def test_provider_pruning_breadcrumb():
+def test_provider_retains_aria_breadcrumb_navigation():
     html = """
     <nav aria-label="Breadcrumb"><a href="/">Home</a> Current</nav>
     <nav id="product-nav"><a href="/buy">Buy</a></nav>
     <main><h1>Current</h1></main>
     """
     page = process_html(prune_html(html), URL)
-    assert "Home" not in page.text
+    assert "Home" in page.text
     assert "Buy" in page.text
     assert "# Current" in page.text
 

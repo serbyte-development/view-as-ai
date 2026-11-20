@@ -56,9 +56,8 @@ def _is_breadcrumb(node: lxml.html.HtmlElement) -> bool:
     item_type = node.get("itemtype", "").strip().lower()
     if node.get("itemscope") is not None and "schema.org/breadcrumblist" in item_type:
         return False
-    aria_label = node.get("aria-label", "").strip().lower()
     classes = _class_tokens(node)
-    if aria_label == "breadcrumb" or any("breadcrumb" in value.lower() for value in classes):
+    if any("breadcrumb" in value.lower() for value in classes):
         return True
     return node.tag in {"nav", "ul", "ol"} and "breadcrumb" in node.get("id", "").lower()
 

@@ -96,6 +96,19 @@ def test_schema_breadcrumb_microdata_is_retained():
     assert "Visible breadcrumb" in text
 
 
+def test_aria_label_breadcrumb_is_retained():
+    html = """
+    <nav aria-label="Breadcrumb">
+      <a href="/blog">Blog</a>
+      <span aria-hidden="true">/</span>
+      <a href="/blog#web-design">Web Design &amp; UX</a>
+    </nav>
+    """
+    text = _text(html)
+    assert "Blog" in text
+    assert "Web Design & UX" in text
+
+
 @pytest.mark.parametrize("token", ["breadcrumb", "breadcrumbs"])
 def test_breadcrumb_class_is_pruned_on_plain_elements(token):
     assert "TARGET" not in _text(f'<div class="{token}">TARGET</div>')
