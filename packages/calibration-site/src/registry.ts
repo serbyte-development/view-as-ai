@@ -3,6 +3,7 @@ import { activeAssets, activeRoutes } from "./fixtures/active";
 import { baselineAssets, baselineRoutes } from "./fixtures/baseline";
 import { boilerplateRoutes } from "./fixtures/boilerplate";
 import { breadcrumbContextRoutes } from "./fixtures/breadcrumb-context";
+import { claudePruningRoutes } from "./fixtures/claude-pruning";
 import { denseMatrixRoutes } from "./fixtures/dense-matrices";
 import { duplicateRoutes } from "./fixtures/duplicate";
 import { frameFollowupRoutes } from "./fixtures/frame-followups";
@@ -39,6 +40,7 @@ export const routes: FixtureRoute[] = [
   ...isolatedVisibilityRoutes,
   ...boilerplateRoutes,
   ...breadcrumbContextRoutes,
+  ...claudePruningRoutes,
   ...frameFollowupRoutes,
   ...headMetadataRoutes,
   ...jsonLdRoutes,
