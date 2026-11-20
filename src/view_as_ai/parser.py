@@ -301,10 +301,9 @@ def process_html(html: str, url: str, title: str | None = None) -> PageContents:
     else:
         final_title = get_domain(url) if url else ""
 
-    # Native web.run omits these subtrees, including inline SVG text and links.
-    # Remove them before link/button extraction can flatten hidden descendants
-    # into otherwise visible labels. Preserve surrounding text and tails.
-    for node in reversed(root.xpath(".//script | .//style | .//math | .//template | .//svg")):
+    # Native web.run omits these subtrees. Remove active/non-reading content
+    # before control extraction can flatten hidden descendants into labels.
+    for node in reversed(root.xpath(".//script | .//style | .//math | .//template")):
         replace_node_with_text(node, "")
 
     base = root.find(".//base[@href]")
@@ -318,6 +317,10 @@ def process_html(html: str, url: str, title: str | None = None) -> PageContents:
     for form in root.findall(".//form"):
         form.tag = "div"
     replace_controls(root)
+    # Keep SVGs through button classification: native flattens buttons that
+    # originally contain child markup, even when that child is an omitted SVG.
+    for node in reversed(root.xpath(".//svg")):
+        replace_node_with_text(node, "")
     urls = replace_references(root, url, base_url)
     prepare_tables(root)
     # Emphasis is intentionally omitted from native text. Unwrap it before the

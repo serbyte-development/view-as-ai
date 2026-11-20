@@ -119,6 +119,19 @@ def test_controls_preserve_text_without_inventing_aria_rules():
     assert "Notes" in page.text
 
 
+def test_svg_child_keeps_button_complexity_before_svg_is_omitted():
+    page = process_html(
+        '<p>These are <button type="button" popovertarget="definition">visual hierarchy'
+        '<svg aria-hidden="true"><use href="/icons.svg#info"></use></svg></button>'
+        '<span id="definition" popover="auto" role="note"><strong>Visual hierarchy</strong>'
+        "<span>The arrangement of design elements.</span></span>.</p>",
+        URL,
+    )
+    assert "[Button:" not in page.text
+    assert "visual hierarchy" in page.text
+    assert "Visual hierarchy The arrangement of design elements." in page.text
+
+
 def test_linked_code_keeps_markup_and_neighboring_text():
     page = process_html(
         '<p>Call <a href="/fn"><code><span>sleep()</span></code></a>.</p>'
