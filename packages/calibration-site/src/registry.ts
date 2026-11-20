@@ -2,6 +2,7 @@ import type { FixtureRoute, StaticAsset } from "./fixture-types";
 import { activeAssets, activeRoutes } from "./fixtures/active";
 import { baselineAssets, baselineRoutes } from "./fixtures/baseline";
 import { boilerplateRoutes } from "./fixtures/boilerplate";
+import { breadcrumbContextRoutes } from "./fixtures/breadcrumb-context";
 import { denseMatrixRoutes } from "./fixtures/dense-matrices";
 import { duplicateRoutes } from "./fixtures/duplicate";
 import { frameFollowupRoutes } from "./fixtures/frame-followups";
@@ -37,6 +38,7 @@ export const routes: FixtureRoute[] = [
   ...kitchenSinkRoutes,
   ...isolatedVisibilityRoutes,
   ...boilerplateRoutes,
+  ...breadcrumbContextRoutes,
   ...frameFollowupRoutes,
   ...headMetadataRoutes,
   ...jsonLdRoutes,
