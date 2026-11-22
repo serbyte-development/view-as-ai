@@ -187,6 +187,21 @@ def test_external_images_include_source_domain():
     assert page.urls == {"0": "https://images.test/cover.png"}
 
 
+def test_images_without_alt_or_title_are_omitted():
+    page = process_html(
+        '<p>Before<img src="/missing-alt.png"><img src="/empty-alt.png" alt="">After</p>',
+        URL,
+    )
+    assert page.text == "BeforeAfter"
+    assert page.urls == {}
+
+
+def test_image_title_is_used_when_alt_is_empty():
+    page = process_html('<img src="/cover.png" title="Cover title" alt="">', URL)
+    assert page.text == "【0†Image: Cover title】"
+    assert page.urls == {"0": "https://example.test/cover.png"}
+
+
 def test_icon_only_button_preserves_its_image_without_an_invented_button_name():
     page = process_html(
         '<button aria-label="Close dialog"><img src="/close.svg" alt="Close"></button>',
@@ -205,15 +220,16 @@ def test_image_only_email_anchor_is_suppressed_and_tail_survives():
     assert page.urls == {}
 
 
-def test_email_text_survives_while_its_image_is_suppressed():
+def test_nonweb_link_text_survives_while_unlabeled_images_are_suppressed():
     page = process_html(
         '<a href="tel:123"><img src="/phone.png">123</a>'
         '<p><a href="mailto:hello@example.test"><img src="/email.png">hello@example.test</a></p>',
         URL,
     )
+    assert "123" in page.text
     assert "hello@example.test" in page.text
-    assert page.urls == {"0": "https://example.test/phone.png"}
-    assert "【0†Image】" in page.text
+    assert page.urls == {}
+    assert "Image" not in page.text
 
 
 def test_plain_nonweb_links_keep_literal_adjacent_text_boundaries():

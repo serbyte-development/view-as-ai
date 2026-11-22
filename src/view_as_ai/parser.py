@@ -149,7 +149,7 @@ def replace_references(root: lxml.html.HtmlElement, cur_url: str, base_url: str)
                 if scheme not in ("http", "https"):
                     if scheme == "mailto":
                         # Native USAGov and HVAC captures retain email text while
-                        # omitting email-link images. Phone images remain.
+                        # omitting email-link images. Labeled phone images can remain.
                         for image in node.findall(".//img"):
                             image.drop_tree()
                     node.drop_tag()
@@ -193,7 +193,10 @@ def replace_references(root: lxml.html.HtmlElement, cur_url: str, base_url: str)
             title = merge_whitespace(node.get("title", "")).strip()
             alt = merge_whitespace(node.get("alt", "")).strip()
             image_label = title or alt
-            label = f"Image: {image_label}" if image_label else "Image"
+            if not image_label:
+                replace_node_with_text(node, "")
+                continue
+            label = f"Image: {image_label}"
         src = node.get("src", "")
         try:
             target = urljoin(base_url, src)
