@@ -8,7 +8,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from view_as_ai import cli
+from view_as_ai import __version__, cli
 
 FIXTURE = Path(__file__).parent / "fixtures" / "example.html"
 
@@ -379,7 +379,7 @@ def test_version(capsys):
     with pytest.raises(SystemExit) as exc:
         cli.main(["--version"])
     assert exc.value.code == 0
-    assert capsys.readouterr().out.strip() == "view-as-ai 1.0.4"
+    assert capsys.readouterr().out.strip() == f"view-as-ai {__version__}"
 
 
 def test_help_explains_common_usage(capsys):

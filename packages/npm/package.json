@@ -1,6 +1,6 @@
 {
   "name": "view-as-ai",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Preview local or deployed websites as AI web browsers and LLM agents see them",
   "license": "GPL-3.0-or-later",
   "type": "module",

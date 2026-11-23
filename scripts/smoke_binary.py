@@ -10,16 +10,34 @@ from pathlib import Path
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("binary", type=Path)
+    parser.add_argument("--docker-image", help="Run the same checks in a Linux runtime image")
     args = parser.parse_args()
     binary = args.binary.resolve()
+    command = [str(binary)]
+    if args.docker_image:
+        command = [
+            "docker",
+            "run",
+            "--rm",
+            "-i",
+            "--network",
+            "none",
+            "--mount",
+            f"type=bind,source={binary.parent},target=/binary,readonly",
+            args.docker_image,
+            f"/binary/{binary.name}",
+        ]
 
-    version = subprocess.run(
-        [str(binary), "--version"],
-        check=True,
+    started = subprocess.run(
+        [*command, "--version"],
+        check=False,
         capture_output=True,
         text=True,
         encoding="utf-8",
-    ).stdout.strip()
+    )
+    if started.returncode != 0:
+        raise RuntimeError(f"Frozen executable failed to start:\n{started.stderr}")
+    version = started.stdout.strip()
     if not version.startswith("view-as-ai "):
         raise RuntimeError(f"Unexpected version output: {version!r}")
 
@@ -30,7 +48,7 @@ def main() -> int:
     )
     result = subprocess.run(
         [
-            str(binary),
+            *command,
             "-",
             "--base-url",
             "https://example.test/",
