@@ -1,0 +1,58 @@
+{
+  "name": "view-as-ai",
+  "version": "1.0.4",
+  "description": "Preview local or deployed websites as AI web browsers and LLM agents see them",
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "main": "./lib/index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./lib/index.js"
+    }
+  },
+  "bin": {
+    "view-as-ai": "bin/view-as-ai.js"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "scripts",
+    "test",
+    "index.d.ts",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check:release": "node scripts/verify-release.mjs",
+    "check:version": "node scripts/check-version.mjs",
+    "postinstall": "node scripts/install-binary.mjs",
+    "test": "node --test",
+    "prepack": "npm run check:version && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Serbyte-Development/view-as-ai.git",
+    "directory": "packages/npm"
+  },
+  "homepage": "https://github.com/Serbyte-Development/view-as-ai",
+  "bugs": {
+    "url": "https://github.com/Serbyte-Development/view-as-ai/issues"
+  },
+  "keywords": [
+    "ai",
+    "chatgpt",
+    "llm",
+    "nextjs",
+    "seo",
+    "website",
+    "crawler",
+    "view-as-ai"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

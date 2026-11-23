@@ -1,6 +1,6 @@
 # View as AI - see how AI views your website
 
-[Try it](#try-it) • [CLI](#cli) • [Python API](#python-api) • [How it works](#how-it-works) • [Calibration](#calibration-and-limitations)
+[Try it](#try-it) • [CLI](#cli) • [Node.js API](#nodejs-api) • [Python API](#python-api) • [How it works](#how-it-works) • [Calibration](#calibration-and-limitations)
 
 [![CI](https://github.com/Serbyte-Development/view-as-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Serbyte-Development/view-as-ai/actions/workflows/ci.yml)
 [![License: GPL-3.0-or-later](https://img.shields.io/badge/License-GPL--3.0--or--later-blue.svg)](LICENSE)
@@ -143,6 +143,27 @@ uv add view-as-ai
 Requires Python 3.11+. `python -m view_as_ai` exposes the same CLI.
 
 </details>
+
+## Node.js API
+
+```sh
+npm install view-as-ai
+```
+
+```js
+import { viewAsAI } from "view-as-ai";
+
+const page = await viewAsAI("https://example.com");
+console.log(page.text);
+```
+
+`viewAsAI()` returns `{ url, text, title, urls }`. The npm package installs the matching verified
+standalone executable, so Python is not required.
+
+For a Next.js Route Handler on Vercel, use the default Node.js runtime. Keep `view-as-ai` external
+and include `node_modules/view-as-ai/vendor/**/*` with `outputFileTracingIncludes` so the installed
+Linux executable is bundled into the function. The npm package README includes the complete
+`route.ts` and `next.config.ts` example.
 
 ## Python API
 

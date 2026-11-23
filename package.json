@@ -7,6 +7,7 @@
   ],
   "scripts": {
     "build:calibration": "npm run build --workspace @serbyte/view-as-ai-calibration-site",
-    "check:calibration": "npm run check --workspace @serbyte/view-as-ai-calibration-site"
+    "check:calibration": "npm run check --workspace @serbyte/view-as-ai-calibration-site",
+    "check:npm": "npm run check:version --workspace view-as-ai && npm test --workspace view-as-ai"
   }
 }

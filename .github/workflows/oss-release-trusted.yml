@@ -64,6 +64,12 @@ jobs:
         if: contains(inputs.targets, 'npm')
         working-directory: ${{ inputs.npm_dir }}
         run: test "$(node -p "require('./package.json').version")" = "${{ inputs.version }}"
+      - name: Verify npm package matches standalone release
+        if: contains(inputs.targets, 'npm') && inputs.npm_dir == 'packages/npm'
+        working-directory: ${{ inputs.npm_dir }}
+        run: |
+          test -n "${{ inputs.release_tag }}"
+          node scripts/verify-release.mjs "${{ inputs.release_tag }}"
       - name: Install dependencies
         if: contains(inputs.targets, 'npm')
         working-directory: ${{ inputs.npm_dir }}

@@ -4,6 +4,7 @@ branch: main
 targets:
   - github
   - pypi
+  - npm
 artifacts:
   workflow: release-artifacts.yml
   event: workflow_dispatch
@@ -22,3 +23,5 @@ github:
     - checksums.txt
 pypi:
   packageDir: .
+npm:
+  packageDir: packages/npm
